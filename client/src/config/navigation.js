@@ -1,0 +1,67 @@
+import {
+  LayoutDashboard,
+  User,
+  Award,
+  Target,
+  BarChart3,
+  BookOpen,
+  CheckCircle2,
+  Briefcase,
+  ShieldCheck,
+  Settings,
+  Share2,
+  Users,
+  LineChart,
+  Globe,
+  Building2,
+  FileText,
+  UserCheck,
+  FileSpreadsheet,
+  History,
+  Search,
+  ListOrdered,
+  Calendar,
+  MessageSquare
+} from 'lucide-react';
+
+export const studentNavItems = [
+  { label: 'Overview', path: '/student', icon: LayoutDashboard },
+  { label: 'My Profile', path: '/student/profile', icon: User },
+  { label: 'Skills & Evidence', path: '/student/skills', icon: Award },
+  { label: 'Career Goals', path: '/student/goals', icon: Target },
+  { label: 'Skill Gap Analysis', path: '/student/skill-gap', icon: BarChart3 },
+  { label: 'Learning Path', path: '/student/learning-path', icon: BookOpen },
+  { label: 'Mock Drives', path: '/student/mock-drives', icon: CheckCircle2 },
+  { label: 'My Applications', path: '/student/applications', icon: Briefcase },
+  { label: 'Knowledge Graph', path: '/student/knowledge-graph', icon: Share2 },
+  { label: 'Privacy & Consent', path: '/student/privacy', icon: ShieldCheck },
+  { label: 'Settings', path: '/student/settings', icon: Settings },
+];
+
+export const adminNavItems = [
+  { label: 'Overview', path: '/admin', icon: LayoutDashboard },
+  { label: 'Student Directory', path: '/admin/students', icon: Users },
+  { label: 'Cohort Analytics', path: '/admin/cohort-analytics', icon: LineChart },
+  { label: 'Industry Intel', path: '/admin/industry-intel', icon: Globe },
+  { label: 'Skill Gap Matrix', path: '/admin/skill-gap', icon: BarChart3 },
+  { label: 'Placement Drives', path: '/admin/drives', icon: Calendar },
+  { label: 'Mock Drive Control', path: '/admin/mock-drives', icon: CheckCircle2 },
+  { label: 'Company Directory', path: '/admin/companies', icon: Building2 },
+  { label: 'Eligibility Rules', path: '/admin/eligibility', icon: FileText },
+  { label: 'Recruiters', path: '/admin/recruiters', icon: UserCheck },
+  { label: 'Reports & Export', path: '/admin/reports', icon: FileSpreadsheet },
+  { label: 'Audit Trail', path: '/admin/audit', icon: History },
+  { label: 'Settings', path: '/admin/settings', icon: Settings },
+];
+
+export const recruiterNavItems = [
+  { label: 'Overview', path: '/recruiter', icon: LayoutDashboard },
+  { label: 'Company Profile', path: '/recruiter/profile', icon: Building2 },
+  { label: 'Job Requirements', path: '/recruiter/jobs', icon: Target },
+  { label: 'Candidate Discovery', path: '/recruiter/discovery', icon: Search },
+  { label: 'Shortlists', path: '/recruiter/shortlists', icon: ListOrdered },
+  { label: 'Placement Drives', path: '/recruiter/drives', icon: Calendar },
+  { label: 'Interviews', path: '/recruiter/interviews', icon: Users },
+  { label: 'Candidate Feedback', path: '/recruiter/feedback', icon: MessageSquare },
+  { label: 'Settings', path: '/recruiter/settings', icon: Settings },
+];
