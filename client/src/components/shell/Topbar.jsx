@@ -13,6 +13,7 @@ import {
   Shield,
   GraduationCap,
   Building,
+  ShieldAlert,
   Check
 } from 'lucide-react';
 import Avatar from '../ui/Avatar';
@@ -51,6 +52,7 @@ export default function Topbar({ role = 'student', onMenuClick }) {
     { id: 'student', label: 'Student Portal', path: '/student', icon: GraduationCap, color: 'text-indigo-600' },
     { id: 'admin', label: 'T&P Admin Portal', path: '/admin', icon: Shield, color: 'text-purple-600' },
     { id: 'recruiter', label: 'Recruiter Portal', path: '/recruiter', icon: Building, color: 'text-emerald-600' },
+    { id: 'superadmin', label: 'Super Admin', path: '/super-admin', icon: ShieldAlert, color: 'text-rose-600' },
   ];
 
   const currentRoleObj = roles.find((r) => r.id === role) || roles[0];
@@ -188,7 +190,7 @@ export default function Topbar({ role = 'student', onMenuClick }) {
             aria-label="User menu"
           >
             <Avatar
-              name={role === 'admin' ? 'Rajiv Menon' : role === 'recruiter' ? 'Sarah Jenkins' : 'Priya Sharma'}
+              name={role === 'admin' ? 'Rajiv Menon' : role === 'recruiter' ? 'Sarah Jenkins' : role === 'superadmin' ? 'Platform Administrator' : 'Priya Sharma'}
               size="sm"
               status="online"
             />
@@ -198,15 +200,15 @@ export default function Topbar({ role = 'student', onMenuClick }) {
             <div className="absolute right-0 mt-2 w-52 rounded-xl border border-slate-200 bg-white p-1.5 shadow-lg ring-1 ring-black/5 z-50">
               <div className="px-3 py-2 border-b border-slate-100">
                 <p className="text-xs font-semibold text-slate-900">
-                  {role === 'admin' ? 'Dr. Rajiv Menon' : role === 'recruiter' ? 'Sarah Jenkins' : 'Priya Sharma'}
+                  {role === 'admin' ? 'Dr. Rajiv Menon' : role === 'recruiter' ? 'Sarah Jenkins' : role === 'superadmin' ? 'Platform Administrator' : 'Priya Sharma'}
                 </p>
                 <p className="text-[11px] text-slate-500 truncate">
-                  {role === 'admin' ? 'head.tnp@college.edu' : role === 'recruiter' ? 'sarah.j@techcorp.io' : 'priya.cs21@college.edu'}
+                  {role === 'admin' ? 'head.tnp@college.edu' : role === 'recruiter' ? 'sarah.j@techcorp.io' : role === 'superadmin' ? 'superadmin@carrersync.io' : 'priya.cs21@college.edu'}
                 </p>
               </div>
               <div className="py-1">
                 <Link
-                  to={role === 'student' ? '/student/profile' : role === 'admin' ? '/admin/settings' : '/recruiter/profile'}
+                  to={role === 'student' ? '/student/profile' : role === 'admin' ? '/admin/settings' : role === 'recruiter' ? '/recruiter/profile' : '/super-admin/settings'}
                   onClick={() => setShowProfileMenu(false)}
                   className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100 rounded-lg transition-colors"
                 >
@@ -214,7 +216,7 @@ export default function Topbar({ role = 'student', onMenuClick }) {
                   <span>My Profile</span>
                 </Link>
                 <Link
-                  to={`/${role}/settings`}
+                  to={role === 'superadmin' ? '/super-admin/settings' : `/${role}/settings`}
                   onClick={() => setShowProfileMenu(false)}
                   className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100 rounded-lg transition-colors"
                 >

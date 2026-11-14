@@ -26,7 +26,7 @@ export default function DataTable({
                   key={idx}
                   className={`py-3.5 px-4 ${col.align === 'right' ? 'text-right' : col.align === 'center' ? 'text-center' : 'text-left'} ${col.className || ''}`}
                 >
-                  {col.header}
+                  {col.header || col.label}
                 </th>
               ))}
             </tr>
@@ -58,7 +58,7 @@ export default function DataTable({
                       key={colIdx}
                       className={`py-3 px-4 ${col.align === 'right' ? 'text-right' : col.align === 'center' ? 'text-center' : 'text-left'}`}
                     >
-                      {col.render ? col.render(row) : row[col.accessor]}
+                      {col.render ? col.render(row[col.accessor || col.key], row) : (row[col.accessor || col.key])}
                     </td>
                   ))}
                 </tr>

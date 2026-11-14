@@ -1,6 +1,6 @@
 /**
  * Health Check API Service
- * Queries the backend GET /api/health endpoint.
+ * Queries the backend GET /api/v1/health endpoint.
  */
 
 import apiClient from './api';

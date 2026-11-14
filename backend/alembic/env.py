@@ -25,8 +25,9 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# Set database connection URL dynamically from settings
-config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
+# Set database connection URL dynamically from settings (prefer direct unpooled for migrations)
+migration_db_url = settings.DATABASE_URL_UNPOOLED or settings.DATABASE_URL
+config.set_main_option("sqlalchemy.url", migration_db_url)
 
 target_metadata = Base.metadata
 

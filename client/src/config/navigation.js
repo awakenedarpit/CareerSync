@@ -21,7 +21,12 @@ import {
   Search,
   ListOrdered,
   Calendar,
-  MessageSquare
+  MessageSquare,
+  Building,
+  PlusCircle,
+  UserPlus,
+  Mail,
+  ShieldAlert
 } from 'lucide-react';
 
 export const studentNavItems = [
@@ -65,3 +70,15 @@ export const recruiterNavItems = [
   { label: 'Candidate Feedback', path: '/recruiter/feedback', icon: MessageSquare },
   { label: 'Settings', path: '/recruiter/settings', icon: Settings },
 ];
+
+export const superAdminNavItems = [
+  { label: 'Overview', path: '/super-admin', icon: LayoutDashboard },
+  { label: 'College Management', path: '/super-admin/colleges', icon: Building2 },
+  { label: 'Register College', path: '/super-admin/colleges/new', icon: PlusCircle },
+  { label: 'User Management', path: '/super-admin/users', icon: Users },
+  { label: 'Create User', path: '/super-admin/users/new', icon: UserPlus },
+  { label: 'Invitations', path: '/super-admin/invitations', icon: Mail },
+  { label: 'Audit Trail', path: '/super-admin/audit-logs', icon: History },
+  { label: 'Platform Settings', path: '/super-admin/settings', icon: Settings },
+];
+

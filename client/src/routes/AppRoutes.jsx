@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 // Layouts
 import DashboardLayout from '../layouts/DashboardLayout';
@@ -47,6 +47,16 @@ import RecruiterPlacementDrives from '../pages/recruiter/PlacementDrives';
 import RecruiterInterviews from '../pages/recruiter/Interviews';
 import CandidateFeedback from '../pages/recruiter/Feedback';
 import RecruiterSettings from '../pages/recruiter/Settings';
+
+// Super Admin Pages
+import SuperAdminOverview from '../pages/superadmin/Overview';
+import CollegeManagement from '../pages/superadmin/CollegeManagement';
+import CreateCollege from '../pages/superadmin/CreateCollege';
+import UserManagement from '../pages/superadmin/UserManagement';
+import CreateUser from '../pages/superadmin/CreateUser';
+import InvitationManagement from '../pages/superadmin/InvitationManagement';
+import AuditLogs from '../pages/superadmin/AuditLogs';
+import PlatformSettings from '../pages/superadmin/Settings';
 
 import Button from '../components/ui/Button';
 
@@ -116,6 +126,19 @@ export default function AppRoutes() {
         <Route path="interviews" element={<RecruiterInterviews />} />
         <Route path="feedback" element={<CandidateFeedback />} />
         <Route path="settings" element={<RecruiterSettings />} />
+      </Route>
+
+      {/* Super Admin Portal Routes */}
+      <Route path="/super-admin" element={<DashboardLayout role="superadmin" />}>
+        <Route index element={<SuperAdminOverview />} />
+        <Route path="colleges" element={<CollegeManagement />} />
+        <Route path="colleges/new" element={<CreateCollege />} />
+        <Route path="users" element={<UserManagement />} />
+        <Route path="users/new" element={<CreateUser />} />
+        <Route path="invitations" element={<InvitationManagement />} />
+        <Route path="audit-logs" element={<AuditLogs />} />
+        <Route path="audit" element={<AuditLogs />} />
+        <Route path="settings" element={<PlatformSettings />} />
       </Route>
 
       {/* 404 Fallback */}

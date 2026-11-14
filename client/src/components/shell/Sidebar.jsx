@@ -7,9 +7,10 @@ import {
   ChevronRight,
   Shield,
   GraduationCap,
-  Building
+  Building,
+  ShieldAlert
 } from 'lucide-react';
-import { studentNavItems, adminNavItems, recruiterNavItems } from '../../config/navigation';
+import { studentNavItems, adminNavItems, recruiterNavItems, superAdminNavItems } from '../../config/navigation';
 import Avatar from '../ui/Avatar';
 import Badge from '../ui/Badge';
 
@@ -35,6 +36,13 @@ export default function Sidebar({ role = 'student', isOpen, onClose }) {
     RoleIcon = Building;
     userName = 'Sarah Jenkins';
     userEmail = 'sarah.j@techcorp.io';
+  } else if (role === 'superadmin') {
+    navItems = superAdminNavItems;
+    roleLabel = 'Super Admin';
+    roleBadgeVariant = 'rose';
+    RoleIcon = ShieldAlert;
+    userName = 'Platform Administrator';
+    userEmail = 'superadmin@carrersync.io';
   }
 
   return (
@@ -92,7 +100,7 @@ export default function Sidebar({ role = 'student', isOpen, onClose }) {
               <NavLink
                 key={item.path}
                 to={item.path}
-                end={item.path === '/student' || item.path === '/admin' || item.path === '/recruiter'}
+                end={item.path === '/student' || item.path === '/admin' || item.path === '/recruiter' || item.path === '/super-admin'}
                 onClick={onClose}
                 className={({ isActive }) =>
                   `group flex items-center justify-between rounded-lg px-3 py-2 text-sm font-medium transition-colors ${

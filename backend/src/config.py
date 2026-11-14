@@ -15,7 +15,7 @@ class DatabaseSettings(BaseSettings):
     Supports Neon PostgreSQL (Free Tier) via asyncpg.
     """
     model_config = SettingsConfigDict(
-        env_file=(".env", "../.env", "backend/.env"),
+        env_file=(".env.local", ".env", "../.env.local", "../.env", "backend/.env"),
         env_file_encoding="utf-8",
         extra="ignore",
     )
@@ -24,6 +24,10 @@ class DatabaseSettings(BaseSettings):
     DATABASE_URL: str = Field(
         default="sqlite+aiosqlite:///./test_carrersync.db",
         description="PostgreSQL async connection string (e.g., postgresql+asyncpg://...)"
+    )
+    DATABASE_URL_UNPOOLED: str | None = Field(
+        default=None,
+        description="Direct non-pooled PostgreSQL async connection string for migrations"
     )
 
     # Neon Free Tier Connection Pooling Configuration
@@ -40,20 +44,37 @@ class DatabaseSettings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 120
 
-    @field_validator("DATABASE_URL", mode="before")
+    @field_validator("DATABASE_URL", "DATABASE_URL_UNPOOLED", mode="before")
     @classmethod
-    def sanitize_database_url(cls, v: str) -> str:
+    def sanitize_database_url(cls, v: str | None) -> str | None:
         """
-        Ensures proper asyncpg driver prefix for PostgreSQL URLs.
+        Ensures proper asyncpg driver prefix for PostgreSQL URLs and removes
+        unsupported libpq query parameters (like channel_binding).
         Converts standard postgres:// or postgresql:// to postgresql+asyncpg://.
         """
         if not v:
-            return "sqlite+aiosqlite:///./test_carrersync.db"
-        if v.startswith("postgres://"):
-            return v.replace("postgres://", "postgresql+asyncpg://", 1)
-        if v.startswith("postgresql://") and not v.startswith("postgresql+asyncpg://"):
-            return v.replace("postgresql://", "postgresql+asyncpg://", 1)
-        return v
+            return v
+        url = v
+        if url.startswith("postgres://"):
+            url = url.replace("postgres://", "postgresql+asyncpg://", 1)
+        elif url.startswith("postgresql://") and not url.startswith("postgresql+asyncpg://"):
+            url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
+
+        # Convert libpq parameters to asyncpg equivalents
+        if "?" in url:
+            base, query = url.split("?", 1)
+            params = []
+            for p in query.split("&"):
+                if p.startswith("channel_binding="):
+                    continue
+                if p.startswith("sslmode="):
+                    val = p.split("=", 1)[1]
+                    params.append(f"ssl={val}")
+                else:
+                    params.append(p)
+            url = f"{base}?{'&'.join(params)}" if params else base
+
+        return url
 
 
 settings = DatabaseSettings()
