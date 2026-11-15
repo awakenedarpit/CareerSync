@@ -53,7 +53,7 @@ export interface InMemDocRecord {
   updatedAt: Date;
 }
 
-const inMemoryDocuments = new Map<string, InMemDocRecord>();
+export const inMemoryDocuments = new Map<string, InMemDocRecord>();
 
 // Helper to reset memory store during test execution
 export function clearInMemoryDocuments(): void {

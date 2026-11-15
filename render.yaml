@@ -1,0 +1,38 @@
+# ==============================================================================
+# CarrerSync Render Web Service Deployment Configuration
+# Strict ₹0 Zero-Cost Architecture | Cardless Deployment
+# ==============================================================================
+
+services:
+  - type: web
+    name: carrersync-api
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm install --prefix server && npm run build --prefix server || true
+    startCommand: npm start --prefix server
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ENVIRONMENT
+        value: production
+      - key: PORT
+        value: 10000
+      - key: STORAGE_PROVIDER
+        value: local
+      - key: STORAGE_LOCAL_DIRECTORY
+        value: uploads
+      - key: DATABASE_URL
+        sync: false
+      - key: DATABASE_URL_UNPOOLED
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 7200
+      - key: CLIENT_URL
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false

@@ -1,4 +1,12 @@
 import type { Tenant } from './db/schema';
+export {
+  CANONICAL_ROLES,
+  CanonicalRole,
+  normalizeRole,
+  isRole,
+  hasAnyRole,
+  toDatabaseRole
+} from './utils/roles';
 
 export type UserRole =
   | 'student'
@@ -14,6 +22,8 @@ export interface AuthUserContext {
   email: string;
   role: UserRole;
   fullName?: string;
+  hasVerificationPermission?: boolean;
+  isDelegatedReviewer?: boolean;
 }
 
 declare global {

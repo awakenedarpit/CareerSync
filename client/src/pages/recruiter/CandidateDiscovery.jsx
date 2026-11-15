@@ -33,8 +33,11 @@ export default function CandidateDiscovery() {
       roll: 'CS2021-084',
       branch: 'Computer Science',
       cgpa: 8.42,
+      administrativeStatus: 'ELIGIBLE',
       matchReason: 'Direct match for Full Stack / Web Core requirements. 8 skills verified via GitHub repositories.',
       verifiedSkills: ['JavaScript (ES6+)', 'React.js', 'PostgreSQL', 'Node.js'],
+      unverifiedSkills: ['GraphQL', 'Docker'],
+      skillGaps: ['Kubernetes'],
       githubRepo: 'github.com/priyasharma-dev/event-engine',
       matchScore: 92
     },
@@ -44,8 +47,11 @@ export default function CandidateDiscovery() {
       roll: 'CS2021-012',
       branch: 'Computer Science',
       cgpa: 9.10,
+      administrativeStatus: 'ELIGIBLE',
       matchReason: 'Top algorithmic score in cohort. 11 skills verified with strong C++ and distributed systems code.',
       verifiedSkills: ['C++', 'Data Structures', 'Distributed Systems', 'Algorithms'],
+      unverifiedSkills: ['Linux Kernel', 'gRPC'],
+      skillGaps: ['AWS'],
       githubRepo: 'github.com/aarav-patel/raft-consensus',
       matchScore: 96
     },
@@ -55,8 +61,11 @@ export default function CandidateDiscovery() {
       roll: 'CS2021-028',
       branch: 'Computer Science',
       cgpa: 8.90,
+      administrativeStatus: 'ELIGIBLE',
       matchReason: 'Strong cloud architecture background with verified Azure and Go containerized projects.',
       verifiedSkills: ['Go', 'Docker', 'Kubernetes', 'Cloud'],
+      unverifiedSkills: ['Terraform'],
+      skillGaps: ['Kafka'],
       githubRepo: 'github.com/ananya-iyer/k8s-scaler',
       matchScore: 89
     },
@@ -66,8 +75,11 @@ export default function CandidateDiscovery() {
       roll: 'IT2021-091',
       branch: 'Information Tech',
       cgpa: 8.15,
+      administrativeStatus: 'ELIGIBLE',
       matchReason: 'Solid backend enterprise profile with verified Spring Boot & PostgreSQL implementations.',
       verifiedSkills: ['Java', 'Spring Boot', 'SQL', 'REST APIs'],
+      unverifiedSkills: ['Redis'],
+      skillGaps: ['Microservices Design'],
       githubRepo: 'github.com/sneha-gupta/banking-api',
       matchScore: 85
     },
@@ -77,8 +89,11 @@ export default function CandidateDiscovery() {
       roll: 'CS2021-052',
       branch: 'Computer Science',
       cgpa: 8.80,
+      administrativeStatus: 'ELIGIBLE',
       matchReason: 'High systems proficiency with verified Rust memory safety and network concurrency code.',
       verifiedSkills: ['Rust', 'Linux Internals', 'Networks', 'C'],
+      unverifiedSkills: ['WebAssembly'],
+      skillGaps: ['DevOps'],
       githubRepo: 'github.com/meera-n/rust-http-proxy',
       matchScore: 94
     }
@@ -189,18 +204,59 @@ export default function CandidateDiscovery() {
                   {cand.matchReason}
                 </div>
 
-                {/* Verified Skills */}
-                <div className="mt-3">
-                  <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block mb-1.5">
-                    Verified Competencies
-                  </span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {cand.verifiedSkills.map((sk) => (
-                      <span key={sk} className="text-xs bg-emerald-50 text-emerald-800 border border-emerald-200/60 px-2 py-0.5 rounded font-medium">
-                        {sk}
-                      </span>
-                    ))}
+                {/* Administrative Status & Privacy Indicator */}
+                <div className="mt-2.5 flex items-center justify-between text-[11px] p-2 bg-slate-50 border border-slate-200/80 rounded-lg">
+                  <div className="flex items-center gap-1.5 text-emerald-700 font-semibold">
+                    <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" />
+                    <span>Admin: ELIGIBLE (CGPA {cand.cgpa})</span>
                   </div>
+                  <span className="text-slate-400 text-[10px]">Contact Anonymized</span>
+                </div>
+
+                {/* Skill Breakdown: Verified, Unverified, Missing */}
+                <div className="mt-3 space-y-2">
+                  <div>
+                    <span className="text-[10px] font-semibold text-emerald-700 uppercase tracking-wider block mb-1">
+                      Verified Competencies ({cand.verifiedSkills.length})
+                    </span>
+                    <div className="flex flex-wrap gap-1">
+                      {cand.verifiedSkills.map((sk) => (
+                        <span key={sk} className="text-xs bg-emerald-50 text-emerald-800 border border-emerald-200/70 px-2 py-0.5 rounded font-medium">
+                          ✓ {sk}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {cand.unverifiedSkills && (
+                    <div>
+                      <span className="text-[10px] font-semibold text-amber-700 uppercase tracking-wider block mb-1">
+                        Self-Declared / Pending ({cand.unverifiedSkills.length})
+                      </span>
+                      <div className="flex flex-wrap gap-1">
+                        {cand.unverifiedSkills.map((sk) => (
+                          <span key={sk} className="text-xs bg-amber-50 text-amber-800 border border-amber-200 px-2 py-0.5 rounded font-medium">
+                            ? {sk}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {cand.skillGaps && (
+                    <div>
+                      <span className="text-[10px] font-semibold text-rose-700 uppercase tracking-wider block mb-1">
+                        Skill Gaps ({cand.skillGaps.length})
+                      </span>
+                      <div className="flex flex-wrap gap-1">
+                        {cand.skillGaps.map((sk) => (
+                          <span key={sk} className="text-xs bg-rose-50 text-rose-700 border border-rose-200 px-2 py-0.5 rounded font-medium">
+                            ✕ {sk}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Code Evidence Link */}

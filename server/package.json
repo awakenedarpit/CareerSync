@@ -7,7 +7,8 @@
     "start": "tsx src/server.ts",
     "dev": "tsx watch src/server.ts",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "db:generate": "drizzle-kit generate --config=drizzle.config.ts"
   },
   "keywords": [
     "carrersync",
@@ -41,6 +42,7 @@
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.13.9",
     "@types/supertest": "^6.0.2",
+    "drizzle-kit": "^0.30.6",
     "nodemon": "^3.1.9",
     "supertest": "^7.0.0",
     "tsx": "^4.19.3",

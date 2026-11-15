@@ -134,9 +134,9 @@ describe('Cryptographic & Security Utilities', () => {
       const token = await createJwtToken(validPayload, testSecret);
       const parts = token.split('.');
 
-      // Invert the last character of the signature
+      // Tamper with the signature by modifying its characters
       const corruptedSig =
-        parts[2].slice(0, -1) + (parts[2].slice(-1) === 'a' ? 'b' : 'a');
+        (parts[2][0] === 'a' ? 'b' : 'a') + parts[2].slice(1);
       const corruptedToken = `${parts[0]}.${parts[1]}.${corruptedSig}`;
 
       await expect(verifyJwtToken(corruptedToken, testSecret)).rejects.toThrow();

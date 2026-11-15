@@ -665,3 +665,212 @@ File metadata is persisted in the PostgreSQL `documents` table, enforcing:
   - `RECRUITER`: Permitted access only to shared placement resumes/evidence within their authorized drive scope.
   - `SUPER_ADMIN`: Platform compliance view with explicit audit event logging.
 - **Delivery**: Binary streams served with `Content-Disposition: attachment; filename="..."`, `X-Content-Type-Options: nosniff`, and `Cache-Control: private, no-cache`.
+
+---
+
+## 13. Phase 09 — AI Profiling Agent & Evidence Ingestion Subsystem
+
+### 13.1 Overview & Foundational Axiom
+Phase 09 establishes the **Student Profiling Agent** and the **13-Step Document Ingestion Engine** within the active Node.js + Express backend (`server/src/ai/`, `server/src/ingestion/`, `server/src/services/`, and `server/src/routes/profiling.routes.ts`).
+
+The entire profiling subsystem is governed by the foundational axiom:
+$$\mathbf{\text{“Resume\ mention\ is\ not\ verification.”}}$$
+
+The Profiling Agent acts strictly as an **evidence discovery and extraction service**, not an autonomous certifier. It identifies claimed competencies, maps them to contextual project applications, extracts certifications, calculates multi-signal confidence scores $[0.10, 0.99]$, and stages them for mandatory student review. Full `VERIFIED` status remains the exclusive authority of human evaluators (TPO Admins and Faculty Coordinators).
+
+### 13.2 The 13-Step Document Ingestion Pipeline
+```
+[1. Upload] ──► [2. Bearer JWT Auth] ──► [3. Anti-Spoof Tenant Check] ──► [4. Secure Buffer Stream]
+       │
+       ▼
+[5. Magic Byte Validation] ──► [6. PDF/DOCX Parser] ──► [7. Scanned Doc Check] ──► [8. Normalizer]
+       │
+       ▼
+[9. Local PII Scrubber] ──► [10. Hybrid AI Analysis] ──► [11. Staging in profileExtractions]
+       │
+       ▼
+[12. Student Review UI] ──► [13. Relational Persistence & Profile Snapshot Versioning]
+```
+
+1. **Upload**: Multipart document upload (`POST /api/v1/files/upload`) bounded by 5 MB limit.
+2. **Auth**: Validates Bearer JWT (`sub`, `role`, `tenant_id`) via `requireAuth`.
+3. **Tenant Check**: Enforces anti-spoofing tenant verification (`tenantIsolationMiddleware`).
+4. **Storage Retrieval**: Binary buffer streamed via `IStorageService` using SHA-256 content key.
+5. **Magic Byte Check**: Validates `%PDF-`, `PK\x03\x04` (DOCX), PNG, JPEG binary signatures.
+6. **Native Parsing**: Zero-cost text extraction:
+   - *PDF*: `zlib.inflateSync` stream decompression and `BT...ET` text block decoding.
+   - *DOCX*: ZIP directory parsing and `word/document.xml` text tag extraction.
+7. **Scanned Check**: Detects image files or raster-only PDFs; marks `requiresManualReview: true` with zero hallucinated text.
+8. **Normalization**: XML entity unescaping, control character stripping, punctuation standardization, and section header detection (`normalizer.ts`).
+9. **PII Scrubbing**: Local redaction of emails, Indian/international phone numbers, Aadhaar, PAN, SSN, postal addresses, and candidate names (`pii-filter.ts`).
+10. **Hybrid AI Profiling**: Structured extraction via `AIFactory` targeting Gemini Free Tier or Rule-Based Provider.
+11. **Staging**: Persisted to `profileExtractions` with status `PENDING_REVIEW`.
+12. **Student Review**: Student inspects extracted skills, projects, and confidence scores in `ProfileReviewModal.jsx`, accepting or rejecting items.
+13. **Profile Persistence**: Approved skills saved to `profileSkillEvidence` with `EVIDENCE_FOUND` or `PENDING_REVIEW` (never auto-`VERIFIED`); audit logged in `profileReviewEvents`; snapshot appended to `profileVersions`.
+
+### 13.3 Hybrid AI Architecture & Zero-Cost Policy
+- **Primary Tier**: Google Gemini Free Tier (`gemini-1.5-flash` / `gemini-2.0-flash`) accessed cardlessly via Google AI Studio API (15 RPM, 1,500 RPD). Enforces strict JSON output validated via Zod (`profiling.schema.ts`).
+- **Deterministic Fallback Tier**: Local regex-based `RuleBasedAIProvider` operating 100% offline with zero network overhead, sub-15ms latency, and zero hallucination risk.
+- **Auto-Degradation**: API quota exhaustion (HTTP 429), missing `GEMINI_API_KEY`, or network timeouts transparently degrade to the rule-based provider without application crash.
+
+### 13.4 Relational Data Model Extensions (`server/src/db/schema.ts`)
+- `documentProcessingJobs`: Tracks ingestion job lifecycle (`QUEUED`, `PROCESSING`, `COMPLETED`, `FAILED`, `CANCELLED`).
+- `profileExtractions`: Staging table holding proposed skills, projects, certifications, warnings, and confidence.
+- `profileSkillEvidence`: Canonical skill evidence ledger (`RESUME`, `PROJECT`, `CERTIFICATE`, `ASSESSMENT`, `SELF_DECLARED`).
+- `profileReviewEvents`: Immutable audit log of all human and student review actions (`APPROVE`, `REJECT`, `MODIFY`).
+- `profileVersions`: Immutable JSON snapshot ledger tracking point-in-time profile state across versions.
+
+### 13.5 Evidence Verification Rules & Role Authority
+- **Evidence Hierarchy**: Self-Declared ($0.15$) $\rightarrow$ Resume-Mentioned ($0.35$) $\rightarrow$ Project-Supported ($0.65$) $\rightarrow$ Certificate-Supported ($0.75$) $\rightarrow$ Assessment-Supported ($0.90$) $\rightarrow$ Human-Reviewed ($1.00$).
+- **State Transitions**: `SELF_DECLARED` $\rightarrow$ `PENDING_REVIEW` $\rightarrow$ `EVIDENCE_FOUND` $\rightarrow$ `VERIFIED` (or `REJECTED` / `NEEDS_MORE_EVIDENCE`).
+- **Authority Boundary**:
+  - `STUDENT`: Can approve/reject their own proposed extractions.
+  - `TPO_ADMIN` & `FACULTY_COORDINATOR`: Exclusive authority to award `VERIFIED` status upon inspecting physical/code artifacts.
+  - `AI AGENT`: Recommendation and evidence discovery only; strictly forbidden from transitioning records to `VERIFIED`.
+
+
+---
+
+## 14. Phase 10 — TPO Verification Portal, Placement Readiness Engine & Job Eligibility Subsystem
+
+### 14.1 Overview & Architecture Integration
+Phase 10 completes the end-to-end placement workflow by operationalizing institutional credential verification, automated explainable readiness scoring, diagnostic skill gap analysis, and declarative campus job eligibility gating. Built directly into the active Node.js + Express backend (`server/src/verification/`, `server/src/readiness/`, `server/src/eligibility/`, `server/src/routes/`) and React Single Page Application (`client/src/pages/tpo/`, `client/src/services/`), Phase 10 translates verified student artifacts into qualified, audit-compliant candidate pipelines for corporate recruitment.
+
+```mermaid
+flowchart TD
+    subgraph Phase09["Phase 09: Discovery & Ingestion"]
+        Upload["Document Upload / Parser"] --> AI_Profile["AI Profiling & Rule Extractor"]
+        AI_Profile --> Staging["Staged in profileSkillEvidence\n(PENDING_REVIEW / EVIDENCE_FOUND)"]
+    end
+
+    subgraph Phase10_Verification["Phase 10: TPO Verification Subsystem"]
+        TPO_Queue["TPO Verification Queue\n(GET /api/v1/tpo/verification/pending)"]
+        Decision{"TPO Institutional Review\n(Student NEVER self-verifies)"}
+        TPO_Audit["Audit Ledger\n(skillVerificationReviews)"]
+        
+        Staging --> TPO_Queue --> Decision
+        Decision -->|Verify Artifact| Verified["VERIFIED Status\n(Institutional Seal)"]
+        Decision -->|Reject / Request More| Feedback["REJECTED / NEEDS_MORE_EVIDENCE\n(Student Resubmission Flow)"]
+        Decision --> TPO_Audit
+    end
+
+    subgraph Phase10_Readiness["Phase 10: Readiness & Diagnostics Engine"]
+        Verified --> ReadinessEngine["Placement Readiness Engine\n(35% Verified + 25% Coverage + 20% Project + 20% Academic)"]
+        ReadinessEngine --> Snapshot["studentReadinessSnapshots\n(READY / DEVELOPING / NEEDS_SUPPORT)"]
+        ReadinessEngine --> GapEngine["Skill Gap Diagnostics\n(4-Tier Match & Severity Classification)"]
+    end
+
+    subgraph Phase10_Eligibility["Phase 10: Declarative Job Eligibility"]
+        JobDef["Declarative Job Requirements\n(Departments, Graduation Year, CGPA, Skills)"]
+        EvalEngine["Two-Stage Eligibility Evaluator\n(Stage 1: Hard Criteria | Stage 2: Advisory Skills)"]
+        Override["TPO Override Protocol\n(Mandatory Justification Audit)"]
+        
+        Snapshot --> EvalEngine
+        JobDef --> EvalEngine
+        EvalEngine --> EligibleResult["Result: ELIGIBLE / INELIGIBLE / NEEDS_REVIEW"]
+        EvalEngine -.->|Exception Case| Override
+    end
+```
+
+### 14.2 TPO Evidence Verification Subsystem & State Machine
+- **The Core Rule**: The student candidate **NEVER self-verifies**. Student access to verification mutation endpoints yields `403 FORBIDDEN` (`STUDENT_CANNOT_SELF_VERIFY`). Full `VERIFIED` status remains the exclusive mandate of `TPO_ADMIN` and `COLLEGE_ADMIN`.
+- **State Machine Transitions**:
+  - `PENDING_REVIEW` $\rightarrow$ `VERIFIED`, `REJECTED`, `NEEDS_MORE_EVIDENCE`
+  - `EVIDENCE_FOUND` $\rightarrow$ `VERIFIED`, `REJECTED`, `NEEDS_MORE_EVIDENCE`
+  - `SELF_DECLARED` $\rightarrow$ `NEEDS_MORE_EVIDENCE`, `REJECTED` (Direct promotion to `VERIFIED` without physical/digital artifact is rejected with `400 BAD_REQUEST`)
+  - `NEEDS_MORE_EVIDENCE` $\rightarrow$ `PENDING_REVIEW` (on student artifact resubmission), `REJECTED`
+  - `REJECTED` $\rightarrow$ `PENDING_REVIEW` (on formal student appeal with updated evidence)
+- **Immutable Verification Audit Ledger**: Every decision persists reviewer UUID, prior status, new status, timestamp, and justification reason to `skillVerificationReviews` and platform-wide `auditEvents`.
+- **Reference**: Detailed in [docs/TPO_VERIFICATION_WORKFLOW.md](file:///Users/user/CarrerSync/docs/TPO_VERIFICATION_WORKFLOW.md).
+
+### 14.3 Placement Readiness Intelligence Engine
+- **Composite Scoring Formula**:
+  $$S = 0.35 \cdot S_{\text{verified}} + 0.25 \cdot S_{\text{coverage}} + 0.20 \cdot S_{\text{project}} + 0.20 \cdot S_{\text{academic}}$$
+- **Four Core Dimensions**:
+  1. *Verified Skills Score* ($35\%$): Count and domain breadth of institutional `VERIFIED` competencies.
+  2. *Evidence Coverage Score* ($25\%$): Ratio of evidence-backed skill claims to total claimed skills, penalizing uncorroborated resume stuffing.
+  3. *Project Evidence Depth* ($20\%$): Evaluates code repositories, deployment links, and complexity of practical deliverables.
+  4. *Academic & Assessment Score* ($20\%$): Normalized CGPA/percentage and internal technical assessment benchmarks.
+- **Data Completeness Safeguard ($C$)**: Missing optional academic records produce $C < 1.00$ rather than a 0-point penalty. Profiles with $C < 0.40$ are categorized as `INSUFFICIENT_DATA` rather than prematurely penalizing students.
+- **Categorization Matrix**:
+  - $S \ge 80.0 \land C \ge 0.40 \implies \mathbf{READY}$
+  - $60.0 \le S < 80.0 \land C \ge 0.40 \implies \mathbf{DEVELOPING}$
+  - $S < 60.0 \land C \ge 0.40 \implies \mathbf{NEEDS\_SUPPORT}$
+  - $C < 0.40 \implies \mathbf{INSUFFICIENT\_DATA}$
+- **Advisory Policy**: The Readiness Score is explicitly an advisory benchmark of portfolio rigor. It is **never a guaranteed probability of placement**.
+- **Reference**: Detailed in [docs/PLACEMENT_READINESS_ENGINE.md](file:///Users/user/CarrerSync/docs/PLACEMENT_READINESS_ENGINE.md).
+
+### 14.4 Skill Gap Diagnostics Engine
+- **Four-Tier Match Taxonomy**:
+  1. `VERIFIED_MATCH`: Skill attested with institutional `VERIFIED` seal (100% credit).
+  2. `EVIDENCE_MATCH`: Artifact-supported competency (`EVIDENCE_FOUND`) awaiting TPO review (75% credit).
+  3. `PENDING_VERIFICATION`: Resume-extracted or self-declared claim lacking external artifact (35% credit).
+  4. `MISSING_SKILL`: Zero recorded demonstration in profile (0% credit).
+- **Gap Severity Classification**:
+  - `CRITICAL`: Mandatory `requiredSkills` competency missing from profile.
+  - `MODERATE`: Mandatory skill is unverified (`PENDING_VERIFICATION`), or preferred skill is missing.
+  - `MINOR`: Preferred skill has pending evidence, or minor tool discrepancy.
+- **Targeted Action Framework**: Every diagnosed gap outputs curated learning modules, concrete engineering project activities (e.g., containerizing an API, setting up Redis caching), and verification steps.
+- **Reference**: Detailed in [docs/SKILL_GAP_DIAGNOSTICS.md](file:///Users/user/CarrerSync/docs/SKILL_GAP_DIAGNOSTICS.md).
+
+### 14.5 Declarative Job Requirements & Eligibility Engine
+- **Declarative Requirement Schema**: Stored in `jobRequirements` with structured criteria: `eligibleDepartments` (JSON), `graduationYear` (int), `minimumCgpa` (numeric), `requiredSkills` (JSON), `preferredSkills` (JSON), and `assessmentRequirements` (JSON).
+- **Two-Stage Evaluation**:
+  - *Stage 1 (Hard Criteria)*: Strict gating on Department, Cohort Graduation Year, and Minimum CGPA cutoff.
+  - *Stage 2 (Competency Matching)*: Advisory skill gap evaluation comparing verified student skills against job competencies.
+- **Missing Data Handling ("Missing Data Is Not Ineligibility")**: When CGPA or semester marks are unrecorded in the student database, the engine returns `NEEDS_REVIEW` or `INSUFFICIENT_DATA` rather than rejecting the student as `INELIGIBLE`.
+- **TPO Override Protocol**: Institutional officers (`TPO_ADMIN`, `COLLEGE_ADMIN`) may override an evaluation with a mandatory documented justification string ($\ge 10$ characters), recorded immutably in `jobEligibilityEvaluations` and `auditEvents`.
+- **Reference**: Detailed in [docs/JOB_ELIGIBILITY_ENGINE.md](file:///Users/user/CarrerSync/docs/JOB_ELIGIBILITY_ENGINE.md).
+
+### 14.6 Relational Data Model Extensions (`server/src/db/schema.ts`)
+Phase 10 extends the canonical PostgreSQL schema with tenant-isolated, foreign-key-constrained relational entities:
+- **`skillVerificationReviews`**: Audit ledger tracking every TPO verification decision (`id`, `tenantId`, `studentId`, `evidenceId`, `reviewerId`, `previousStatus`, `newStatus`, `reason`, `reviewerNotes`, `createdAt`).
+- **`studentReadinessSnapshots`**: Longitudinal snapshot ledger storing computed readiness (`id`, `tenantId`, `studentId`, `score`, `category`, `dimensions`, `explanation`, `dataCompleteness`, `calculatedAt`).
+- **`jobRequirements`**: Declarative company recruitment specifications (`id`, `tenantId`, `companyName`, `jobTitle`, `jobDescription`, `eligibleDepartments`, `graduationYear`, `minimumCgpa`, `requiredSkills`, `preferredSkills`, `status`, `createdBy`).
+- **`jobEligibilityEvaluations`**: Evaluation outcomes with rule-by-rule breakdowns (`id`, `tenantId`, `studentId`, `jobId`, `result`, `matchedRequirements`, `unmetRequirements`, `missingInformation`, `explanation`, `overriddenBy`, `overrideReason`, `evaluatedAt`).
+- **Enums**: `readinessCategoryEnum` (`READY`, `DEVELOPING`, `NEEDS_SUPPORT`, `INSUFFICIENT_DATA`), `eligibilityResultEnum` (`ELIGIBLE`, `INELIGIBLE`, `NEEDS_REVIEW`, `INSUFFICIENT_DATA`), `recruitmentJobStatusEnum` (`DRAFT`, `ACTIVE`, `CLOSED`, `ARCHIVED`).
+
+### 14.7 Security Architecture & Privacy Safeguards
+- **Anti-Spoofing Tenant Isolation**: Authoritative tenant ID extracted exclusively from verified Bearer JWT; header/query/body spoofing rejected with 403 `TENANT_SPOOFING_REJECTED`; queries scoped with `withTenantContext`.
+- **5-Role RBAC Enforcement**: Strict server-side role gating separating `SUPER_ADMIN`, `COLLEGE_ADMIN`, `TPO_ADMIN`, `RECRUITER`, and `STUDENT`.
+- **Zero Student Data Egress to AI**: All readiness calculations, gap diagnostics, and eligibility checks run locally in deterministic TypeScript with zero outbound network calls to external LLMs.
+- **Recruiter View Limits**: Corporate recruiters have read access to readiness scores and verified badges, but internal TPO reviewer notes, correction requests, and disciplinary remarks are strictly redacted at the API boundary.
+- **Reference**: Detailed in [docs/VERIFICATION_SECURITY_MODEL.md](file:///Users/user/CarrerSync/docs/VERIFICATION_SECURITY_MODEL.md).
+
+---
+
+## 15. Phase 10.1 — Security, Eligibility & Architecture Corrections
+
+Phase 10.1 establishes rigorous correctness, fairness, and security enhancements to the Phase 10 foundations:
+
+### 15.1 Strict Verification Authority & Delegation
+- **Authoritative Reviewer**: Evidence verification decisions (`VERIFIED`, `REJECTED`, `NEEDS_MORE_EVIDENCE`) are restricted strictly to `TPO_ADMIN` and explicitly designated faculty review committees (`hasExplicitVerificationPermission: true`).
+- **Defensive Role Blocking**: `COLLEGE_ADMIN` (without explicit reviewer delegation), `SUPER_ADMIN`, `RECRUITER`, and `STUDENT` are blocked with `403 Forbidden` (`FORBIDDEN_INSUFFICIENT_ROLE`).
+- **Audit Logging**: Every transition records reviewer ID, actor email, prior/new status, mandatory justification reason, and timestamp in `skill_verification_reviews` and `audit_events`.
+
+### 15.2 Two-Stage Eligibility Engine Fairness
+- **Separation of Concerns**: Orthogonal separation of `administrativeEligibility` (`ELIGIBLE` | `INELIGIBLE` | `NEEDS_REVIEW`) from `skillMatchStatus` (`VERIFIED_MATCH` | `EVIDENCE_MATCH` | `PENDING_VERIFICATION` | `MISSING_SKILL` | `NOT_ASSESSED`) and `overallReviewStatus`.
+- **Critical Fairness Invariant**: Missing skill evidence or unverified claims **never** mark a candidate administratively `INELIGIBLE`. When administrative criteria pass but skills are missing or pending, status is deterministically held as `NEEDS_REVIEW` with clear explanation: `"Administratively eligible; pending skill verification for required skills"`.
+- **Recruiter Postings Gate**: Recruiter-created job postings default to `DRAFT` status and require explicit TPO activation before becoming active for student viewing or applications.
+
+### 15.3 Generalized Dynamic Reweighting in Readiness Engine
+- **Formula**: $S_{\text{adj}} = \frac{\sum_{i \in A} w_i S_i}{\sum_{i \in A} w_i}$ across active dimensions $A \subseteq \{\text{Verified Skills (0.35)}, \text{Coverage (0.25)}, \text{Projects (0.20)}, \text{Academics (0.20)}\}$.
+- **Fairness Principle**: Missing optional records (academics, project artifacts) are omitted without scoring penalty by dynamically renormalizing available dimension weights.
+- **Safeguard**: If completeness $< 0.40$ or available weight sum $< 0.40$, status is flagged as `INSUFFICIENT_DATA`.
+- **Mandatory Placement Disclaimer**: Every generated explanation itemizes contributing and reweighted dimensions and explicitly states that readiness indicates profile preparedness and does not guarantee placement.
+
+### 15.4 Canonical 5-Role Normalization Taxonomy
+- Enforces canonical roles (`SUPER_ADMIN`, `COLLEGE_ADMIN`, `TPO_ADMIN`, `RECRUITER`, `STUDENT`) across all authentication, middleware, and route barriers via `server/src/utils/roles.ts`.
+- Legacy token variants (`superadmin`, `admin`, `tpo`, `company`, etc.) are normalized safely with transparent backward compatibility.
+
+### 15.5 Verified Non-Destructive Migrations
+- Migration files generated into `server/drizzle/0000_shocking_echo.sql` via `drizzle-kit` under `server/drizzle.config.ts`.
+- Zero destructive operations (`DROP TABLE`, `DROP COLUMN`, `TRUNCATE`). All 4 Phase 10 tables enforce tenant isolation, foreign keys, and indexes.
+
+### 15.6 Reference Documentation
+- [docs/PHASE_10_1_INITIAL_AUDIT.md](file:///Users/user/CarrerSync/docs/PHASE_10_1_INITIAL_AUDIT.md)
+- [docs/PHASE_10_1_SECURITY_CORRECTIONS.md](file:///Users/user/CarrerSync/docs/PHASE_10_1_SECURITY_CORRECTIONS.md)
+- [docs/PHASE_10_1_ELIGIBILITY_AND_READINESS.md](file:///Users/user/CarrerSync/docs/PHASE_10_1_ELIGIBILITY_AND_READINESS.md)
+- [docs/PHASE_10_1_DATABASE_MIGRATION_AUDIT.md](file:///Users/user/CarrerSync/docs/PHASE_10_1_DATABASE_MIGRATION_AUDIT.md)
+- [docs/PHASE_10_1_FINAL_REPORT.md](file:///Users/user/CarrerSync/docs/PHASE_10_1_FINAL_REPORT.md)
+

@@ -19,7 +19,7 @@ for (const envPath of potentialEnvPaths) {
 }
 
 const envSchema = z.object({
-  PORT: z.coerce.number().default(5000),
+  PORT: z.coerce.number().default(5050),
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   ENVIRONMENT: z.string().default('development'),
   DATABASE_URL: z.string().optional(),

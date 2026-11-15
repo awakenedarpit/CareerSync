@@ -43,12 +43,16 @@ export async function createJwtToken(
     tenant_id: string;
     role: string;
     email?: string;
+    hasVerificationPermission?: boolean;
+    isDelegatedReviewer?: boolean;
+    [key: string]: unknown;
   },
   secret: string = env.JWT_SECRET || DEFAULT_SECRET,
   expiresInSeconds: number = DEFAULT_EXPIRY_SECONDS
 ): Promise<string> {
   const now = Math.floor(Date.now() / 1000);
   const fullPayload: JwtTokenPayload = {
+    ...payload,
     sub: payload.sub,
     tenant_id: payload.tenant_id,
     role: payload.role,

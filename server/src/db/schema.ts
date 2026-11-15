@@ -161,6 +161,266 @@ export const agentExecutionStatusEnum = pgEnum('agent_exec_status_enum', [
 ]);
 
 // ============================================================================
+// Phase 09 — AI Student Profiling & Document Ingestion Enums
+// ============================================================================
+
+export const jobStatusEnum = pgEnum('job_status_enum', [
+  'QUEUED',
+  'PROCESSING',
+  'COMPLETED',
+  'FAILED',
+  'CANCELLED'
+]);
+
+export const extractionStatusEnum = pgEnum('extraction_status_enum', [
+  'PENDING_REVIEW',
+  'APPROVED',
+  'REJECTED',
+  'PARTIALLY_APPROVED'
+]);
+
+export const reviewActionEnum = pgEnum('review_action_enum', [
+  'APPROVE',
+  'REJECT',
+  'MODIFY'
+]);
+
+export const profileEvidenceTypeEnum = pgEnum('profile_evidence_type_enum', [
+  'RESUME',
+  'PROJECT',
+  'CERTIFICATE',
+  'ASSESSMENT',
+  'SELF_DECLARED'
+]);
+
+export const profileVerificationStatusEnum = pgEnum('profile_verification_status_enum', [
+  'SELF_DECLARED',
+  'EVIDENCE_FOUND',
+  'PENDING_REVIEW',
+  'VERIFIED',
+  'REJECTED',
+  'NEEDS_MORE_EVIDENCE'
+]);
+
+// Cross-phase aliases for Phase 09 profiling
+export const profilingEvidenceTypeEnum = profileEvidenceTypeEnum;
+export const profilingVerificationStatusEnum = profileVerificationStatusEnum;
+
+// ============================================================================
+// Phase 10: Placement Readiness, Skill Verification & Job Eligibility Enums
+// ============================================================================
+
+export const readinessCategoryEnum = pgEnum('readiness_category_enum', [
+  'READY',
+  'DEVELOPING',
+  'NEEDS_SUPPORT',
+  'INSUFFICIENT_DATA'
+]);
+
+export const eligibilityResultEnum = pgEnum('eligibility_result_enum', [
+  'ELIGIBLE',
+  'INELIGIBLE',
+  'NEEDS_REVIEW',
+  'INSUFFICIENT_DATA'
+]);
+
+export const recruitmentJobStatusEnum = pgEnum('recruitment_job_status_enum', [
+  'DRAFT',
+  'ACTIVE',
+  'CLOSED',
+  'ARCHIVED'
+]);
+
+// ============================================================================
+// Phase 11 — Recruiter Drive Orchestration & Placement Intelligence Enums
+// ============================================================================
+
+export const companyVerificationStatusEnum = pgEnum('company_verification_status_enum', [
+  'PENDING',
+  'UNDER_REVIEW',
+  'VERIFIED',
+  'REJECTED'
+]);
+
+export const driveStageStatusEnum = pgEnum('drive_stage_status_enum', [
+  'DRAFT',
+  'PENDING_TPO_APPROVAL',
+  'APPROVED',
+  'SCHEDULED',
+  'REGISTRATION_OPEN',
+  'IN_PROGRESS',
+  'COMPLETED',
+  'CANCELLED',
+  'POSTPONED'
+]);
+
+export const candidateShortlistStatusEnum = pgEnum('candidate_shortlist_status_enum', [
+  'RECOMMENDED',
+  'SUBMITTED_FOR_TPO_REVIEW',
+  'APPROVED',
+  'REJECTED',
+  'WITHDRAWN'
+]);
+
+export const assessmentTypeEnum = pgEnum('assessment_type_enum', [
+  'APTITUDE',
+  'TECHNICAL',
+  'CODING',
+  'INTERVIEW'
+]);
+
+export const assessmentStatusEnum = pgEnum('assessment_status_enum', [
+  'SCHEDULED',
+  'IN_PROGRESS',
+  'COMPLETED',
+  'CANCELLED'
+]);
+
+export const interviewStageEnum = pgEnum('interview_stage_enum', [
+  'TECHNICAL_1',
+  'TECHNICAL_2',
+  'CODING',
+  'MANAGERIAL',
+  'HR',
+  'FINAL'
+]);
+
+export const offerLifecycleStatusEnum = pgEnum('offer_lifecycle_status_enum', [
+  'DRAFT',
+  'SUBMITTED_FOR_REVIEW',
+  'APPROVED',
+  'REJECTED',
+  'RELEASED',
+  'ACCEPTED',
+  'DECLINED',
+  'EXPIRED',
+  'WITHDRAWN'
+]);
+
+// ============================================================================
+// Phase 12 — Student Mock Drive, Assessment Engine & Personalized Learning Intelligence Enums
+// ============================================================================
+
+export const mockDriveStatusEnum = pgEnum('mock_drive_status_enum', [
+  'DRAFT',
+  'PUBLISHED',
+  'ACTIVE',
+  'COMPLETED',
+  'ARCHIVED'
+]);
+
+export const mockRoundTypeEnum = pgEnum('mock_round_type_enum', [
+  'APTITUDE',
+  'TECHNICAL_CODING',
+  'INTERVIEW'
+]);
+
+export const assessmentAttemptStatusEnum = pgEnum('assessment_attempt_status_enum', [
+  'IN_PROGRESS',
+  'COMPLETED',
+  'TIMED_OUT',
+  'ABANDONED'
+]);
+
+export const codingLanguageEnum = pgEnum('coding_language_enum', [
+  'python',
+  'java',
+  'cpp',
+  'javascript'
+]);
+
+export const codingVerdictEnum = pgEnum('coding_verdict_enum', [
+  'ACCEPTED',
+  'WRONG_ANSWER',
+  'TIME_LIMIT_EXCEEDED',
+  'MEMORY_LIMIT_EXCEEDED',
+  'COMPILATION_ERROR',
+  'RUNTIME_ERROR',
+  'DEMO_EVALUATION'
+]);
+
+export const skillProficiencyCategoryEnum = pgEnum('skill_proficiency_category_enum', [
+  'ASSESSED_STRENGTH',
+  'IMPROVEMENT_NEEDED',
+  'NOT_ASSESSED',
+  'INSUFFICIENT_DATA'
+]);
+
+export const learningTaskStatusEnum = pgEnum('learning_task_status_enum', [
+  'RECOMMENDED',
+  'IN_PROGRESS',
+  'SUBMITTED_FOR_REVIEW',
+  'COMPLETED',
+  'REJECTED',
+  'PAUSED'
+]);
+
+export const learningTaskCategoryEnum = pgEnum('learning_task_category_enum', [
+  'CONCEPT_LEARNING',
+  'CODING_EXERCISE',
+  'PRACTICAL_PROJECT',
+  'DATABASE_PRACTICE',
+  'PROBLEM_SOLVING',
+  'INTERVIEW_PREP',
+  'PORTFOLIO_IMPROVEMENT'
+]);
+
+// ============================================================================
+// Phase 13 — Industry Skill Intelligence, Career Recommendation & Skill-Gap Analysis Engine Enums
+// ============================================================================
+
+export const taxonomyCategoryEnum = pgEnum('taxonomy_category_enum', [
+  'PROGRAMMING_LANGUAGES',
+  'FRONTEND',
+  'BACKEND',
+  'DATABASE',
+  'CLOUD_DEVOPS',
+  'DATA_AI',
+  'CORE_CS',
+  'PROFESSIONAL_SKILLS'
+]);
+
+export const jdSourceTypeEnum = pgEnum('jd_source_type_enum', [
+  'RECRUITER_SUBMISSION',
+  'MANUAL_UPLOAD',
+  'INTERNAL_SYSTEM',
+  'PUBLIC_DATASET',
+  'PUBLIC_FEED'
+]);
+
+export const jdAnalysisStatusEnum = pgEnum('jd_analysis_status_enum', [
+  'PENDING',
+  'ANALYZED',
+  'HUMAN_REVIEWED',
+  'REJECTED'
+]);
+
+export const skillImportanceEnum = pgEnum('skill_importance_enum', [
+  'MANDATORY',
+  'PREFERRED',
+  'OPTIONAL'
+]);
+
+export const studentSkillGapStatusEnum = pgEnum('student_skill_gap_status_enum', [
+  'VERIFIED_MATCH',
+  'EVIDENCE_AVAILABLE',
+  'PENDING_VERIFICATION',
+  'IMPROVEMENT_NEEDED',
+  'MISSING_EVIDENCE',
+  'NOT_ASSESSED'
+]);
+
+export const careerRecommendationFitEnum = pgEnum('career_recommendation_fit_enum', [
+  'STRONG_MATCH',
+  'GOOD_MATCH',
+  'POTENTIAL_MATCH',
+  'DEVELOPING',
+  'INSUFFICIENT_DATA'
+]);
+
+
+
+// ============================================================================
 // Core Tables Definition (16 Canonical Domain Tables + Invitations + AI Tables)
 // ============================================================================
 
@@ -384,6 +644,15 @@ export const companies = pgTable('companies', {
   name: varchar('name', { length: 255 }).notNull().unique(),
   industryDomain: varchar('industry_domain', { length: 150 }),
   website: varchar('website', { length: 512 }),
+  description: text('description'),
+  logoUrl: varchar('logo_url', { length: 512 }),
+  headquarters: varchar('headquarters', { length: 255 }),
+  contactEmail: varchar('contact_email', { length: 255 }),
+  contactPhone: varchar('contact_phone', { length: 50 }),
+  verificationStatus: companyVerificationStatusEnum('verification_status').default('PENDING').notNull(),
+  verifiedBy: uuid('verified_by').references(() => users.id, { onDelete: 'set null' }),
+  verifiedAt: timestamp('verified_at', { withTimezone: true }),
+  rejectionReason: text('rejection_reason'),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
 });
@@ -405,9 +674,9 @@ export const jobRoles = pgTable('job_roles', {
 });
 
 /**
- * 11. Job Requirements Table
+ * 11. Role Skill Requirements Table (Canonical Domain Table)
  */
-export const jobRequirements = pgTable(
+export const roleJobRequirements = pgTable(
   'job_requirements',
   {
     id: uuid('id').defaultRandom().primaryKey(),
@@ -428,6 +697,8 @@ export const jobRequirements = pgTable(
   ]
 );
 
+export const legacyJobRequirements = roleJobRequirements;
+
 /**
  * 12. Placement Drives Table
  */
@@ -441,6 +712,12 @@ export const placementDrives = pgTable(
     jobRoleId: uuid('job_role_id')
       .notNull()
       .references(() => jobRoles.id, { onDelete: 'cascade' }),
+    title: varchar('title', { length: 255 }),
+    description: text('description'),
+    venue: varchar('venue', { length: 255 }),
+    availablePositions: integer('available_positions').default(1),
+    companyId: uuid('company_id').references(() => companies.id, { onDelete: 'cascade' }),
+    recruiterId: uuid('recruiter_id').references(() => users.id, { onDelete: 'set null' }),
     batchYear: integer('batch_year').notNull(),
     minCgpa: numeric('min_cgpa', { precision: 4, scale: 2 }).default('6.00').notNull(),
     maxBacklogsAllowed: integer('max_backlogs_allowed').default(0).notNull(),
@@ -449,11 +726,15 @@ export const placementDrives = pgTable(
     registrationEnd: timestamp('registration_end', { withTimezone: true }).notNull(),
     driveDate: timestamp('drive_date', { withTimezone: true }),
     status: driveStatusEnum('status').default('draft').notNull(),
+    stageStatus: driveStageStatusEnum('stage_status').default('DRAFT').notNull(),
+    tpoApprovedBy: uuid('tpo_approved_by').references(() => users.id, { onDelete: 'set null' }),
+    tpoApprovalReason: text('tpo_approval_reason'),
     createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
     updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
   },
   (table) => [
-    index('ix_drives_tenant_status_batch').on(table.tenantId, table.status, table.batchYear)
+    index('ix_drives_tenant_status_batch').on(table.tenantId, table.status, table.batchYear),
+    index('ix_drives_stage_status').on(table.tenantId, table.stageStatus)
   ]
 );
 
@@ -825,6 +1106,1551 @@ export const documents = pgTable(
 );
 
 // ============================================================================
+// Phase 09 — AI Student Profiling & Document Ingestion Tables
+// ============================================================================
+
+/**
+ * 22. Document Processing Jobs Table
+ * Asynchronous job queue tracking background document text extraction and AI profiling.
+ */
+export const documentProcessingJobs = pgTable(
+  'document_processing_jobs',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    documentId: uuid('document_id')
+      .notNull()
+      .references(() => documents.id, { onDelete: 'cascade' }),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    status: jobStatusEnum('status').default('QUEUED').notNull(),
+    retryCount: integer('retry_count').default(0).notNull(),
+    errorMessage: text('error_message'),
+    payload: jsonb('payload').default({}).notNull(),
+    result: jsonb('result').default({}).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+    completedAt: timestamp('completed_at', { withTimezone: true })
+  },
+  (table) => [
+    index('idx_doc_jobs_tenant').on(table.tenantId),
+    index('idx_doc_jobs_document').on(table.documentId),
+    index('idx_doc_jobs_user').on(table.userId),
+    index('idx_doc_jobs_status').on(table.status),
+    index('idx_doc_jobs_tenant_status').on(table.tenantId, table.status)
+  ]
+);
+
+/**
+ * 23. Profile Extractions Table
+ * Output of AI profiling analysis on documents, containing proposed skills, projects, and warnings.
+ */
+export const profileExtractions = pgTable(
+  'profile_extractions',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    documentId: uuid('document_id')
+      .notNull()
+      .references(() => documents.id, { onDelete: 'cascade' }),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    rawTextPreview: text('raw_text_preview'),
+    sanitizedText: text('sanitized_text'),
+    extractedSkills: jsonb('extracted_skills').default([]).notNull(),
+    extractedProjects: jsonb('extracted_projects').default([]).notNull(),
+    extractedCertifications: jsonb('extracted_certifications').default([]).notNull(),
+    warnings: jsonb('warnings').default([]).notNull(),
+    overallConfidence: numeric('overall_confidence', { precision: 4, scale: 2 }).default('0.00').notNull(),
+    providerUsed: varchar('provider_used', { length: 50 }).default('rule-based').notNull(),
+    status: extractionStatusEnum('status').default('PENDING_REVIEW').notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_profile_extractions_tenant').on(table.tenantId),
+    index('idx_profile_extractions_document').on(table.documentId),
+    index('idx_profile_extractions_user').on(table.userId),
+    index('idx_profile_extractions_status').on(table.status),
+    index('idx_profile_extractions_tenant_user').on(table.tenantId, table.userId)
+  ]
+);
+
+/**
+ * 24. Profile Skill Evidence Table
+ * Granular skill claims supported by verifiable document/project evidence and verification states.
+ */
+export const profileSkillEvidence = pgTable(
+  'profile_skill_evidence',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    skillName: varchar('skill_name', { length: 100 }).notNull(),
+    category: varchar('category', { length: 100 }).notNull(),
+    proficiencyClaim: varchar('proficiency_claim', { length: 50 }),
+    evidenceType: profileEvidenceTypeEnum('evidence_type').notNull(),
+    documentId: uuid('document_id').references(() => documents.id, { onDelete: 'set null' }),
+    extractionId: uuid('extraction_id').references(() => profileExtractions.id, { onDelete: 'set null' }),
+    confidence: numeric('confidence', { precision: 4, scale: 2 }).default('0.50').notNull(),
+    verificationStatus: profileVerificationStatusEnum('verification_status').default('PENDING_REVIEW').notNull(),
+    reviewedBy: uuid('reviewed_by').references(() => users.id, { onDelete: 'set null' }),
+    reviewedAt: timestamp('reviewed_at', { withTimezone: true }),
+    reviewNotes: text('review_notes'),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_profile_skill_evidence_tenant').on(table.tenantId),
+    index('idx_profile_skill_evidence_user').on(table.userId),
+    index('idx_profile_skill_evidence_skill').on(table.skillName),
+    index('idx_profile_skill_evidence_status').on(table.verificationStatus),
+    index('idx_profile_skill_evidence_document').on(table.documentId),
+    index('idx_profile_skill_evidence_extraction').on(table.extractionId),
+    index('idx_profile_skill_evidence_tenant_user').on(table.tenantId, table.userId),
+    index('idx_profile_skill_evidence_tenant_user_skill').on(table.tenantId, table.userId, table.skillName)
+  ]
+);
+
+/**
+ * 25. Profile Review Events Table
+ * Audit log of student or administrator approval, rejection, or modification of profile extractions.
+ */
+export const profileReviewEvents = pgTable(
+  'profile_review_events',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    extractionId: uuid('extraction_id').references(() => profileExtractions.id, { onDelete: 'set null' }),
+    skillId: uuid('skill_id').references(() => profileSkillEvidence.id, { onDelete: 'set null' }),
+    action: reviewActionEnum('action').notNull(),
+    reviewerId: uuid('reviewer_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    reviewerRole: varchar('reviewer_role', { length: 50 }).notNull(),
+    previousState: jsonb('previous_state'),
+    newState: jsonb('new_state'),
+    comment: text('comment'),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_profile_review_events_tenant').on(table.tenantId),
+    index('idx_profile_review_events_user').on(table.userId),
+    index('idx_profile_review_events_reviewer').on(table.reviewerId),
+    index('idx_profile_review_events_extraction').on(table.extractionId),
+    index('idx_profile_review_events_skill').on(table.skillId),
+    index('idx_profile_review_events_tenant_user').on(table.tenantId, table.userId)
+  ]
+);
+
+/**
+ * 26. Profile Versions Table
+ * Immutable historical snapshots of a student's profile state over time.
+ */
+export const profileVersions = pgTable(
+  'profile_versions',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    versionNumber: integer('version_number').notNull(),
+    snapshot: jsonb('snapshot').notNull(),
+    triggerEvent: varchar('trigger_event', { length: 100 }).notNull(),
+    createdBy: uuid('created_by')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_profile_versions_tenant').on(table.tenantId),
+    index('idx_profile_versions_user').on(table.userId),
+    index('idx_profile_versions_creator').on(table.createdBy),
+    uniqueIndex('uq_profile_versions_tenant_user_ver').on(table.tenantId, table.userId, table.versionNumber),
+    index('idx_profile_versions_tenant_user').on(table.tenantId, table.userId)
+  ]
+);
+
+// College tenant entity alias for Phase 09 compliance
+export const colleges = tenants;
+
+// ============================================================================
+// Phase 10: Placement Readiness, Skill Verification & Job Eligibility Tables
+// ============================================================================
+
+/**
+ * 27. Skill Verification Reviews Table
+ * Audit and lifecycle review records for student evidence verification by authorized faculty/TPO.
+ */
+export const skillVerificationReviews = pgTable(
+  'skill_verification_reviews',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    evidenceId: uuid('evidence_id')
+      .notNull()
+      .references(() => profileSkillEvidence.id, { onDelete: 'cascade' }),
+    reviewerId: uuid('reviewer_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    previousStatus: profileVerificationStatusEnum('previous_status').notNull(),
+    newStatus: profileVerificationStatusEnum('new_status').notNull(),
+    reason: text('reason').notNull(),
+    reviewerNotes: text('reviewer_notes'),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_skill_reviews_tenant').on(table.tenantId),
+    index('idx_skill_reviews_student').on(table.studentId),
+    index('idx_skill_reviews_evidence').on(table.evidenceId),
+    index('idx_skill_reviews_reviewer').on(table.reviewerId),
+    index('idx_skill_reviews_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 28. Student Readiness Snapshots Table
+ * Periodic deterministic evaluation snapshots of student placement readiness.
+ */
+export const studentReadinessSnapshots = pgTable(
+  'student_readiness_snapshots',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    score: numeric('score', { precision: 5, scale: 2 }).notNull(),
+    category: readinessCategoryEnum('category').notNull(),
+    dimensions: jsonb('dimensions').default({}).notNull(),
+    explanation: text('explanation').notNull(),
+    dataCompleteness: numeric('data_completeness', { precision: 4, scale: 2 }).default('1.00').notNull(),
+    calculatedAt: timestamp('calculated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_readiness_snap_tenant').on(table.tenantId),
+    index('idx_readiness_snap_student').on(table.studentId),
+    index('idx_readiness_snap_category').on(table.category),
+    index('idx_readiness_snap_calculated').on(table.calculatedAt),
+    index('idx_readiness_snap_tenant_student').on(table.tenantId, table.studentId)
+  ]
+);
+
+/**
+ * 29. Job Requirements (Recruitment Job Postings) Table
+ * Tenant-isolated recruitment postings with criteria, required & preferred skills, and assessment requirements.
+ */
+export const jobRequirements = pgTable(
+  'recruitment_job_requirements',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    companyName: varchar('company_name', { length: 200 }).notNull(),
+    companyId: uuid('company_id').references(() => companies.id, { onDelete: 'cascade' }),
+    jobTitle: varchar('job_title', { length: 200 }).notNull(),
+    jobRole: varchar('job_role', { length: 150 }),
+    jobCategory: varchar('job_category', { length: 100 }),
+    employmentType: varchar('employment_type', { length: 50 }).default('Full-Time'),
+    workLocation: varchar('work_location', { length: 150 }),
+    salaryMinLpa: numeric('salary_min_lpa', { precision: 6, scale: 2 }),
+    salaryMaxLpa: numeric('salary_max_lpa', { precision: 6, scale: 2 }),
+    maxBacklogsAllowed: integer('max_backlogs_allowed').default(0),
+    experienceLevel: varchar('experience_level', { length: 100 }),
+    vacancies: integer('vacancies').default(1),
+    jobDescription: text('job_description').notNull(),
+    eligibleDepartments: jsonb('eligible_departments').default([]).notNull(),
+    graduationYear: integer('graduation_year'),
+    minimumCgpa: numeric('minimum_cgpa', { precision: 4, scale: 2 }),
+    requiredSkills: jsonb('required_skills').default([]).notNull(),
+    preferredSkills: jsonb('preferred_skills').default([]).notNull(),
+    assessmentRequirements: jsonb('assessment_requirements').default([]).notNull(),
+    deadline: timestamp('deadline', { withTimezone: true }),
+    status: recruitmentJobStatusEnum('status').default('ACTIVE').notNull(),
+    tpoApprovalStatus: varchar('tpo_approval_status', { length: 50 }).default('PENDING_TPO_APPROVAL'),
+    tpoApprovedBy: uuid('tpo_approved_by').references(() => users.id, { onDelete: 'set null' }),
+    tpoApprovalReason: text('tpo_approval_reason'),
+    rejectionReason: text('rejection_reason'),
+    createdBy: uuid('created_by')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_job_req_tenant').on(table.tenantId),
+    index('idx_job_req_status').on(table.status),
+    index('idx_job_req_created_by').on(table.createdBy),
+    index('idx_job_req_company').on(table.companyName),
+    index('idx_job_req_tenant_status').on(table.tenantId, table.status)
+  ]
+);
+
+export const recruitmentJobRequirements = jobRequirements;
+export const recruitmentJobs = jobRequirements;
+
+/**
+ * 30. Job Eligibility Evaluations Table
+ * Evaluation outcomes determining student eligibility against job requirements with human override audit.
+ */
+export const jobEligibilityEvaluations = pgTable(
+  'job_eligibility_evaluations',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    jobId: uuid('job_id')
+      .notNull()
+      .references(() => jobRequirements.id, { onDelete: 'cascade' }),
+    result: eligibilityResultEnum('result').notNull(),
+    matchedRequirements: jsonb('matched_requirements').default([]).notNull(),
+    unmetRequirements: jsonb('unmet_requirements').default([]).notNull(),
+    missingInformation: jsonb('missing_information').default([]).notNull(),
+    explanation: text('explanation').notNull(),
+    overriddenBy: uuid('overridden_by').references(() => users.id, { onDelete: 'set null' }),
+    overrideReason: text('override_reason'),
+    evaluatedAt: timestamp('evaluated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_eligibility_eval_tenant').on(table.tenantId),
+    index('idx_eligibility_eval_student').on(table.studentId),
+    index('idx_eligibility_eval_job').on(table.jobId),
+    index('idx_eligibility_eval_result').on(table.result),
+    index('idx_eligibility_eval_tenant_job').on(table.tenantId, table.jobId),
+    index('idx_eligibility_eval_student_job').on(table.studentId, table.jobId)
+  ]
+);
+
+// ============================================================================
+// Phase 11 — Recruiter Drive Orchestration & Placement Intelligence Tables
+// ============================================================================
+
+/**
+ * 31. Recruiter Company Memberships Table
+ * Binds recruiter user accounts to their verified corporate entity.
+ */
+export const recruiterCompanyMemberships = pgTable(
+  'recruiter_company_memberships',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    companyId: uuid('company_id')
+      .notNull()
+      .references(() => companies.id, { onDelete: 'cascade' }),
+    role: varchar('role', { length: 50 }).default('recruiter').notNull(),
+    isPrimaryContact: boolean('is_primary_contact').default(false).notNull(),
+    status: varchar('status', { length: 50 }).default('active').notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_recruiter_membership_user').on(table.userId),
+    index('idx_recruiter_membership_company').on(table.companyId),
+    uniqueIndex('uq_recruiter_user_company').on(table.userId, table.companyId)
+  ]
+);
+
+/**
+ * 32. Company Verification Reviews Table
+ * Immutable audit log of TPO / platform administration company verification reviews.
+ */
+export const companyVerificationReviews = pgTable(
+  'company_verification_reviews',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    companyId: uuid('company_id')
+      .notNull()
+      .references(() => companies.id, { onDelete: 'cascade' }),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    reviewerId: uuid('reviewer_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    decision: companyVerificationStatusEnum('decision').notNull(),
+    reviewNotes: text('review_notes').notNull(),
+    reviewedAt: timestamp('reviewed_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_company_review_company').on(table.companyId),
+    index('idx_company_review_tenant').on(table.tenantId),
+    index('idx_company_review_reviewer').on(table.reviewerId)
+  ]
+);
+
+/**
+ * 33. Placement Drive Schedules Table
+ * Calendar slots, interview schedules, and timeline conflict detection.
+ */
+export const driveSchedules = pgTable(
+  'drive_schedules',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    driveId: uuid('drive_id')
+      .notNull()
+      .references(() => placementDrives.id, { onDelete: 'cascade' }),
+    eventTitle: varchar('event_title', { length: 255 }).notNull(),
+    eventType: varchar('event_type', { length: 50 }).notNull(),
+    startTime: timestamp('start_time', { withTimezone: true }).notNull(),
+    endTime: timestamp('end_time', { withTimezone: true }).notNull(),
+    venueOrLink: varchar('venue_or_link', { length: 512 }),
+    conflictFlag: boolean('conflict_flag').default(false).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_drive_sched_tenant').on(table.tenantId),
+    index('idx_drive_sched_drive').on(table.driveId),
+    index('idx_drive_sched_time').on(table.tenantId, table.startTime, table.endTime)
+  ]
+);
+
+/**
+ * 34. Candidate Shortlists Table
+ * Human-in-the-loop candidate shortlisting workflow with mandatory TPO governance.
+ */
+export const candidateShortlists = pgTable(
+  'candidate_shortlists',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    driveId: uuid('drive_id')
+      .notNull()
+      .references(() => placementDrives.id, { onDelete: 'cascade' }),
+    jobId: uuid('job_id')
+      .notNull()
+      .references(() => jobRequirements.id, { onDelete: 'cascade' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    recruiterId: uuid('recruiter_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    status: candidateShortlistStatusEnum('status').default('RECOMMENDED').notNull(),
+    recruiterNotes: text('recruiter_notes'),
+    tpoReviewerId: uuid('tpo_reviewer_id').references(() => users.id, { onDelete: 'set null' }),
+    tpoDecisionReason: text('tpo_decision_reason'),
+    reviewedAt: timestamp('reviewed_at', { withTimezone: true }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_shortlist_tenant').on(table.tenantId),
+    index('idx_shortlist_drive').on(table.driveId),
+    index('idx_shortlist_student').on(table.studentId),
+    index('idx_shortlist_status').on(table.status),
+    uniqueIndex('uq_shortlist_drive_student').on(table.driveId, table.studentId)
+  ]
+);
+
+/**
+ * 35. Drive Assessments Table
+ * Aptitude, technical, coding, and interview assessments scheduled for a drive.
+ */
+export const driveAssessments = pgTable(
+  'drive_assessments',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    driveId: uuid('drive_id')
+      .notNull()
+      .references(() => placementDrives.id, { onDelete: 'cascade' }),
+    assessmentType: assessmentTypeEnum('assessment_type').default('APTITUDE').notNull(),
+    title: varchar('title', { length: 255 }).notNull(),
+    scheduledAt: timestamp('scheduled_at', { withTimezone: true }),
+    durationMinutes: integer('duration_minutes').default(60).notNull(),
+    meetingDetails: text('meeting_details'),
+    status: assessmentStatusEnum('status').default('SCHEDULED').notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_drive_assess_tenant').on(table.tenantId),
+    index('idx_drive_assess_drive').on(table.driveId)
+  ]
+);
+
+/**
+ * 36. Candidate Assessment Results Table
+ * Recorded candidate evaluation scores and feedback with authorization checks.
+ */
+export const candidateAssessmentResults = pgTable(
+  'candidate_assessment_results',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    assessmentId: uuid('assessment_id')
+      .notNull()
+      .references(() => driveAssessments.id, { onDelete: 'cascade' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    score: numeric('score', { precision: 5, scale: 2 }),
+    maxScore: numeric('max_score', { precision: 5, scale: 2 }).default('100.00').notNull(),
+    status: varchar('status', { length: 50 }).default('COMPLETED').notNull(),
+    feedback: text('feedback'),
+    recordedBy: uuid('recorded_by')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_assess_result_tenant').on(table.tenantId),
+    index('idx_assess_result_assess').on(table.assessmentId),
+    index('idx_assess_result_student').on(table.studentId),
+    uniqueIndex('uq_assess_result_student').on(table.assessmentId, table.studentId)
+  ]
+);
+
+/**
+ * 37. Drive Interview Rounds Table
+ * Multi-stage interview coordination (technical, coding, managerial, HR, final).
+ */
+export const driveInterviewRounds = pgTable(
+  'drive_interview_rounds',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    driveId: uuid('drive_id')
+      .notNull()
+      .references(() => placementDrives.id, { onDelete: 'cascade' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    roundNumber: integer('round_number').default(1).notNull(),
+    roundStage: interviewStageEnum('round_stage').default('TECHNICAL_1').notNull(),
+    scheduledAt: timestamp('scheduled_at', { withTimezone: true }).notNull(),
+    interviewerName: varchar('interviewer_name', { length: 255 }),
+    interviewerId: uuid('interviewer_id').references(() => users.id, { onDelete: 'set null' }),
+    meetingDetails: text('meeting_details'),
+    status: varchar('status', { length: 50 }).default('SCHEDULED').notNull(),
+    feedback: text('feedback'),
+    rating: integer('rating'),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_interview_rnd_tenant').on(table.tenantId),
+    index('idx_interview_rnd_drive').on(table.driveId),
+    index('idx_interview_rnd_student').on(table.studentId)
+  ]
+);
+
+/**
+ * 38. Placement Offers Table
+ * Complete offer lifecycle management with TPO review gate and student acceptance tracking.
+ */
+export const placementOffers = pgTable(
+  'placement_offers',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    driveId: uuid('drive_id')
+      .notNull()
+      .references(() => placementDrives.id, { onDelete: 'cascade' }),
+    jobId: uuid('job_id')
+      .notNull()
+      .references(() => jobRequirements.id, { onDelete: 'cascade' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    companyId: uuid('company_id')
+      .notNull()
+      .references(() => companies.id, { onDelete: 'cascade' }),
+    recruiterId: uuid('recruiter_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    roleTitle: varchar('role_title', { length: 255 }).notNull(),
+    ctcLpa: numeric('ctc_lpa', { precision: 6, scale: 2 }),
+    joiningDate: timestamp('joining_date', { withTimezone: true }),
+    offerDate: timestamp('offer_date', { withTimezone: true }).defaultNow().notNull(),
+    expiryDate: timestamp('expiry_date', { withTimezone: true }),
+    status: offerLifecycleStatusEnum('status').default('DRAFT').notNull(),
+    tpoReviewerId: uuid('tpo_reviewer_id').references(() => users.id, { onDelete: 'set null' }),
+    tpoApprovalReason: text('tpo_approval_reason'),
+    studentRespondedAt: timestamp('student_responded_at', { withTimezone: true }),
+    studentResponseNotes: text('student_response_notes'),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_offer_tenant').on(table.tenantId),
+    index('idx_offer_drive').on(table.driveId),
+    index('idx_offer_student').on(table.studentId),
+    index('idx_offer_company').on(table.companyId),
+    index('idx_offer_status').on(table.status)
+  ]
+);
+
+/**
+ * 39. Offer Status History Table
+ * Immutable audit trail tracking historical state transitions for all placement offers.
+ */
+export const offerStatusHistory = pgTable(
+  'offer_status_history',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    offerId: uuid('offer_id')
+      .notNull()
+      .references(() => placementOffers.id, { onDelete: 'cascade' }),
+    previousStatus: varchar('previous_status', { length: 50 }).notNull(),
+    newStatus: varchar('new_status', { length: 50 }).notNull(),
+    changedBy: uuid('changed_by')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    reason: text('reason'),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_offer_history_offer').on(table.offerId),
+    index('idx_offer_history_changed_by').on(table.changedBy)
+  ]
+);
+
+// ============================================================================
+// Phase 12 — Student Mock Drive, Assessment Engine & Personalized Learning Intelligence Tables
+// ============================================================================
+
+/**
+ * 40. Assessment Question Banks Table
+ * Categorized repositories of questions for mock drives and skill evaluations.
+ */
+export const assessmentQuestionBanks = pgTable(
+  'assessment_question_banks',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    title: varchar('title', { length: 255 }).notNull(),
+    category: varchar('category', { length: 50 }).notNull(), // aptitude / technical / interview
+    description: text('description'),
+    createdBy: uuid('created_by')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_qbank_tenant').on(table.tenantId),
+    index('idx_qbank_category').on(table.category),
+    index('idx_qbank_created_by').on(table.createdBy)
+  ]
+);
+
+/**
+ * 41. Assessment Questions Table
+ * Individual evaluation questions spanning MCQ, coding challenges, and descriptive/behavioral prompts.
+ */
+export const assessmentQuestions = pgTable(
+  'assessment_questions',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    bankId: uuid('bank_id')
+      .notNull()
+      .references(() => assessmentQuestionBanks.id, { onDelete: 'cascade' }),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    category: varchar('category', { length: 50 }).notNull(),
+    topic: varchar('topic', { length: 100 }).notNull(),
+    difficulty: varchar('difficulty', { length: 20 }).default('medium').notNull(),
+    questionText: text('question_text').notNull(),
+    questionType: varchar('question_type', { length: 30 }).default('MCQ').notNull(),
+    optionsJson: jsonb('options_json'),
+    correctAnswer: text('correct_answer'),
+    explanation: text('explanation'),
+    testCasesJson: jsonb('test_cases_json'),
+    starterCodeJson: jsonb('starter_code_json'),
+    marks: integer('marks').default(1).notNull(),
+    negativeMarks: numeric('negative_marks', { precision: 4, scale: 2 }).default('0.00').notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_questions_bank').on(table.bankId),
+    index('idx_questions_tenant').on(table.tenantId),
+    index('idx_questions_category').on(table.category),
+    index('idx_questions_topic').on(table.topic),
+    index('idx_questions_difficulty').on(table.difficulty)
+  ]
+);
+
+/**
+ * 42. Mock Drive Configurations Table
+ * Institutional mock recruitment drive configurations with departmental rules and cutoffs.
+ */
+export const mockDriveConfigurations = pgTable(
+  'mock_drive_configurations',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    title: varchar('title', { length: 255 }).notNull(),
+    targetRole: varchar('target_role', { length: 150 }).notNull(),
+    description: text('description'),
+    status: mockDriveStatusEnum('status').default('DRAFT').notNull(),
+    eligibleDepartmentsJson: jsonb('eligible_departments_json').default([]).notNull(),
+    minCgpa: numeric('min_cgpa', { precision: 4, scale: 2 }).default('0.00').notNull(),
+    createdBy: uuid('created_by')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    scheduledStart: timestamp('scheduled_start', { withTimezone: true }),
+    scheduledEnd: timestamp('scheduled_end', { withTimezone: true }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_mock_drive_tenant').on(table.tenantId),
+    index('idx_mock_drive_status').on(table.status),
+    index('idx_mock_drive_target_role').on(table.targetRole),
+    index('idx_mock_drive_created_by').on(table.createdBy)
+  ]
+);
+
+/**
+ * 43. Mock Drive Rounds Table
+ * Sequenced stages for mock placement drives (Aptitude -> Coding -> Interview).
+ */
+export const mockDriveRounds = pgTable(
+  'mock_drive_rounds',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    driveId: uuid('drive_id')
+      .notNull()
+      .references(() => mockDriveConfigurations.id, { onDelete: 'cascade' }),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    roundType: mockRoundTypeEnum('round_type').notNull(),
+    roundOrder: integer('round_order').notNull(),
+    title: varchar('title', { length: 255 }).notNull(),
+    durationMinutes: integer('duration_minutes').default(60).notNull(),
+    cutoffScore: numeric('cutoff_score', { precision: 5, scale: 2 }).default('0.00').notNull(),
+    questionBankId: uuid('question_bank_id').references(() => assessmentQuestionBanks.id, { onDelete: 'set null' }),
+    configJson: jsonb('config_json').default({}).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_mock_round_drive').on(table.driveId),
+    index('idx_mock_round_tenant').on(table.tenantId),
+    index('idx_mock_round_order').on(table.driveId, table.roundOrder),
+    index('idx_mock_round_qbank').on(table.questionBankId)
+  ]
+);
+
+/**
+ * 44. Assessment Reports Table
+ * Comprehensive analytical report synthesized after mock drive or practice evaluations.
+ */
+export const assessmentReports = pgTable(
+  'assessment_reports',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    driveId: uuid('drive_id').references(() => mockDriveConfigurations.id, { onDelete: 'set null' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    targetRole: varchar('target_role', { length: 150 }).notNull(),
+    aptitudeScore: numeric('aptitude_score', { precision: 5, scale: 2 }).default('0.00').notNull(),
+    technicalScore: numeric('technical_score', { precision: 5, scale: 2 }).default('0.00').notNull(),
+    interviewScore: numeric('interview_score', { precision: 5, scale: 2 }).default('0.00').notNull(),
+    compositeScore: numeric('composite_score', { precision: 5, scale: 2 }).default('0.00').notNull(),
+    strengthsJson: jsonb('strengths_json').default([]).notNull(),
+    weaknessesJson: jsonb('weaknesses_json').default([]).notNull(),
+    questionsAttempted: integer('questions_attempted').default(0).notNull(),
+    questionsUnanswered: integer('questions_unanswered').default(0).notNull(),
+    timeUtilizationSeconds: integer('time_utilization_seconds').default(0).notNull(),
+    recommendationsJson: jsonb('recommendations_json').default([]).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_assessment_report_drive').on(table.driveId),
+    index('idx_assessment_report_student').on(table.studentId),
+    index('idx_assessment_report_tenant').on(table.tenantId),
+    index('idx_assessment_report_composite').on(table.compositeScore)
+  ]
+);
+
+/**
+ * 45. Mock Drive Participants Table
+ * Student registrations and progression tracking across mock drive rounds.
+ */
+export const mockDriveParticipants = pgTable(
+  'mock_drive_participants',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    driveId: uuid('drive_id')
+      .notNull()
+      .references(() => mockDriveConfigurations.id, { onDelete: 'cascade' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    registrationStatus: varchar('registration_status', { length: 50 }).default('REGISTERED').notNull(),
+    currentRoundOrder: integer('current_round_order').default(1).notNull(),
+    completedAt: timestamp('completed_at', { withTimezone: true }),
+    finalReportId: uuid('final_report_id').references(() => assessmentReports.id, { onDelete: 'set null' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    uniqueIndex('uq_mock_participant_drive_student').on(table.driveId, table.studentId),
+    index('idx_mock_participant_tenant').on(table.tenantId),
+    index('idx_mock_participant_student').on(table.studentId),
+    index('idx_mock_participant_status').on(table.registrationStatus)
+  ]
+);
+
+/**
+ * 46. Assessment Attempts Table
+ * Student attempt sessions for specific mock rounds or standalone assessments.
+ */
+export const assessmentAttempts = pgTable(
+  'assessment_attempts',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    driveId: uuid('drive_id').references(() => mockDriveConfigurations.id, { onDelete: 'set null' }),
+    roundId: uuid('round_id').references(() => mockDriveRounds.id, { onDelete: 'set null' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    roundType: mockRoundTypeEnum('round_type').notNull(),
+    status: assessmentAttemptStatusEnum('status').default('IN_PROGRESS').notNull(),
+    score: numeric('score', { precision: 6, scale: 2 }).default('0.00').notNull(),
+    maxScore: numeric('max_score', { precision: 6, scale: 2 }).default('100.00').notNull(),
+    percentage: numeric('percentage', { precision: 5, scale: 2 }).default('0.00').notNull(),
+    topicAnalysisJson: jsonb('topic_analysis_json').default({}).notNull(),
+    startedAt: timestamp('started_at', { withTimezone: true }).defaultNow().notNull(),
+    completedAt: timestamp('completed_at', { withTimezone: true }),
+    expiresAt: timestamp('expires_at', { withTimezone: true }),
+    timeSpentSeconds: integer('time_spent_seconds').default(0).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_attempt_student').on(table.studentId),
+    index('idx_attempt_drive').on(table.driveId),
+    index('idx_attempt_round').on(table.roundId),
+    index('idx_attempt_tenant').on(table.tenantId),
+    index('idx_attempt_status').on(table.status)
+  ]
+);
+
+/**
+ * 47. Assessment Responses Table
+ * Granular per-question responses submitted during an assessment attempt.
+ */
+export const assessmentResponses = pgTable(
+  'assessment_responses',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    attemptId: uuid('attempt_id')
+      .notNull()
+      .references(() => assessmentAttempts.id, { onDelete: 'cascade' }),
+    questionId: uuid('question_id')
+      .notNull()
+      .references(() => assessmentQuestions.id, { onDelete: 'cascade' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    selectedOption: text('selected_option'),
+    answerText: text('answer_text'),
+    isCorrect: boolean('is_correct'),
+    marksAwarded: numeric('marks_awarded', { precision: 5, scale: 2 }).default('0.00').notNull(),
+    isMarkedForReview: boolean('is_marked_for_review').default(false).notNull(),
+    timeSpentSeconds: integer('time_spent_seconds').default(0).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_response_attempt').on(table.attemptId),
+    index('idx_response_question').on(table.questionId),
+    index('idx_response_student').on(table.studentId),
+    index('idx_response_tenant').on(table.tenantId),
+    uniqueIndex('uq_response_attempt_question').on(table.attemptId, table.questionId)
+  ]
+);
+
+/**
+ * 48. Coding Submissions Table
+ * Executed code submissions for coding assessment problems with sandbox execution metrics.
+ */
+export const codingSubmissions = pgTable(
+  'coding_submissions',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    attemptId: uuid('attempt_id')
+      .notNull()
+      .references(() => assessmentAttempts.id, { onDelete: 'cascade' }),
+    problemId: uuid('problem_id')
+      .notNull()
+      .references(() => assessmentQuestions.id, { onDelete: 'cascade' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    language: codingLanguageEnum('language').notNull(),
+    sourceCode: text('source_code').notNull(),
+    verdict: codingVerdictEnum('verdict').notNull(),
+    testCasesPassed: integer('test_cases_passed').default(0).notNull(),
+    totalTestCases: integer('total_test_cases').default(0).notNull(),
+    executionTimeMs: integer('execution_time_ms').default(0).notNull(),
+    memoryKb: integer('memory_kb').default(0).notNull(),
+    outputDetailsJson: jsonb('output_details_json').default({}).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_coding_sub_attempt').on(table.attemptId),
+    index('idx_coding_sub_problem').on(table.problemId),
+    index('idx_coding_sub_student').on(table.studentId),
+    index('idx_coding_sub_tenant').on(table.tenantId),
+    index('idx_coding_sub_verdict').on(table.verdict)
+  ]
+);
+
+/**
+ * 49. Interview Practice Sessions Table
+ * AI or peer-conducted technical/behavioral interview practice sessions.
+ */
+export const interviewPracticeSessions = pgTable(
+  'interview_practice_sessions',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    driveId: uuid('drive_id').references(() => mockDriveConfigurations.id, { onDelete: 'set null' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    targetRole: varchar('target_role', { length: 150 }).notNull(),
+    category: varchar('category', { length: 50 }).default('TECHNICAL').notNull(),
+    totalQuestions: integer('total_questions').default(5).notNull(),
+    status: varchar('status', { length: 50 }).default('IN_PROGRESS').notNull(),
+    startedAt: timestamp('started_at', { withTimezone: true }).defaultNow().notNull(),
+    completedAt: timestamp('completed_at', { withTimezone: true }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_interview_session_student').on(table.studentId),
+    index('idx_interview_session_drive').on(table.driveId),
+    index('idx_interview_session_tenant').on(table.tenantId),
+    index('idx_interview_session_status').on(table.status)
+  ]
+);
+
+/**
+ * 50. Interview Practice Feedback Table
+ * Multi-dimensional evaluation rubrics for interview questions (correctness, clarity, relevance, etc.).
+ */
+export const interviewPracticeFeedback = pgTable(
+  'interview_practice_feedback',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    sessionId: uuid('session_id')
+      .notNull()
+      .references(() => interviewPracticeSessions.id, { onDelete: 'cascade' }),
+    questionId: uuid('question_id').references(() => assessmentQuestions.id, { onDelete: 'set null' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    studentAnswer: text('student_answer'),
+    audioRecordingUrl: varchar('audio_recording_url', { length: 1024 }),
+    correctnessScore: numeric('correctness_score', { precision: 4, scale: 2 }).default('0.00').notNull(),
+    understandingScore: numeric('understanding_score', { precision: 4, scale: 2 }).default('0.00').notNull(),
+    completenessScore: numeric('completeness_score', { precision: 4, scale: 2 }).default('0.00').notNull(),
+    relevanceScore: numeric('relevance_score', { precision: 4, scale: 2 }).default('0.00').notNull(),
+    clarityScore: numeric('clarity_score', { precision: 4, scale: 2 }).default('0.00').notNull(),
+    overallScore: numeric('overall_score', { precision: 4, scale: 2 }).default('0.00').notNull(),
+    strengthsText: text('strengths_text'),
+    weaknessesText: text('weaknesses_text'),
+    suggestedAnswerText: text('suggested_answer_text'),
+    evaluatorType: varchar('evaluator_type', { length: 50 }).default('AI').notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_interview_fb_session').on(table.sessionId),
+    index('idx_interview_fb_question').on(table.questionId),
+    index('idx_interview_fb_student').on(table.studentId),
+    index('idx_interview_fb_tenant').on(table.tenantId)
+  ]
+);
+
+/**
+ * 51. Learning Paths Table
+ * Student personalized roadmap synthesized from assessment gap analysis and target roles.
+ */
+export const learningPaths = pgTable(
+  'learning_paths',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    targetRole: varchar('target_role', { length: 150 }).notNull(),
+    readinessScore: numeric('readiness_score', { precision: 5, scale: 2 }).default('0.00').notNull(),
+    activeGoal: text('active_goal').notNull(),
+    status: varchar('status', { length: 50 }).default('ACTIVE').notNull(),
+    generatedAt: timestamp('generated_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_learning_paths_student').on(table.studentId),
+    index('idx_learning_paths_tenant').on(table.tenantId),
+    index('idx_learning_paths_status').on(table.status)
+  ]
+);
+
+/**
+ * 52. Learning Tasks Table
+ * Modular, actionable learning tasks (concepts, exercises, projects) tied to target skills.
+ */
+export const learningTasks = pgTable(
+  'learning_tasks',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    pathId: uuid('path_id')
+      .notNull()
+      .references(() => learningPaths.id, { onDelete: 'cascade' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    title: varchar('title', { length: 255 }).notNull(),
+    description: text('description').notNull(),
+    category: learningTaskCategoryEnum('category').notNull(),
+    targetSkill: varchar('target_skill', { length: 100 }).notNull(),
+    difficulty: varchar('difficulty', { length: 20 }).default('intermediate').notNull(),
+    estimatedHours: numeric('estimated_hours', { precision: 4, scale: 1 }).default('2.0').notNull(),
+    completionCriteria: text('completion_criteria').notNull(),
+    expectedEvidenceType: varchar('expected_evidence_type', { length: 50 }).default('project_repository').notNull(),
+    status: learningTaskStatusEnum('status').default('RECOMMENDED').notNull(),
+    taskOrder: integer('task_order').default(1).notNull(),
+    startedAt: timestamp('started_at', { withTimezone: true }),
+    completedAt: timestamp('completed_at', { withTimezone: true }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_learning_tasks_path').on(table.pathId),
+    index('idx_learning_tasks_student').on(table.studentId),
+    index('idx_learning_tasks_tenant').on(table.tenantId),
+    index('idx_learning_tasks_status').on(table.status),
+    index('idx_learning_tasks_category').on(table.category),
+    index('idx_learning_tasks_skill').on(table.targetSkill)
+  ]
+);
+
+/**
+ * 53. Learning Task Submissions Table
+ * Student submitted deliverables (repositories, deployed applications, documentation) for verification.
+ */
+export const learningTaskSubmissions = pgTable(
+  'learning_task_submissions',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    taskId: uuid('task_id')
+      .notNull()
+      .references(() => learningTasks.id, { onDelete: 'cascade' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    repositoryUrl: varchar('repository_url', { length: 1024 }),
+    projectUrl: varchar('project_url', { length: 1024 }),
+    documentationText: text('documentation_text'),
+    reviewStatus: varchar('review_status', { length: 50 }).default('PENDING').notNull(),
+    feedbackText: text('feedback_text'),
+    reviewedBy: uuid('reviewed_by').references(() => users.id, { onDelete: 'set null' }),
+    reviewedAt: timestamp('reviewed_at', { withTimezone: true }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_learning_sub_task').on(table.taskId),
+    index('idx_learning_sub_student').on(table.studentId),
+    index('idx_learning_sub_tenant').on(table.tenantId),
+    index('idx_learning_sub_status').on(table.reviewStatus)
+  ]
+);
+
+/**
+ * 54. Learning Evidence Links Table
+ * Verified binding between learning task submissions and verified student skills.
+ */
+export const learningEvidenceLinks = pgTable(
+  'learning_evidence_links',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    taskId: uuid('task_id')
+      .notNull()
+      .references(() => learningTasks.id, { onDelete: 'cascade' }),
+    submissionId: uuid('submission_id').references(() => learningTaskSubmissions.id, { onDelete: 'cascade' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    skillId: uuid('skill_id').references(() => skills.id, { onDelete: 'set null' }),
+    evidenceType: varchar('evidence_type', { length: 50 }).notNull(),
+    evidenceUrl: varchar('evidence_url', { length: 1024 }).notNull(),
+    verificationStatus: varchar('verification_status', { length: 50 }).default('pending_review').notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_evidence_link_task').on(table.taskId),
+    index('idx_evidence_link_sub').on(table.submissionId),
+    index('idx_evidence_link_student').on(table.studentId),
+    index('idx_evidence_link_tenant').on(table.tenantId),
+    index('idx_evidence_link_skill').on(table.skillId)
+  ]
+);
+
+// ============================================================================
+// Phase 13 — Industry Skill Intelligence, Career Recommendation & Skill-Gap Analysis Engine Tables
+// ============================================================================
+
+/**
+ * 55. Skill Taxonomy Master Table
+ * Canonical repository of industry-standardized skills with hierarchy and external taxonomy mappings.
+ */
+export const skillTaxonomy = pgTable(
+  'skill_taxonomy',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    skillName: varchar('skill_name', { length: 255 }).notNull(),
+    canonicalName: varchar('canonical_name', { length: 255 }).notNull(),
+    category: taxonomyCategoryEnum('category').notNull(),
+    description: text('description'),
+    parentSkillId: uuid('parent_skill_id').references((): any => skillTaxonomy.id, { onDelete: 'set null' }),
+    externalMappingJson: jsonb('external_mapping_json').default({}).notNull(), // ESCO, O*NET, NSQF metadata
+    isActive: boolean('is_active').default(true).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_skill_tax_tenant').on(table.tenantId),
+    index('idx_skill_tax_name').on(table.skillName),
+    index('idx_skill_tax_canonical').on(table.canonicalName),
+    index('idx_skill_tax_category').on(table.category),
+    index('idx_skill_tax_parent').on(table.parentSkillId)
+  ]
+);
+
+/**
+ * 56. Skill Aliases Table
+ * Alternative names, variations, and acronyms mapped to canonical taxonomy skills.
+ */
+export const skillAliases = pgTable(
+  'skill_aliases',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    skillId: uuid('skill_id')
+      .notNull()
+      .references(() => skillTaxonomy.id, { onDelete: 'cascade' }),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    aliasName: varchar('alias_name', { length: 255 }).notNull(),
+    normalizedAlias: varchar('normalized_alias', { length: 255 }).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_skill_alias_skill').on(table.skillId),
+    index('idx_skill_alias_tenant').on(table.tenantId),
+    index('idx_skill_alias_normalized').on(table.normalizedAlias)
+  ]
+);
+
+/**
+ * 57. Job Description Sources Table
+ * Registry of data acquisition channels for industry job postings.
+ */
+export const jobDescriptionSources = pgTable(
+  'job_description_sources',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    sourceName: varchar('source_name', { length: 255 }).notNull(),
+    sourceType: jdSourceTypeEnum('source_type').notNull(),
+    sourceUrl: varchar('source_url', { length: 1024 }),
+    description: text('description'),
+    isActive: boolean('is_active').default(true).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_jd_source_tenant').on(table.tenantId),
+    index('idx_jd_source_type').on(table.sourceType),
+    index('idx_jd_source_active').on(table.isActive)
+  ]
+);
+
+/**
+ * 58. Industry Job Descriptions Table
+ * Ingested real-world employer job postings with metadata, provenance, and deduplication hashes.
+ */
+export const industryJobDescriptions = pgTable(
+  'industry_job_descriptions',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    sourceId: uuid('source_id').references(() => jobDescriptionSources.id, { onDelete: 'set null' }),
+    companyName: varchar('company_name', { length: 255 }).notNull(),
+    jobTitle: varchar('job_title', { length: 255 }).notNull(),
+    targetRole: varchar('target_role', { length: 255 }).notNull(),
+    industryDomain: varchar('industry_domain', { length: 100 }),
+    rawDescription: text('raw_description').notNull(),
+    location: varchar('location', { length: 255 }),
+    employmentType: varchar('employment_type', { length: 50 }).default('full_time'),
+    experienceMinYears: numeric('experience_min_years', { precision: 4, scale: 1 }).default('0.0'),
+    experienceMaxYears: numeric('experience_max_years', { precision: 4, scale: 1 }),
+    educationRequirement: text('education_requirement'),
+    publishedDate: timestamp('published_date', { withTimezone: true }),
+    collectionTimestamp: timestamp('collection_timestamp', { withTimezone: true }).defaultNow().notNull(),
+    contentHash: varchar('content_hash', { length: 64 }),
+    duplicateOfId: uuid('duplicate_of_id').references((): any => industryJobDescriptions.id, { onDelete: 'set null' }),
+    verificationStatus: varchar('verification_status', { length: 50 }).default('unverified').notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_ind_jd_tenant').on(table.tenantId),
+    index('idx_ind_jd_source').on(table.sourceId),
+    index('idx_ind_jd_company').on(table.companyName),
+    index('idx_ind_jd_role').on(table.targetRole),
+    index('idx_ind_jd_hash').on(table.contentHash),
+    index('idx_ind_jd_dup').on(table.duplicateOfId)
+  ]
+);
+
+/**
+ * 59. Job Description Analyses Table
+ * Extracted and structured skill demand from job descriptions with human review auditing.
+ */
+export const jobDescriptionAnalyses = pgTable(
+  'job_description_analyses',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    jdId: uuid('jd_id')
+      .notNull()
+      .references(() => industryJobDescriptions.id, { onDelete: 'cascade' }),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    normalizedRole: varchar('normalized_role', { length: 255 }).notNull(),
+    requiredSkillsJson: jsonb('required_skills_json').default([]).notNull(),
+    preferredSkillsJson: jsonb('preferred_skills_json').default([]).notNull(),
+    minExperienceYears: numeric('min_experience_years', { precision: 4, scale: 1 }).default('0.0'),
+    educationRequirementsJson: jsonb('education_requirements_json').default([]).notNull(),
+    confidenceScore: numeric('confidence_score', { precision: 5, scale: 2 }).default('100.00').notNull(),
+    analysisMethod: varchar('analysis_method', { length: 50 }).default('AI').notNull(), // AI / DETERMINISTIC
+    reviewStatus: jdAnalysisStatusEnum('review_status').default('PENDING').notNull(),
+    reviewedBy: uuid('reviewed_by').references(() => users.id, { onDelete: 'set null' }),
+    reviewedAt: timestamp('reviewed_at', { withTimezone: true }),
+    reviewerNotes: text('reviewer_notes'),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_jd_analysis_jd').on(table.jdId),
+    index('idx_jd_analysis_tenant').on(table.tenantId),
+    index('idx_jd_analysis_role').on(table.normalizedRole),
+    index('idx_jd_analysis_status').on(table.reviewStatus)
+  ]
+);
+
+/**
+ * 60. Industry Skill Demand Table
+ * Aggregated demand frequency metrics per skill and time period across job descriptions.
+ */
+export const industrySkillDemand = pgTable(
+  'industry_skill_demand',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    skillId: uuid('skill_id').references(() => skillTaxonomy.id, { onDelete: 'set null' }),
+    skillName: varchar('skill_name', { length: 255 }).notNull(),
+    category: varchar('category', { length: 50 }).notNull(),
+    mentionCount: integer('mention_count').default(0).notNull(),
+    requiredCount: integer('required_count').default(0).notNull(),
+    preferredCount: integer('preferred_count').default(0).notNull(),
+    frequencyPercentage: numeric('frequency_percentage', { precision: 5, scale: 2 }).default('0.00').notNull(),
+    analysisPeriod: varchar('analysis_period', { length: 50 }).notNull(), // e.g. "2026-Q4"
+    lastAnalyzedAt: timestamp('last_analyzed_at', { withTimezone: true }).defaultNow().notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_skill_demand_tenant').on(table.tenantId),
+    index('idx_skill_demand_skill').on(table.skillId),
+    index('idx_skill_demand_name').on(table.skillName),
+    index('idx_skill_demand_period').on(table.analysisPeriod)
+  ]
+);
+
+/**
+ * 61. Industry Skill Trends Table
+ * Time-series momentum and growth trajectories for skills across market windows.
+ */
+export const industrySkillTrends = pgTable(
+  'industry_skill_trends',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    skillId: uuid('skill_id').references(() => skillTaxonomy.id, { onDelete: 'set null' }),
+    skillName: varchar('skill_name', { length: 255 }).notNull(),
+    currentPeriodMentions: integer('current_period_mentions').default(0).notNull(),
+    previousPeriodMentions: integer('previous_period_mentions').default(0).notNull(),
+    percentageGrowth: numeric('percentage_growth', { precision: 6, scale: 2 }).default('0.00').notNull(),
+    momentumStatus: varchar('momentum_status', { length: 30 }).default('STABLE').notNull(), // SURGING, GROWING, STABLE, DECLINING
+    sampleSize: integer('sample_size').default(0).notNull(),
+    confidenceLevel: numeric('confidence_level', { precision: 5, scale: 2 }).default('100.00').notNull(),
+    periodStart: timestamp('period_start', { withTimezone: true }).notNull(),
+    periodEnd: timestamp('period_end', { withTimezone: true }).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_skill_trend_tenant').on(table.tenantId),
+    index('idx_skill_trend_skill').on(table.skillId),
+    index('idx_skill_trend_name').on(table.skillName),
+    index('idx_skill_trend_momentum').on(table.momentumStatus)
+  ]
+);
+
+/**
+ * 62. Role Skill Requirements Table
+ * Benchmark competencies, foundational prerequisites, and project expectations per target role.
+ */
+export const roleSkillRequirements = pgTable(
+  'role_skill_requirements',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    roleName: varchar('role_name', { length: 255 }).notNull(),
+    category: varchar('category', { length: 100 }).notNull(),
+    coreSkillsJson: jsonb('core_skills_json').default([]).notNull(),
+    requiredFoundationsJson: jsonb('required_foundations_json').default([]).notNull(),
+    preferredSkillsJson: jsonb('preferred_skills_json').default([]).notNull(),
+    practicalProjectExpectationsJson: jsonb('practical_project_expectations_json').default([]).notNull(),
+    experienceExpectations: text('experience_expectations'),
+    isSystemTemplate: boolean('is_system_template').default(false).notNull(),
+    isReviewed: boolean('is_reviewed').default(false).notNull(),
+    createdBy: uuid('created_by').references(() => users.id, { onDelete: 'set null' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_role_skill_tenant').on(table.tenantId),
+    index('idx_role_skill_name').on(table.roleName),
+    index('idx_role_skill_category').on(table.category)
+  ]
+);
+
+/**
+ * 63. Student Role Preferences Table
+ * Student-configured or advisor-set career aspirations and role prioritization.
+ */
+export const studentRolePreferences = pgTable(
+  'student_role_preferences',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    targetRole: varchar('target_role', { length: 255 }).notNull(),
+    preferenceRank: integer('preference_rank').default(1).notNull(),
+    isPrimary: boolean('is_primary').default(false).notNull(),
+    setByStudent: boolean('set_by_student').default(true).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_student_role_pref_student').on(table.studentId),
+    index('idx_student_role_pref_tenant').on(table.tenantId),
+    index('idx_student_role_pref_role').on(table.targetRole)
+  ]
+);
+
+/**
+ * 64. Student Skill Gap Snapshots Table
+ * Granular skill-by-skill gap diagnostic per student and target career role.
+ */
+export const studentSkillGapSnapshots = pgTable(
+  'student_skill_gap_snapshots',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    targetRole: varchar('target_role', { length: 255 }).notNull(),
+    skillId: uuid('skill_id').references(() => skillTaxonomy.id, { onDelete: 'set null' }),
+    skillName: varchar('skill_name', { length: 255 }).notNull(),
+    category: varchar('category', { length: 100 }).notNull(),
+    status: studentSkillGapStatusEnum('status').notNull(),
+    confidenceScore: numeric('confidence_score', { precision: 5, scale: 2 }).default('100.00').notNull(),
+    verifiedEvidenceCount: integer('verified_evidence_count').default(0).notNull(),
+    unverifiedEvidenceCount: integer('unverified_evidence_count').default(0).notNull(),
+    assessmentScore: numeric('assessment_score', { precision: 5, scale: 2 }),
+    diagnosisRationale: text('diagnosis_rationale'),
+    recommendedAction: text('recommended_action'),
+    generatedAt: timestamp('generated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_std_gap_student').on(table.studentId),
+    index('idx_std_gap_tenant').on(table.tenantId),
+    index('idx_std_gap_role').on(table.targetRole),
+    index('idx_std_gap_skill').on(table.skillId),
+    index('idx_std_gap_status').on(table.status)
+  ]
+);
+
+/**
+ * 65. Career Recommendations Table
+ * Explainable role recommendations synthesized from student verified profile, market demand, and gap analysis.
+ */
+export const careerRecommendations = pgTable(
+  'career_recommendations',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    recommendedRole: varchar('recommended_role', { length: 255 }).notNull(),
+    fitLevel: careerRecommendationFitEnum('fit_level').notNull(),
+    matchScorePercentage: numeric('match_score_percentage', { precision: 5, scale: 2 }).default('0.00').notNull(),
+    strengthsJson: jsonb('strengths_json').default([]).notNull(),
+    gapsJson: jsonb('gaps_json').default([]).notNull(),
+    suggestedProjectsJson: jsonb('suggested_projects_json').default([]).notNull(),
+    suggestedLearningTasksJson: jsonb('suggested_learning_tasks_json').default([]).notNull(),
+    rationaleText: text('rationale_text').notNull(),
+    isDismissed: boolean('is_dismissed').default(false).notNull(),
+    generatedAt: timestamp('generated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_career_rec_student').on(table.studentId),
+    index('idx_career_rec_tenant').on(table.tenantId),
+    index('idx_career_rec_role').on(table.recommendedRole),
+    index('idx_career_rec_fit').on(table.fitLevel)
+  ]
+);
+
+/**
+ * 66. Cohort Skill Gap Snapshots Table
+ * Macro department- and batch-level capability vs market demand analytics for institutional curriculum interventions.
+ */
+export const cohortSkillGapSnapshots = pgTable(
+  'cohort_skill_gap_snapshots',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    department: varchar('department', { length: 100 }).notNull(),
+    graduationYear: integer('graduation_year').notNull(),
+    totalStudentsAnalyzed: integer('total_students_analyzed').default(0).notNull(),
+    mostCommonGapsJson: jsonb('most_common_gaps_json').default([]).notNull(),
+    verifiedSkillCoverageJson: jsonb('verified_skill_coverage_json').default([]).notNull(),
+    capabilityVsDemandJson: jsonb('capability_vs_demand_json').default([]).notNull(),
+    recommendedInterventionsJson: jsonb('recommended_interventions_json').default([]).notNull(),
+    analyzedAt: timestamp('analyzed_at', { withTimezone: true }).defaultNow().notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_cohort_gap_tenant').on(table.tenantId),
+    index('idx_cohort_gap_dept_year').on(table.department, table.graduationYear)
+  ]
+);
+
+
+
+// ============================================================================
 // Drizzle Relations
 // ============================================================================
 
@@ -840,7 +2666,16 @@ export const tenantsRelations = relations(tenants, ({ many }) => ({
   placementPredictions: many(placementPredictions),
   learningRecommendations: many(learningRecommendations),
   agentExecutionLogs: many(agentExecutionLogs),
-  agentWorkflows: many(agentWorkflows)
+  agentWorkflows: many(agentWorkflows),
+  documentProcessingJobs: many(documentProcessingJobs),
+  profileExtractions: many(profileExtractions),
+  profileSkillEvidence: many(profileSkillEvidence),
+  profileReviewEvents: many(profileReviewEvents),
+  profileVersions: many(profileVersions),
+  skillVerificationReviews: many(skillVerificationReviews),
+  studentReadinessSnapshots: many(studentReadinessSnapshots),
+  recruitmentJobs: many(jobRequirements),
+  jobEligibilityEvaluations: many(jobEligibilityEvaluations)
 }));
 
 export const usersRelations = relations(users, ({ one, many }) => ({
@@ -856,10 +2691,13 @@ export const usersRelations = relations(users, ({ one, many }) => ({
   notifications: many(notifications),
   auditEvents: many(auditEvents),
   sentInvitations: many(invitations),
-  agentLogs: many(agentExecutionLogs)
+  agentLogs: many(agentExecutionLogs),
+  readinessSnapshots: many(studentReadinessSnapshots),
+  recruitmentJobs: many(jobRequirements),
+  eligibilityEvaluations: many(jobEligibilityEvaluations)
 }));
 
-export const documentsRelations = relations(documents, ({ one }) => ({
+export const documentsRelations = relations(documents, ({ one, many }) => ({
   tenant: one(tenants, {
     fields: [documents.tenantId],
     references: [tenants.id]
@@ -867,7 +2705,9 @@ export const documentsRelations = relations(documents, ({ one }) => ({
   owner: one(users, {
     fields: [documents.ownerUserId],
     references: [users.id]
-  })
+  }),
+  processingJobs: many(documentProcessingJobs),
+  extractions: many(profileExtractions)
 }));
 
 export const studentsRelations = relations(students, ({ one, many }) => ({
@@ -891,7 +2731,7 @@ export const studentsRelations = relations(students, ({ one, many }) => ({
 
 export const skillsRelations = relations(skills, ({ many }) => ({
   studentSkills: many(studentSkills),
-  jobRequirements: many(jobRequirements),
+  jobRequirements: many(roleJobRequirements),
   evidence: many(evidenceRecords),
   assessments: many(skillAssessments),
   recommendations: many(learningRecommendations)
@@ -970,21 +2810,23 @@ export const jobRolesRelations = relations(jobRoles, ({ one, many }) => ({
     fields: [jobRoles.companyId],
     references: [companies.id]
   }),
-  requirements: many(jobRequirements),
+  requirements: many(roleJobRequirements),
   placementDrives: many(placementDrives),
   gapAnalyses: many(skillGapAnalyses)
 }));
 
-export const jobRequirementsRelations = relations(jobRequirements, ({ one }) => ({
+export const roleJobRequirementsRelations = relations(roleJobRequirements, ({ one }) => ({
   jobRole: one(jobRoles, {
-    fields: [jobRequirements.jobRoleId],
+    fields: [roleJobRequirements.jobRoleId],
     references: [jobRoles.id]
   }),
   skill: one(skills, {
-    fields: [jobRequirements.skillId],
+    fields: [roleJobRequirements.skillId],
     references: [skills.id]
   })
 }));
+
+export const legacyJobRequirementsRelations = roleJobRequirementsRelations;
 
 export const placementDrivesRelations = relations(placementDrives, ({ one, many }) => ({
   tenant: one(tenants, {
@@ -1130,6 +2972,316 @@ export const agentWorkflowsRelations = relations(agentWorkflows, ({ one }) => ({
   })
 }));
 
+export const documentProcessingJobsRelations = relations(documentProcessingJobs, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [documentProcessingJobs.tenantId],
+    references: [tenants.id]
+  }),
+  document: one(documents, {
+    fields: [documentProcessingJobs.documentId],
+    references: [documents.id]
+  }),
+  user: one(users, {
+    fields: [documentProcessingJobs.userId],
+    references: [users.id]
+  })
+}));
+
+export const profileExtractionsRelations = relations(profileExtractions, ({ one, many }) => ({
+  tenant: one(tenants, {
+    fields: [profileExtractions.tenantId],
+    references: [tenants.id]
+  }),
+  document: one(documents, {
+    fields: [profileExtractions.documentId],
+    references: [documents.id]
+  }),
+  user: one(users, {
+    fields: [profileExtractions.userId],
+    references: [users.id]
+  }),
+  skillEvidence: many(profileSkillEvidence),
+  reviewEvents: many(profileReviewEvents)
+}));
+
+export const profileSkillEvidenceRelations = relations(profileSkillEvidence, ({ one, many }) => ({
+  tenant: one(tenants, {
+    fields: [profileSkillEvidence.tenantId],
+    references: [tenants.id]
+  }),
+  user: one(users, {
+    fields: [profileSkillEvidence.userId],
+    references: [users.id]
+  }),
+  document: one(documents, {
+    fields: [profileSkillEvidence.documentId],
+    references: [documents.id]
+  }),
+  extraction: one(profileExtractions, {
+    fields: [profileSkillEvidence.extractionId],
+    references: [profileExtractions.id]
+  }),
+  reviewer: one(users, {
+    fields: [profileSkillEvidence.reviewedBy],
+    references: [users.id]
+  }),
+  reviewEvents: many(profileReviewEvents),
+  verificationReviews: many(skillVerificationReviews)
+}));
+
+export const profileReviewEventsRelations = relations(profileReviewEvents, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [profileReviewEvents.tenantId],
+    references: [tenants.id]
+  }),
+  user: one(users, {
+    fields: [profileReviewEvents.userId],
+    references: [users.id]
+  }),
+  extraction: one(profileExtractions, {
+    fields: [profileReviewEvents.extractionId],
+    references: [profileExtractions.id]
+  }),
+  skill: one(profileSkillEvidence, {
+    fields: [profileReviewEvents.skillId],
+    references: [profileSkillEvidence.id]
+  }),
+  reviewer: one(users, {
+    fields: [profileReviewEvents.reviewerId],
+    references: [users.id]
+  })
+}));
+
+export const profileVersionsRelations = relations(profileVersions, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [profileVersions.tenantId],
+    references: [tenants.id]
+  }),
+  user: one(users, {
+    fields: [profileVersions.userId],
+    references: [users.id]
+  }),
+  creator: one(users, {
+    fields: [profileVersions.createdBy],
+    references: [users.id]
+  })
+}));
+
+// ============================================================================
+// Phase 10 Relations
+// ============================================================================
+
+export const skillVerificationReviewsRelations = relations(skillVerificationReviews, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [skillVerificationReviews.tenantId],
+    references: [tenants.id]
+  }),
+  student: one(users, {
+    fields: [skillVerificationReviews.studentId],
+    references: [users.id]
+  }),
+  evidence: one(profileSkillEvidence, {
+    fields: [skillVerificationReviews.evidenceId],
+    references: [profileSkillEvidence.id]
+  }),
+  reviewer: one(users, {
+    fields: [skillVerificationReviews.reviewerId],
+    references: [users.id]
+  })
+}));
+
+export const studentReadinessSnapshotsRelations = relations(studentReadinessSnapshots, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [studentReadinessSnapshots.tenantId],
+    references: [tenants.id]
+  }),
+  student: one(users, {
+    fields: [studentReadinessSnapshots.studentId],
+    references: [users.id]
+  })
+}));
+
+export const jobRequirementsRelations = relations(jobRequirements, ({ one, many }) => ({
+  tenant: one(tenants, {
+    fields: [jobRequirements.tenantId],
+    references: [tenants.id]
+  }),
+  creator: one(users, {
+    fields: [jobRequirements.createdBy],
+    references: [users.id]
+  }),
+  evaluations: many(jobEligibilityEvaluations)
+}));
+
+export const recruitmentJobRequirementsRelations = jobRequirementsRelations;
+export const recruitmentJobsRelations = jobRequirementsRelations;
+
+export const jobEligibilityEvaluationsRelations = relations(jobEligibilityEvaluations, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [jobEligibilityEvaluations.tenantId],
+    references: [tenants.id]
+  }),
+  student: one(users, {
+    fields: [jobEligibilityEvaluations.studentId],
+    references: [users.id]
+  }),
+  job: one(jobRequirements, {
+    fields: [jobEligibilityEvaluations.jobId],
+    references: [jobRequirements.id]
+  }),
+  overridingUser: one(users, {
+    fields: [jobEligibilityEvaluations.overriddenBy],
+    references: [users.id]
+  })
+}));
+
+// ============================================================================
+// Phase 13 Relations
+// ============================================================================
+
+export const skillTaxonomyRelations = relations(skillTaxonomy, ({ one, many }) => ({
+  tenant: one(tenants, {
+    fields: [skillTaxonomy.tenantId],
+    references: [tenants.id]
+  }),
+  parentSkill: one(skillTaxonomy, {
+    fields: [skillTaxonomy.parentSkillId],
+    references: [skillTaxonomy.id],
+    relationName: 'parentChildTaxonomy'
+  }),
+  childSkills: many(skillTaxonomy, {
+    relationName: 'parentChildTaxonomy'
+  }),
+  aliases: many(skillAliases),
+  demand: many(industrySkillDemand),
+  trends: many(industrySkillTrends),
+  studentSkillGaps: many(studentSkillGapSnapshots)
+}));
+
+export const skillAliasesRelations = relations(skillAliases, ({ one }) => ({
+  skill: one(skillTaxonomy, {
+    fields: [skillAliases.skillId],
+    references: [skillTaxonomy.id]
+  }),
+  tenant: one(tenants, {
+    fields: [skillAliases.tenantId],
+    references: [tenants.id]
+  })
+}));
+
+export const jobDescriptionSourcesRelations = relations(jobDescriptionSources, ({ one, many }) => ({
+  tenant: one(tenants, {
+    fields: [jobDescriptionSources.tenantId],
+    references: [tenants.id]
+  }),
+  jobDescriptions: many(industryJobDescriptions)
+}));
+
+export const industryJobDescriptionsRelations = relations(industryJobDescriptions, ({ one, many }) => ({
+  tenant: one(tenants, {
+    fields: [industryJobDescriptions.tenantId],
+    references: [tenants.id]
+  }),
+  source: one(jobDescriptionSources, {
+    fields: [industryJobDescriptions.sourceId],
+    references: [jobDescriptionSources.id]
+  }),
+  analyses: many(jobDescriptionAnalyses)
+}));
+
+export const jobDescriptionAnalysesRelations = relations(jobDescriptionAnalyses, ({ one }) => ({
+  jd: one(industryJobDescriptions, {
+    fields: [jobDescriptionAnalyses.jdId],
+    references: [industryJobDescriptions.id]
+  }),
+  tenant: one(tenants, {
+    fields: [jobDescriptionAnalyses.tenantId],
+    references: [tenants.id]
+  }),
+  reviewer: one(users, {
+    fields: [jobDescriptionAnalyses.reviewedBy],
+    references: [users.id]
+  })
+}));
+
+export const industrySkillDemandRelations = relations(industrySkillDemand, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [industrySkillDemand.tenantId],
+    references: [tenants.id]
+  }),
+  skill: one(skillTaxonomy, {
+    fields: [industrySkillDemand.skillId],
+    references: [skillTaxonomy.id]
+  })
+}));
+
+export const industrySkillTrendsRelations = relations(industrySkillTrends, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [industrySkillTrends.tenantId],
+    references: [tenants.id]
+  }),
+  skill: one(skillTaxonomy, {
+    fields: [industrySkillTrends.skillId],
+    references: [skillTaxonomy.id]
+  })
+}));
+
+export const roleSkillRequirementsRelations = relations(roleSkillRequirements, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [roleSkillRequirements.tenantId],
+    references: [tenants.id]
+  }),
+  creator: one(users, {
+    fields: [roleSkillRequirements.createdBy],
+    references: [users.id]
+  })
+}));
+
+export const studentRolePreferencesRelations = relations(studentRolePreferences, ({ one }) => ({
+  student: one(users, {
+    fields: [studentRolePreferences.studentId],
+    references: [users.id]
+  }),
+  tenant: one(tenants, {
+    fields: [studentRolePreferences.tenantId],
+    references: [tenants.id]
+  })
+}));
+
+export const studentSkillGapSnapshotsRelations = relations(studentSkillGapSnapshots, ({ one }) => ({
+  student: one(users, {
+    fields: [studentSkillGapSnapshots.studentId],
+    references: [users.id]
+  }),
+  tenant: one(tenants, {
+    fields: [studentSkillGapSnapshots.tenantId],
+    references: [tenants.id]
+  }),
+  skill: one(skillTaxonomy, {
+    fields: [studentSkillGapSnapshots.skillId],
+    references: [skillTaxonomy.id]
+  })
+}));
+
+export const careerRecommendationsRelations = relations(careerRecommendations, ({ one }) => ({
+  student: one(users, {
+    fields: [careerRecommendations.studentId],
+    references: [users.id]
+  }),
+  tenant: one(tenants, {
+    fields: [careerRecommendations.tenantId],
+    references: [tenants.id]
+  })
+}));
+
+export const cohortSkillGapSnapshotsRelations = relations(cohortSkillGapSnapshots, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [cohortSkillGapSnapshots.tenantId],
+    references: [tenants.id]
+  })
+}));
+
+
 // ============================================================================
 // Exported Inferred Types for Safety
 // ============================================================================
@@ -1167,6 +3319,11 @@ export type NewJobRole = typeof jobRoles.$inferInsert;
 export type JobRequirement = typeof jobRequirements.$inferSelect;
 export type NewJobRequirement = typeof jobRequirements.$inferInsert;
 
+export type RoleJobRequirement = typeof roleJobRequirements.$inferSelect;
+export type NewRoleJobRequirement = typeof roleJobRequirements.$inferInsert;
+export type LegacyJobRequirement = RoleJobRequirement;
+export type NewLegacyJobRequirement = NewRoleJobRequirement;
+
 export type PlacementDrive = typeof placementDrives.$inferSelect;
 export type NewPlacementDrive = typeof placementDrives.$inferInsert;
 
@@ -1202,3 +3359,213 @@ export type NewAgentWorkflow = typeof agentWorkflows.$inferInsert;
 
 export type Document = typeof documents.$inferSelect;
 export type NewDocument = typeof documents.$inferInsert;
+
+// ============================================================================
+// Phase 09 — AI Student Profiling & Document Ingestion Inferred Types
+// ============================================================================
+
+export type DocumentProcessingJob = typeof documentProcessingJobs.$inferSelect;
+export type NewDocumentProcessingJob = typeof documentProcessingJobs.$inferInsert;
+
+export type ProfileExtraction = typeof profileExtractions.$inferSelect;
+export type NewProfileExtraction = typeof profileExtractions.$inferInsert;
+
+export type ProfileSkillEvidence = typeof profileSkillEvidence.$inferSelect;
+export type NewProfileSkillEvidence = typeof profileSkillEvidence.$inferInsert;
+
+export type ProfileReviewEvent = typeof profileReviewEvents.$inferSelect;
+export type NewProfileReviewEvent = typeof profileReviewEvents.$inferInsert;
+
+export type ProfileVersion = typeof profileVersions.$inferSelect;
+export type NewProfileVersion = typeof profileVersions.$inferInsert;
+
+// Phase 09 Enum Value Types
+export type JobStatus = (typeof jobStatusEnum.enumValues)[number];
+export type ExtractionStatus = (typeof extractionStatusEnum.enumValues)[number];
+export type ReviewAction = (typeof reviewActionEnum.enumValues)[number];
+export type ProfileEvidenceType = (typeof profileEvidenceTypeEnum.enumValues)[number];
+export type ProfileVerificationStatus = (typeof profileVerificationStatusEnum.enumValues)[number];
+
+// Phase 09 College Alias Types
+export const collegesRelations = tenantsRelations;
+export type College = Tenant;
+export type NewCollege = NewTenant;
+
+// ============================================================================
+// Phase 10 — Placement Readiness, Skill Verification & Job Eligibility Types
+// ============================================================================
+
+export type SkillVerificationReview = typeof skillVerificationReviews.$inferSelect;
+export type NewSkillVerificationReview = typeof skillVerificationReviews.$inferInsert;
+
+export type StudentReadinessSnapshot = typeof studentReadinessSnapshots.$inferSelect;
+export type NewStudentReadinessSnapshot = typeof studentReadinessSnapshots.$inferInsert;
+
+export type RecruitmentJob = typeof jobRequirements.$inferSelect;
+export type NewRecruitmentJob = typeof jobRequirements.$inferInsert;
+
+export type RecruitmentJobRequirement = typeof jobRequirements.$inferSelect;
+export type NewRecruitmentJobRequirement = typeof jobRequirements.$inferInsert;
+
+export type JobEligibilityEvaluation = typeof jobEligibilityEvaluations.$inferSelect;
+export type NewJobEligibilityEvaluation = typeof jobEligibilityEvaluations.$inferInsert;
+
+// Phase 10 Enum Value Types
+export type ReadinessCategory = (typeof readinessCategoryEnum.enumValues)[number];
+export type EligibilityResult = (typeof eligibilityResultEnum.enumValues)[number];
+export type RecruitmentJobStatus = (typeof recruitmentJobStatusEnum.enumValues)[number];
+
+// ============================================================================
+// Phase 11 — Recruiter Drive Orchestration & Placement Intelligence Types
+// ============================================================================
+
+export type RecruiterCompanyMembership = typeof recruiterCompanyMemberships.$inferSelect;
+export type NewRecruiterCompanyMembership = typeof recruiterCompanyMemberships.$inferInsert;
+
+export type CompanyVerificationReview = typeof companyVerificationReviews.$inferSelect;
+export type NewCompanyVerificationReview = typeof companyVerificationReviews.$inferInsert;
+
+export type DriveSchedule = typeof driveSchedules.$inferSelect;
+export type NewDriveSchedule = typeof driveSchedules.$inferInsert;
+
+export type CandidateShortlist = typeof candidateShortlists.$inferSelect;
+export type NewCandidateShortlist = typeof candidateShortlists.$inferInsert;
+
+export type DriveAssessment = typeof driveAssessments.$inferSelect;
+export type NewDriveAssessment = typeof driveAssessments.$inferInsert;
+
+export type CandidateAssessmentResult = typeof candidateAssessmentResults.$inferSelect;
+export type NewCandidateAssessmentResult = typeof candidateAssessmentResults.$inferInsert;
+
+export type DriveInterviewRound = typeof driveInterviewRounds.$inferSelect;
+export type NewDriveInterviewRound = typeof driveInterviewRounds.$inferInsert;
+
+export type PlacementOffer = typeof placementOffers.$inferSelect;
+export type NewPlacementOffer = typeof placementOffers.$inferInsert;
+
+export type OfferStatusHistory = typeof offerStatusHistory.$inferSelect;
+export type NewOfferStatusHistory = typeof offerStatusHistory.$inferInsert;
+
+// Phase 11 Enum Value Types
+export type CompanyVerificationStatus = (typeof companyVerificationStatusEnum.enumValues)[number];
+export type DriveStageStatus = (typeof driveStageStatusEnum.enumValues)[number];
+export type CandidateShortlistStatus = (typeof candidateShortlistStatusEnum.enumValues)[number];
+export type AssessmentType = (typeof assessmentTypeEnum.enumValues)[number];
+export type AssessmentStatus = (typeof assessmentStatusEnum.enumValues)[number];
+export type InterviewStage = (typeof interviewStageEnum.enumValues)[number];
+export type OfferLifecycleStatus = (typeof offerLifecycleStatusEnum.enumValues)[number];
+
+// ============================================================================
+// Phase 12 — Student Mock Drive, Assessment Engine & Learning Intelligence Types
+// ============================================================================
+
+export type AssessmentQuestionBank = typeof assessmentQuestionBanks.$inferSelect;
+export type NewAssessmentQuestionBank = typeof assessmentQuestionBanks.$inferInsert;
+
+export type AssessmentQuestion = typeof assessmentQuestions.$inferSelect;
+export type NewAssessmentQuestion = typeof assessmentQuestions.$inferInsert;
+
+export type MockDriveConfiguration = typeof mockDriveConfigurations.$inferSelect;
+export type NewMockDriveConfiguration = typeof mockDriveConfigurations.$inferInsert;
+
+export type MockDriveRound = typeof mockDriveRounds.$inferSelect;
+export type NewMockDriveRound = typeof mockDriveRounds.$inferInsert;
+
+export type MockDriveParticipant = typeof mockDriveParticipants.$inferSelect;
+export type NewMockDriveParticipant = typeof mockDriveParticipants.$inferInsert;
+
+export type AssessmentAttempt = typeof assessmentAttempts.$inferSelect;
+export type NewAssessmentAttempt = typeof assessmentAttempts.$inferInsert;
+
+export type AssessmentResponse = typeof assessmentResponses.$inferSelect;
+export type NewAssessmentResponse = typeof assessmentResponses.$inferInsert;
+
+export type CodingSubmission = typeof codingSubmissions.$inferSelect;
+export type NewCodingSubmission = typeof codingSubmissions.$inferInsert;
+
+export type InterviewPracticeSession = typeof interviewPracticeSessions.$inferSelect;
+export type NewInterviewPracticeSession = typeof interviewPracticeSessions.$inferInsert;
+
+export type InterviewPracticeFeedback = typeof interviewPracticeFeedback.$inferSelect;
+export type NewInterviewPracticeFeedback = typeof interviewPracticeFeedback.$inferInsert;
+
+export type AssessmentReport = typeof assessmentReports.$inferSelect;
+export type NewAssessmentReport = typeof assessmentReports.$inferInsert;
+
+export type LearningPath = typeof learningPaths.$inferSelect;
+export type NewLearningPath = typeof learningPaths.$inferInsert;
+
+export type LearningTask = typeof learningTasks.$inferSelect;
+export type NewLearningTask = typeof learningTasks.$inferInsert;
+
+export type LearningTaskSubmission = typeof learningTaskSubmissions.$inferSelect;
+export type NewLearningTaskSubmission = typeof learningTaskSubmissions.$inferInsert;
+
+export type LearningEvidenceLink = typeof learningEvidenceLinks.$inferSelect;
+export type NewLearningEvidenceLink = typeof learningEvidenceLinks.$inferInsert;
+
+// Phase 12 Enum Value Types
+export type MockDriveStatus = (typeof mockDriveStatusEnum.enumValues)[number];
+export type MockRoundType = (typeof mockRoundTypeEnum.enumValues)[number];
+export type AssessmentAttemptStatus = (typeof assessmentAttemptStatusEnum.enumValues)[number];
+export type CodingLanguage = (typeof codingLanguageEnum.enumValues)[number];
+export type CodingVerdict = (typeof codingVerdictEnum.enumValues)[number];
+export type SkillProficiencyCategory = (typeof skillProficiencyCategoryEnum.enumValues)[number];
+export type LearningTaskStatus = (typeof learningTaskStatusEnum.enumValues)[number];
+export type LearningTaskCategory = (typeof learningTaskCategoryEnum.enumValues)[number];
+
+// ============================================================================
+// Phase 13 — Industry Skill Intelligence, Career Recommendation & Skill-Gap Analysis Types
+// ============================================================================
+
+export type SkillTaxonomy = typeof skillTaxonomy.$inferSelect;
+export type NewSkillTaxonomy = typeof skillTaxonomy.$inferInsert;
+
+export type SkillAlias = typeof skillAliases.$inferSelect;
+export type NewSkillAlias = typeof skillAliases.$inferInsert;
+export type SkillAliases = SkillAlias;
+export type NewSkillAliases = NewSkillAlias;
+
+export type JobDescriptionSource = typeof jobDescriptionSources.$inferSelect;
+export type NewJobDescriptionSource = typeof jobDescriptionSources.$inferInsert;
+
+export type IndustryJobDescription = typeof industryJobDescriptions.$inferSelect;
+export type NewIndustryJobDescription = typeof industryJobDescriptions.$inferInsert;
+
+export type JobDescriptionAnalysis = typeof jobDescriptionAnalyses.$inferSelect;
+export type NewJobDescriptionAnalysis = typeof jobDescriptionAnalyses.$inferInsert;
+
+export type IndustrySkillDemand = typeof industrySkillDemand.$inferSelect;
+export type NewIndustrySkillDemand = typeof industrySkillDemand.$inferInsert;
+
+export type IndustrySkillTrend = typeof industrySkillTrends.$inferSelect;
+export type NewIndustrySkillTrend = typeof industrySkillTrends.$inferInsert;
+export type IndustrySkillTrends = IndustrySkillTrend;
+export type NewIndustrySkillTrends = NewIndustrySkillTrend;
+
+export type RoleSkillRequirement = typeof roleSkillRequirements.$inferSelect;
+export type NewRoleSkillRequirement = typeof roleSkillRequirements.$inferInsert;
+
+export type StudentRolePreference = typeof studentRolePreferences.$inferSelect;
+export type NewStudentRolePreference = typeof studentRolePreferences.$inferInsert;
+
+export type StudentSkillGapSnapshot = typeof studentSkillGapSnapshots.$inferSelect;
+export type NewStudentSkillGapSnapshot = typeof studentSkillGapSnapshots.$inferInsert;
+
+export type CareerRecommendation = typeof careerRecommendations.$inferSelect;
+export type NewCareerRecommendation = typeof careerRecommendations.$inferInsert;
+
+export type CohortSkillGapSnapshot = typeof cohortSkillGapSnapshots.$inferSelect;
+export type NewCohortSkillGapSnapshot = typeof cohortSkillGapSnapshots.$inferInsert;
+
+// Phase 13 Enum Value Types
+export type TaxonomyCategory = (typeof taxonomyCategoryEnum.enumValues)[number];
+export type JdSourceType = (typeof jdSourceTypeEnum.enumValues)[number];
+export type JdAnalysisStatus = (typeof jdAnalysisStatusEnum.enumValues)[number];
+export type SkillImportance = (typeof skillImportanceEnum.enumValues)[number];
+export type StudentSkillGapStatus = (typeof studentSkillGapStatusEnum.enumValues)[number];
+export type CareerRecommendationFit = (typeof careerRecommendationFitEnum.enumValues)[number];
+
+
+
+

@@ -7,13 +7,34 @@ import { authRoutes } from './routes/auth.routes';
 import { tenantRoutes } from './routes/tenant.routes';
 import { superAdminRoutes } from './routes/superadmin.routes';
 import fileRoutes from './routes/file.routes';
+import { profilingRoutes } from './routes/profiling.routes';
+import { tpoVerificationRoutes, studentEvidenceRoutes } from './routes/tpo.routes';
+import { readinessRoutes, tpoReadinessRoutes } from './routes/readiness.routes';
+import { jobRoutes } from './routes/job.routes';
+import { recruiterRoutes } from './routes/recruiter.routes';
+import { tpoApprovalRoutes } from './routes/tpo-approvals.routes';
+import { studentOfferRoutes } from './routes/student-offers.routes';
+import { studentAssessmentRoutes } from './routes/student-assessment.routes';
+import { studentLearningRoutes } from './routes/student-learning.routes';
+import { tpoMockDriveRoutes } from './routes/tpo-mock-drive.routes';
+import { tpoIndustryRoutes } from './routes/tpo-industry.routes';
+import { studentCareerRoutes } from './routes/student-career.routes';
 import { getHealthData, getApiHealthData } from './routes/health.routes';
 
 const app: Express = express();
 
 // ---------------------------------------------------------------------------
-// Global Middleware
+// Global Middleware & Security Headers
 // ---------------------------------------------------------------------------
+
+// Security headers middleware (Defense-in-depth against MIME sniffing and clickjacking)
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  next();
+});
 
 // CORS configuration — Vite dev, Vercel production, and client URL
 const allowedOrigins = [
@@ -34,7 +55,7 @@ app.use(
       ) {
         return callback(null, true);
       }
-      return callback(null, true);
+      return callback(null, false);
     },
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'x-tenant-id'],
@@ -91,6 +112,28 @@ app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/tenants', tenantRoutes);
 app.use('/api/v1/super-admin', superAdminRoutes);
 app.use('/api/v1/files', fileRoutes);
+app.use('/api/v1/profiling', profilingRoutes);
+
+// Phase 10 — TPO Verification, Readiness Intelligence & Job Eligibility Routes
+app.use('/api/v1/tpo/verification', tpoVerificationRoutes);
+app.use('/api/v1/tpo/readiness', tpoReadinessRoutes);
+app.use('/api/v1/students/me', studentEvidenceRoutes);
+app.use('/api/v1/readiness', readinessRoutes);
+app.use('/api/v1/jobs', jobRoutes);
+
+// Phase 11 — Recruiter Drive Orchestration & Placement Intelligence Routes
+app.use('/api/v1/recruiter', recruiterRoutes);
+app.use('/api/v1/tpo/approvals', tpoApprovalRoutes);
+app.use('/api/v1/student/offers', studentOfferRoutes);
+
+// Phase 12 — Student Mock Drive, Assessment Engine & Personalized Learning Intelligence Routes
+app.use('/api/v1/student/learning-path', studentLearningRoutes);
+app.use('/api/v1/student', studentAssessmentRoutes);
+app.use('/api/v1/tpo/mock-drives', tpoMockDriveRoutes);
+
+// Phase 13 — Industry Skill Intelligence, Career Recommendation & Skill-Gap Analysis Engine Routes
+app.use('/api/v1/tpo', tpoIndustryRoutes);
+app.use('/api/v1/student', studentCareerRoutes);
 
 // ---------------------------------------------------------------------------
 // 404 & Centralized Error Handlers

@@ -10,7 +10,8 @@ import {
   ArrowRight,
   Sparkles,
   Award,
-  Clock
+  Clock,
+  LineChart
 } from 'lucide-react';
 import PageHeader from '../../components/ui/PageHeader';
 import StatCard from '../../components/ui/StatCard';
@@ -38,7 +39,7 @@ export default function RecruiterOverview() {
         subtitle="Source pre-verified campus candidates backed by authentic code repositories and faculty evaluations."
         breadcrumbs={[{ label: 'Recruiter', href: '/recruiter' }, { label: 'Overview' }]}
         action={
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <Button to="/recruiter/discovery" variant="primary" size="sm">
               <Search className="h-4 w-4 mr-1.5" />
               Discover Candidates
@@ -46,6 +47,14 @@ export default function RecruiterOverview() {
             <Button to="/recruiter/jobs" variant="outline" size="sm">
               <Briefcase className="h-4 w-4 mr-1.5" />
               Post Job Opening
+            </Button>
+            <Button to="/recruiter/offers" variant="outline" size="sm">
+              <Award className="h-4 w-4 mr-1.5" />
+              Offers
+            </Button>
+            <Button to="/recruiter/analytics" variant="outline" size="sm">
+              <LineChart className="h-4 w-4 mr-1.5" />
+              Analytics
             </Button>
           </div>
         }

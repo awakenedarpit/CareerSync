@@ -26,7 +26,8 @@ import {
   PlusCircle,
   UserPlus,
   Mail,
-  ShieldAlert
+  ShieldAlert,
+  Compass
 } from 'lucide-react';
 
 export const studentNavItems = [
@@ -34,10 +35,13 @@ export const studentNavItems = [
   { label: 'My Profile', path: '/student/profile', icon: User },
   { label: 'Skills & Evidence', path: '/student/skills', icon: Award },
   { label: 'Career Goals', path: '/student/goals', icon: Target },
+  { label: 'Career Recommendations', path: '/student/career-recommendations', icon: Compass },
   { label: 'Skill Gap Analysis', path: '/student/skill-gap', icon: BarChart3 },
+  { label: 'Company Intelligence', path: '/student/company-intelligence', icon: Building2 },
   { label: 'Learning Path', path: '/student/learning-path', icon: BookOpen },
   { label: 'Mock Drives', path: '/student/mock-drives', icon: CheckCircle2 },
   { label: 'My Applications', path: '/student/applications', icon: Briefcase },
+  { label: 'Placement Offers', path: '/student/offers', icon: Award },
   { label: 'Knowledge Graph', path: '/student/knowledge-graph', icon: Share2 },
   { label: 'Privacy & Consent', path: '/student/privacy', icon: ShieldCheck },
   { label: 'Settings', path: '/student/settings', icon: Settings },
@@ -45,8 +49,13 @@ export const studentNavItems = [
 
 export const adminNavItems = [
   { label: 'Overview', path: '/admin', icon: LayoutDashboard },
+  { label: 'Approvals Queue', path: '/tpo/approvals', icon: ShieldAlert },
+  { label: 'TPO Verification', path: '/tpo/verification', icon: ShieldCheck },
+  { label: 'Cohort Readiness', path: '/tpo/readiness', icon: Award },
+  { label: 'Job Eligibility', path: '/tpo/jobs', icon: Briefcase },
   { label: 'Student Directory', path: '/admin/students', icon: Users },
   { label: 'Cohort Analytics', path: '/admin/cohort-analytics', icon: LineChart },
+  { label: 'Cohort Intelligence', path: '/tpo/cohort-intelligence', icon: BarChart3 },
   { label: 'Industry Intel', path: '/admin/industry-intel', icon: Globe },
   { label: 'Skill Gap Matrix', path: '/admin/skill-gap', icon: BarChart3 },
   { label: 'Placement Drives', path: '/admin/drives', icon: Calendar },
@@ -66,7 +75,10 @@ export const recruiterNavItems = [
   { label: 'Candidate Discovery', path: '/recruiter/discovery', icon: Search },
   { label: 'Shortlists', path: '/recruiter/shortlists', icon: ListOrdered },
   { label: 'Placement Drives', path: '/recruiter/drives', icon: Calendar },
+  { label: 'Assessments', path: '/recruiter/assessments', icon: FileSpreadsheet },
   { label: 'Interviews', path: '/recruiter/interviews', icon: Users },
+  { label: 'Placement Offers', path: '/recruiter/offers', icon: Award },
+  { label: 'Placement Intelligence', path: '/recruiter/analytics', icon: LineChart },
   { label: 'Candidate Feedback', path: '/recruiter/feedback', icon: MessageSquare },
   { label: 'Settings', path: '/recruiter/settings', icon: Settings },
 ];

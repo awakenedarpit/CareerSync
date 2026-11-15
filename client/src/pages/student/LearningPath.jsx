@@ -1,225 +1,430 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-  BookOpen,
-  CheckCircle2,
   Clock,
   ExternalLink,
   FolderGit2,
-  ArrowRight,
-  Sparkles,
-  Play,
-  RotateCcw
+  RotateCcw,
+  CheckCircle2,
+  Check,
+  ShieldCheck,
+  BarChart3,
+  AlertCircle
 } from 'lucide-react';
 import PageHeader from '../../components/ui/PageHeader';
 import Card from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
 import ProgressBar from '../../components/ui/ProgressBar';
 import Badge from '../../components/ui/Badge';
+import Modal from '../../components/ui/Modal';
+import Input from '../../components/ui/Input';
+import assessmentService from '../../services/assessmentService';
 
 export default function LearningPath() {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: 'Containerize Event Engine with Docker Compose',
-      category: 'DevOps / Deployment',
-      priority: 'High',
-      estTime: '3.5 hrs',
-      status: 'in_progress',
-      resource: 'Official Docker MERN Guide',
-      url: 'https://docs.docker.com',
-      deliverable: 'Commit docker-compose.yml to GitHub repo'
-    },
-    {
-      id: 2,
-      title: 'Implement Redis Caching for Event Inventory',
-      category: 'System Performance',
-      priority: 'Medium',
-      estTime: '2 hrs',
-      status: 'not_started',
-      resource: 'Redis Node.js Quickstart',
-      url: 'https://redis.io',
-      deliverable: 'Add Redis cache layer in Node.js routes'
-    },
-    {
-      id: 3,
-      title: 'Write Integration Tests with Vitest & Supertest',
-      category: 'Code Quality',
-      priority: 'High',
-      estTime: '4 hrs',
-      status: 'not_started',
-      resource: 'Vitest Testing Guide',
-      url: 'https://vitest.dev',
-      deliverable: '>70% test coverage report in repo'
-    },
-    {
-      id: 4,
-      title: 'Study System Design: Scalable Rate Limiter',
-      category: 'Interview Architecture',
-      priority: 'Medium',
-      estTime: '3 hrs',
-      status: 'completed',
-      resource: 'System Design Primer (GitHub)',
-      url: 'https://github.com/donnemartin/system-design-primer',
-      deliverable: 'Interactive architecture diagram submission'
-    },
-    {
-      id: 5,
-      title: 'TypeScript Strict Mode Migration',
-      category: 'Languages',
-      priority: 'Low',
-      estTime: '2.5 hrs',
-      status: 'completed',
-      resource: 'TypeScript Handbook',
-      url: 'https://www.typescriptlang.org',
-      deliverable: 'Zero any types in devcollab repository'
-    }
-  ]);
+  const [learningData, setLearningData] = useState(null);
+  const [tasks, setTasks] = useState([]);
+  const [weaknesses, setWeaknesses] = useState(null);
+  const [activeCategory, setActiveCategory] = useState('ALL');
+  const [isRegenerating, setIsRegenerating] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const toggleTaskStatus = (id) => {
-    setTasks(tasks.map(t => {
-      if (t.id === id) {
-        const nextStatus = t.status === 'completed' ? 'in_progress' : t.status === 'in_progress' ? 'completed' : 'in_progress';
-        return { ...t, status: nextStatus };
+  // Evidence Modal State
+  const [evidenceModalTask, setEvidenceModalTask] = useState(null);
+  const [repoUrl, setRepoUrl] = useState('');
+  const [docUrl, setDocUrl] = useState('');
+  const [notes, setNotes] = useState('');
+  const [isSubmittingEvidence, setIsSubmittingEvidence] = useState(false);
+  const [evidenceSuccessMsg, setEvidenceSuccessMsg] = useState('');
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        setLoading(true);
+        const [pathData, weaknessData] = await Promise.all([
+          assessmentService.getLearningPath(),
+          assessmentService.getWeaknessAnalysis()
+        ]);
+        setLearningData(pathData);
+        setTasks(pathData?.tasks || []);
+        setWeaknesses(weaknessData);
+      } catch (err) {
+        console.error('Failed to load learning path:', err);
+      } finally {
+        setLoading(false);
       }
-      return t;
-    }));
+    }
+    loadData();
+  }, []);
+
+  const handleToggleStatus = async (taskId) => {
+    const task = tasks.find(t => t.id === taskId);
+    if (!task) return;
+
+    let nextStatus = 'in_progress';
+    if (task.status === 'not_started') nextStatus = 'in_progress';
+    else if (task.status === 'in_progress') nextStatus = 'completed';
+    else if (task.status === 'completed') nextStatus = 'not_started';
+
+    // Optimistic update
+    setTasks(prev => prev.map(t => t.id === taskId ? { ...t, status: nextStatus } : t));
+
+    try {
+      await assessmentService.updateTaskStatus(taskId, nextStatus);
+    } catch (err) {
+      console.error('Failed to update task status:', err);
+    }
+  };
+
+  const handleRegeneratePath = async () => {
+    try {
+      setIsRegenerating(true);
+      const updated = await assessmentService.generateLearningPath();
+      setLearningData(updated);
+      setTasks(updated?.tasks || []);
+    } catch (err) {
+      console.error('Failed to regenerate path:', err);
+    } finally {
+      setIsRegenerating(false);
+    }
+  };
+
+  const openEvidenceModal = (task) => {
+    setEvidenceModalTask(task);
+    setRepoUrl(task.evidenceSubmitted?.repoUrl || '');
+    setDocUrl(task.evidenceSubmitted?.docUrl || '');
+    setNotes(task.evidenceSubmitted?.notes || '');
+    setEvidenceSuccessMsg('');
+  };
+
+  const handleSubmitEvidence = async (e) => {
+    e.preventDefault();
+    if (!evidenceModalTask) return;
+    try {
+      setIsSubmittingEvidence(true);
+      await assessmentService.submitTaskEvidence(evidenceModalTask.id, {
+        repoUrl,
+        docUrl,
+        notes
+      });
+
+      // Update task in state
+      setTasks(prev => prev.map(t => {
+        if (t.id === evidenceModalTask.id) {
+          return {
+            ...t,
+            status: 'completed',
+            evidenceSubmitted: {
+              repoUrl,
+              docUrl,
+              notes,
+              submittedAt: new Date().toISOString()
+            }
+          };
+        }
+        return t;
+      }));
+
+      setEvidenceSuccessMsg('Evidence submitted successfully! Forwarded for TPO verification.');
+      setTimeout(() => {
+        setEvidenceModalTask(null);
+        setEvidenceSuccessMsg('');
+      }, 1200);
+    } catch (err) {
+      console.error('Evidence submission failed:', err);
+    } finally {
+      setIsSubmittingEvidence(false);
+    }
   };
 
   const completedCount = tasks.filter(t => t.status === 'completed').length;
-  const progressPercent = Math.round((completedCount / tasks.length) * 100);
+  const progressPercent = tasks.length > 0 ? Math.round((completedCount / tasks.length) * 100) : 0;
+  const categories = ['ALL', ...new Set(tasks.map(t => t.category))];
+
+  const filteredTasks = activeCategory === 'ALL'
+    ? tasks
+    : tasks.filter(t => t.category === activeCategory);
+
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[400px]">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600 mb-3" />
+        <p className="text-sm text-slate-500">Curating Personalized Learning Modules...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
+      {/* Page Header */}
       <PageHeader
-        title="Personalized Learning Path"
-        subtitle="Curated micro-tasks and architectural modules to resolve your diagnosed skill gaps."
+        title="Personalized Learning Path & Skill Remediation"
+        subtitle="Adaptive micro-tasks curated from your mock drive gap diagnostics to target high-yield interview readiness."
         breadcrumbs={[{ label: 'Student', href: '/student' }, { label: 'Learning Path' }]}
         action={
-          <Button to="/student/skills" variant="outline" size="sm">
-            Check Verified Skills
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              onClick={handleRegeneratePath}
+              disabled={isRegenerating}
+              variant="outline"
+              size="sm"
+            >
+              <RotateCcw className={`h-4 w-4 mr-1.5 ${isRegenerating ? 'animate-spin' : ''}`} />
+              {isRegenerating ? 'Refreshing...' : 'Regenerate Path'}
+            </Button>
+            <Button to="/student/mock-drives/reports" variant="primary" size="sm">
+              <BarChart3 className="h-4 w-4 mr-1.5" />
+              View Gap Evidence
+            </Button>
+          </div>
         }
       />
 
-      {/* Progress Milestone Card */}
-      <Card className="p-6 border-slate-200">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-slate-100">
-          <div>
-            <span className="text-xs font-semibold uppercase tracking-wider text-indigo-600">Track Progress</span>
-            <h3 className="text-xl font-bold text-slate-900">Full Stack Placement Readiness Module</h3>
-            <p className="text-xs text-slate-500 mt-1">
-              {completedCount} of {tasks.length} core learning objectives completed.
+      {/* Diagnosed Weaknesses Alert Bar */}
+      {weaknesses && weaknesses.identifiedGaps?.length > 0 && (
+        <Card className="p-4 border-amber-200 bg-amber-50/30">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5">
+              <span className="p-1.5 rounded-lg bg-amber-100 text-amber-700">
+                <AlertCircle className="h-4 w-4" />
+              </span>
+              <div>
+                <h4 className="text-xs font-bold text-amber-950">Active Mock Drive Gap Diagnostics</h4>
+                <p className="text-[11px] text-amber-800">
+                  {weaknesses.identifiedGaps.length} areas need remediation for <strong>{learningData?.targetRole || 'Full Stack Engineer'}</strong>:
+                  {' '}{weaknesses.identifiedGaps.map(g => g.topic).join(' • ')}
+                </p>
+              </div>
+            </div>
+
+            <Badge variant="amber" size="sm">
+              Target Readiness: {weaknesses.readinessProjection}%
+            </Badge>
+          </div>
+        </Card>
+      )}
+
+      {/* Overall Progress Banner */}
+      <Card className="p-6 border-indigo-100 bg-gradient-to-br from-indigo-50/50 via-white to-purple-50/20">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-2 max-w-xl">
+            <div className="flex items-center gap-2">
+              <Badge variant="indigo" size="sm">Target: {learningData?.targetRole || 'Full Stack Engineer'}</Badge>
+              <span className="text-xs text-slate-500 font-medium">
+                {completedCount} of {tasks.length} Modules Verified
+              </span>
+            </div>
+            <h2 className="text-lg font-bold text-slate-900">Your Actionable Learning Blueprint</h2>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Complete each hands-on micro-task and submit your project evidence (GitHub repository or documentation URL) to verify your skills with the Training and Placement Cell.
             </p>
           </div>
 
-          <div className="w-full md:w-64 space-y-2">
-            <div className="flex justify-between text-xs font-medium text-slate-700">
-              <span>Overall Completion</span>
-              <span className="font-bold text-indigo-600">{progressPercent}%</span>
+          <div className="w-full md:w-64 space-y-1.5 bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
+            <div className="flex items-center justify-between text-xs">
+              <span className="font-semibold text-slate-700">Path Completion</span>
+              <span className="font-bold text-indigo-700">{progressPercent}%</span>
             </div>
-            <ProgressBar value={progressPercent} variant="indigo" size="md" />
-          </div>
-        </div>
-
-        {/* Milestone Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6">
-          <div className="p-4 rounded-xl border border-emerald-200 bg-emerald-50/50">
-            <div className="flex items-center gap-2 text-xs font-bold text-emerald-800 mb-1">
-              <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-              <span>Milestone 1: Web Core</span>
+            <ProgressBar value={progressPercent} color="indigo" />
+            <div className="text-[10px] text-slate-400 text-right pt-0.5">
+              ~{learningData?.estimatedHoursRemaining || 8.5} hours remaining
             </div>
-            <p className="text-[11px] text-slate-600">React, Node.js, SQL Database Design verified with code proof.</p>
-            <span className="inline-block mt-2 text-[10px] font-semibold text-emerald-700 uppercase">100% Completed</span>
-          </div>
-
-          <div className="p-4 rounded-xl border border-indigo-200 bg-indigo-50/50">
-            <div className="flex items-center gap-2 text-xs font-bold text-indigo-800 mb-1">
-              <Play className="h-4 w-4 text-indigo-600" />
-              <span>Milestone 2: Containerization & Tests</span>
-            </div>
-            <p className="text-[11px] text-slate-600">Docker compose multi-container setup and test automation suites.</p>
-            <span className="inline-block mt-2 text-[10px] font-semibold text-indigo-700 uppercase">In Progress (50%)</span>
-          </div>
-
-          <div className="p-4 rounded-xl border border-slate-200 bg-slate-50/50">
-            <div className="flex items-center gap-2 text-xs font-bold text-slate-700 mb-1">
-              <Clock className="h-4 w-4 text-slate-400" />
-              <span>Milestone 3: Scale & System Design</span>
-            </div>
-            <p className="text-[11px] text-slate-600">Distributed caching, rate limiters, and mock technical interview rounds.</p>
-            <span className="inline-block mt-2 text-[10px] font-semibold text-slate-400 uppercase">Next Up</span>
           </div>
         </div>
       </Card>
 
+      {/* Category Filter Pills */}
+      <div className="flex items-center justify-between">
+        <div className="flex flex-wrap gap-1.5">
+          {categories.map(cat => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`text-xs font-semibold px-3 py-1.5 rounded-lg border transition-all ${
+                activeCategory === cat
+                  ? 'bg-indigo-600 text-white border-indigo-600 shadow-xs'
+                  : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+              }`}
+            >
+              {cat === 'ALL' ? 'All Modules' : cat}
+            </button>
+          ))}
+        </div>
+
+        <span className="text-xs text-slate-500">{filteredTasks.length} Tasks Listed</span>
+      </div>
+
       {/* Task List */}
-      <div>
-        <h3 className="text-base font-bold text-slate-900 mb-3">Assigned Micro-Tasks</h3>
-        <div className="space-y-3">
-          {tasks.map((task) => (
-            <div
+      <div className="space-y-3">
+        {filteredTasks.map((task) => {
+          const isCompleted = task.status === 'completed';
+          const isInProgress = task.status === 'in_progress';
+          const hasEvidence = !!task.evidenceSubmitted;
+
+          return (
+            <Card
               key={task.id}
-              className={`p-4 rounded-xl border transition-all flex flex-col md:flex-row md:items-center justify-between gap-4 ${
-                task.status === 'completed'
-                  ? 'border-emerald-200 bg-emerald-50/20'
-                  : task.status === 'in_progress'
-                  ? 'border-indigo-200 bg-white shadow-2xs'
+              className={`p-5 border transition-all ${
+                isCompleted
+                  ? 'border-emerald-200 bg-emerald-50/10'
+                  : isInProgress
+                  ? 'border-indigo-200 bg-indigo-50/10'
                   : 'border-slate-200 bg-white'
               }`}
             >
-              <div className="flex items-start gap-3">
-                <button
-                  onClick={() => toggleTaskStatus(task.id)}
-                  className={`mt-0.5 h-5 w-5 rounded-md border flex items-center justify-center transition-colors ${
-                    task.status === 'completed'
-                      ? 'border-emerald-600 bg-emerald-600 text-white'
-                      : 'border-slate-300 hover:border-indigo-500'
-                  }`}
-                  aria-label="Toggle task status"
-                >
-                  {task.status === 'completed' && <CheckCircle2 className="h-4 w-4" />}
-                </button>
-
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <h4 className={`text-sm font-bold ${task.status === 'completed' ? 'line-through text-slate-400' : 'text-slate-900'}`}>
-                      {task.title}
-                    </h4>
-                    <Badge variant={task.priority === 'High' ? 'rose' : 'amber'} size="sm">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                {/* Left Task Content */}
+                <div className="space-y-1.5 max-w-2xl">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <Badge variant={task.priority === 'HIGH' ? 'red' : 'indigo'} size="sm">
                       {task.priority} Priority
                     </Badge>
+                    <Badge variant="neutral" size="sm">{task.category}</Badge>
+                    <span className="text-xs text-slate-400 flex items-center gap-1">
+                      <Clock className="h-3 w-3" /> {task.estimatedHours} hrs
+                    </span>
                   </div>
-                  <p className="text-xs text-slate-500">
-                    Deliverable: <strong className="text-slate-700">{task.deliverable}</strong>
+
+                  <h3 className={`text-base font-bold ${isCompleted ? 'text-slate-600 line-through' : 'text-slate-900'}`}>
+                    {task.title}
+                  </h3>
+
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    <strong>Deliverable: </strong>{task.deliverableDesc}
                   </p>
-                  <div className="flex items-center gap-3 text-[11px] text-slate-400 pt-1">
-                    <span>Est: {task.estTime}</span>
-                    <span>•</span>
-                    <a
-                      href={task.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-indigo-600 hover:underline flex items-center gap-0.5"
-                    >
-                      {task.resource} <ExternalLink className="h-2.5 w-2.5" />
-                    </a>
-                  </div>
+
+                  {/* Resource Link */}
+                  {task.resourceUrl && (
+                    <div className="pt-1">
+                      <a
+                        href={task.resourceUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs text-indigo-600 hover:text-indigo-800 font-medium"
+                      >
+                        <ExternalLink className="h-3 w-3" />
+                        {task.resourceTitle}
+                      </a>
+                    </div>
+                  )}
+
+                  {/* Evidence Submitted Badge */}
+                  {hasEvidence && (
+                    <div className="flex items-center gap-2 pt-1 text-xs text-emerald-700">
+                      <ShieldCheck className="h-4 w-4 text-emerald-600" />
+                      <span>
+                        Verified Evidence Linked: <a href={task.evidenceSubmitted.repoUrl} target="_blank" rel="noopener noreferrer" className="underline font-mono">{task.evidenceSubmitted.repoUrl}</a>
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Right Action Controls */}
+                <div className="flex items-center gap-2 shrink-0 self-end md:self-center">
+                  <Button
+                    onClick={() => openEvidenceModal(task)}
+                    variant={hasEvidence ? 'outline' : 'secondary'}
+                    size="sm"
+                  >
+                    <FolderGit2 className="h-3.5 w-3.5 mr-1" />
+                    {hasEvidence ? 'Edit Evidence' : 'Submit Evidence'}
+                  </Button>
+
+                  <Button
+                    onClick={() => handleToggleStatus(task.id)}
+                    variant={isCompleted ? 'outline' : isInProgress ? 'primary' : 'outline'}
+                    size="sm"
+                  >
+                    {isCompleted ? (
+                      <>
+                        <Check className="h-3.5 w-3.5 mr-1 text-emerald-600" />
+                        Completed
+                      </>
+                    ) : isInProgress ? (
+                      'In Progress'
+                    ) : (
+                      'Start Task'
+                    )}
+                  </Button>
                 </div>
               </div>
-
-              <div className="flex items-center gap-2 shrink-0">
-                <Button
-                  onClick={() => toggleTaskStatus(task.id)}
-                  variant={task.status === 'completed' ? 'outline' : 'primary'}
-                  size="sm"
-                >
-                  {task.status === 'completed' ? 'Mark In Progress' : 'Complete & Verify'}
-                </Button>
-              </div>
-            </div>
-          ))}
-        </div>
+            </Card>
+          );
+        })}
       </div>
+
+      {/* Project Evidence Submission Modal */}
+      {evidenceModalTask && (
+        <Modal
+          isOpen={!!evidenceModalTask}
+          onClose={() => setEvidenceModalTask(null)}
+          title={`Submit Verification Evidence: ${evidenceModalTask.title}`}
+          footer={
+            <div className="flex justify-end gap-2">
+              <Button onClick={() => setEvidenceModalTask(null)} variant="outline" size="sm">
+                Cancel
+              </Button>
+              <Button
+                onClick={handleSubmitEvidence}
+                disabled={isSubmittingEvidence || !repoUrl}
+                variant="primary"
+                size="sm"
+              >
+                {isSubmittingEvidence ? 'Submitting...' : 'Confirm Submission'}
+              </Button>
+            </div>
+          }
+        >
+          <form onSubmit={handleSubmitEvidence} className="space-y-4 text-xs">
+            <p className="text-slate-600">
+              Provide verifiable links demonstrating completion of this learning task. Evidence will be reviewed by the TPO Cell to update your cohort placement readiness score.
+            </p>
+
+            {evidenceSuccessMsg && (
+              <div className="p-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 shrink-0" />
+                <span>{evidenceSuccessMsg}</span>
+              </div>
+            )}
+
+            <div>
+              <label className="font-semibold text-slate-800 block mb-1">
+                GitHub Repository or Pull Request URL <span className="text-red-500">*</span>
+              </label>
+              <Input
+                type="url"
+                placeholder="https://github.com/username/project/pull/12"
+                value={repoUrl}
+                onChange={(e) => setRepoUrl(e.target.value)}
+                required
+              />
+            </div>
+
+            <div>
+              <label className="font-semibold text-slate-800 block mb-1">
+                Architecture Documentation / Live Demo URL (Optional)
+              </label>
+              <Input
+                type="url"
+                placeholder="https://username.github.io/project or Notion doc link"
+                value={docUrl}
+                onChange={(e) => setDocUrl(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <label className="font-semibold text-slate-800 block mb-1">
+                Implementation Notes & Verifiable Commits
+              </label>
+              <textarea
+                rows={3}
+                placeholder="Briefly describe what was implemented (e.g., added Docker multi-stage build, achieved 82% test coverage)..."
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                className="w-full text-xs text-slate-800 p-2.5 border border-slate-200 rounded-lg focus:outline-hidden focus:ring-1 focus:ring-indigo-600"
+              />
+            </div>
+          </form>
+        </Modal>
+      )}
     </div>
   );
 }

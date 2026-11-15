@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {
-  User,
-  GraduationCap,
-  Mail,
-  Phone,
-  Globe,
   Code2,
   Award,
   ExternalLink,
@@ -16,7 +11,9 @@ import {
   UploadCloud,
   Download,
   Trash2,
-  Clock
+  Sparkles,
+  Loader2,
+  X
 } from 'lucide-react';
 import PageHeader from '../../components/ui/PageHeader';
 import Card from '../../components/ui/Card';
@@ -25,7 +22,9 @@ import Input from '../../components/ui/Input';
 import Badge from '../../components/ui/Badge';
 import StatusBadge from '../../components/ui/StatusBadge';
 import DocumentUploadModal from '../../components/documents/DocumentUploadModal';
+import ProfileReviewModal from '../../components/profiling/ProfileReviewModal';
 import fileService from '../../services/fileService';
+import profilingService from '../../services/profilingService';
 
 export default function StudentProfile() {
   const [isEditing, setIsEditing] = useState(false);
@@ -84,6 +83,88 @@ export default function StudentProfile() {
     } catch (err) {
       alert('Delete error: ' + err.message);
     }
+  };
+
+  // AI Profiling State & Handlers (Phase 09)
+  const [analyzingDocId, setAnalyzingDocId] = useState(null);
+  const [analysisStatusText, setAnalysisStatusText] = useState('');
+  const [activeExtraction, setActiveExtraction] = useState(null);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [profilingMessage, setProfilingMessage] = useState(null);
+
+  const handleAnalyzeDocument = async (doc) => {
+    try {
+      setAnalyzingDocId(doc.id);
+      setAnalysisStatusText('Initiating AI Profiler...');
+      setProfilingMessage(null);
+
+      const triggerRes = await profilingService.analyzeDocument(doc.id);
+      const jobId = triggerRes.jobId || triggerRes.job?.id || triggerRes.id;
+
+      if (!jobId) {
+        // Direct extraction response fallback
+        const extraction = triggerRes.extraction || triggerRes;
+        setActiveExtraction({
+          ...extraction,
+          originalFilename: doc.original_filename,
+        });
+        setIsReviewModalOpen(true);
+        return;
+      }
+
+      setAnalysisStatusText('Processing document...');
+      const completedJob = await profilingService.pollJobUntilComplete(
+        jobId,
+        1500,
+        30,
+        (job) => {
+          if (job.status === 'PROCESSING') {
+            setAnalysisStatusText('AI extracting skills & evidence...');
+          } else if (job.status === 'QUEUED') {
+            setAnalysisStatusText('Queued in processing pipeline...');
+          }
+        }
+      );
+
+      const extractionId = completedJob.extractionId || completedJob.result?.extractionId || completedJob.id;
+      let extractionData;
+      if (extractionId) {
+        setAnalysisStatusText('Retrieving extracted profile...');
+        extractionData = await profilingService.getExtraction(extractionId);
+      } else {
+        extractionData = completedJob.result || completedJob;
+      }
+
+      setActiveExtraction({
+        ...extractionData,
+        originalFilename: doc.original_filename,
+      });
+      setIsReviewModalOpen(true);
+    } catch (err) {
+      console.error('AI Profiling Error:', err);
+      setProfilingMessage({
+        type: 'error',
+        text: err.message || 'AI document analysis failed. Please verify document format.'
+      });
+    } finally {
+      setAnalyzingDocId(null);
+      setAnalysisStatusText('');
+    }
+  };
+
+  const handleExtractionApproved = (data) => {
+    setProfilingMessage({
+      type: 'success',
+      text: `AI extraction approved! ${data.approvedSkillNames?.length || 0} skills queued as evidence in your portfolio.`
+    });
+    loadDocuments();
+  };
+
+  const handleExtractionRejected = () => {
+    setProfilingMessage({
+      type: 'info',
+      text: 'AI extraction rejected. Audit log and document processing record updated.'
+    });
   };
 
   const breadcrumbs = [
@@ -152,6 +233,34 @@ export default function StudentProfile() {
         <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-xs flex items-center gap-2">
           <CheckCircle2 className="h-4 w-4 text-emerald-600" />
           <span>Profile records successfully updated and queued for tenant evidence re-indexing.</span>
+        </div>
+      )}
+
+      {profilingMessage && (
+        <div
+          className={`p-3 rounded-xl border text-xs flex items-center justify-between gap-2 ${
+            profilingMessage.type === 'error'
+              ? 'bg-rose-50 border-rose-200 text-rose-800'
+              : profilingMessage.type === 'info'
+              ? 'bg-blue-50 border-blue-200 text-blue-800'
+              : 'bg-emerald-50 border-emerald-200 text-emerald-800'
+          }`}
+        >
+          <div className="flex items-center gap-2">
+            {profilingMessage.type === 'error' ? (
+              <X className="h-4 w-4 text-rose-600 shrink-0" />
+            ) : (
+              <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
+            )}
+            <span>{profilingMessage.text}</span>
+          </div>
+          <button
+            onClick={() => setProfilingMessage(null)}
+            className="p-1 hover:opacity-70 rounded transition-opacity"
+            title="Dismiss"
+          >
+            <X className="h-3.5 w-3.5" />
+          </button>
         </div>
       )}
 
@@ -330,7 +439,27 @@ export default function StudentProfile() {
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-1 shrink-0">
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    <Button
+                      size="xs"
+                      variant="outline"
+                      onClick={() => handleAnalyzeDocument(doc)}
+                      disabled={analyzingDocId === doc.id}
+                      className="text-indigo-600 border-indigo-200 hover:bg-indigo-50 shrink-0"
+                      title="Analyze skills and evidence using AI Profiler"
+                    >
+                      {analyzingDocId === doc.id ? (
+                        <>
+                          <Loader2 className="h-3.5 w-3.5 animate-spin mr-1 text-indigo-600" />
+                          <span className="text-[11px] font-medium">{analysisStatusText || 'Analyzing...'}</span>
+                        </>
+                      ) : (
+                        <>
+                          <Sparkles className="h-3.5 w-3.5 mr-1 text-indigo-600" />
+                          <span className="text-[11px] font-medium">Analyze with AI Profiler</span>
+                        </>
+                      )}
+                    </Button>
                     <button
                       onClick={() => handleDownload(doc)}
                       className="p-1.5 text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
@@ -426,6 +555,14 @@ export default function StudentProfile() {
         onClose={() => setIsUploadModalOpen(false)}
         onSuccess={loadDocuments}
         initialType={modalInitialType}
+      />
+
+      <ProfileReviewModal
+        isOpen={isReviewModalOpen}
+        onClose={() => setIsReviewModalOpen(false)}
+        extraction={activeExtraction}
+        onApproved={handleExtractionApproved}
+        onRejected={handleExtractionRejected}
       />
     </div>
   );
