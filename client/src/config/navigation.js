@@ -27,12 +27,20 @@ import {
   UserPlus,
   Mail,
   ShieldAlert,
-  Compass
+  Compass,
+  TrendingUp,
+  Sparkles,
+  Activity,
+  Cpu,
+  GraduationCap
 } from 'lucide-react';
 
 export const studentNavItems = [
   { label: 'Overview', path: '/student', icon: LayoutDashboard },
   { label: 'My Profile', path: '/student/profile', icon: User },
+  { label: 'Alumni Mentorship', path: '/student/mentorship', icon: GraduationCap },
+  { label: 'Peer Mock Interviews', path: '/student/peer-interviews', icon: Users },
+  { label: 'Learning Collaboration', path: '/student/collaboration', icon: MessageSquare },
   { label: 'Skills & Evidence', path: '/student/skills', icon: Award },
   { label: 'Career Goals', path: '/student/goals', icon: Target },
   { label: 'Career Recommendations', path: '/student/career-recommendations', icon: Compass },
@@ -49,6 +57,8 @@ export const studentNavItems = [
 
 export const adminNavItems = [
   { label: 'Overview', path: '/admin', icon: LayoutDashboard },
+  { label: 'Alumni & Moderation', path: '/tpo/alumni-network', icon: GraduationCap },
+  { label: 'Agent Orchestration', path: '/tpo/orchestration', icon: Sparkles },
   { label: 'Approvals Queue', path: '/tpo/approvals', icon: ShieldAlert },
   { label: 'TPO Verification', path: '/tpo/verification', icon: ShieldCheck },
   { label: 'Cohort Readiness', path: '/tpo/readiness', icon: Award },
@@ -56,6 +66,8 @@ export const adminNavItems = [
   { label: 'Student Directory', path: '/admin/students', icon: Users },
   { label: 'Cohort Analytics', path: '/admin/cohort-analytics', icon: LineChart },
   { label: 'Cohort Intelligence', path: '/tpo/cohort-intelligence', icon: BarChart3 },
+  { label: 'Predictive Analytics', path: '/tpo/predictive-analytics', icon: TrendingUp },
+  { label: 'Platform Observability', path: '/admin/observability', icon: Activity },
   { label: 'Industry Intel', path: '/admin/industry-intel', icon: Globe },
   { label: 'Skill Gap Matrix', path: '/admin/skill-gap', icon: BarChart3 },
   { label: 'Placement Drives', path: '/admin/drives', icon: Calendar },
@@ -66,6 +78,11 @@ export const adminNavItems = [
   { label: 'Reports & Export', path: '/admin/reports', icon: FileSpreadsheet },
   { label: 'Audit Trail', path: '/admin/audit', icon: History },
   { label: 'Settings', path: '/admin/settings', icon: Settings },
+];
+
+export const alumniNavItems = [
+  { label: 'Dashboard & Sessions', path: '/alumni/dashboard', icon: LayoutDashboard },
+  { label: 'Profile & Capacity', path: '/alumni/profile', icon: User },
 ];
 
 export const recruiterNavItems = [
@@ -85,6 +102,7 @@ export const recruiterNavItems = [
 
 export const superAdminNavItems = [
   { label: 'Overview', path: '/super-admin', icon: LayoutDashboard },
+  { label: 'Platform Observability', path: '/super-admin/observability', icon: Activity },
   { label: 'College Management', path: '/super-admin/colleges', icon: Building2 },
   { label: 'Register College', path: '/super-admin/colleges/new', icon: PlusCircle },
   { label: 'User Management', path: '/super-admin/users', icon: Users },

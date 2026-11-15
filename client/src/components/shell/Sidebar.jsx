@@ -10,7 +10,7 @@ import {
   Building,
   ShieldAlert
 } from 'lucide-react';
-import { studentNavItems, adminNavItems, recruiterNavItems, superAdminNavItems } from '../../config/navigation';
+import { studentNavItems, adminNavItems, recruiterNavItems, superAdminNavItems, alumniNavItems } from '../../config/navigation';
 import Avatar from '../ui/Avatar';
 import Badge from '../ui/Badge';
 
@@ -29,6 +29,13 @@ export default function Sidebar({ role = 'student', isOpen, onClose }) {
     RoleIcon = Shield;
     userName = 'Dr. Rajiv Menon';
     userEmail = 'head.tnp@college.edu';
+  } else if (role === 'alumni') {
+    navItems = alumniNavItems;
+    roleLabel = 'Alumni Portal';
+    roleBadgeVariant = 'emerald';
+    RoleIcon = GraduationCap;
+    userName = 'Ananya Deshmukh';
+    userEmail = 'ananya.deshmukh@alumni.edu';
   } else if (role === 'recruiter') {
     navItems = recruiterNavItems;
     roleLabel = 'Recruiter Portal';

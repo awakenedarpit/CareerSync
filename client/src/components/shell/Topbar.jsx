@@ -18,10 +18,12 @@ import {
 } from 'lucide-react';
 import Avatar from '../ui/Avatar';
 import Badge from '../ui/Badge';
-import NotificationPanel from '../ui/NotificationPanel';
+import NotificationDrawer from '../notifications/NotificationDrawer';
+import { notificationService } from '../../services/notificationService';
 
 export default function Topbar({ role = 'student', onMenuClick }) {
   const [showNotifications, setShowNotifications] = useState(false);
+  const [unreadCount, setUnreadCount] = useState(2);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showRoleSwitcher, setShowRoleSwitcher] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -30,6 +32,22 @@ export default function Topbar({ role = 'student', onMenuClick }) {
   const profileRef = useRef(null);
   const roleRef = useRef(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    let mounted = true;
+    async function fetchUnread() {
+      try {
+        const data = await notificationService.getNotifications();
+        if (mounted && data) {
+          setUnreadCount(data.unreadCount ?? 0);
+        }
+      } catch {
+        // keep default
+      }
+    }
+    fetchUnread();
+    return () => { mounted = false; };
+  }, [showNotifications]);
 
   // Close dropdowns on click outside
   useEffect(() => {
@@ -50,6 +68,7 @@ export default function Topbar({ role = 'student', onMenuClick }) {
 
   const roles = [
     { id: 'student', label: 'Student Portal', path: '/student', icon: GraduationCap, color: 'text-indigo-600' },
+    { id: 'alumni', label: 'Alumni Portal', path: '/alumni/dashboard', icon: GraduationCap, color: 'text-amber-600' },
     { id: 'admin', label: 'T&P Admin Portal', path: '/admin', icon: Shield, color: 'text-purple-600' },
     { id: 'recruiter', label: 'Recruiter Portal', path: '/recruiter', icon: Building, color: 'text-emerald-600' },
     { id: 'superadmin', label: 'Super Admin', path: '/super-admin', icon: ShieldAlert, color: 'text-rose-600' },
@@ -133,53 +152,29 @@ export default function Topbar({ role = 'student', onMenuClick }) {
           )}
         </div>
 
-        {/* Notification Bell with Panel */}
-        <div className="relative" ref={notifRef}>
+        {/* Notification Bell with Slide-over Drawer */}
+        <div>
           <button
-            onClick={() => setShowNotifications(!showNotifications)}
+            onClick={() => setShowNotifications(true)}
             className="relative rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-700 transition-colors"
             aria-label="View notifications"
           >
             <Bell className="h-5 w-5" />
-            <span className="absolute top-1.5 right-1.5 flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-600"></span>
-            </span>
+            {unreadCount > 0 ? (
+              <span className="absolute top-1 right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-indigo-600 px-1 text-[10px] font-bold text-white shadow-2xs">
+                {unreadCount > 9 ? '9+' : unreadCount}
+              </span>
+            ) : (
+              <span className="absolute top-1.5 right-1.5 flex h-2 w-2">
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-slate-300"></span>
+              </span>
+            )}
           </button>
 
-          {showNotifications && (
-            <div className="absolute right-0 mt-2 z-50">
-              <NotificationPanel
-                onClose={() => setShowNotifications(false)}
-                notifications={[
-                  {
-                    id: '1',
-                    type: 'verification',
-                    title: 'Skill Verified: JavaScript Core',
-                    message: 'GitHub project repository analysis verified async programming & DOM manipulation.',
-                    time: '10m ago',
-                    read: false,
-                  },
-                  {
-                    id: '2',
-                    type: 'drive',
-                    title: 'New Drive: TCS Digital 2025',
-                    message: 'Eligibility criteria: CGPA ≥ 7.5. Your verified profile matches all mandatory requirements.',
-                    time: '1h ago',
-                    read: false,
-                  },
-                  {
-                    id: '3',
-                    type: 'gap',
-                    title: 'Skill Gap Identified',
-                    message: 'Full Stack track requires Docker containerization. 1 micro-task recommended.',
-                    time: '3h ago',
-                    read: true,
-                  },
-                ]}
-              />
-            </div>
-          )}
+          <NotificationDrawer
+            isOpen={showNotifications}
+            onClose={() => setShowNotifications(false)}
+          />
         </div>
 
         {/* User Profile Avatar & Menu */}

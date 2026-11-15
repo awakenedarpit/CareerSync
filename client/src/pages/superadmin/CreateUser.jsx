@@ -50,7 +50,9 @@ export default function CreateUser() {
     { value: 'col-3', label: 'Delhi Technological University (Delhi)' },
     { value: 'col-4', label: 'National Institute of Tech Surathkal' },
     { value: 'col-6', label: 'Birla Institute of Technology Mesra' },
-    { value: 'col-7', label: 'Indian Institute of Engineering Science Shibpur' },
+    { value: 'col-7', label: 'Indore Institute of Science and Technology' },
+    { value: 'col-8', label: 'Indian Institute of Engineering Science Shibpur' },
+
   ];
 
   const roleConfigs = [
@@ -224,11 +226,10 @@ export default function CreateUser() {
                   key={r.id}
                   type="button"
                   onClick={() => setRole(r.id)}
-                  className={`p-4 rounded-xl border text-left transition-all flex flex-col justify-between ${
-                    isSelected
-                      ? 'border-indigo-600 bg-indigo-50/60 ring-2 ring-indigo-600/20'
-                      : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50/50'
-                  }`}
+                  className={`p-4 rounded-xl border text-left transition-all flex flex-col justify-between ${isSelected
+                    ? 'border-indigo-600 bg-indigo-50/60 ring-2 ring-indigo-600/20'
+                    : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50/50'
+                    }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className={`p-2 rounded-lg ${isSelected ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600'}`}>
@@ -349,11 +350,14 @@ export default function CreateUser() {
                   onChange={(e) => setFormData({ ...formData, branch: e.target.value })}
                   options={[
                     'Computer Science & Engineering',
-                    'Information Science',
-                    'Electronics & Communication',
+                    'Computer Science & Engineering (Data Science)',
+                    'Artificial Intelligence & Machine Learning',
+                    'Robotics and Artificial Intelligence',
+                    'Information Technology',
+                    'Electronics & Communication Engineering',
+                    'Electronics and Computer Science',
                     'Mechanical Engineering',
-                    'Electrical & Electronics',
-                    'Data Science & AI'
+                    'Civil Engineering',
                   ]}
                   required
                 />
@@ -361,7 +365,7 @@ export default function CreateUser() {
                   label="Graduation Year"
                   value={formData.gradYear}
                   onChange={(e) => setFormData({ ...formData, gradYear: e.target.value })}
-                  options={['2024', '2025', '2026', '2027']}
+                  options={['2024', '2025', '2026', '2027', '2028', '2029', '2030', '2031', '2032']}
                   required
                 />
               </div>

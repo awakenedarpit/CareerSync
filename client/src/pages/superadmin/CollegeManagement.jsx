@@ -25,24 +25,24 @@ import Input from '../../components/ui/Input';
 export default function CollegeManagement() {
   const [colleges, setColleges] = useState([
     {
-      id: 'col-1',
-      name: 'MIT World Peace University',
-      slug: 'mit-wpu',
-      domain: 'mitwpu.edu.in',
-      location: 'Pune, Maharashtra',
-      contactEmail: 'admin@mitwpu.edu.in',
-      contactPhone: '+91 20 2740 0000',
+      id: 'col-7',
+      name: 'Indore Institute of Science and Technology',
+      slug: 'iist',
+      domain: 'iist.indoreinstitute.com/',
+      location: 'Indore , Madhya Pradesh',
+      contactEmail: 'admissions@indoreinstitute.com',
+      contactPhone: '+91 8224071000',
       admins: 3,
-      students: 2450,
+      students: 4060,
       status: 'Active',
-      createdAt: '2024-01-15'
+      createdAt: '2026-11-15'
     },
     {
       id: 'col-2',
-      name: 'Stanford Institute of Technology',
-      slug: 'sit-blr',
-      domain: 'sit.edu.in',
-      location: 'Bengaluru, Karnataka',
+      name: 'Acropolis Institute of Technology and Research',
+      slug: 'aits',
+      domain: 'aits.edu.in',
+      location: 'Indore , Madhya Pradesh',
       contactEmail: 'director@sit.edu.in',
       contactPhone: '+91 80 4123 4567',
       admins: 2,
@@ -104,6 +104,19 @@ export default function CollegeManagement() {
     },
     {
       id: 'col-7',
+      name: 'Indore Institute of Science and Technology',
+      slug: 'iist',
+      domain: 'iist.indoreinstitute.com/',
+      location: 'Indore , Madhya Pradesh',
+      contactEmail: 'admissions@indoreinstitute.com',
+      contactPhone: '+91 8224071000',
+      admins: 3,
+      students: 2150,
+      status: 'Active',
+      createdAt: '2024-05-18'
+    },
+    {
+      id: 'col-8',
       name: 'Indian Institute of Engineering Science',
       slug: 'iiest-shibpur',
       domain: 'iiests.ac.in',
@@ -261,11 +274,10 @@ export default function CollegeManagement() {
           </button>
           <button
             onClick={() => handleToggleStatus(row.id)}
-            className={`p-1.5 rounded-lg transition-colors ${
-              row.status === 'Active'
-                ? 'text-slate-500 hover:text-rose-600 hover:bg-rose-50'
-                : 'text-slate-500 hover:text-emerald-600 hover:bg-emerald-50'
-            }`}
+            className={`p-1.5 rounded-lg transition-colors ${row.status === 'Active'
+              ? 'text-slate-500 hover:text-rose-600 hover:bg-rose-50'
+              : 'text-slate-500 hover:text-emerald-600 hover:bg-emerald-50'
+              }`}
             title={row.status === 'Active' ? 'Suspend Institution' : 'Reactivate Institution'}
           >
             <Power className="h-4 w-4" />
@@ -280,11 +292,10 @@ export default function CollegeManagement() {
       {/* Floating Notification */}
       {notification && (
         <div
-          className={`fixed bottom-6 right-6 z-50 px-4 py-3 rounded-xl shadow-lg border text-sm font-medium flex items-center gap-2 animate-in slide-in-from-bottom duration-200 ${
-            notification.type === 'warning'
-              ? 'bg-amber-50 border-amber-200 text-amber-800'
-              : 'bg-emerald-50 border-emerald-200 text-emerald-800'
-          }`}
+          className={`fixed bottom-6 right-6 z-50 px-4 py-3 rounded-xl shadow-lg border text-sm font-medium flex items-center gap-2 animate-in slide-in-from-bottom duration-200 ${notification.type === 'warning'
+            ? 'bg-amber-50 border-amber-200 text-amber-800'
+            : 'bg-emerald-50 border-emerald-200 text-emerald-800'
+            }`}
         >
           {notification.type === 'warning' ? (
             <AlertTriangle className="h-4 w-4 text-amber-600" />
@@ -330,11 +341,10 @@ export default function CollegeManagement() {
               <button
                 key={status}
                 onClick={() => setStatusFilter(status)}
-                className={`px-3 py-1 rounded-md transition-all ${
-                  statusFilter === status
-                    ? 'bg-white text-indigo-700 shadow-xs font-semibold'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
+                className={`px-3 py-1 rounded-md transition-all ${statusFilter === status
+                  ? 'bg-white text-indigo-700 shadow-xs font-semibold'
+                  : 'text-slate-600 hover:text-slate-900'
+                  }`}
               >
                 {status}
               </button>

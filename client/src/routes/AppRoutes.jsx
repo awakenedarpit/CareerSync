@@ -44,13 +44,14 @@ import AdminReports from '../pages/admin/Reports';
 import AdminAuditLogs from '../pages/admin/AuditLogs';
 import AdminSettings from '../pages/admin/Settings';
 
-// TPO Portal Pages (Phase 10, 11, 12 & 13)
+// TPO Portal Pages (Phase 10, 11, 12, 13 & 14)
 import VerificationPortal from '../pages/tpo/VerificationPortal';
 import ReadinessDashboard from '../pages/tpo/ReadinessDashboard';
 import JobEligibilityPortal from '../pages/tpo/JobEligibilityPortal';
 import TpoApprovalsQueue from '../pages/tpo/TpoApprovalsQueue';
 import TpoMockDrives from '../pages/tpo/TpoMockDrives';
 import CohortIntelligence from '../pages/tpo/CohortIntelligence';
+import PredictiveAnalytics from '../pages/tpo/PredictiveAnalytics';
 
 // Recruiter Pages (Phase 11)
 import RecruiterOverview from '../pages/recruiter/Overview';
@@ -75,6 +76,21 @@ import CreateUser from '../pages/superadmin/CreateUser';
 import InvitationManagement from '../pages/superadmin/InvitationManagement';
 import AuditLogs from '../pages/superadmin/AuditLogs';
 import PlatformSettings from '../pages/superadmin/Settings';
+import PlatformObservability from '../pages/superadmin/PlatformObservability';
+
+// Phase 15 Cross-Agent Orchestration
+import AgentOrchestration from '../pages/tpo/AgentOrchestration';
+
+// Phase 16 Alumni Engagement, Peer Mock Interviews & Real-Time Collaboration
+import MentorshipHub from '../pages/student/MentorshipHub';
+import MentorshipRequests from '../pages/student/MentorshipRequests';
+import PeerInterviews from '../pages/student/PeerInterviews';
+import PeerInterviewRoom from '../pages/student/PeerInterviewRoom';
+import CollaborationHub from '../pages/student/CollaborationHub';
+import CollaborationRoom from '../pages/student/CollaborationRoom';
+import AlumniDashboard from '../pages/alumni/AlumniDashboard';
+import AlumniProfile from '../pages/alumni/AlumniProfile';
+import TpoAlumniNetwork from '../pages/tpo/TpoAlumniNetwork';
 
 import Button from '../components/ui/Button';
 
@@ -105,6 +121,12 @@ export default function AppRoutes() {
       <Route path="/student" element={<DashboardLayout role="student" />}>
         <Route index element={<StudentOverview />} />
         <Route path="profile" element={<StudentProfile />} />
+        <Route path="mentorship" element={<MentorshipHub />} />
+        <Route path="mentorship-requests" element={<MentorshipRequests />} />
+        <Route path="peer-interviews" element={<PeerInterviews />} />
+        <Route path="peer-interviews/room/:roomId" element={<PeerInterviewRoom />} />
+        <Route path="collaboration" element={<CollaborationHub />} />
+        <Route path="collaboration/room/:roomId" element={<CollaborationRoom />} />
         <Route path="skills" element={<SkillsEvidence />} />
         <Route path="goals" element={<CareerGoals />} />
         <Route path="skill-gap" element={<StudentSkillGapAnalysis />} />
@@ -127,10 +149,12 @@ export default function AppRoutes() {
       {/* T&P Admin Portal Routes */}
       <Route path="/admin" element={<DashboardLayout role="admin" />}>
         <Route index element={<AdminOverview />} />
+        <Route path="alumni-network" element={<TpoAlumniNetwork />} />
         <Route path="students" element={<StudentDirectory />} />
         <Route path="cohort-analytics" element={<CohortAnalytics />} />
         <Route path="industry-intel" element={<IndustryIntelligence />} />
         <Route path="cohort-intelligence" element={<CohortIntelligence />} />
+        <Route path="predictive-analytics" element={<PredictiveAnalytics />} />
         <Route path="skill-gap" element={<AdminSkillGapAnalysis />} />
         <Route path="drives" element={<AdminPlacementDrives />} />
         <Route path="mock-drives" element={<TpoMockDrives />} />
@@ -143,11 +167,14 @@ export default function AppRoutes() {
         <Route path="recruiters" element={<RecruiterManagement />} />
         <Route path="reports" element={<AdminReports />} />
         <Route path="audit" element={<AdminAuditLogs />} />
+        <Route path="orchestration" element={<AgentOrchestration />} />
+        <Route path="observability" element={<PlatformObservability />} />
         <Route path="settings" element={<AdminSettings />} />
       </Route>
 
-      {/* TPO Portal Routes (Phase 10, 11, 12 & 13) */}
+      {/* TPO Portal Routes (Phase 10, 11, 12, 13, 14, 15 & 16) */}
       <Route path="/tpo" element={<DashboardLayout role="admin" />}>
+        <Route path="alumni-network" element={<TpoAlumniNetwork />} />
         <Route path="verification" element={<VerificationPortal />} />
         <Route path="readiness" element={<ReadinessDashboard />} />
         <Route path="jobs" element={<JobEligibilityPortal />} />
@@ -155,6 +182,15 @@ export default function AppRoutes() {
         <Route path="mock-drives" element={<TpoMockDrives />} />
         <Route path="industry-intelligence" element={<IndustryIntelligence />} />
         <Route path="cohort-intelligence" element={<CohortIntelligence />} />
+        <Route path="predictive-analytics" element={<PredictiveAnalytics />} />
+        <Route path="orchestration" element={<AgentOrchestration />} />
+      </Route>
+
+      {/* Alumni Portal Routes (Phase 16) */}
+      <Route path="/alumni" element={<DashboardLayout role="alumni" />}>
+        <Route index element={<AlumniDashboard />} />
+        <Route path="dashboard" element={<AlumniDashboard />} />
+        <Route path="profile" element={<AlumniProfile />} />
       </Route>
 
       {/* Recruiter Portal Routes */}
@@ -184,6 +220,7 @@ export default function AppRoutes() {
         <Route path="invitations" element={<InvitationManagement />} />
         <Route path="audit-logs" element={<AuditLogs />} />
         <Route path="audit" element={<AuditLogs />} />
+        <Route path="observability" element={<PlatformObservability />} />
         <Route path="settings" element={<PlatformSettings />} />
       </Route>
 
