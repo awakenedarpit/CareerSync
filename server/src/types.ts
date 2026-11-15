@@ -1,5 +1,7 @@
 import type { Tenant } from './db/schema';
 export {
+  ROLES,
+  ALL_ROLES,
   CANONICAL_ROLES,
   CanonicalRole,
   normalizeRole,
@@ -14,7 +16,8 @@ export type UserRole =
   | 'tpo_admin'
   | 'faculty_coordinator'
   | 'recruiter'
-  | 'superadmin';
+  | 'superadmin'
+  | 'alumni';
 
 export interface AuthUserContext {
   id: string;

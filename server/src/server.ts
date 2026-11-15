@@ -1,5 +1,6 @@
 import app from './app';
 import env from './config/env';
+import { realtimeWebSocketServer } from './realtime/websocket.server';
 
 const port = process.env.PORT ? parseInt(process.env.PORT, 10) : env.PORT;
 
@@ -8,6 +9,9 @@ const server = app.listen(port, () => {
   console.log(`[CarrerSync API] Health check: http://localhost:${port}/api/v1/health`);
   console.log(`[CarrerSync API] CORS Origin: ${env.CLIENT_URL}`);
 });
+
+// Mount self-hosted WebSocket server on existing Express 5 HTTP server
+realtimeWebSocketServer.init(server);
 
 const gracefulShutdown = (signal: string) => {
   console.log(`[CarrerSync API] Received ${signal}. Shutting down HTTP server gracefully...`);

@@ -29,6 +29,27 @@
       "when": 1794751660151,
       "tag": "0003_salty_kulan_gath",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1794757317164,
+      "tag": "0004_yellow_firelord",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1794759719701,
+      "tag": "0005_nappy_ego",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1794762662332,
+      "tag": "0006_previous_eternity",
+      "breakpoints": true
     }
   ]
 }

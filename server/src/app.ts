@@ -19,6 +19,13 @@ import { studentLearningRoutes } from './routes/student-learning.routes';
 import { tpoMockDriveRoutes } from './routes/tpo-mock-drive.routes';
 import { tpoIndustryRoutes } from './routes/tpo-industry.routes';
 import { studentCareerRoutes } from './routes/student-career.routes';
+import { tpoPredictiveRoutes } from './routes/tpo-predictive.routes';
+import { orchestrationRoutes } from './routes/orchestration.routes';
+import { notificationRoutes } from './routes/notification.routes';
+import { alumniRoutes, mentorshipRoutes, tpoAlumniRoutes } from './routes/alumni.routes';
+import { peerInterviewRoutes } from './routes/peer-interview.routes';
+import { collaborationRoutes } from './routes/collaboration.routes';
+import { moderationRoutes, tpoModerationRoutes } from './routes/moderation.routes';
 import { getHealthData, getApiHealthData } from './routes/health.routes';
 
 const app: Express = express();
@@ -131,9 +138,27 @@ app.use('/api/v1/student/learning-path', studentLearningRoutes);
 app.use('/api/v1/student', studentAssessmentRoutes);
 app.use('/api/v1/tpo/mock-drives', tpoMockDriveRoutes);
 
+// Phase 16 — Alumni & Moderation TPO Institutional Routes (mounted before broad /api/v1/tpo)
+app.use('/api/v1/tpo/alumni', tpoAlumniRoutes);
+app.use('/api/v1/tpo/moderation', tpoModerationRoutes);
+
 // Phase 13 — Industry Skill Intelligence, Career Recommendation & Skill-Gap Analysis Engine Routes
 app.use('/api/v1/tpo', tpoIndustryRoutes);
 app.use('/api/v1/student', studentCareerRoutes);
+
+// Phase 14 — Predictive Placement Analytics Agent Routes
+app.use('/api/v1/tpo/predictive-analytics', tpoPredictiveRoutes);
+
+// Phase 15 — Autonomous Placement Orchestration, Multi-Agent Workflows & Notifications
+app.use('/api/v1/orchestration', orchestrationRoutes);
+app.use('/api/v1/notifications', notificationRoutes);
+
+// Phase 16 — Alumni Mentorship Network, Live Peer Mock Interviews & Realtime Collaboration
+app.use('/api/v1/alumni', alumniRoutes);
+app.use('/api/v1/mentorship', mentorshipRoutes);
+app.use('/api/v1/peer-interviews', peerInterviewRoutes);
+app.use('/api/v1/collaboration', collaborationRoutes);
+app.use('/api/v1/moderation', moderationRoutes);
 
 // ---------------------------------------------------------------------------
 // 404 & Centralized Error Handlers

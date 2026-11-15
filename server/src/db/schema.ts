@@ -25,7 +25,8 @@ export const userRoleEnum = pgEnum('user_role_enum', [
   'tpo_admin',
   'faculty_coordinator',
   'recruiter',
-  'student'
+  'student',
+  'alumni'
 ]);
 
 export const invitationStatusEnum = pgEnum('invitation_status_enum', [
@@ -416,6 +417,195 @@ export const careerRecommendationFitEnum = pgEnum('career_recommendation_fit_enu
   'POTENTIAL_MATCH',
   'DEVELOPING',
   'INSUFFICIENT_DATA'
+]);
+
+// ============================================================================
+// Phase 14 — Predictive Placement Analytics Engine Enums
+// ============================================================================
+
+export const readinessClassificationEnum = pgEnum('readiness_classification_enum', [
+  'HIGH_READINESS',
+  'MODERATE_READINESS',
+  'DEVELOPING_READINESS',
+  'INSUFFICIENT_DATA'
+]);
+
+export const predictionTargetEnum = pgEnum('prediction_target_enum', [
+  'SHORTLIST_PROGRESSION',
+  'INTERVIEW_COMPLETION',
+  'OFFER_CONVERSION',
+  'COHORT_OUTCOME'
+]);
+
+export const predictionModelTypeEnum = pgEnum('prediction_model_type_enum', [
+  'LOGISTIC_REGRESSION',
+  'DECISION_TREE',
+  'HISTORICAL_CONVERSION',
+  'CALIBRATED_PROBABILITY',
+  'INSUFFICIENT_DATA_BASELINE'
+]);
+
+export const studentSupportCategoryEnum = pgEnum('student_support_category_enum', [
+  'SKILL_DEVELOPMENT',
+  'ASSESSMENT_PRACTICE',
+  'PROJECT_GUIDANCE',
+  'PROFILE_COMPLETION',
+  'INTERVIEW_PREPARATION',
+  'ADDITIONAL_REVIEW',
+  'INSUFFICIENT_DATA'
+]);
+
+export const supportInterventionStatusEnum = pgEnum('support_intervention_status_enum', [
+  'IDENTIFIED',
+  'UNDER_TPO_REVIEW',
+  'APPROVED',
+  'IN_PROGRESS',
+  'RESOLVED',
+  'DISMISSED'
+]);
+
+export const interventionPriorityEnum = pgEnum('intervention_priority_enum', [
+  'CRITICAL',
+  'HIGH',
+  'MEDIUM',
+  'LOW'
+]);
+
+export const forecastMethodEnum = pgEnum('forecast_method_enum', [
+  'MOVING_AVERAGE',
+  'HISTORICAL_AVERAGE',
+  'LINEAR_TREND',
+  'SEASONAL_TREND',
+  'FORECAST_UNAVAILABLE'
+]);
+
+// ============================================================================
+// Phase 15 — Autonomous Placement Orchestration & Workflow Enums
+// ============================================================================
+
+export const workflowStatusEnum = pgEnum('workflow_status_enum', [
+  'QUEUED',
+  'RUNNING',
+  'WAITING_FOR_REVIEW',
+  'COMPLETED',
+  'FAILED',
+  'CANCELLED',
+  'RETRY_PENDING'
+]);
+
+export const workflowTriggerTypeEnum = pgEnum('workflow_trigger_type_enum', [
+  'MANUAL_USER',
+  'AUTOMATED_EVENT',
+  'SCHEDULED_CRON',
+  'AGENT_HANDOFF',
+  'SYSTEM_DISPATCH'
+]);
+
+export const workflowApprovalStatusEnum = pgEnum('workflow_approval_status_enum', [
+  'PENDING',
+  'APPROVED',
+  'REJECTED',
+  'DISMISSED'
+]);
+
+export const notificationEventTypeEnum = pgEnum('notification_event_type_enum', [
+  'PROFILE_REVIEW_COMPLETED',
+  'EVIDENCE_REQUESTED',
+  'SKILL_VERIFIED',
+  'ROADMAP_UPDATED',
+  'MOCK_ASSESSMENT_COMPLETED',
+  'DRIVE_PUBLISHED',
+  'ELIGIBILITY_UPDATED',
+  'INTERVIEW_SCHEDULED',
+  'OFFER_UPDATED',
+  'TPO_APPROVAL_REQUIRED',
+  'WORKFLOW_FAILED',
+  'WORKFLOW_COMPLETED',
+  'DELEGATION_GRANTED',
+  'DELEGATION_REVOKED'
+]);
+
+export const agentNameEnum = pgEnum('agent_name_enum', [
+  'STUDENT_PROFILING_AGENT',
+  'INDUSTRY_SKILL_GAP_AGENT',
+  'PREDICTIVE_PLACEMENT_AGENT',
+  'PLACEMENT_ORCHESTRATION_AGENT',
+  'CENTRAL_ORCHESTRATOR'
+]);
+
+// ============================================================================
+// Phase 16 — Peer Collaboration & Alumni Mentorship Ecosystem Enums
+// ============================================================================
+
+export const alumniVerificationStatusEnum = pgEnum('alumni_verification_status_enum', [
+  'PENDING',
+  'VERIFIED',
+  'REJECTED',
+  'SUSPENDED'
+]);
+
+export const mentorshipRequestStatusEnum = pgEnum('mentorship_request_status_enum', [
+  'PENDING',
+  'ACCEPTED',
+  'DECLINED',
+  'RESCHEDULE_REQUESTED',
+  'CANCELLED',
+  'COMPLETED'
+]);
+
+export const peerInterviewTypeEnum = pgEnum('peer_interview_type_enum', [
+  'TECHNICAL',
+  'HR',
+  'BEHAVIORAL',
+  'APTITUDE_DISCUSSION',
+  'PROJECT_EXPLANATION',
+  'SYSTEM_DESIGN',
+  'GENERAL_PREP'
+]);
+
+export const peerInterviewModeEnum = pgEnum('peer_interview_mode_enum', [
+  'STRUCTURED_INTERVIEW',
+  'COLLABORATIVE_PRACTICE'
+]);
+
+export const peerInterviewStatusEnum = pgEnum('peer_interview_status_enum', [
+  'SCHEDULED',
+  'IN_PROGRESS',
+  'COMPLETED',
+  'CANCELLED'
+]);
+
+export const collaborationRoomCategoryEnum = pgEnum('collaboration_room_category_enum', [
+  'DSA',
+  'WEB_DEV',
+  'BACKEND',
+  'DATABASE',
+  'AI',
+  'APTITUDE',
+  'INTERVIEW',
+  'PROJECT',
+  'GENERAL_STUDY'
+]);
+
+export const collaborationRoomStatusEnum = pgEnum('collaboration_room_status_enum', [
+  'ACTIVE',
+  'ARCHIVED',
+  'CLOSED'
+]);
+
+export const moderationReportStatusEnum = pgEnum('moderation_report_status_enum', [
+  'PENDING_REVIEW',
+  'INVESTIGATING',
+  'RESOLVED_ACTION_TAKEN',
+  'DISMISSED'
+]);
+
+export const moderationActionEnum = pgEnum('moderation_action_enum', [
+  'NO_ACTION',
+  'WARNING_ISSUED',
+  'SESSION_TERMINATED',
+  'PARTICIPANT_BLOCKED',
+  'ACCOUNT_SUSPENDED'
 ]);
 
 
@@ -900,30 +1090,8 @@ export const skillGapAnalyses = pgTable(
 
 /**
  * 19. Placement Predictions Table (AI Agent & Analytics)
+ * Consolidated and extended under Phase 14 (Table 69: placementPredictions)
  */
-export const placementPredictions = pgTable(
-  'placement_predictions',
-  {
-    id: uuid('id').defaultRandom().primaryKey(),
-    tenantId: uuid('tenant_id')
-      .notNull()
-      .references(() => tenants.id, { onDelete: 'cascade' }),
-    studentId: uuid('student_id')
-      .notNull()
-      .references(() => students.id, { onDelete: 'cascade' }),
-    driveId: uuid('drive_id').references(() => placementDrives.id, { onDelete: 'cascade' }),
-    probabilityScore: numeric('probability_score', { precision: 5, scale: 4 }).notNull(),
-    riskTier: riskTierEnum('risk_tier').default('moderate_risk').notNull(),
-    contributingFactorsJson: jsonb('contributing_factors_json').default([]).notNull(),
-    isAdvisoryOnly: boolean('is_advisory_only').default(true).notNull(),
-    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
-    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
-  },
-  (table) => [
-    index('ix_predictions_tenant_student').on(table.tenantId, table.studentId),
-    index('ix_placement_predictions_drive_id').on(table.driveId)
-  ]
-);
 
 /**
  * 20. Learning Recommendations Table (AI Agent & Analytics)
@@ -983,26 +1151,8 @@ export const agentExecutionLogs = pgTable(
 
 /**
  * 22. Agent Workflows Table (State Machine Tracking)
+ * Consolidated and extended under Phase 15 (Table 75: agentWorkflows)
  */
-export const agentWorkflows = pgTable(
-  'agent_workflows',
-  {
-    id: uuid('id').defaultRandom().primaryKey(),
-    tenantId: uuid('tenant_id')
-      .notNull()
-      .references(() => tenants.id, { onDelete: 'cascade' }),
-    workflowName: varchar('workflow_name', { length: 150 }).notNull(),
-    targetEntityType: varchar('target_entity_type', { length: 50 }).notNull(),
-    targetEntityId: uuid('target_entity_id').notNull(),
-    currentStage: varchar('current_stage', { length: 100 }).notNull(),
-    stateHistory: jsonb('state_history').default([]).notNull(),
-    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
-    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
-  },
-  (table) => [
-    index('ix_workflows_tenant_entity').on(table.tenantId, table.targetEntityType, table.targetEntityId)
-  ]
-);
 
 // ============================================================================
 // Non-Destructive Column Compatibility Helpers (Dual-Read & Normalization)
@@ -2648,6 +2798,1098 @@ export const cohortSkillGapSnapshots = pgTable(
   ]
 );
 
+// ============================================================================
+// Phase 14 — Predictive Placement Analytics Engine Tables
+// ============================================================================
+
+/**
+ * 67. Placement Prediction Runs Table
+ * Manages model training, evaluation runs, statistical validation metrics, and hyperparameters.
+ */
+export const placementPredictionRuns = pgTable(
+  'placement_prediction_runs',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    runName: varchar('run_name', { length: 255 }).notNull(),
+    target: predictionTargetEnum('target').notNull(),
+    modelType: predictionModelTypeEnum('model_type').notNull(),
+    status: varchar('status', { length: 50 }).default('COMPLETED').notNull(),
+    sampleSize: integer('sample_size').default(0).notNull(),
+    trainingSplitRatio: numeric('training_split_ratio', { precision: 4, scale: 2 }).default('0.80'),
+    accuracy: numeric('accuracy', { precision: 6, scale: 4 }),
+    precision: numeric('precision', { precision: 6, scale: 4 }),
+    recall: numeric('recall', { precision: 6, scale: 4 }),
+    f1Score: numeric('f1_score', { precision: 6, scale: 4 }),
+    brierScore: numeric('brier_score', { precision: 6, scale: 4 }),
+    confusionMatrixJson: jsonb('confusion_matrix_json').default({}).notNull(),
+    featureWeightsJson: jsonb('feature_weights_json').default({}).notNull(),
+    hyperparametersJson: jsonb('hyperparameters_json').default({}).notNull(),
+    executedBy: uuid('executed_by').references(() => users.id, { onDelete: 'set null' }),
+    notes: text('notes'),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_pred_run_tenant').on(table.tenantId),
+    index('idx_pred_run_target').on(table.target),
+    index('idx_pred_run_model').on(table.modelType),
+    index('idx_pred_run_executed_by').on(table.executedBy),
+    index('idx_pred_run_created').on(table.createdAt)
+  ]
+);
+
+/**
+ * 68. Student Readiness History Table
+ * Multi-dimensional longitudinal readiness classification and explainable contribution factors.
+ */
+export const studentReadinessHistory = pgTable(
+  'student_readiness_history',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => students.id, { onDelete: 'cascade' }),
+    readinessClassification: readinessClassificationEnum('readiness_classification').notNull(),
+    overallScore: numeric('overall_score', { precision: 5, scale: 2 }).default('0.00').notNull(),
+    academicScore: numeric('academic_score', { precision: 5, scale: 2 }).default('0.00'),
+    technicalSkillScore: numeric('technical_skill_score', { precision: 5, scale: 2 }).default('0.00'),
+    assessmentScore: numeric('assessment_score', { precision: 5, scale: 2 }).default('0.00'),
+    interviewScore: numeric('interview_score', { precision: 5, scale: 2 }).default('0.00'),
+    profileCompletenessScore: numeric('profile_completeness_score', { precision: 5, scale: 2 }).default('0.00'),
+    verifiedEvidenceCount: integer('verified_evidence_count').default(0).notNull(),
+    missingDataFlagsJson: jsonb('missing_data_flags_json').default([]).notNull(),
+    factorsBreakdownJson: jsonb('factors_breakdown_json').default({}).notNull(),
+    evaluationDate: timestamp('evaluation_date', { withTimezone: true }).defaultNow().notNull(),
+    evaluatedBy: uuid('evaluated_by').references(() => users.id, { onDelete: 'set null' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_readiness_hist_tenant').on(table.tenantId),
+    index('idx_readiness_hist_student').on(table.studentId),
+    index('idx_readiness_hist_class').on(table.readinessClassification),
+    index('idx_readiness_hist_date').on(table.evaluationDate)
+  ]
+);
+
+/**
+ * 69. Placement Outcome Predictions Table
+ * Probability estimations, confidence intervals, model attribution, and ethical non-exclusion safeguards.
+ */
+export const placementPredictions = pgTable(
+  'placement_predictions',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => students.id, { onDelete: 'cascade' }),
+    driveId: uuid('drive_id').references(() => placementDrives.id, { onDelete: 'cascade' }),
+    probabilityScore: numeric('probability_score', { precision: 5, scale: 4 }).default('0.0000').notNull(),
+    riskTier: riskTierEnum('risk_tier').default('moderate_risk').notNull(),
+    contributingFactorsJson: jsonb('contributing_factors_json').default([]).notNull(),
+    isAdvisoryOnly: boolean('is_advisory_only').default(true).notNull(),
+    // Phase 14 Predictive Extensions
+    runId: uuid('run_id').references(() => placementPredictionRuns.id, { onDelete: 'cascade' }),
+    predictionTarget: predictionTargetEnum('prediction_target').default('OFFER_CONVERSION').notNull(),
+    predictedProbability: numeric('predicted_probability', { precision: 6, scale: 4 }),
+    confidenceIntervalLower: numeric('confidence_interval_lower', { precision: 6, scale: 4 }),
+    confidenceIntervalUpper: numeric('confidence_interval_upper', { precision: 6, scale: 4 }),
+    readinessClassification: readinessClassificationEnum('readiness_classification').default('INSUFFICIENT_DATA').notNull(),
+    modelUsed: predictionModelTypeEnum('model_used').default('INSUFFICIENT_DATA_BASELINE').notNull(),
+    dataCoverageScore: numeric('data_coverage_score', { precision: 5, scale: 2 }).default('100.00'),
+    limitationsNotes: text('limitations_notes'),
+    isInsufficientData: boolean('is_insufficient_data').default(false).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('ix_predictions_tenant_student').on(table.tenantId, table.studentId),
+    index('ix_placement_predictions_drive_id').on(table.driveId),
+    index('idx_placement_pred_run').on(table.runId),
+    index('idx_placement_pred_target').on(table.predictionTarget),
+    index('idx_placement_pred_class').on(table.readinessClassification),
+    index('idx_placement_pred_created').on(table.createdAt)
+  ]
+);
+
+/**
+ * 70. Student Support Recommendations Table
+ * Diagnostic support identification across 7 categories using non-stigmatizing language and review workflow.
+ */
+export const studentSupportRecommendations = pgTable(
+  'student_support_recommendations',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => students.id, { onDelete: 'cascade' }),
+    category: studentSupportCategoryEnum('category').notNull(),
+    priority: interventionPriorityEnum('priority').default('MEDIUM').notNull(),
+    status: supportInterventionStatusEnum('status').default('IDENTIFIED').notNull(),
+    title: varchar('title', { length: 255 }).notNull(),
+    supportRationale: text('support_rationale').notNull(),
+    recommendedActionsJson: jsonb('recommended_actions_json').default([]).notNull(),
+    evidenceJson: jsonb('evidence_json').default({}).notNull(),
+    reviewedBy: uuid('reviewed_by').references(() => users.id, { onDelete: 'set null' }),
+    reviewedAt: timestamp('reviewed_at', { withTimezone: true }),
+    reviewNotes: text('review_notes'),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_support_rec_tenant').on(table.tenantId),
+    index('idx_support_rec_student').on(table.studentId),
+    index('idx_support_rec_category').on(table.category),
+    index('idx_support_rec_priority').on(table.priority),
+    index('idx_support_rec_status').on(table.status),
+    index('idx_support_rec_reviewed_by').on(table.reviewedBy)
+  ]
+);
+
+/**
+ * 71. TPO Intervention Records Table
+ * Human-in-the-loop intervention plans, institutional clinics, bootcamps, and progress tracking.
+ */
+export const tpoInterventionRecords = pgTable(
+  'tpo_intervention_records',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    recommendationId: uuid('recommendation_id').references(() => studentSupportRecommendations.id, { onDelete: 'set null' }),
+    studentId: uuid('student_id').references(() => students.id, { onDelete: 'cascade' }),
+    department: varchar('department', { length: 100 }),
+    batchYear: integer('batch_year'),
+    title: varchar('title', { length: 255 }).notNull(),
+    interventionType: varchar('intervention_type', { length: 100 }).notNull(),
+    priority: interventionPriorityEnum('priority').default('MEDIUM').notNull(),
+    status: supportInterventionStatusEnum('status').default('APPROVED').notNull(),
+    scheduledDate: timestamp('scheduled_date', { withTimezone: true }),
+    completedDate: timestamp('completed_date', { withTimezone: true }),
+    actionNotes: text('action_notes'),
+    targetStudentCount: integer('target_student_count').default(1).notNull(),
+    assignedTo: uuid('assigned_to').references(() => users.id, { onDelete: 'set null' }),
+    approvedBy: uuid('approved_by').references(() => users.id, { onDelete: 'set null' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_tpo_interv_tenant').on(table.tenantId),
+    index('idx_tpo_interv_student').on(table.studentId),
+    index('idx_tpo_interv_rec').on(table.recommendationId),
+    index('idx_tpo_interv_status').on(table.status),
+    index('idx_tpo_interv_priority').on(table.priority),
+    index('idx_tpo_interv_dept').on(table.department),
+    index('idx_tpo_interv_batch').on(table.batchYear),
+    index('idx_tpo_interv_assigned').on(table.assignedTo)
+  ]
+);
+
+/**
+ * 72. Placement Forecast Snapshots Table
+ * Time-series forecast projections, historical averages, moving averages, and uncertainty bounds.
+ */
+export const placementForecastSnapshots = pgTable(
+  'placement_forecast_snapshots',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    forecastPeriod: varchar('forecast_period', { length: 100 }).notNull(),
+    batchYear: integer('batch_year').notNull(),
+    department: varchar('department', { length: 100 }),
+    forecastMethod: forecastMethodEnum('forecast_method').notNull(),
+    projectedPlacementRate: numeric('projected_placement_rate', { precision: 5, scale: 2 }).notNull(),
+    lowerBoundRate: numeric('lower_bound_rate', { precision: 5, scale: 2 }),
+    upperBoundRate: numeric('upper_bound_rate', { precision: 5, scale: 2 }),
+    projectedOfferCount: integer('projected_offer_count').default(0),
+    historicalSampleSize: integer('historical_sample_size').default(0).notNull(),
+    parametersJson: jsonb('parameters_json').default({}).notNull(),
+    scenarioVariablesJson: jsonb('scenario_variables_json').default({}).notNull(),
+    isForecastUnavailable: boolean('is_forecast_unavailable').default(false).notNull(),
+    forecastTimestamp: timestamp('forecast_timestamp', { withTimezone: true }).defaultNow().notNull(),
+    generatedBy: uuid('generated_by').references(() => users.id, { onDelete: 'set null' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_forecast_snap_tenant').on(table.tenantId),
+    index('idx_forecast_snap_period').on(table.forecastPeriod),
+    index('idx_forecast_snap_batch').on(table.batchYear),
+    index('idx_forecast_snap_dept').on(table.department),
+    index('idx_forecast_snap_method').on(table.forecastMethod),
+    index('idx_forecast_snap_time').on(table.forecastTimestamp)
+  ]
+);
+
+/**
+ * 73. Analytics Snapshots Table
+ * Pre-aggregated cohort and department level placement metrics, mock drive insights, and trend records.
+ */
+export const analyticsSnapshots = pgTable(
+  'analytics_snapshots',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    snapshotType: varchar('snapshot_type', { length: 100 }).notNull(),
+    batchYear: integer('batch_year'),
+    department: varchar('department', { length: 100 }),
+    cohortSize: integer('cohort_size').default(0).notNull(),
+    isSuppressed: boolean('is_suppressed').default(false).notNull(),
+    metricsJson: jsonb('metrics_json').default({}).notNull(),
+    snapshotTimestamp: timestamp('snapshot_timestamp', { withTimezone: true }).defaultNow().notNull(),
+    capturedBy: uuid('captured_by').references(() => users.id, { onDelete: 'set null' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_analytics_snap_tenant').on(table.tenantId),
+    index('idx_analytics_snap_type').on(table.snapshotType),
+    index('idx_analytics_snap_batch').on(table.batchYear),
+    index('idx_analytics_snap_dept').on(table.department),
+    index('idx_analytics_snap_time').on(table.snapshotTimestamp)
+  ]
+);
+
+/**
+ * 74. Analytics Audit Events Table
+ * Comprehensive immutable audit log of predictions, fairness monitoring, reports, and intervention decisions.
+ */
+export const analyticsAuditEvents = pgTable(
+  'analytics_audit_events',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    userId: uuid('user_id').references(() => users.id, { onDelete: 'set null' }),
+    eventType: varchar('event_type', { length: 100 }).notNull(),
+    targetResourceType: varchar('target_resource_type', { length: 100 }),
+    targetResourceId: uuid('target_resource_id'),
+    detailsJson: jsonb('details_json').default({}).notNull(),
+    ipAddress: varchar('ip_address', { length: 45 }),
+    userAgent: text('user_agent'),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_analytics_audit_tenant').on(table.tenantId),
+    index('idx_analytics_audit_user').on(table.userId),
+    index('idx_analytics_audit_event').on(table.eventType),
+    index('idx_analytics_audit_resource').on(table.targetResourceId),
+    index('idx_analytics_audit_time').on(table.createdAt)
+  ]
+);
+
+// ============================================================================
+// Phase 15 — Autonomous Placement Orchestration Engine Tables
+// ============================================================================
+
+/**
+ * 75. Agent Workflows Table
+ * Multi-agent orchestration workflows with state machine tracking, idempotency, retry policies, and multi-tenant isolation.
+ */
+export const agentWorkflows = pgTable(
+  'agent_workflows',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    workflowDefinitionId: varchar('workflow_definition_id', { length: 150 }).default('CENTRAL_WORKFLOW').notNull(),
+    workflowName: varchar('workflow_name', { length: 150 }).notNull(),
+    triggerType: workflowTriggerTypeEnum('trigger_type').default('MANUAL_USER').notNull(),
+    initiatedBy: uuid('initiated_by').references(() => users.id, { onDelete: 'set null' }),
+    idempotencyKey: varchar('idempotency_key', { length: 255 }),
+    status: workflowStatusEnum('status').default('QUEUED').notNull(),
+    priority: varchar('priority', { length: 50 }).default('NORMAL').notNull(),
+    inputPayloadJson: jsonb('input_payload_json').default({}).notNull(),
+    outputResultJson: jsonb('output_result_json').default({}),
+    errorDetailsJson: jsonb('error_details_json').default({}),
+    executionDurationMs: integer('execution_duration_ms'),
+    timeoutMs: integer('timeout_ms').default(300000).notNull(),
+    retryCount: integer('retry_count').default(0).notNull(),
+    maxRetries: integer('max_retries').default(3).notNull(),
+    startedAt: timestamp('started_at', { withTimezone: true }),
+    completedAt: timestamp('completed_at', { withTimezone: true }),
+    // Compatibility columns with legacy state machine
+    targetEntityType: varchar('target_entity_type', { length: 50 }),
+    targetEntityId: uuid('target_entity_id'),
+    currentStage: varchar('current_stage', { length: 100 }),
+    stateHistory: jsonb('state_history').default([]),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('ix_workflows_tenant_entity').on(table.tenantId, table.targetEntityType, table.targetEntityId),
+    index('idx_agent_workflows_tenant').on(table.tenantId),
+    index('idx_agent_workflows_status').on(table.status),
+    index('idx_agent_workflows_definition').on(table.workflowDefinitionId),
+    index('idx_agent_workflows_trigger').on(table.triggerType),
+    index('idx_agent_workflows_initiated_by').on(table.initiatedBy),
+    index('idx_agent_workflows_idempotency').on(table.idempotencyKey),
+    index('idx_agent_workflows_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 76. Agent Workflow Steps Table
+ * Granular step-level execution tracking, inputs/outputs, error diagnosis, and responsible agent mapping.
+ */
+export const agentWorkflowSteps = pgTable(
+  'agent_workflow_steps',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    workflowId: uuid('workflow_id')
+      .notNull()
+      .references(() => agentWorkflows.id, { onDelete: 'cascade' }),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    stepName: varchar('step_name', { length: 150 }).notNull(),
+    stepIndex: integer('step_index').notNull(),
+    responsibleAgent: agentNameEnum('responsible_agent').notNull(),
+    status: workflowStatusEnum('status').default('QUEUED').notNull(),
+    inputJson: jsonb('input_json').default({}).notNull(),
+    outputJson: jsonb('output_json').default({}),
+    errorJson: jsonb('error_json').default({}),
+    startedAt: timestamp('started_at', { withTimezone: true }),
+    completedAt: timestamp('completed_at', { withTimezone: true }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_workflow_steps_workflow').on(table.workflowId),
+    index('idx_workflow_steps_tenant').on(table.tenantId),
+    index('idx_workflow_steps_agent').on(table.responsibleAgent),
+    index('idx_workflow_steps_status').on(table.status),
+    index('idx_workflow_steps_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 77. Agent Execution Events Table
+ * Real-time event log for orchestrator pub/sub, inter-agent coordination, and latency tracking.
+ */
+export const agentExecutionEvents = pgTable(
+  'agent_execution_events',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    workflowId: uuid('workflow_id').references(() => agentWorkflows.id, { onDelete: 'cascade' }),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    eventType: varchar('event_type', { length: 100 }).notNull(),
+    agentName: agentNameEnum('agent_name').notNull(),
+    payloadJson: jsonb('payload_json').default({}).notNull(),
+    correlationId: varchar('correlation_id', { length: 255 }),
+    executionTimeMs: integer('execution_time_ms'),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_exec_events_workflow').on(table.workflowId),
+    index('idx_exec_events_tenant').on(table.tenantId),
+    index('idx_exec_events_agent').on(table.agentName),
+    index('idx_exec_events_type').on(table.eventType),
+    index('idx_exec_events_correlation').on(table.correlationId),
+    index('idx_exec_events_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 78. Agent Workflow Approvals Table
+ * Human-in-the-loop review, approval gates, role-based signing, and reviewer notes.
+ */
+export const agentWorkflowApprovals = pgTable(
+  'agent_workflow_approvals',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    workflowId: uuid('workflow_id')
+      .notNull()
+      .references(() => agentWorkflows.id, { onDelete: 'cascade' }),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    stepId: uuid('step_id').references(() => agentWorkflowSteps.id, { onDelete: 'set null' }),
+    actionType: varchar('action_type', { length: 100 }).notNull(),
+    requiredRole: varchar('required_role', { length: 50 }).default('TPO_ADMIN').notNull(),
+    status: workflowApprovalStatusEnum('status').default('PENDING').notNull(),
+    reviewedBy: uuid('reviewed_by').references(() => users.id, { onDelete: 'set null' }),
+    reviewerNotes: text('reviewer_notes'),
+    reviewedAt: timestamp('reviewed_at', { withTimezone: true }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_workflow_approvals_workflow').on(table.workflowId),
+    index('idx_workflow_approvals_tenant').on(table.tenantId),
+    index('idx_workflow_approvals_step').on(table.stepId),
+    index('idx_workflow_approvals_status').on(table.status),
+    index('idx_workflow_approvals_reviewer').on(table.reviewedBy),
+    index('idx_workflow_approvals_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 79. Notification Events Table
+ * Realtime and inbox notifications dispatched during automated agent workflows, approvals, and system triggers.
+ */
+export const notificationEvents = pgTable(
+  'notification_events',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    recipientUserId: uuid('recipient_user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    eventType: notificationEventTypeEnum('event_type').notNull(),
+    title: varchar('title', { length: 255 }).notNull(),
+    message: text('message').notNull(),
+    referenceType: varchar('reference_type', { length: 100 }),
+    referenceId: varchar('reference_id', { length: 255 }),
+    isRead: boolean('is_read').default(false).notNull(),
+    readAt: timestamp('read_at', { withTimezone: true }),
+    metadataJson: jsonb('metadata_json').default({}).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_notification_events_tenant').on(table.tenantId),
+    index('idx_notification_events_recipient').on(table.recipientUserId),
+    index('idx_notification_events_type').on(table.eventType),
+    index('idx_notification_events_is_read').on(table.isRead),
+    index('idx_notification_events_created_at').on(table.createdAt),
+    index('idx_notification_events_user_unread').on(table.recipientUserId, table.isRead)
+  ]
+);
+
+/**
+ * 80. Delegated Reviewers Table
+ * Persistent delegation of review and verification authority with expirations, scopes, and revocability.
+ */
+export const delegatedReviewers = pgTable(
+  'delegated_reviewers',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    delegatedBy: uuid('delegated_by')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    permissionsJson: jsonb('permissions_json').default([]).notNull(),
+    isActive: boolean('is_active').default(true).notNull(),
+    validUntil: timestamp('valid_until', { withTimezone: true }),
+    notes: text('notes'),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_delegated_reviewers_tenant').on(table.tenantId),
+    index('idx_delegated_reviewers_user').on(table.userId),
+    index('idx_delegated_reviewers_delegated_by').on(table.delegatedBy),
+    index('idx_delegated_reviewers_active').on(table.isActive),
+    index('idx_delegated_reviewers_created_at').on(table.createdAt)
+  ]
+);
+
+// ============================================================================
+// Phase 16 — Peer Collaboration & Alumni Mentorship Ecosystem Tables
+// ============================================================================
+
+/**
+ * 81. Alumni Profiles Table
+ * Detailed alumni professional background, graduation cohort, domain expertise, and mentorship capacity.
+ */
+export const alumniProfiles = pgTable(
+  'alumni_profiles',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    graduationYear: integer('graduation_year').notNull(),
+    degree: varchar('degree', { length: 150 }).notNull(),
+    department: varchar('department', { length: 150 }).notNull(),
+    currentCompany: varchar('current_company', { length: 255 }).notNull(),
+    currentRole: varchar('current_role', { length: 255 }).notNull(),
+    industryDomain: varchar('industry_domain', { length: 150 }),
+    totalExperienceYears: integer('total_experience_years').default(0).notNull(),
+    linkedInUrl: varchar('linkedin_url', { length: 500 }),
+    githubUrl: varchar('github_url', { length: 500 }),
+    portfolioUrl: varchar('portfolio_url', { length: 500 }),
+    bio: text('bio'),
+    skills: jsonb('skills').default([]).notNull(),
+    expertiseAreas: jsonb('expertise_areas').default([]).notNull(),
+    mentorshipEnabled: boolean('mentorship_enabled').default(true).notNull(),
+    maxActiveMentees: integer('max_active_mentees').default(3).notNull(),
+    verificationStatus: alumniVerificationStatusEnum('verification_status').default('PENDING').notNull(),
+    verifiedBy: uuid('verified_by').references(() => users.id, { onDelete: 'set null' }),
+    verifiedAt: timestamp('verified_at', { withTimezone: true }),
+    verificationNotes: text('verification_notes'),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    uniqueIndex('uq_alumni_profiles_user').on(table.userId),
+    index('idx_alumni_profiles_tenant').on(table.tenantId),
+    index('idx_alumni_profiles_status').on(table.verificationStatus),
+    index('idx_alumni_profiles_company').on(table.currentCompany),
+    index('idx_alumni_profiles_enabled').on(table.mentorshipEnabled),
+    index('idx_alumni_profiles_dept_year').on(table.tenantId, table.department, table.graduationYear),
+    index('idx_alumni_profiles_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 82. Mentor Availability Table
+ * Weekly recurring or date-specific availability slots configured by alumni mentors.
+ */
+export const mentorAvailability = pgTable(
+  'mentor_availability',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    alumniProfileId: uuid('alumni_profile_id')
+      .notNull()
+      .references(() => alumniProfiles.id, { onDelete: 'cascade' }),
+    mentorUserId: uuid('mentor_user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    dayOfWeek: integer('day_of_week').notNull(),
+    startTime: varchar('start_time', { length: 10 }).notNull(),
+    endTime: varchar('end_time', { length: 10 }).notNull(),
+    timezone: varchar('timezone', { length: 50 }).default('Asia/Kolkata').notNull(),
+    isRecurring: boolean('is_recurring').default(true).notNull(),
+    specificDate: date('specific_date'),
+    maxBookingsPerSlot: integer('max_bookings_per_slot').default(1).notNull(),
+    isActive: boolean('is_active').default(true).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_mentor_avail_tenant').on(table.tenantId),
+    index('idx_mentor_avail_profile').on(table.alumniProfileId),
+    index('idx_mentor_avail_mentor').on(table.mentorUserId),
+    index('idx_mentor_avail_active').on(table.isActive),
+    index('idx_mentor_avail_day').on(table.dayOfWeek)
+  ]
+);
+
+/**
+ * 83. Mentorship Requests Table
+ * Student guidance and mock interview requests dispatched to alumni mentors.
+ */
+export const mentorshipRequests = pgTable(
+  'mentorship_requests',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => students.id, { onDelete: 'cascade' }),
+    studentUserId: uuid('student_user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    alumniProfileId: uuid('alumni_profile_id')
+      .notNull()
+      .references(() => alumniProfiles.id, { onDelete: 'cascade' }),
+    mentorUserId: uuid('mentor_user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    topic: varchar('topic', { length: 255 }).notNull(),
+    message: text('message').notNull(),
+    goals: text('goals'),
+    preferredSlotId: uuid('preferred_slot_id').references(() => mentorAvailability.id, { onDelete: 'set null' }),
+    preferredDate: timestamp('preferred_date', { withTimezone: true }),
+    status: mentorshipRequestStatusEnum('status').default('PENDING').notNull(),
+    rejectionReason: text('rejection_reason'),
+    rescheduleNote: text('reschedule_note'),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_mentorship_req_tenant').on(table.tenantId),
+    index('idx_mentorship_req_student').on(table.studentId),
+    index('idx_mentorship_req_student_user').on(table.studentUserId),
+    index('idx_mentorship_req_mentor_user').on(table.mentorUserId),
+    index('idx_mentorship_req_profile').on(table.alumniProfileId),
+    index('idx_mentorship_req_status').on(table.status),
+    index('idx_mentorship_req_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 84. Mentorship Sessions Table
+ * Scheduled, in-progress, and completed 1-on-1 mentorship appointments with audit trail and notes.
+ */
+export const mentorshipSessions = pgTable(
+  'mentorship_sessions',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    requestId: uuid('request_id')
+      .notNull()
+      .references(() => mentorshipRequests.id, { onDelete: 'cascade' }),
+    alumniProfileId: uuid('alumni_profile_id')
+      .notNull()
+      .references(() => alumniProfiles.id, { onDelete: 'cascade' }),
+    mentorUserId: uuid('mentor_user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => students.id, { onDelete: 'cascade' }),
+    studentUserId: uuid('student_user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    scheduledAt: timestamp('scheduled_at', { withTimezone: true }).notNull(),
+    durationMinutes: integer('duration_minutes').default(45).notNull(),
+    meetingLink: varchar('meeting_link', { length: 500 }),
+    roomCode: varchar('room_code', { length: 100 }),
+    status: varchar('status', { length: 50 }).default('SCHEDULED').notNull(),
+    alumniNotes: text('alumni_notes'),
+    studentNotes: text('student_notes'),
+    actionItems: jsonb('action_items').default([]).notNull(),
+    recordingUrl: varchar('recording_url', { length: 500 }),
+    completedAt: timestamp('completed_at', { withTimezone: true }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_mentorship_sess_tenant').on(table.tenantId),
+    index('idx_mentorship_sess_request').on(table.requestId),
+    index('idx_mentorship_sess_mentor').on(table.mentorUserId),
+    index('idx_mentorship_sess_student').on(table.studentUserId),
+    index('idx_mentorship_sess_scheduled').on(table.scheduledAt),
+    index('idx_mentorship_sess_status').on(table.status),
+    index('idx_mentorship_sess_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 85. Mentorship Feedback Table
+ * Dual-perspective post-session ratings and qualitative reviews submitted by mentors and students.
+ */
+export const mentorshipFeedback = pgTable(
+  'mentorship_feedback',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    sessionId: uuid('session_id')
+      .notNull()
+      .references(() => mentorshipSessions.id, { onDelete: 'cascade' }),
+    submittedBy: uuid('submitted_by')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    feedbackTarget: varchar('feedback_target', { length: 50 }).notNull(),
+    rating: integer('rating').notNull(),
+    feedbackText: text('feedback_text'),
+    rubricScores: jsonb('rubric_scores').default({}).notNull(),
+    wouldRecommend: boolean('would_recommend').default(true).notNull(),
+    isPrivate: boolean('is_private').default(false).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_mentorship_fb_tenant').on(table.tenantId),
+    index('idx_mentorship_fb_session').on(table.sessionId),
+    index('idx_mentorship_fb_author').on(table.submittedBy),
+    index('idx_mentorship_fb_rating').on(table.rating),
+    index('idx_mentorship_fb_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 86. Peer Interview Rooms Table
+ * Live peer mock interview rooms with shared code editor state, WebRTC coordination, and rubric settings.
+ */
+export const peerInterviewRooms = pgTable(
+  'peer_interview_rooms',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    roomCode: varchar('room_code', { length: 100 }).notNull(),
+    title: varchar('title', { length: 255 }).notNull(),
+    interviewType: peerInterviewTypeEnum('interview_type').notNull(),
+    mode: peerInterviewModeEnum('mode').default('STRUCTURED_INTERVIEW').notNull(),
+    status: peerInterviewStatusEnum('status').default('SCHEDULED').notNull(),
+    scheduledStartTime: timestamp('scheduled_start_time', { withTimezone: true }).notNull(),
+    scheduledDurationMinutes: integer('scheduled_duration_minutes').default(60).notNull(),
+    actualStartTime: timestamp('actual_start_time', { withTimezone: true }),
+    actualEndTime: timestamp('actual_end_time', { withTimezone: true }),
+    createdBy: uuid('created_by').references(() => users.id, { onDelete: 'set null' }),
+    maxParticipants: integer('max_participants').default(2).notNull(),
+    sharedCodeContent: text('shared_code_content').default('').notNull(),
+    codeLanguage: varchar('code_language', { length: 50 }).default('javascript').notNull(),
+    sharedWhiteboardState: jsonb('shared_whiteboard_state').default({}).notNull(),
+    rubricTemplate: jsonb('rubric_template').default({}).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    uniqueIndex('uq_peer_interview_room_code').on(table.tenantId, table.roomCode),
+    index('idx_peer_room_tenant').on(table.tenantId),
+    index('idx_peer_room_status').on(table.status),
+    index('idx_peer_room_type').on(table.interviewType),
+    index('idx_peer_room_scheduled').on(table.scheduledStartTime),
+    index('idx_peer_room_created_by').on(table.createdBy),
+    index('idx_peer_room_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 87. Peer Interview Participants Table
+ * Room participant assignments (interviewer vs interviewee), connection states, and media flags.
+ */
+export const peerInterviewParticipants = pgTable(
+  'peer_interview_participants',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    roomId: uuid('room_id')
+      .notNull()
+      .references(() => peerInterviewRooms.id, { onDelete: 'cascade' }),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    studentId: uuid('student_id').references(() => students.id, { onDelete: 'set null' }),
+    role: varchar('role', { length: 50 }).default('INTERVIEWEE').notNull(),
+    joinedAt: timestamp('joined_at', { withTimezone: true }).defaultNow().notNull(),
+    leftAt: timestamp('left_at', { withTimezone: true }),
+    connectionStatus: varchar('connection_status', { length: 50 }).default('CONNECTED').notNull(),
+    cameraEnabled: boolean('camera_enabled').default(true).notNull(),
+    micEnabled: boolean('mic_enabled').default(true).notNull(),
+    screenShareEnabled: boolean('screen_share_enabled').default(false).notNull()
+  },
+  (table) => [
+    index('idx_peer_part_tenant').on(table.tenantId),
+    index('idx_peer_part_room').on(table.roomId),
+    index('idx_peer_part_user').on(table.userId),
+    index('idx_peer_part_room_user').on(table.roomId, table.userId)
+  ]
+);
+
+/**
+ * 88. Peer Interview Questions Table
+ * Problems, behavioral prompts, and system design challenges assigned during a peer mock session.
+ */
+export const peerInterviewQuestions = pgTable(
+  'peer_interview_questions',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    roomId: uuid('room_id')
+      .notNull()
+      .references(() => peerInterviewRooms.id, { onDelete: 'cascade' }),
+    questionTitle: varchar('question_title', { length: 255 }).notNull(),
+    questionDescription: text('question_description').notNull(),
+    difficulty: varchar('difficulty', { length: 50 }).default('MEDIUM').notNull(),
+    category: varchar('category', { length: 100 }).default('CODING').notNull(),
+    standardAnswer: text('standard_answer'),
+    codeTemplate: text('code_template'),
+    orderIndex: integer('order_index').default(0).notNull(),
+    isCompleted: boolean('is_completed').default(false).notNull(),
+    completedAt: timestamp('completed_at', { withTimezone: true }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_peer_q_tenant').on(table.tenantId),
+    index('idx_peer_q_room').on(table.roomId),
+    index('idx_peer_q_category').on(table.category),
+    index('idx_peer_q_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 89. Peer Interview Feedback Table
+ * Standardized 4-dimension rubric scoring (Technical, Communication, Problem Solving, Code Quality) with qualitative notes.
+ */
+export const peerInterviewFeedback = pgTable(
+  'peer_interview_feedback',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    roomId: uuid('room_id')
+      .notNull()
+      .references(() => peerInterviewRooms.id, { onDelete: 'cascade' }),
+    evaluatorUserId: uuid('evaluator_user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    evaluateeUserId: uuid('evaluatee_user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    overallRating: integer('overall_rating').notNull(),
+    technicalScore: integer('technical_score'),
+    communicationScore: integer('communication_score'),
+    problemSolvingScore: integer('problem_solving_score'),
+    codeQualityScore: integer('code_quality_score'),
+    detailedRubricScores: jsonb('detailed_rubric_scores').default({}).notNull(),
+    strengthsText: text('strengths_text'),
+    improvementsText: text('improvements_text'),
+    generalFeedback: text('general_feedback'),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_peer_fb_tenant').on(table.tenantId),
+    index('idx_peer_fb_room').on(table.roomId),
+    index('idx_peer_fb_evaluator').on(table.evaluatorUserId),
+    index('idx_peer_fb_evaluatee').on(table.evaluateeUserId),
+    index('idx_peer_fb_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 90. Collaboration Rooms Table
+ * Cohort study pods, project teams, and category-based group learning spaces.
+ */
+export const collaborationRooms = pgTable(
+  'collaboration_rooms',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    slug: varchar('slug', { length: 150 }).notNull(),
+    name: varchar('name', { length: 255 }).notNull(),
+    description: text('description'),
+    category: collaborationRoomCategoryEnum('category').default('GENERAL_STUDY').notNull(),
+    status: collaborationRoomStatusEnum('status').default('ACTIVE').notNull(),
+    isPrivate: boolean('is_private').default(false).notNull(),
+    passcodeHash: varchar('passcode_hash', { length: 255 }),
+    maxMembers: integer('max_members').default(10).notNull(),
+    activeMemberCount: integer('active_member_count').default(0).notNull(),
+    createdBy: uuid('created_by')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    pinnedMessageId: uuid('pinned_message_id'),
+    tags: jsonb('tags').default([]).notNull(),
+    canvasState: jsonb('canvas_state').default({}).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    uniqueIndex('uq_collab_room_tenant_slug').on(table.tenantId, table.slug),
+    index('idx_collab_room_tenant').on(table.tenantId),
+    index('idx_collab_room_category').on(table.category),
+    index('idx_collab_room_status').on(table.status),
+    index('idx_collab_room_creator').on(table.createdBy),
+    index('idx_collab_room_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 91. Collaboration Participants Table
+ * Room membership, moderation roles (Host, Moderator, Member), and activity tracking.
+ */
+export const collaborationParticipants = pgTable(
+  'collaboration_participants',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    roomId: uuid('room_id')
+      .notNull()
+      .references(() => collaborationRooms.id, { onDelete: 'cascade' }),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    role: varchar('role', { length: 50 }).default('MEMBER').notNull(),
+    isMuted: boolean('is_muted').default(false).notNull(),
+    joinedAt: timestamp('joined_at', { withTimezone: true }).defaultNow().notNull(),
+    lastActiveAt: timestamp('last_active_at', { withTimezone: true }).defaultNow().notNull(),
+    leftAt: timestamp('left_at', { withTimezone: true })
+  },
+  (table) => [
+    uniqueIndex('uq_collab_part_room_user').on(table.roomId, table.userId),
+    index('idx_collab_part_tenant').on(table.tenantId),
+    index('idx_collab_part_room').on(table.roomId),
+    index('idx_collab_part_user').on(table.userId),
+    index('idx_collab_part_last_active').on(table.lastActiveAt)
+  ]
+);
+
+/**
+ * 92. Collaboration Messages Table
+ * Persistent chat stream, code snippets, reactions, and attachments in group study rooms.
+ */
+export const collaborationMessages = pgTable(
+  'collaboration_messages',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    roomId: uuid('room_id')
+      .notNull()
+      .references(() => collaborationRooms.id, { onDelete: 'cascade' }),
+    senderUserId: uuid('sender_user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    messageType: varchar('message_type', { length: 50 }).default('TEXT').notNull(),
+    content: text('content').notNull(),
+    codeSnippetJson: jsonb('code_snippet_json').default({}).notNull(),
+    attachmentUrl: varchar('attachment_url', { length: 500 }),
+    isPinned: boolean('is_pinned').default(false).notNull(),
+    isEdited: boolean('is_edited').default(false).notNull(),
+    reactions: jsonb('reactions').default({}).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_collab_msg_tenant').on(table.tenantId),
+    index('idx_collab_msg_room').on(table.roomId),
+    index('idx_collab_msg_sender').on(table.senderUserId),
+    index('idx_collab_msg_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 93. Collaboration Tasks Table
+ * Peer sprint milestones, study tasks, and action item tracking within study pods.
+ */
+export const collaborationTasks = pgTable(
+  'collaboration_tasks',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    roomId: uuid('room_id')
+      .notNull()
+      .references(() => collaborationRooms.id, { onDelete: 'cascade' }),
+    title: varchar('title', { length: 255 }).notNull(),
+    description: text('description'),
+    status: varchar('status', { length: 50 }).default('TODO').notNull(),
+    priority: varchar('priority', { length: 50 }).default('MEDIUM').notNull(),
+    assignedTo: uuid('assigned_to').references(() => users.id, { onDelete: 'set null' }),
+    createdBy: uuid('created_by')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    dueDate: timestamp('due_date', { withTimezone: true }),
+    completedAt: timestamp('completed_at', { withTimezone: true }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_collab_task_tenant').on(table.tenantId),
+    index('idx_collab_task_room').on(table.roomId),
+    index('idx_collab_task_assigned').on(table.assignedTo),
+    index('idx_collab_task_status').on(table.status),
+    index('idx_collab_task_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 94. Moderation Reports Table
+ * Student/mentor anti-harassment reports, policy violations, and incident triage for TPO governance.
+ */
+export const moderationReports = pgTable(
+  'moderation_reports',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    reporterUserId: uuid('reporter_user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    reportedUserId: uuid('reported_user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    entityType: varchar('entity_type', { length: 50 }).notNull(),
+    entityId: uuid('entity_id').notNull(),
+    reason: varchar('reason', { length: 255 }).notNull(),
+    description: text('description').notNull(),
+    evidenceJson: jsonb('evidence_json').default({}).notNull(),
+    status: moderationReportStatusEnum('status').default('PENDING_REVIEW').notNull(),
+    investigatedBy: uuid('investigated_by').references(() => users.id, { onDelete: 'set null' }),
+    investigationNotes: text('investigation_notes'),
+    resolvedAt: timestamp('resolved_at', { withTimezone: true }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_mod_rep_tenant').on(table.tenantId),
+    index('idx_mod_rep_reporter').on(table.reporterUserId),
+    index('idx_mod_rep_reported').on(table.reportedUserId),
+    index('idx_mod_rep_status').on(table.status),
+    index('idx_mod_rep_entity').on(table.entityType, table.entityId),
+    index('idx_mod_rep_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 95. Moderation Actions Table
+ * TPO and College Admin enforcement actions (warning, session termination, participant block, account suspension).
+ */
+export const moderationActions = pgTable(
+  'moderation_actions',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    reportId: uuid('report_id')
+      .notNull()
+      .references(() => moderationReports.id, { onDelete: 'cascade' }),
+    actionType: moderationActionEnum('action_type').notNull(),
+    targetUserId: uuid('target_user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    executedBy: uuid('executed_by')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    reason: text('reason').notNull(),
+    actionDurationHours: integer('action_duration_hours').default(0).notNull(),
+    validUntil: timestamp('valid_until', { withTimezone: true }),
+    notes: text('notes'),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_mod_act_tenant').on(table.tenantId),
+    index('idx_mod_act_report').on(table.reportId),
+    index('idx_mod_act_target').on(table.targetUserId),
+    index('idx_mod_act_executed_by').on(table.executedBy),
+    index('idx_mod_act_type').on(table.actionType),
+    index('idx_mod_act_created_at').on(table.createdAt)
+  ]
+);
+
 
 
 // ============================================================================
@@ -2667,6 +3909,11 @@ export const tenantsRelations = relations(tenants, ({ many }) => ({
   learningRecommendations: many(learningRecommendations),
   agentExecutionLogs: many(agentExecutionLogs),
   agentWorkflows: many(agentWorkflows),
+  agentWorkflowSteps: many(agentWorkflowSteps),
+  agentExecutionEvents: many(agentExecutionEvents),
+  agentWorkflowApprovals: many(agentWorkflowApprovals),
+  notificationEvents: many(notificationEvents),
+  delegatedReviewers: many(delegatedReviewers),
   documentProcessingJobs: many(documentProcessingJobs),
   profileExtractions: many(profileExtractions),
   profileSkillEvidence: many(profileSkillEvidence),
@@ -2675,7 +3922,22 @@ export const tenantsRelations = relations(tenants, ({ many }) => ({
   skillVerificationReviews: many(skillVerificationReviews),
   studentReadinessSnapshots: many(studentReadinessSnapshots),
   recruitmentJobs: many(jobRequirements),
-  jobEligibilityEvaluations: many(jobEligibilityEvaluations)
+  jobEligibilityEvaluations: many(jobEligibilityEvaluations),
+  alumniProfiles: many(alumniProfiles),
+  mentorAvailability: many(mentorAvailability),
+  mentorshipRequests: many(mentorshipRequests),
+  mentorshipSessions: many(mentorshipSessions),
+  mentorshipFeedback: many(mentorshipFeedback),
+  peerInterviewRooms: many(peerInterviewRooms),
+  peerInterviewParticipants: many(peerInterviewParticipants),
+  peerInterviewQuestions: many(peerInterviewQuestions),
+  peerInterviewFeedback: many(peerInterviewFeedback),
+  collaborationRooms: many(collaborationRooms),
+  collaborationParticipants: many(collaborationParticipants),
+  collaborationMessages: many(collaborationMessages),
+  collaborationTasks: many(collaborationTasks),
+  moderationReports: many(moderationReports),
+  moderationActions: many(moderationActions)
 }));
 
 export const usersRelations = relations(users, ({ one, many }) => ({
@@ -2692,9 +3954,37 @@ export const usersRelations = relations(users, ({ one, many }) => ({
   auditEvents: many(auditEvents),
   sentInvitations: many(invitations),
   agentLogs: many(agentExecutionLogs),
+  initiatedWorkflows: many(agentWorkflows),
+  workflowApprovals: many(agentWorkflowApprovals),
+  notificationEvents: many(notificationEvents),
+  delegatedReviewers: many(delegatedReviewers),
   readinessSnapshots: many(studentReadinessSnapshots),
   recruitmentJobs: many(jobRequirements),
-  eligibilityEvaluations: many(jobEligibilityEvaluations)
+  eligibilityEvaluations: many(jobEligibilityEvaluations),
+  alumniProfile: one(alumniProfiles, {
+    fields: [users.id],
+    references: [alumniProfiles.userId],
+    relationName: 'userAlumniProfile'
+  }),
+  mentorAvailabilitySlots: many(mentorAvailability),
+  mentorshipRequestsAsStudent: many(mentorshipRequests, { relationName: 'studentRequests' }),
+  mentorshipRequestsAsMentor: many(mentorshipRequests, { relationName: 'mentorRequests' }),
+  mentorshipSessionsAsStudent: many(mentorshipSessions, { relationName: 'studentSessions' }),
+  mentorshipSessionsAsMentor: many(mentorshipSessions, { relationName: 'mentorSessions' }),
+  submittedMentorshipFeedback: many(mentorshipFeedback),
+  peerInterviewRoomsCreated: many(peerInterviewRooms),
+  peerInterviewParticipations: many(peerInterviewParticipants),
+  peerInterviewFeedbackGiven: many(peerInterviewFeedback, { relationName: 'evaluatorFeedback' }),
+  peerInterviewFeedbackReceived: many(peerInterviewFeedback, { relationName: 'evaluateeFeedback' }),
+  collaborationRoomsCreated: many(collaborationRooms),
+  collaborationParticipations: many(collaborationParticipants),
+  collaborationMessagesSent: many(collaborationMessages),
+  collaborationTasksCreated: many(collaborationTasks, { relationName: 'taskCreator' }),
+  collaborationTasksAssigned: many(collaborationTasks, { relationName: 'taskAssignee' }),
+  moderationReportsFiled: many(moderationReports, { relationName: 'reporterUser' }),
+  moderationReportsAgainst: many(moderationReports, { relationName: 'reportedUser' }),
+  moderationActionsReceived: many(moderationActions, { relationName: 'targetUser' }),
+  moderationActionsExecuted: many(moderationActions, { relationName: 'executingUser' })
 }));
 
 export const documentsRelations = relations(documents, ({ one, many }) => ({
@@ -2932,6 +4222,10 @@ export const placementPredictionsRelations = relations(placementPredictions, ({ 
   drive: one(placementDrives, {
     fields: [placementPredictions.driveId],
     references: [placementDrives.id]
+  }),
+  run: one(placementPredictionRuns, {
+    fields: [placementPredictions.runId],
+    references: [placementPredictionRuns.id]
   })
 }));
 
@@ -2965,11 +4259,18 @@ export const agentExecutionLogsRelations = relations(agentExecutionLogs, ({ one 
   })
 }));
 
-export const agentWorkflowsRelations = relations(agentWorkflows, ({ one }) => ({
+export const agentWorkflowsRelations = relations(agentWorkflows, ({ one, many }) => ({
   tenant: one(tenants, {
     fields: [agentWorkflows.tenantId],
     references: [tenants.id]
-  })
+  }),
+  initiator: one(users, {
+    fields: [agentWorkflows.initiatedBy],
+    references: [users.id]
+  }),
+  steps: many(agentWorkflowSteps),
+  events: many(agentExecutionEvents),
+  approvals: many(agentWorkflowApprovals)
 }));
 
 export const documentProcessingJobsRelations = relations(documentProcessingJobs, ({ one }) => ({
@@ -3281,6 +4582,467 @@ export const cohortSkillGapSnapshotsRelations = relations(cohortSkillGapSnapshot
   })
 }));
 
+// ============================================================================
+// Phase 14 Relations
+// ============================================================================
+
+export const placementPredictionRunsRelations = relations(placementPredictionRuns, ({ one, many }) => ({
+  tenant: one(tenants, {
+    fields: [placementPredictionRuns.tenantId],
+    references: [tenants.id]
+  }),
+  executor: one(users, {
+    fields: [placementPredictionRuns.executedBy],
+    references: [users.id]
+  }),
+  predictions: many(placementPredictions)
+}));
+
+export const studentReadinessHistoryRelations = relations(studentReadinessHistory, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [studentReadinessHistory.tenantId],
+    references: [tenants.id]
+  }),
+  student: one(students, {
+    fields: [studentReadinessHistory.studentId],
+    references: [students.id]
+  }),
+  evaluator: one(users, {
+    fields: [studentReadinessHistory.evaluatedBy],
+    references: [users.id]
+  })
+}));
+
+export const studentSupportRecommendationsRelations = relations(studentSupportRecommendations, ({ one, many }) => ({
+  tenant: one(tenants, {
+    fields: [studentSupportRecommendations.tenantId],
+    references: [tenants.id]
+  }),
+  student: one(students, {
+    fields: [studentSupportRecommendations.studentId],
+    references: [students.id]
+  }),
+  reviewer: one(users, {
+    fields: [studentSupportRecommendations.reviewedBy],
+    references: [users.id]
+  }),
+  interventions: many(tpoInterventionRecords)
+}));
+
+export const tpoInterventionRecordsRelations = relations(tpoInterventionRecords, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [tpoInterventionRecords.tenantId],
+    references: [tenants.id]
+  }),
+  recommendation: one(studentSupportRecommendations, {
+    fields: [tpoInterventionRecords.recommendationId],
+    references: [studentSupportRecommendations.id]
+  }),
+  student: one(students, {
+    fields: [tpoInterventionRecords.studentId],
+    references: [students.id]
+  }),
+  assignee: one(users, {
+    fields: [tpoInterventionRecords.assignedTo],
+    references: [users.id]
+  }),
+  approver: one(users, {
+    fields: [tpoInterventionRecords.approvedBy],
+    references: [users.id]
+  })
+}));
+
+export const placementForecastSnapshotsRelations = relations(placementForecastSnapshots, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [placementForecastSnapshots.tenantId],
+    references: [tenants.id]
+  }),
+  generator: one(users, {
+    fields: [placementForecastSnapshots.generatedBy],
+    references: [users.id]
+  })
+}));
+
+export const analyticsSnapshotsRelations = relations(analyticsSnapshots, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [analyticsSnapshots.tenantId],
+    references: [tenants.id]
+  }),
+  capturer: one(users, {
+    fields: [analyticsSnapshots.capturedBy],
+    references: [users.id]
+  })
+}));
+
+export const analyticsAuditEventsRelations = relations(analyticsAuditEvents, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [analyticsAuditEvents.tenantId],
+    references: [tenants.id]
+  }),
+  user: one(users, {
+    fields: [analyticsAuditEvents.userId],
+    references: [users.id]
+  })
+}));
+
+// ============================================================================
+// Phase 15 Relations
+// ============================================================================
+
+export const agentWorkflowStepsRelations = relations(agentWorkflowSteps, ({ one, many }) => ({
+  workflow: one(agentWorkflows, {
+    fields: [agentWorkflowSteps.workflowId],
+    references: [agentWorkflows.id]
+  }),
+  tenant: one(tenants, {
+    fields: [agentWorkflowSteps.tenantId],
+    references: [tenants.id]
+  }),
+  approvals: many(agentWorkflowApprovals)
+}));
+
+export const agentExecutionEventsRelations = relations(agentExecutionEvents, ({ one }) => ({
+  workflow: one(agentWorkflows, {
+    fields: [agentExecutionEvents.workflowId],
+    references: [agentWorkflows.id]
+  }),
+  tenant: one(tenants, {
+    fields: [agentExecutionEvents.tenantId],
+    references: [tenants.id]
+  })
+}));
+
+export const agentWorkflowApprovalsRelations = relations(agentWorkflowApprovals, ({ one }) => ({
+  workflow: one(agentWorkflows, {
+    fields: [agentWorkflowApprovals.workflowId],
+    references: [agentWorkflows.id]
+  }),
+  step: one(agentWorkflowSteps, {
+    fields: [agentWorkflowApprovals.stepId],
+    references: [agentWorkflowSteps.id]
+  }),
+  tenant: one(tenants, {
+    fields: [agentWorkflowApprovals.tenantId],
+    references: [tenants.id]
+  }),
+  reviewer: one(users, {
+    fields: [agentWorkflowApprovals.reviewedBy],
+    references: [users.id]
+  })
+}));
+
+export const notificationEventsRelations = relations(notificationEvents, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [notificationEvents.tenantId],
+    references: [tenants.id]
+  }),
+  recipient: one(users, {
+    fields: [notificationEvents.recipientUserId],
+    references: [users.id]
+  })
+}));
+
+export const delegatedReviewersRelations = relations(delegatedReviewers, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [delegatedReviewers.tenantId],
+    references: [tenants.id]
+  }),
+  user: one(users, {
+    fields: [delegatedReviewers.userId],
+    references: [users.id]
+  }),
+  delegator: one(users, {
+    fields: [delegatedReviewers.delegatedBy],
+    references: [users.id]
+  })
+}));
+
+// ============================================================================
+// Phase 16 Relations
+// ============================================================================
+
+export const alumniProfilesRelations = relations(alumniProfiles, ({ one, many }) => ({
+  tenant: one(tenants, {
+    fields: [alumniProfiles.tenantId],
+    references: [tenants.id]
+  }),
+  user: one(users, {
+    fields: [alumniProfiles.userId],
+    references: [users.id],
+    relationName: 'userAlumniProfile'
+  }),
+  verifier: one(users, {
+    fields: [alumniProfiles.verifiedBy],
+    references: [users.id]
+  }),
+  availabilitySlots: many(mentorAvailability),
+  mentorshipRequests: many(mentorshipRequests),
+  mentorshipSessions: many(mentorshipSessions)
+}));
+
+export const mentorAvailabilityRelations = relations(mentorAvailability, ({ one, many }) => ({
+  tenant: one(tenants, {
+    fields: [mentorAvailability.tenantId],
+    references: [tenants.id]
+  }),
+  alumniProfile: one(alumniProfiles, {
+    fields: [mentorAvailability.alumniProfileId],
+    references: [alumniProfiles.id]
+  }),
+  mentorUser: one(users, {
+    fields: [mentorAvailability.mentorUserId],
+    references: [users.id]
+  }),
+  mentorshipRequests: many(mentorshipRequests)
+}));
+
+export const mentorshipRequestsRelations = relations(mentorshipRequests, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [mentorshipRequests.tenantId],
+    references: [tenants.id]
+  }),
+  student: one(students, {
+    fields: [mentorshipRequests.studentId],
+    references: [students.id]
+  }),
+  studentUser: one(users, {
+    fields: [mentorshipRequests.studentUserId],
+    references: [users.id],
+    relationName: 'studentRequests'
+  }),
+  mentorUser: one(users, {
+    fields: [mentorshipRequests.mentorUserId],
+    references: [users.id],
+    relationName: 'mentorRequests'
+  }),
+  alumniProfile: one(alumniProfiles, {
+    fields: [mentorshipRequests.alumniProfileId],
+    references: [alumniProfiles.id]
+  }),
+  preferredSlot: one(mentorAvailability, {
+    fields: [mentorshipRequests.preferredSlotId],
+    references: [mentorAvailability.id]
+  })
+}));
+
+export const mentorshipSessionsRelations = relations(mentorshipSessions, ({ one, many }) => ({
+  tenant: one(tenants, {
+    fields: [mentorshipSessions.tenantId],
+    references: [tenants.id]
+  }),
+  request: one(mentorshipRequests, {
+    fields: [mentorshipSessions.requestId],
+    references: [mentorshipRequests.id]
+  }),
+  alumniProfile: one(alumniProfiles, {
+    fields: [mentorshipSessions.alumniProfileId],
+    references: [alumniProfiles.id]
+  }),
+  mentorUser: one(users, {
+    fields: [mentorshipSessions.mentorUserId],
+    references: [users.id],
+    relationName: 'mentorSessions'
+  }),
+  student: one(students, {
+    fields: [mentorshipSessions.studentId],
+    references: [students.id]
+  }),
+  studentUser: one(users, {
+    fields: [mentorshipSessions.studentUserId],
+    references: [users.id],
+    relationName: 'studentSessions'
+  }),
+  feedback: many(mentorshipFeedback)
+}));
+
+export const mentorshipFeedbackRelations = relations(mentorshipFeedback, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [mentorshipFeedback.tenantId],
+    references: [tenants.id]
+  }),
+  session: one(mentorshipSessions, {
+    fields: [mentorshipFeedback.sessionId],
+    references: [mentorshipSessions.id]
+  }),
+  submitter: one(users, {
+    fields: [mentorshipFeedback.submittedBy],
+    references: [users.id]
+  })
+}));
+
+export const peerInterviewRoomsRelations = relations(peerInterviewRooms, ({ one, many }) => ({
+  tenant: one(tenants, {
+    fields: [peerInterviewRooms.tenantId],
+    references: [tenants.id]
+  }),
+  creator: one(users, {
+    fields: [peerInterviewRooms.createdBy],
+    references: [users.id]
+  }),
+  participants: many(peerInterviewParticipants),
+  questions: many(peerInterviewQuestions),
+  feedback: many(peerInterviewFeedback)
+}));
+
+export const peerInterviewParticipantsRelations = relations(peerInterviewParticipants, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [peerInterviewParticipants.tenantId],
+    references: [tenants.id]
+  }),
+  room: one(peerInterviewRooms, {
+    fields: [peerInterviewParticipants.roomId],
+    references: [peerInterviewRooms.id]
+  }),
+  user: one(users, {
+    fields: [peerInterviewParticipants.userId],
+    references: [users.id]
+  }),
+  student: one(students, {
+    fields: [peerInterviewParticipants.studentId],
+    references: [students.id]
+  })
+}));
+
+export const peerInterviewQuestionsRelations = relations(peerInterviewQuestions, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [peerInterviewQuestions.tenantId],
+    references: [tenants.id]
+  }),
+  room: one(peerInterviewRooms, {
+    fields: [peerInterviewQuestions.roomId],
+    references: [peerInterviewRooms.id]
+  })
+}));
+
+export const peerInterviewFeedbackRelations = relations(peerInterviewFeedback, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [peerInterviewFeedback.tenantId],
+    references: [tenants.id]
+  }),
+  room: one(peerInterviewRooms, {
+    fields: [peerInterviewFeedback.roomId],
+    references: [peerInterviewRooms.id]
+  }),
+  evaluator: one(users, {
+    fields: [peerInterviewFeedback.evaluatorUserId],
+    references: [users.id],
+    relationName: 'evaluatorFeedback'
+  }),
+  evaluatee: one(users, {
+    fields: [peerInterviewFeedback.evaluateeUserId],
+    references: [users.id],
+    relationName: 'evaluateeFeedback'
+  })
+}));
+
+export const collaborationRoomsRelations = relations(collaborationRooms, ({ one, many }) => ({
+  tenant: one(tenants, {
+    fields: [collaborationRooms.tenantId],
+    references: [tenants.id]
+  }),
+  creator: one(users, {
+    fields: [collaborationRooms.createdBy],
+    references: [users.id]
+  }),
+  participants: many(collaborationParticipants),
+  messages: many(collaborationMessages),
+  tasks: many(collaborationTasks)
+}));
+
+export const collaborationParticipantsRelations = relations(collaborationParticipants, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [collaborationParticipants.tenantId],
+    references: [tenants.id]
+  }),
+  room: one(collaborationRooms, {
+    fields: [collaborationParticipants.roomId],
+    references: [collaborationRooms.id]
+  }),
+  user: one(users, {
+    fields: [collaborationParticipants.userId],
+    references: [users.id]
+  })
+}));
+
+export const collaborationMessagesRelations = relations(collaborationMessages, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [collaborationMessages.tenantId],
+    references: [tenants.id]
+  }),
+  room: one(collaborationRooms, {
+    fields: [collaborationMessages.roomId],
+    references: [collaborationRooms.id]
+  }),
+  sender: one(users, {
+    fields: [collaborationMessages.senderUserId],
+    references: [users.id]
+  })
+}));
+
+export const collaborationTasksRelations = relations(collaborationTasks, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [collaborationTasks.tenantId],
+    references: [tenants.id]
+  }),
+  room: one(collaborationRooms, {
+    fields: [collaborationTasks.roomId],
+    references: [collaborationRooms.id]
+  }),
+  creator: one(users, {
+    fields: [collaborationTasks.createdBy],
+    references: [users.id],
+    relationName: 'taskCreator'
+  }),
+  assignee: one(users, {
+    fields: [collaborationTasks.assignedTo],
+    references: [users.id],
+    relationName: 'taskAssignee'
+  })
+}));
+
+export const moderationReportsRelations = relations(moderationReports, ({ one, many }) => ({
+  tenant: one(tenants, {
+    fields: [moderationReports.tenantId],
+    references: [tenants.id]
+  }),
+  reporter: one(users, {
+    fields: [moderationReports.reporterUserId],
+    references: [users.id],
+    relationName: 'reporterUser'
+  }),
+  reportedUser: one(users, {
+    fields: [moderationReports.reportedUserId],
+    references: [users.id],
+    relationName: 'reportedUser'
+  }),
+  investigator: one(users, {
+    fields: [moderationReports.investigatedBy],
+    references: [users.id]
+  }),
+  actions: many(moderationActions)
+}));
+
+export const moderationActionsRelations = relations(moderationActions, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [moderationActions.tenantId],
+    references: [tenants.id]
+  }),
+  report: one(moderationReports, {
+    fields: [moderationActions.reportId],
+    references: [moderationReports.id]
+  }),
+  targetUser: one(users, {
+    fields: [moderationActions.targetUserId],
+    references: [users.id],
+    relationName: 'targetUser'
+  }),
+  executor: one(users, {
+    fields: [moderationActions.executedBy],
+    references: [users.id],
+    relationName: 'executingUser'
+  })
+}));
+
 
 // ============================================================================
 // Exported Inferred Types for Safety
@@ -3353,9 +5115,6 @@ export type NewLearningRecommendation = typeof learningRecommendations.$inferIns
 
 export type AgentExecutionLog = typeof agentExecutionLogs.$inferSelect;
 export type NewAgentExecutionLog = typeof agentExecutionLogs.$inferInsert;
-
-export type AgentWorkflow = typeof agentWorkflows.$inferSelect;
-export type NewAgentWorkflow = typeof agentWorkflows.$inferInsert;
 
 export type Document = typeof documents.$inferSelect;
 export type NewDocument = typeof documents.$inferInsert;
@@ -3565,6 +5324,169 @@ export type JdAnalysisStatus = (typeof jdAnalysisStatusEnum.enumValues)[number];
 export type SkillImportance = (typeof skillImportanceEnum.enumValues)[number];
 export type StudentSkillGapStatus = (typeof studentSkillGapStatusEnum.enumValues)[number];
 export type CareerRecommendationFit = (typeof careerRecommendationFitEnum.enumValues)[number];
+
+// ============================================================================
+// Phase 14 — Predictive Placement Analytics Types
+// ============================================================================
+
+export type PlacementPredictionRun = typeof placementPredictionRuns.$inferSelect;
+export type NewPlacementPredictionRun = typeof placementPredictionRuns.$inferInsert;
+
+export type StudentReadinessHistory = typeof studentReadinessHistory.$inferSelect;
+export type NewStudentReadinessHistory = typeof studentReadinessHistory.$inferInsert;
+
+export type StudentSupportRecommendation = typeof studentSupportRecommendations.$inferSelect;
+export type NewStudentSupportRecommendation = typeof studentSupportRecommendations.$inferInsert;
+
+export type TpoInterventionRecord = typeof tpoInterventionRecords.$inferSelect;
+export type NewTpoInterventionRecord = typeof tpoInterventionRecords.$inferInsert;
+
+export type PlacementForecastSnapshot = typeof placementForecastSnapshots.$inferSelect;
+export type NewPlacementForecastSnapshot = typeof placementForecastSnapshots.$inferInsert;
+
+export type AnalyticsSnapshot = typeof analyticsSnapshots.$inferSelect;
+export type NewAnalyticsSnapshot = typeof analyticsSnapshots.$inferInsert;
+
+export type AnalyticsAuditEvent = typeof analyticsAuditEvents.$inferSelect;
+export type NewAnalyticsAuditEvent = typeof analyticsAuditEvents.$inferInsert;
+
+// Phase 14 Enum Value Types
+export type ReadinessClassification = (typeof readinessClassificationEnum.enumValues)[number];
+export type PredictionTarget = (typeof predictionTargetEnum.enumValues)[number];
+export type PredictionModelType = (typeof predictionModelTypeEnum.enumValues)[number];
+export type StudentSupportCategory = (typeof studentSupportCategoryEnum.enumValues)[number];
+export type SupportInterventionStatus = (typeof supportInterventionStatusEnum.enumValues)[number];
+export type InterventionPriority = (typeof interventionPriorityEnum.enumValues)[number];
+export type ForecastMethod = (typeof forecastMethodEnum.enumValues)[number];
+
+// ============================================================================
+// Phase 15 — Autonomous Placement Orchestration & Workflow Types
+// ============================================================================
+
+export type AgentWorkflow = typeof agentWorkflows.$inferSelect;
+export type NewAgentWorkflow = typeof agentWorkflows.$inferInsert;
+export type AgentWorkflows = AgentWorkflow;
+export type NewAgentWorkflows = NewAgentWorkflow;
+
+export type AgentWorkflowStep = typeof agentWorkflowSteps.$inferSelect;
+export type NewAgentWorkflowStep = typeof agentWorkflowSteps.$inferInsert;
+export type AgentWorkflowSteps = AgentWorkflowStep;
+export type NewAgentWorkflowSteps = NewAgentWorkflowStep;
+
+export type AgentExecutionEvent = typeof agentExecutionEvents.$inferSelect;
+export type NewAgentExecutionEvent = typeof agentExecutionEvents.$inferInsert;
+export type AgentExecutionEvents = AgentExecutionEvent;
+export type NewAgentExecutionEvents = NewAgentExecutionEvent;
+
+export type AgentWorkflowApproval = typeof agentWorkflowApprovals.$inferSelect;
+export type NewAgentWorkflowApproval = typeof agentWorkflowApprovals.$inferInsert;
+export type AgentWorkflowApprovals = AgentWorkflowApproval;
+export type NewAgentWorkflowApprovals = NewAgentWorkflowApproval;
+
+export type NotificationEvent = typeof notificationEvents.$inferSelect;
+export type NewNotificationEvent = typeof notificationEvents.$inferInsert;
+export type NotificationEvents = NotificationEvent;
+export type NewNotificationEvents = NewNotificationEvent;
+
+export type DelegatedReviewer = typeof delegatedReviewers.$inferSelect;
+export type NewDelegatedReviewer = typeof delegatedReviewers.$inferInsert;
+export type DelegatedReviewers = DelegatedReviewer;
+export type NewDelegatedReviewers = NewDelegatedReviewer;
+
+// Phase 15 Enum Value Types
+export type WorkflowStatus = (typeof workflowStatusEnum.enumValues)[number];
+export type WorkflowTriggerType = (typeof workflowTriggerTypeEnum.enumValues)[number];
+export type WorkflowApprovalStatus = (typeof workflowApprovalStatusEnum.enumValues)[number];
+export type NotificationEventType = (typeof notificationEventTypeEnum.enumValues)[number];
+export type AgentName = (typeof agentNameEnum.enumValues)[number];
+
+// ============================================================================
+// Phase 16 — Peer Collaboration & Alumni Mentorship Ecosystem Types
+// ============================================================================
+
+export type AlumniProfile = typeof alumniProfiles.$inferSelect;
+export type NewAlumniProfile = typeof alumniProfiles.$inferInsert;
+export type AlumniProfiles = AlumniProfile;
+export type NewAlumniProfiles = NewAlumniProfile;
+
+export type MentorAvailability = typeof mentorAvailability.$inferSelect;
+export type NewMentorAvailability = typeof mentorAvailability.$inferInsert;
+
+export type MentorshipRequest = typeof mentorshipRequests.$inferSelect;
+export type NewMentorshipRequest = typeof mentorshipRequests.$inferInsert;
+export type MentorshipRequests = MentorshipRequest;
+export type NewMentorshipRequests = NewMentorshipRequest;
+
+export type MentorshipSession = typeof mentorshipSessions.$inferSelect;
+export type NewMentorshipSession = typeof mentorshipSessions.$inferInsert;
+export type MentorshipSessions = MentorshipSession;
+export type NewMentorshipSessions = NewMentorshipSession;
+
+export type MentorshipFeedback = typeof mentorshipFeedback.$inferSelect;
+export type NewMentorshipFeedback = typeof mentorshipFeedback.$inferInsert;
+
+export type PeerInterviewRoom = typeof peerInterviewRooms.$inferSelect;
+export type NewPeerInterviewRoom = typeof peerInterviewRooms.$inferInsert;
+export type PeerInterviewRooms = PeerInterviewRoom;
+export type NewPeerInterviewRooms = NewPeerInterviewRoom;
+
+export type PeerInterviewParticipant = typeof peerInterviewParticipants.$inferSelect;
+export type NewPeerInterviewParticipant = typeof peerInterviewParticipants.$inferInsert;
+export type PeerInterviewParticipants = PeerInterviewParticipant;
+export type NewPeerInterviewParticipants = NewPeerInterviewParticipant;
+
+export type PeerInterviewQuestion = typeof peerInterviewQuestions.$inferSelect;
+export type NewPeerInterviewQuestion = typeof peerInterviewQuestions.$inferInsert;
+export type PeerInterviewQuestions = PeerInterviewQuestion;
+export type NewPeerInterviewQuestions = NewPeerInterviewQuestion;
+
+export type PeerInterviewFeedback = typeof peerInterviewFeedback.$inferSelect;
+export type NewPeerInterviewFeedback = typeof peerInterviewFeedback.$inferInsert;
+
+export type CollaborationRoom = typeof collaborationRooms.$inferSelect;
+export type NewCollaborationRoom = typeof collaborationRooms.$inferInsert;
+export type CollaborationRooms = CollaborationRoom;
+export type NewCollaborationRooms = NewCollaborationRoom;
+
+export type CollaborationParticipant = typeof collaborationParticipants.$inferSelect;
+export type NewCollaborationParticipant = typeof collaborationParticipants.$inferInsert;
+export type CollaborationParticipants = CollaborationParticipant;
+export type NewCollaborationParticipants = NewCollaborationParticipant;
+
+export type CollaborationMessage = typeof collaborationMessages.$inferSelect;
+export type NewCollaborationMessage = typeof collaborationMessages.$inferInsert;
+export type CollaborationMessages = CollaborationMessage;
+export type NewCollaborationMessages = NewCollaborationMessage;
+
+export type CollaborationTask = typeof collaborationTasks.$inferSelect;
+export type NewCollaborationTask = typeof collaborationTasks.$inferInsert;
+export type CollaborationTasks = CollaborationTask;
+export type NewCollaborationTasks = NewCollaborationTask;
+
+export type ModerationReport = typeof moderationReports.$inferSelect;
+export type NewModerationReport = typeof moderationReports.$inferInsert;
+export type ModerationReports = ModerationReport;
+export type NewModerationReports = NewModerationReport;
+
+export type ModerationAction = typeof moderationActions.$inferSelect;
+export type NewModerationAction = typeof moderationActions.$inferInsert;
+export type ModerationActions = ModerationAction;
+export type NewModerationActions = NewModerationAction;
+
+// Phase 16 Enum Value Types
+export type AlumniVerificationStatus = (typeof alumniVerificationStatusEnum.enumValues)[number];
+export type MentorshipRequestStatus = (typeof mentorshipRequestStatusEnum.enumValues)[number];
+export type PeerInterviewType = (typeof peerInterviewTypeEnum.enumValues)[number];
+export type PeerInterviewMode = (typeof peerInterviewModeEnum.enumValues)[number];
+export type PeerInterviewStatus = (typeof peerInterviewStatusEnum.enumValues)[number];
+export type CollaborationRoomCategory = (typeof collaborationRoomCategoryEnum.enumValues)[number];
+export type CollaborationRoomStatus = (typeof collaborationRoomStatusEnum.enumValues)[number];
+export type ModerationReportStatus = (typeof moderationReportStatusEnum.enumValues)[number];
+export type ModerationActionType = (typeof moderationActionEnum.enumValues)[number];
+export type ModerationActionEnum = (typeof moderationActionEnum.enumValues)[number];
+
+
+
 
 
 

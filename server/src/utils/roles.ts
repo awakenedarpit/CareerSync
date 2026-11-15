@@ -10,6 +10,26 @@
  * 5. STUDENT
  */
 
+export const ROLES = {
+  SUPER_ADMIN: 'superadmin',
+  COLLEGE_ADMIN: 'college_admin',
+  TPO_ADMIN: 'tpo_admin',
+  FACULTY_COORDINATOR: 'faculty_coordinator',
+  RECRUITER: 'recruiter',
+  STUDENT: 'student',
+  ALUMNI: 'alumni'
+} as const;
+
+export const ALL_ROLES = [
+  'student',
+  'faculty_coordinator',
+  'recruiter',
+  'tpo_admin',
+  'college_admin',
+  'superadmin',
+  'alumni'
+] as const;
+
 export const CANONICAL_ROLES = [
   'SUPER_ADMIN',
   'COLLEGE_ADMIN',
@@ -18,7 +38,7 @@ export const CANONICAL_ROLES = [
   'STUDENT'
 ] as const;
 
-export type CanonicalRole = (typeof CANONICAL_ROLES)[number];
+export type CanonicalRole = (typeof CANONICAL_ROLES)[number] | 'ALUMNI';
 
 /**
  * Normalizes any legacy, lowercase, or variant role representation to canonical uppercase.
@@ -68,6 +88,10 @@ export function normalizeRole(
     case 'CANDIDATE':
       return 'STUDENT';
 
+    case 'ALUMNI':
+    case 'GRADUATE':
+      return 'ALUMNI';
+
     default:
       return fallback || null;
   }
@@ -108,6 +132,8 @@ export function toDatabaseRole(role: CanonicalRole | string): string {
       return 'recruiter';
     case 'STUDENT':
       return 'student';
+    case 'ALUMNI':
+      return 'alumni';
     default:
       return String(role).toLowerCase();
   }
