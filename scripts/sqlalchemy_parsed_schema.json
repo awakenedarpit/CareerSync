@@ -1,0 +1,1486 @@
+{
+  "tenants": [
+    {
+      "name": "id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function uuid4 at 0x107913270>)",
+      "primary_key": true
+    },
+    {
+      "name": "name",
+      "type": "VARCHAR(255)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "slug",
+      "type": "VARCHAR(100)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "domain",
+      "type": "VARCHAR(255)",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "is_active",
+      "type": "BOOLEAN",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(True)",
+      "primary_key": false
+    },
+    {
+      "name": "created_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x107934300>)",
+      "primary_key": false
+    },
+    {
+      "name": "updated_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x1079343b0>)",
+      "primary_key": false
+    }
+  ],
+  "users": [
+    {
+      "name": "id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function uuid4 at 0x1079138a0>)",
+      "primary_key": true
+    },
+    {
+      "name": "email",
+      "type": "VARCHAR(255)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "password_hash",
+      "type": "VARCHAR(255)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "full_name",
+      "type": "VARCHAR(255)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "role",
+      "type": "VARCHAR(19)",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(<UserRole.STUDENT: 'student'>)",
+      "primary_key": false
+    },
+    {
+      "name": "is_active",
+      "type": "BOOLEAN",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(True)",
+      "primary_key": false
+    },
+    {
+      "name": "is_verified",
+      "type": "BOOLEAN",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(False)",
+      "primary_key": false
+    },
+    {
+      "name": "tenant_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "created_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x107934eb0>)",
+      "primary_key": false
+    },
+    {
+      "name": "updated_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x107934e00>)",
+      "primary_key": false
+    }
+  ],
+  "students": [
+    {
+      "name": "id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function uuid4 at 0x1079340f0>)",
+      "primary_key": true
+    },
+    {
+      "name": "user_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "roll_number",
+      "type": "VARCHAR(50)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "department",
+      "type": "VARCHAR(100)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "batch_year",
+      "type": "INTEGER",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "degree",
+      "type": "VARCHAR(50)",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault('B.Tech')",
+      "primary_key": false
+    },
+    {
+      "name": "cgpa",
+      "type": "NUMERIC(4, 2)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "backlog_count",
+      "type": "INTEGER",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(0)",
+      "primary_key": false
+    },
+    {
+      "name": "date_of_birth",
+      "type": "DATE",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "resume_r2_url",
+      "type": "VARCHAR(512)",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "readiness_score",
+      "type": "NUMERIC(5, 2)",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(0.0)",
+      "primary_key": false
+    },
+    {
+      "name": "tenant_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "created_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x107935a60>)",
+      "primary_key": false
+    },
+    {
+      "name": "updated_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x1079359b0>)",
+      "primary_key": false
+    }
+  ],
+  "academic_semesters": [
+    {
+      "name": "id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function uuid4 at 0x107934b40>)",
+      "primary_key": true
+    },
+    {
+      "name": "student_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "semester_number",
+      "type": "INTEGER",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "sgpa",
+      "type": "NUMERIC(4, 2)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "credits_earned",
+      "type": "NUMERIC(4, 1)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "backlogs_in_semester",
+      "type": "INTEGER",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(0)",
+      "primary_key": false
+    },
+    {
+      "name": "tenant_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "created_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x1079361f0>)",
+      "primary_key": false
+    },
+    {
+      "name": "updated_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x1079362a0>)",
+      "primary_key": false
+    }
+  ],
+  "skills": [
+    {
+      "name": "id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function uuid4 at 0x1079354e0>)",
+      "primary_key": true
+    },
+    {
+      "name": "name",
+      "type": "VARCHAR(150)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "canonical_slug",
+      "type": "VARCHAR(150)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "category",
+      "type": "VARCHAR(21)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "description",
+      "type": "TEXT",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "created_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x107936ae0>)",
+      "primary_key": false
+    },
+    {
+      "name": "updated_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x107936b90>)",
+      "primary_key": false
+    }
+  ],
+  "student_skills": [
+    {
+      "name": "id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function uuid4 at 0x107935bc0>)",
+      "primary_key": true
+    },
+    {
+      "name": "student_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "skill_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "state",
+      "type": "VARCHAR(15)",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(<SkillState.CLAIMED: 'Claimed'>)",
+      "primary_key": false
+    },
+    {
+      "name": "proficiency_level",
+      "type": "VARCHAR(12)",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(<ProficiencyLevel.BEGINNER: 'beginner'>)",
+      "primary_key": false
+    },
+    {
+      "name": "confidence_score",
+      "type": "NUMERIC(4, 3)",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(0.0)",
+      "primary_key": false
+    },
+    {
+      "name": "verified_at",
+      "type": "DATETIME",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "verified_by_user_id",
+      "type": "CHAR(32)",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "expiry_date",
+      "type": "DATETIME",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "tenant_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "created_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x1079375e0>)",
+      "primary_key": false
+    },
+    {
+      "name": "updated_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x107937530>)",
+      "primary_key": false
+    }
+  ],
+  "evidence_records": [
+    {
+      "name": "id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function uuid4 at 0x1079368d0>)",
+      "primary_key": true
+    },
+    {
+      "name": "student_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "skill_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "evidence_type",
+      "type": "VARCHAR(20)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "source_url",
+      "type": "VARCHAR(1024)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "r2_storage_key",
+      "type": "VARCHAR(512)",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "metadata_json",
+      "type": "JSON",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function dict at 0x107936e50>)",
+      "primary_key": false
+    },
+    {
+      "name": "verification_status",
+      "type": "VARCHAR(14)",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(<VerificationStatus.PENDING_REVIEW: 'pending_review'>)",
+      "primary_key": false
+    },
+    {
+      "name": "validated_by",
+      "type": "CHAR(32)",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "tenant_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "created_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x1079c81a0>)",
+      "primary_key": false
+    },
+    {
+      "name": "updated_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x1079c8250>)",
+      "primary_key": false
+    }
+  ],
+  "skill_assessments": [
+    {
+      "name": "id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function uuid4 at 0x107937950>)",
+      "primary_key": true
+    },
+    {
+      "name": "student_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "skill_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "assessment_name",
+      "type": "VARCHAR(255)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "score",
+      "type": "NUMERIC(5, 2)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "max_score",
+      "type": "NUMERIC(5, 2)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "evaluation_metrics",
+      "type": "JSON",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function dict at 0x107937cc0>)",
+      "primary_key": false
+    },
+    {
+      "name": "completed_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "tenant_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "created_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x1079c9010>)",
+      "primary_key": false
+    },
+    {
+      "name": "updated_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x1079c8f60>)",
+      "primary_key": false
+    }
+  ],
+  "companies": [
+    {
+      "name": "id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function uuid4 at 0x1079c85c0>)",
+      "primary_key": true
+    },
+    {
+      "name": "name",
+      "type": "VARCHAR(255)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "industry_domain",
+      "type": "VARCHAR(150)",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "website",
+      "type": "VARCHAR(512)",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "created_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x1079c9900>)",
+      "primary_key": false
+    },
+    {
+      "name": "updated_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x1079c99b0>)",
+      "primary_key": false
+    }
+  ],
+  "job_roles": [
+    {
+      "name": "id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function uuid4 at 0x1079c8eb0>)",
+      "primary_key": true
+    },
+    {
+      "name": "company_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "title",
+      "type": "VARCHAR(255)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "description",
+      "type": "TEXT",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "experience_level",
+      "type": "VARCHAR(50)",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault('Fresher / Entry Level')",
+      "primary_key": false
+    },
+    {
+      "name": "ctc_lpa",
+      "type": "NUMERIC(6, 2)",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "created_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x1079ca350>)",
+      "primary_key": false
+    },
+    {
+      "name": "updated_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x1079ca400>)",
+      "primary_key": false
+    }
+  ],
+  "job_requirements": [
+    {
+      "name": "id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function uuid4 at 0x1079c96f0>)",
+      "primary_key": true
+    },
+    {
+      "name": "job_role_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "skill_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "is_mandatory",
+      "type": "BOOLEAN",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(True)",
+      "primary_key": false
+    },
+    {
+      "name": "min_proficiency",
+      "type": "VARCHAR(12)",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(<ProficiencyLevel.INTERMEDIATE: 'intermediate'>)",
+      "primary_key": false
+    },
+    {
+      "name": "weight",
+      "type": "NUMERIC(3, 2)",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(1.0)",
+      "primary_key": false
+    },
+    {
+      "name": "created_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x1079cab90>)",
+      "primary_key": false
+    },
+    {
+      "name": "updated_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x1079cac40>)",
+      "primary_key": false
+    }
+  ],
+  "placement_drives": [
+    {
+      "name": "id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function uuid4 at 0x1079ca610>)",
+      "primary_key": true
+    },
+    {
+      "name": "job_role_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "batch_year",
+      "type": "INTEGER",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "min_cgpa",
+      "type": "NUMERIC(4, 2)",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(6.0)",
+      "primary_key": false
+    },
+    {
+      "name": "max_backlogs_allowed",
+      "type": "INTEGER",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(0)",
+      "primary_key": false
+    },
+    {
+      "name": "eligible_departments",
+      "type": "JSON",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function list at 0x1079ca2a0>)",
+      "primary_key": false
+    },
+    {
+      "name": "registration_start",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "registration_end",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "drive_date",
+      "type": "DATETIME",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "status",
+      "type": "VARCHAR(9)",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(<DriveStatus.DRAFT: 'draft'>)",
+      "primary_key": false
+    },
+    {
+      "name": "tenant_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "created_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x1079cbc10>)",
+      "primary_key": false
+    },
+    {
+      "name": "updated_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x1079cbb60>)",
+      "primary_key": false
+    }
+  ],
+  "applications": [
+    {
+      "name": "id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function uuid4 at 0x1079cb320>)",
+      "primary_key": true
+    },
+    {
+      "name": "drive_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "student_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "status",
+      "type": "VARCHAR(19)",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(<ApplicationStatus.APPLIED: 'applied'>)",
+      "primary_key": false
+    },
+    {
+      "name": "final_decision_by",
+      "type": "CHAR(32)",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "tenant_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "created_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x107a3c670>)",
+      "primary_key": false
+    },
+    {
+      "name": "updated_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x107a3c5c0>)",
+      "primary_key": false
+    }
+  ],
+  "interviews": [
+    {
+      "name": "id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function uuid4 at 0x1079cbab0>)",
+      "primary_key": true
+    },
+    {
+      "name": "application_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "round_number",
+      "type": "INTEGER",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "round_type",
+      "type": "VARCHAR(11)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "scheduled_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "status",
+      "type": "VARCHAR(9)",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(<InterviewStatus.SCHEDULED: 'scheduled'>)",
+      "primary_key": false
+    },
+    {
+      "name": "interviewer_feedback",
+      "type": "TEXT",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "tenant_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "created_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x107a3d0c0>)",
+      "primary_key": false
+    },
+    {
+      "name": "updated_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x107a3d010>)",
+      "primary_key": false
+    }
+  ],
+  "skill_gap_analyses": [
+    {
+      "name": "id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function uuid4 at 0x107a3c460>)",
+      "primary_key": true
+    },
+    {
+      "name": "student_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "job_role_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "match_percentage",
+      "type": "NUMERIC(5, 2)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "missing_skills_json",
+      "type": "JSON",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function list at 0x107a3c7d0>)",
+      "primary_key": false
+    },
+    {
+      "name": "matching_skills_json",
+      "type": "JSON",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function list at 0x107a3c930>)",
+      "primary_key": false
+    },
+    {
+      "name": "analysis_mode",
+      "type": "VARCHAR(50)",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault('deterministic_rule_engine')",
+      "primary_key": false
+    },
+    {
+      "name": "tenant_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "created_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x107a3dbc0>)",
+      "primary_key": false
+    },
+    {
+      "name": "updated_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x107a3db10>)",
+      "primary_key": false
+    }
+  ],
+  "placement_predictions": [
+    {
+      "name": "id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function uuid4 at 0x107a3ceb0>)",
+      "primary_key": true
+    },
+    {
+      "name": "student_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "drive_id",
+      "type": "CHAR(32)",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "probability_score",
+      "type": "NUMERIC(5, 2)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "risk_tier",
+      "type": "VARCHAR(13)",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(<RiskTier.MODERATE_RISK: 'moderate_risk'>)",
+      "primary_key": false
+    },
+    {
+      "name": "contributing_factors_json",
+      "type": "JSON",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function dict at 0x107a3d380>)",
+      "primary_key": false
+    },
+    {
+      "name": "is_advisory_only",
+      "type": "BOOLEAN",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(True)",
+      "primary_key": false
+    },
+    {
+      "name": "tenant_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "created_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x107a3e6c0>)",
+      "primary_key": false
+    },
+    {
+      "name": "updated_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x107a3e610>)",
+      "primary_key": false
+    }
+  ],
+  "learning_recommendations": [
+    {
+      "name": "id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function uuid4 at 0x107a3d7a0>)",
+      "primary_key": true
+    },
+    {
+      "name": "student_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "skill_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "target_role_id",
+      "type": "CHAR(32)",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "title",
+      "type": "VARCHAR(255)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "action_type",
+      "type": "VARCHAR(17)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "description",
+      "type": "TEXT",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "estimated_hours",
+      "type": "INTEGER",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(10)",
+      "primary_key": false
+    },
+    {
+      "name": "is_completed",
+      "type": "BOOLEAN",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(False)",
+      "primary_key": false
+    },
+    {
+      "name": "tenant_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "created_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x107a3efb0>)",
+      "primary_key": false
+    },
+    {
+      "name": "updated_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x107a3ef00>)",
+      "primary_key": false
+    }
+  ],
+  "agent_execution_logs": [
+    {
+      "name": "id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function uuid4 at 0x107a3e820>)",
+      "primary_key": true
+    },
+    {
+      "name": "agent_type",
+      "type": "VARCHAR(23)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "triggered_by",
+      "type": "CHAR(32)",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "execution_mode",
+      "type": "VARCHAR(50)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "input_payload_digest",
+      "type": "VARCHAR(64)",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "tokens_consumed",
+      "type": "INTEGER",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(0)",
+      "primary_key": false
+    },
+    {
+      "name": "latency_ms",
+      "type": "INTEGER",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "status",
+      "type": "VARCHAR(13)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "error_message",
+      "type": "TEXT",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "executed_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x107a3e980>)",
+      "primary_key": false
+    },
+    {
+      "name": "tenant_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    }
+  ],
+  "agent_workflows": [
+    {
+      "name": "id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function uuid4 at 0x107a3f3d0>)",
+      "primary_key": true
+    },
+    {
+      "name": "workflow_name",
+      "type": "VARCHAR(150)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "target_entity_type",
+      "type": "VARCHAR(50)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "target_entity_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "current_stage",
+      "type": "VARCHAR(100)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "state_history",
+      "type": "JSON",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function list at 0x107a3f320>)",
+      "primary_key": false
+    },
+    {
+      "name": "tenant_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "created_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x107ac05c0>)",
+      "primary_key": false
+    },
+    {
+      "name": "updated_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x107ac0510>)",
+      "primary_key": false
+    }
+  ],
+  "audit_events": [
+    {
+      "name": "id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function uuid4 at 0x107a3fd70>)",
+      "primary_key": true
+    },
+    {
+      "name": "actor_id",
+      "type": "CHAR(32)",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "actor_email",
+      "type": "VARCHAR(255)",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "action",
+      "type": "VARCHAR(100)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "resource_type",
+      "type": "VARCHAR(100)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "resource_id",
+      "type": "VARCHAR(100)",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "changes_diff",
+      "type": "JSON",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function dict at 0x107a3fed0>)",
+      "primary_key": false
+    },
+    {
+      "name": "ip_address",
+      "type": "VARCHAR(45)",
+      "nullable": true,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "timestamp",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x107a3fe20>)",
+      "primary_key": false
+    },
+    {
+      "name": "tenant_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    }
+  ],
+  "notifications": [
+    {
+      "name": "id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function uuid4 at 0x107ac07d0>)",
+      "primary_key": true
+    },
+    {
+      "name": "recipient_user_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "title",
+      "type": "VARCHAR(255)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "message",
+      "type": "TEXT",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "type",
+      "type": "VARCHAR(18)",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(<NotificationType.SYSTEM: 'system'>)",
+      "primary_key": false
+    },
+    {
+      "name": "is_read",
+      "type": "BOOLEAN",
+      "nullable": false,
+      "default": "ScalarElementColumnDefault(False)",
+      "primary_key": false
+    },
+    {
+      "name": "tenant_id",
+      "type": "CHAR(32)",
+      "nullable": false,
+      "default": null,
+      "primary_key": false
+    },
+    {
+      "name": "created_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x107ac19b0>)",
+      "primary_key": false
+    },
+    {
+      "name": "updated_at",
+      "type": "DATETIME",
+      "nullable": false,
+      "default": "CallableColumnDefault(<function utc_now at 0x107ac1900>)",
+      "primary_key": false
+    }
+  ]
+}

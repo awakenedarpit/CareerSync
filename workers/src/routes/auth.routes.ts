@@ -62,6 +62,20 @@ authRoutes.post('/register', async (c) => {
   }
 
   const data = parseResult.data;
+
+  // Security Gate: Disallow public Super Admin self-registration.
+  // Super Admins must be provisioned out-of-band via CLI scripts or secure environment seeds.
+  if (data.role === 'superadmin') {
+    return c.json(
+      {
+        success: false,
+        error: 'Super Admin registration is prohibited via public registration endpoint. Super Admins must be provisioned out-of-band.',
+        code: 'SUPERADMIN_REGISTRATION_PROHIBITED'
+      },
+      403
+    );
+  }
+
   const dbUrl = c.env?.DATABASE_URL;
 
   // Resolve tenantId: body -> header -> context
@@ -157,7 +171,7 @@ authRoutes.post('/register', async (c) => {
           fullName: data.fullName.trim(),
           role: data.role as any,
           isActive: true,
-          isVerified: data.role === 'superadmin' || data.role === 'college_admin'
+          isVerified: data.role === 'college_admin'
         })
         .returning();
 

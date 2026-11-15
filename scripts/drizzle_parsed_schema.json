@@ -1,0 +1,2003 @@
+{
+  "academic_semesters": [
+    {
+      "tsProp": "id",
+      "dbCol": "id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "gen_random_uuid()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "tenantId",
+      "dbCol": "tenant_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "studentId",
+      "dbCol": "student_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "semesterNumber",
+      "dbCol": "semester_number",
+      "dataType": "number",
+      "columnType": "PgInteger",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "sgpa",
+      "dbCol": "sgpa",
+      "dataType": "string",
+      "columnType": "PgNumeric",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "creditsEarned",
+      "dbCol": "credits_earned",
+      "dataType": "string",
+      "columnType": "PgNumeric",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "backlogsInSemester",
+      "dbCol": "backlogs_in_semester",
+      "dataType": "number",
+      "columnType": "PgInteger",
+      "notNull": true,
+      "hasDefault": true,
+      "default": 0
+    },
+    {
+      "tsProp": "createdAt",
+      "dbCol": "created_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "updatedAt",
+      "dbCol": "updated_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "applications": [
+    {
+      "tsProp": "id",
+      "dbCol": "id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "gen_random_uuid()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "tenantId",
+      "dbCol": "tenant_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "driveId",
+      "dbCol": "drive_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "studentId",
+      "dbCol": "student_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "status",
+      "dbCol": "status",
+      "dataType": "string",
+      "columnType": "PgEnumColumn",
+      "notNull": true,
+      "hasDefault": true,
+      "default": "applied"
+    },
+    {
+      "tsProp": "finalDecisionBy",
+      "dbCol": "final_decision_by",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "createdAt",
+      "dbCol": "created_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "updatedAt",
+      "dbCol": "updated_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "audit_events": [
+    {
+      "tsProp": "id",
+      "dbCol": "id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "gen_random_uuid()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "tenantId",
+      "dbCol": "tenant_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "actorId",
+      "dbCol": "actor_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "actorEmail",
+      "dbCol": "actor_email",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "action",
+      "dbCol": "action",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "resourceType",
+      "dbCol": "resource_type",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "resourceId",
+      "dbCol": "resource_id",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "changesDiff",
+      "dbCol": "changes_diff",
+      "dataType": "json",
+      "columnType": "PgJsonb",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {}
+    },
+    {
+      "tsProp": "ipAddress",
+      "dbCol": "ip_address",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "timestamp",
+      "dbCol": "timestamp",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "companies": [
+    {
+      "tsProp": "id",
+      "dbCol": "id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "gen_random_uuid()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "name",
+      "dbCol": "name",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "industryDomain",
+      "dbCol": "industry_domain",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "website",
+      "dbCol": "website",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "createdAt",
+      "dbCol": "created_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "updatedAt",
+      "dbCol": "updated_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "evidence_records": [
+    {
+      "tsProp": "id",
+      "dbCol": "id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "gen_random_uuid()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "tenantId",
+      "dbCol": "tenant_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "studentId",
+      "dbCol": "student_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "skillId",
+      "dbCol": "skill_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "evidenceType",
+      "dbCol": "evidence_type",
+      "dataType": "string",
+      "columnType": "PgEnumColumn",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "sourceUrl",
+      "dbCol": "source_url",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "r2StorageKey",
+      "dbCol": "r2_storage_key",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "metadataJson",
+      "dbCol": "metadata_json",
+      "dataType": "json",
+      "columnType": "PgJsonb",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {}
+    },
+    {
+      "tsProp": "verificationStatus",
+      "dbCol": "verification_status",
+      "dataType": "string",
+      "columnType": "PgEnumColumn",
+      "notNull": true,
+      "hasDefault": true,
+      "default": "pending_review"
+    },
+    {
+      "tsProp": "validatedBy",
+      "dbCol": "validated_by",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "createdAt",
+      "dbCol": "created_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "updatedAt",
+      "dbCol": "updated_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "tsProp": "id",
+      "dbCol": "id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "gen_random_uuid()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "tenantId",
+      "dbCol": "tenant_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "applicationId",
+      "dbCol": "application_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "roundNumber",
+      "dbCol": "round_number",
+      "dataType": "number",
+      "columnType": "PgInteger",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "roundType",
+      "dbCol": "round_type",
+      "dataType": "string",
+      "columnType": "PgEnumColumn",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "scheduledAt",
+      "dbCol": "scheduled_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "status",
+      "dbCol": "status",
+      "dataType": "string",
+      "columnType": "PgEnumColumn",
+      "notNull": true,
+      "hasDefault": true,
+      "default": "scheduled"
+    },
+    {
+      "tsProp": "interviewerFeedback",
+      "dbCol": "interviewer_feedback",
+      "dataType": "string",
+      "columnType": "PgText",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "createdAt",
+      "dbCol": "created_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "updatedAt",
+      "dbCol": "updated_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "invitations": [
+    {
+      "tsProp": "id",
+      "dbCol": "id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "gen_random_uuid()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "tenantId",
+      "dbCol": "tenant_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "email",
+      "dbCol": "email",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "role",
+      "dbCol": "role",
+      "dataType": "string",
+      "columnType": "PgEnumColumn",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "fullName",
+      "dbCol": "full_name",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "token",
+      "dbCol": "token",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "status",
+      "dbCol": "status",
+      "dataType": "string",
+      "columnType": "PgEnumColumn",
+      "notNull": true,
+      "hasDefault": true,
+      "default": "pending"
+    },
+    {
+      "tsProp": "metadataJson",
+      "dbCol": "metadata_json",
+      "dataType": "json",
+      "columnType": "PgJsonb",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {}
+    },
+    {
+      "tsProp": "invitedByUserId",
+      "dbCol": "invited_by_user_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "expiresAt",
+      "dbCol": "expires_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "acceptedAt",
+      "dbCol": "accepted_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "createdAt",
+      "dbCol": "created_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "updatedAt",
+      "dbCol": "updated_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "job_requirements": [
+    {
+      "tsProp": "id",
+      "dbCol": "id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "gen_random_uuid()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "jobRoleId",
+      "dbCol": "job_role_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "skillId",
+      "dbCol": "skill_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "isMandatory",
+      "dbCol": "is_mandatory",
+      "dataType": "boolean",
+      "columnType": "PgBoolean",
+      "notNull": true,
+      "hasDefault": true,
+      "default": true
+    },
+    {
+      "tsProp": "minProficiency",
+      "dbCol": "min_proficiency",
+      "dataType": "string",
+      "columnType": "PgEnumColumn",
+      "notNull": true,
+      "hasDefault": true,
+      "default": "intermediate"
+    },
+    {
+      "tsProp": "weight",
+      "dbCol": "weight",
+      "dataType": "string",
+      "columnType": "PgNumeric",
+      "notNull": true,
+      "hasDefault": true,
+      "default": "1.00"
+    },
+    {
+      "tsProp": "createdAt",
+      "dbCol": "created_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "updatedAt",
+      "dbCol": "updated_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "job_roles": [
+    {
+      "tsProp": "id",
+      "dbCol": "id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "gen_random_uuid()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "companyId",
+      "dbCol": "company_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "title",
+      "dbCol": "title",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "description",
+      "dbCol": "description",
+      "dataType": "string",
+      "columnType": "PgText",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "experienceLevel",
+      "dbCol": "experience_level",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": true,
+      "hasDefault": true,
+      "default": "Fresher / Entry Level"
+    },
+    {
+      "tsProp": "ctcLpa",
+      "dbCol": "ctc_lpa",
+      "dataType": "string",
+      "columnType": "PgNumeric",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "createdAt",
+      "dbCol": "created_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "updatedAt",
+      "dbCol": "updated_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "notifications": [
+    {
+      "tsProp": "id",
+      "dbCol": "id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "gen_random_uuid()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "tenantId",
+      "dbCol": "tenant_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "recipientUserId",
+      "dbCol": "recipient_user_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "title",
+      "dbCol": "title",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "message",
+      "dbCol": "message",
+      "dataType": "string",
+      "columnType": "PgText",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "type",
+      "dbCol": "type",
+      "dataType": "string",
+      "columnType": "PgEnumColumn",
+      "notNull": true,
+      "hasDefault": true,
+      "default": "system"
+    },
+    {
+      "tsProp": "isRead",
+      "dbCol": "is_read",
+      "dataType": "boolean",
+      "columnType": "PgBoolean",
+      "notNull": true,
+      "hasDefault": true,
+      "default": false
+    },
+    {
+      "tsProp": "createdAt",
+      "dbCol": "created_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "updatedAt",
+      "dbCol": "updated_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "placement_drives": [
+    {
+      "tsProp": "id",
+      "dbCol": "id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "gen_random_uuid()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "tenantId",
+      "dbCol": "tenant_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "jobRoleId",
+      "dbCol": "job_role_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "batchYear",
+      "dbCol": "batch_year",
+      "dataType": "number",
+      "columnType": "PgInteger",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "minCgpa",
+      "dbCol": "min_cgpa",
+      "dataType": "string",
+      "columnType": "PgNumeric",
+      "notNull": true,
+      "hasDefault": true,
+      "default": "6.00"
+    },
+    {
+      "tsProp": "maxBacklogsAllowed",
+      "dbCol": "max_backlogs_allowed",
+      "dataType": "number",
+      "columnType": "PgInteger",
+      "notNull": true,
+      "hasDefault": true,
+      "default": 0
+    },
+    {
+      "tsProp": "eligibleDepartments",
+      "dbCol": "eligible_departments",
+      "dataType": "json",
+      "columnType": "PgJsonb",
+      "notNull": true,
+      "hasDefault": true,
+      "default": []
+    },
+    {
+      "tsProp": "registrationStart",
+      "dbCol": "registration_start",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "registrationEnd",
+      "dbCol": "registration_end",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "driveDate",
+      "dbCol": "drive_date",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "status",
+      "dbCol": "status",
+      "dataType": "string",
+      "columnType": "PgEnumColumn",
+      "notNull": true,
+      "hasDefault": true,
+      "default": "draft"
+    },
+    {
+      "tsProp": "createdAt",
+      "dbCol": "created_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "updatedAt",
+      "dbCol": "updated_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "skill_assessments": [
+    {
+      "tsProp": "id",
+      "dbCol": "id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "gen_random_uuid()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "tenantId",
+      "dbCol": "tenant_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "studentId",
+      "dbCol": "student_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "skillId",
+      "dbCol": "skill_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "assessmentName",
+      "dbCol": "assessment_name",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "score",
+      "dbCol": "score",
+      "dataType": "string",
+      "columnType": "PgNumeric",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "maxScore",
+      "dbCol": "max_score",
+      "dataType": "string",
+      "columnType": "PgNumeric",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "evaluationMetrics",
+      "dbCol": "evaluation_metrics",
+      "dataType": "json",
+      "columnType": "PgJsonb",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {}
+    },
+    {
+      "tsProp": "completedAt",
+      "dbCol": "completed_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "createdAt",
+      "dbCol": "created_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "updatedAt",
+      "dbCol": "updated_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "skills": [
+    {
+      "tsProp": "id",
+      "dbCol": "id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "gen_random_uuid()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "name",
+      "dbCol": "name",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "canonicalSlug",
+      "dbCol": "canonical_slug",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "category",
+      "dbCol": "category",
+      "dataType": "string",
+      "columnType": "PgEnumColumn",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "description",
+      "dbCol": "description",
+      "dataType": "string",
+      "columnType": "PgText",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "createdAt",
+      "dbCol": "created_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "updatedAt",
+      "dbCol": "updated_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "student_skills": [
+    {
+      "tsProp": "id",
+      "dbCol": "id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "gen_random_uuid()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "tenantId",
+      "dbCol": "tenant_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "studentId",
+      "dbCol": "student_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "skillId",
+      "dbCol": "skill_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "state",
+      "dbCol": "state",
+      "dataType": "string",
+      "columnType": "PgEnumColumn",
+      "notNull": true,
+      "hasDefault": true,
+      "default": "Claimed"
+    },
+    {
+      "tsProp": "proficiencyLevel",
+      "dbCol": "proficiency_level",
+      "dataType": "string",
+      "columnType": "PgEnumColumn",
+      "notNull": true,
+      "hasDefault": true,
+      "default": "beginner"
+    },
+    {
+      "tsProp": "confidenceScore",
+      "dbCol": "confidence_score",
+      "dataType": "string",
+      "columnType": "PgNumeric",
+      "notNull": true,
+      "hasDefault": true,
+      "default": "0.000"
+    },
+    {
+      "tsProp": "verifiedAt",
+      "dbCol": "verified_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "verifiedByUserId",
+      "dbCol": "verified_by_user_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "expiryDate",
+      "dbCol": "expiry_date",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "createdAt",
+      "dbCol": "created_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "updatedAt",
+      "dbCol": "updated_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "students": [
+    {
+      "tsProp": "id",
+      "dbCol": "id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "gen_random_uuid()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "tenantId",
+      "dbCol": "tenant_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "userId",
+      "dbCol": "user_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "rollNumber",
+      "dbCol": "roll_number",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "department",
+      "dbCol": "department",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "batchYear",
+      "dbCol": "batch_year",
+      "dataType": "number",
+      "columnType": "PgInteger",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "degree",
+      "dbCol": "degree",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": true,
+      "hasDefault": true,
+      "default": "B.Tech"
+    },
+    {
+      "tsProp": "cgpa",
+      "dbCol": "cgpa",
+      "dataType": "string",
+      "columnType": "PgNumeric",
+      "notNull": true,
+      "hasDefault": true,
+      "default": "0.00"
+    },
+    {
+      "tsProp": "backlogCount",
+      "dbCol": "backlog_count",
+      "dataType": "number",
+      "columnType": "PgInteger",
+      "notNull": true,
+      "hasDefault": true,
+      "default": 0
+    },
+    {
+      "tsProp": "dateOfBirth",
+      "dbCol": "date_of_birth",
+      "dataType": "string",
+      "columnType": "PgDateString",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "resumeR2Url",
+      "dbCol": "resume_r2_url",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "readinessScore",
+      "dbCol": "readiness_score",
+      "dataType": "string",
+      "columnType": "PgNumeric",
+      "notNull": true,
+      "hasDefault": true,
+      "default": "0.00"
+    },
+    {
+      "tsProp": "createdAt",
+      "dbCol": "created_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "updatedAt",
+      "dbCol": "updated_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "tenants": [
+    {
+      "tsProp": "id",
+      "dbCol": "id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "gen_random_uuid()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "name",
+      "dbCol": "name",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "slug",
+      "dbCol": "slug",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "domain",
+      "dbCol": "domain",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "location",
+      "dbCol": "location",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "contactEmail",
+      "dbCol": "contact_email",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "contactPhone",
+      "dbCol": "contact_phone",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": false,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "status",
+      "dbCol": "status",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": true,
+      "hasDefault": true,
+      "default": "active"
+    },
+    {
+      "tsProp": "isSuspended",
+      "dbCol": "is_suspended",
+      "dataType": "boolean",
+      "columnType": "PgBoolean",
+      "notNull": true,
+      "hasDefault": true,
+      "default": false
+    },
+    {
+      "tsProp": "isActive",
+      "dbCol": "is_active",
+      "dataType": "boolean",
+      "columnType": "PgBoolean",
+      "notNull": true,
+      "hasDefault": true,
+      "default": true
+    },
+    {
+      "tsProp": "settings",
+      "dbCol": "settings",
+      "dataType": "json",
+      "columnType": "PgJsonb",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {}
+    },
+    {
+      "tsProp": "createdAt",
+      "dbCol": "created_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "updatedAt",
+      "dbCol": "updated_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "users": [
+    {
+      "tsProp": "id",
+      "dbCol": "id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "gen_random_uuid()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "tenantId",
+      "dbCol": "tenant_id",
+      "dataType": "string",
+      "columnType": "PgUUID",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "email",
+      "dbCol": "email",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "passwordHash",
+      "dbCol": "password_hash",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "fullName",
+      "dbCol": "full_name",
+      "dataType": "string",
+      "columnType": "PgVarchar",
+      "notNull": true,
+      "hasDefault": false
+    },
+    {
+      "tsProp": "role",
+      "dbCol": "role",
+      "dataType": "string",
+      "columnType": "PgEnumColumn",
+      "notNull": true,
+      "hasDefault": true,
+      "default": "student"
+    },
+    {
+      "tsProp": "isActive",
+      "dbCol": "is_active",
+      "dataType": "boolean",
+      "columnType": "PgBoolean",
+      "notNull": true,
+      "hasDefault": true,
+      "default": true
+    },
+    {
+      "tsProp": "isVerified",
+      "dbCol": "is_verified",
+      "dataType": "boolean",
+      "columnType": "PgBoolean",
+      "notNull": true,
+      "hasDefault": true,
+      "default": false
+    },
+    {
+      "tsProp": "createdAt",
+      "dbCol": "created_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tsProp": "updatedAt",
+      "dbCol": "updated_at",
+      "dataType": "date",
+      "columnType": "PgTimestamp",
+      "notNull": true,
+      "hasDefault": true,
+      "default": {
+        "decoder": {},
+        "shouldInlineParams": false,
+        "queryChunks": [
+          {
+            "value": [
+              "now()"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

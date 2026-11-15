@@ -20,11 +20,13 @@ import Badge from '../../components/ui/Badge';
 import Modal from '../../components/ui/Modal';
 import Input from '../../components/ui/Input';
 import Select from '../../components/ui/Select';
+import DocumentUploadModal from '../../components/documents/DocumentUploadModal';
 
 export default function SkillsEvidence() {
   const [activeTab, setActiveTab] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showDocUploadModal, setShowDocUploadModal] = useState(false);
   const [newSkillName, setNewSkillName] = useState('');
   const [newSkillCategory, setNewSkillCategory] = useState('Frontend');
   const [newEvidenceUrl, setNewEvidenceUrl] = useState('');
@@ -171,10 +173,16 @@ export default function SkillsEvidence() {
         subtitle="Transparent skill inventory governed by the 5-state evidence verification lifecycle."
         breadcrumbs={[{ label: 'Student', href: '/student' }, { label: 'Skills & Evidence' }]}
         action={
-          <Button onClick={() => setShowAddModal(true)} variant="primary" size="sm">
-            <Plus className="h-4 w-4 mr-1.5" />
-            Add Skill / Attach Evidence
-          </Button>
+          <div className="flex gap-2">
+            <Button onClick={() => setShowDocUploadModal(true)} variant="outline" size="sm">
+              <UploadCloud className="h-4 w-4 mr-1.5" />
+              Upload Evidence File
+            </Button>
+            <Button onClick={() => setShowAddModal(true)} variant="primary" size="sm">
+              <Plus className="h-4 w-4 mr-1.5" />
+              Add Skill
+            </Button>
+          </div>
         }
       />
 
@@ -320,6 +328,12 @@ export default function SkillsEvidence() {
           />
         </form>
       </Modal>
+
+      <DocumentUploadModal
+        isOpen={showDocUploadModal}
+        onClose={() => setShowDocUploadModal(false)}
+        initialType="project_evidence"
+      />
     </div>
   );
 }

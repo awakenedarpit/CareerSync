@@ -125,12 +125,38 @@ export const notificationTypeEnum = pgEnum('notification_type_enum', [
   'system'
 ]);
 
+export const riskTierEnum = pgEnum('risk_tier_enum', [
+  'low_risk',
+  'moderate_risk',
+  'high_risk'
+]);
+
+export const actionTypeEnum = pgEnum('action_type_enum', [
+  'project_milestone',
+  'hands_on_lab',
+  'course_module',
+  'practice_problem'
+]);
+
+export const agentTypeEnum = pgEnum('agent_type_enum', [
+  'student_profiling',
+  'industry_skill_gap',
+  'predictive_analytics',
+  'placement_orchestration'
+]);
+
+export const agentExecutionStatusEnum = pgEnum('agent_exec_status_enum', [
+  'success',
+  'fallback_used',
+  'failed'
+]);
+
 // ============================================================================
-// Tables Definition
+// Core Tables Definition (16 Canonical Domain Tables + Invitations + AI Tables)
 // ============================================================================
 
 /**
- * Tenants & Institutions Table
+ * 1. Tenants & Institutions Table
  * Represents colleges, universities, or autonomous hiring entities.
  */
 export const tenants = pgTable('tenants', {
@@ -150,7 +176,7 @@ export const tenants = pgTable('tenants', {
 });
 
 /**
- * Users, Authentication & RBAC Table
+ * 2. Users, Authentication & RBAC Table
  * Scoped strictly to tenant_id. Enforces unique email per tenant.
  */
 export const users = pgTable(
@@ -177,8 +203,9 @@ export const users = pgTable(
 );
 
 /**
- * Students Table
+ * 3. Students Table
  * Extended profile for students enrolled within a tenant.
+ * Includes non-destructive column compatibility for resumeUrl and resumeR2Url.
  */
 export const students = pgTable(
   'students',
@@ -198,7 +225,10 @@ export const students = pgTable(
     cgpa: numeric('cgpa', { precision: 4, scale: 2 }).default('0.00').notNull(),
     backlogCount: integer('backlog_count').default(0).notNull(),
     dateOfBirth: date('date_of_birth'),
+    // Non-destructive column compatibility:
+    // Support both canonical resumeUrl and legacy resumeR2Url without dropping or breaking columns
     resumeR2Url: varchar('resume_r2_url', { length: 512 }),
+    resumeUrl: varchar('resume_url', { length: 512 }),
     readinessScore: numeric('readiness_score', { precision: 5, scale: 2 }).default('0.00').notNull(),
     createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
     updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
@@ -211,7 +241,7 @@ export const students = pgTable(
 );
 
 /**
- * Standardized Skills Master Taxonomy
+ * 4. Standardized Skills Master Taxonomy
  */
 export const skills = pgTable('skills', {
   id: uuid('id').defaultRandom().primaryKey(),
@@ -224,7 +254,7 @@ export const skills = pgTable('skills', {
 });
 
 /**
- * StudentSkills Table
+ * 5. StudentSkills Table
  * Explicit binding between a Student and a Skill with strict 5-State lifecycle tracking.
  */
 export const studentSkills = pgTable(
@@ -256,7 +286,8 @@ export const studentSkills = pgTable(
 );
 
 /**
- * Inspectable Evidence Records (Proof-of-work)
+ * 6. Inspectable Evidence Records (Proof-of-work)
+ * Includes non-destructive column compatibility for fileStorageKey and r2StorageKey.
  */
 export const evidenceRecords = pgTable(
   'evidence_records',
@@ -273,7 +304,10 @@ export const evidenceRecords = pgTable(
       .references(() => skills.id, { onDelete: 'cascade' }),
     evidenceType: evidenceTypeEnum('evidence_type').notNull(),
     sourceUrl: varchar('source_url', { length: 1024 }).notNull(),
+    // Non-destructive column compatibility:
+    // Support both canonical fileStorageKey and legacy r2StorageKey without dropping or breaking columns
     r2StorageKey: varchar('r2_storage_key', { length: 512 }),
+    fileStorageKey: varchar('file_storage_key', { length: 512 }),
     metadataJson: jsonb('metadata_json').default({}).notNull(),
     verificationStatus: verificationStatusEnum('verification_status').default('pending_review').notNull(),
     validatedBy: uuid('validated_by').references(() => users.id, { onDelete: 'set null' }),
@@ -286,7 +320,7 @@ export const evidenceRecords = pgTable(
 );
 
 /**
- * Standardized Skill Assessments
+ * 7. Standardized Skill Assessments
  */
 export const skillAssessments = pgTable('skill_assessments', {
   id: uuid('id').defaultRandom().primaryKey(),
@@ -309,7 +343,7 @@ export const skillAssessments = pgTable('skill_assessments', {
 });
 
 /**
- * Academic Semesters Table
+ * 8. Academic Semesters Table
  */
 export const academicSemesters = pgTable(
   'academic_semesters',
@@ -334,7 +368,7 @@ export const academicSemesters = pgTable(
 );
 
 /**
- * Companies Table
+ * 9. Companies Table
  */
 export const companies = pgTable('companies', {
   id: uuid('id').defaultRandom().primaryKey(),
@@ -346,7 +380,7 @@ export const companies = pgTable('companies', {
 });
 
 /**
- * Job Roles Table
+ * 10. Job Roles Table
  */
 export const jobRoles = pgTable('job_roles', {
   id: uuid('id').defaultRandom().primaryKey(),
@@ -362,7 +396,7 @@ export const jobRoles = pgTable('job_roles', {
 });
 
 /**
- * Job Requirements Table
+ * 11. Job Requirements Table
  */
 export const jobRequirements = pgTable(
   'job_requirements',
@@ -386,7 +420,7 @@ export const jobRequirements = pgTable(
 );
 
 /**
- * Placement Drives Table
+ * 12. Placement Drives Table
  */
 export const placementDrives = pgTable(
   'placement_drives',
@@ -415,7 +449,7 @@ export const placementDrives = pgTable(
 );
 
 /**
- * Applications Table
+ * 13. Applications Table
  */
 export const applications = pgTable(
   'applications',
@@ -442,7 +476,7 @@ export const applications = pgTable(
 );
 
 /**
- * Interviews Table
+ * 14. Interviews Table
  */
 export const interviews = pgTable(
   'interviews',
@@ -468,7 +502,7 @@ export const interviews = pgTable(
 );
 
 /**
- * Audit Events Table (Tamper-proof compliance logging)
+ * 15. Audit Events Table (Tamper-proof compliance logging)
  */
 export const auditEvents = pgTable(
   'audit_events',
@@ -491,7 +525,7 @@ export const auditEvents = pgTable(
 );
 
 /**
- * Notifications Table
+ * 16. Notifications Table
  */
 export const notifications = pgTable(
   'notifications',
@@ -516,7 +550,7 @@ export const notifications = pgTable(
 );
 
 /**
- * Invitations Table
+ * 17. Invitations Table
  * Tracks secure, single-use, expiring invitations for platform users.
  */
 export const invitations = pgTable(
@@ -544,6 +578,208 @@ export const invitations = pgTable(
   ]
 );
 
+/**
+ * 18. Skill Gap Analyses Table (AI Agent & Analytics)
+ */
+export const skillGapAnalyses = pgTable(
+  'skill_gap_analyses',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => students.id, { onDelete: 'cascade' }),
+    jobRoleId: uuid('job_role_id')
+      .notNull()
+      .references(() => jobRoles.id, { onDelete: 'cascade' }),
+    matchPercentage: numeric('match_percentage', { precision: 5, scale: 2 }).notNull(),
+    missingSkillsJson: jsonb('missing_skills_json').default([]).notNull(),
+    matchingSkillsJson: jsonb('matching_skills_json').default([]).notNull(),
+    analysisMode: varchar('analysis_mode', { length: 50 }).default('deterministic').notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('ix_gap_analysis_tenant_student_role').on(table.tenantId, table.studentId, table.jobRoleId),
+    index('ix_skill_gap_analyses_student_id').on(table.studentId),
+    index('ix_skill_gap_analyses_job_role_id').on(table.jobRoleId)
+  ]
+);
+
+/**
+ * 19. Placement Predictions Table (AI Agent & Analytics)
+ */
+export const placementPredictions = pgTable(
+  'placement_predictions',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => students.id, { onDelete: 'cascade' }),
+    driveId: uuid('drive_id').references(() => placementDrives.id, { onDelete: 'cascade' }),
+    probabilityScore: numeric('probability_score', { precision: 5, scale: 4 }).notNull(),
+    riskTier: riskTierEnum('risk_tier').default('moderate_risk').notNull(),
+    contributingFactorsJson: jsonb('contributing_factors_json').default([]).notNull(),
+    isAdvisoryOnly: boolean('is_advisory_only').default(true).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('ix_predictions_tenant_student').on(table.tenantId, table.studentId),
+    index('ix_placement_predictions_drive_id').on(table.driveId)
+  ]
+);
+
+/**
+ * 20. Learning Recommendations Table (AI Agent & Analytics)
+ */
+export const learningRecommendations = pgTable(
+  'learning_recommendations',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => students.id, { onDelete: 'cascade' }),
+    skillId: uuid('skill_id')
+      .notNull()
+      .references(() => skills.id, { onDelete: 'cascade' }),
+    targetRoleId: uuid('target_role_id').references(() => jobRoles.id, { onDelete: 'set null' }),
+    title: varchar('title', { length: 255 }).notNull(),
+    actionType: actionTypeEnum('action_type').default('project_milestone').notNull(),
+    description: text('description'),
+    estimatedHours: integer('estimated_hours').default(0).notNull(),
+    isCompleted: boolean('is_completed').default(false).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('ix_learning_recommendations_student_id').on(table.studentId),
+    index('ix_learning_recommendations_skill_id').on(table.skillId)
+  ]
+);
+
+/**
+ * 21. Agent Execution Logs Table (Observability & Compliance)
+ */
+export const agentExecutionLogs = pgTable(
+  'agent_execution_logs',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    agentType: agentTypeEnum('agent_type').notNull(),
+    triggeredBy: uuid('triggered_by').references(() => users.id, { onDelete: 'set null' }),
+    executionMode: varchar('execution_mode', { length: 50 }).notNull(),
+    inputPayloadDigest: varchar('input_payload_digest', { length: 64 }),
+    tokensConsumed: integer('tokens_consumed').default(0).notNull(),
+    latencyMs: integer('latency_ms').default(0).notNull(),
+    status: agentExecutionStatusEnum('status').default('success').notNull(),
+    errorMessage: text('error_message'),
+    executedAt: timestamp('executed_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('ix_agent_logs_tenant_type_status').on(table.tenantId, table.agentType, table.status)
+  ]
+);
+
+/**
+ * 22. Agent Workflows Table (State Machine Tracking)
+ */
+export const agentWorkflows = pgTable(
+  'agent_workflows',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    workflowName: varchar('workflow_name', { length: 150 }).notNull(),
+    targetEntityType: varchar('target_entity_type', { length: 50 }).notNull(),
+    targetEntityId: uuid('target_entity_id').notNull(),
+    currentStage: varchar('current_stage', { length: 100 }).notNull(),
+    stateHistory: jsonb('state_history').default([]).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('ix_workflows_tenant_entity').on(table.tenantId, table.targetEntityType, table.targetEntityId)
+  ]
+);
+
+// ============================================================================
+// Non-Destructive Column Compatibility Helpers (Dual-Read & Normalization)
+// ============================================================================
+
+/**
+ * Non-destructive dual-read helper for student resume URL.
+ * Supports both modern `resumeUrl` and legacy `resumeR2Url` (or snake_case db columns).
+ */
+export function resolveStudentResumeUrl(
+  student: {
+    resumeUrl?: string | null;
+    resumeR2Url?: string | null;
+    resume_url?: string | null;
+    resume_r2_url?: string | null;
+  } | null | undefined
+): string | null {
+  if (!student) return null;
+  return student.resumeUrl ?? student.resumeR2Url ?? student.resume_url ?? student.resume_r2_url ?? null;
+}
+
+/**
+ * Non-destructive dual-read helper for evidence artifact storage key.
+ * Supports both modern `fileStorageKey` and legacy `r2StorageKey` (or snake_case db columns).
+ */
+export function resolveEvidenceStorageKey(
+  record: {
+    fileStorageKey?: string | null;
+    r2StorageKey?: string | null;
+    file_storage_key?: string | null;
+    r2_storage_key?: string | null;
+  } | null | undefined
+): string | null {
+  if (!record) return null;
+  return record.fileStorageKey ?? record.r2StorageKey ?? record.file_storage_key ?? record.r2_storage_key ?? null;
+}
+
+/**
+ * Normalizes student resume fields for backward and forward compatibility.
+ * When either `resumeUrl` or `resumeR2Url` is provided, ensures both are populated.
+ */
+export function normalizeStudentResumeInput<T extends Record<string, any>>(
+  input: T
+): T & { resumeUrl: string | null; resumeR2Url: string | null } {
+  const url = input.resumeUrl ?? input.resumeR2Url ?? input.resume_url ?? input.resume_r2_url ?? null;
+  return {
+    ...input,
+    resumeUrl: url,
+    resumeR2Url: url
+  };
+}
+
+/**
+ * Normalizes evidence storage key fields for backward and forward compatibility.
+ * When either `fileStorageKey` or `r2StorageKey` is provided, ensures both are populated.
+ */
+export function normalizeEvidenceStorageInput<T extends Record<string, any>>(
+  input: T
+): T & { fileStorageKey: string | null; r2StorageKey: string | null } {
+  const key = input.fileStorageKey ?? input.r2StorageKey ?? input.file_storage_key ?? input.r2_storage_key ?? null;
+  return {
+    ...input,
+    fileStorageKey: key,
+    r2StorageKey: key
+  };
+}
+
 // ============================================================================
 // Drizzle Relations
 // ============================================================================
@@ -554,7 +790,12 @@ export const tenantsRelations = relations(tenants, ({ many }) => ({
   placementDrives: many(placementDrives),
   auditEvents: many(auditEvents),
   notifications: many(notifications),
-  invitations: many(invitations)
+  invitations: many(invitations),
+  skillGapAnalyses: many(skillGapAnalyses),
+  placementPredictions: many(placementPredictions),
+  learningRecommendations: many(learningRecommendations),
+  agentExecutionLogs: many(agentExecutionLogs),
+  agentWorkflows: many(agentWorkflows)
 }));
 
 export const usersRelations = relations(users, ({ one, many }) => ({
@@ -568,7 +809,8 @@ export const usersRelations = relations(users, ({ one, many }) => ({
   }),
   notifications: many(notifications),
   auditEvents: many(auditEvents),
-  sentInvitations: many(invitations)
+  sentInvitations: many(invitations),
+  agentLogs: many(agentExecutionLogs)
 }));
 
 export const studentsRelations = relations(students, ({ one, many }) => ({
@@ -584,12 +826,18 @@ export const studentsRelations = relations(students, ({ one, many }) => ({
   evidence: many(evidenceRecords),
   assessments: many(skillAssessments),
   semesters: many(academicSemesters),
-  applications: many(applications)
+  applications: many(applications),
+  gapAnalyses: many(skillGapAnalyses),
+  predictions: many(placementPredictions),
+  recommendations: many(learningRecommendations)
 }));
 
 export const skillsRelations = relations(skills, ({ many }) => ({
   studentSkills: many(studentSkills),
-  jobRequirements: many(jobRequirements)
+  jobRequirements: many(jobRequirements),
+  evidence: many(evidenceRecords),
+  assessments: many(skillAssessments),
+  recommendations: many(learningRecommendations)
 }));
 
 export const studentSkillsRelations = relations(studentSkills, ({ one }) => ({
@@ -611,6 +859,51 @@ export const studentSkillsRelations = relations(studentSkills, ({ one }) => ({
   })
 }));
 
+export const evidenceRecordsRelations = relations(evidenceRecords, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [evidenceRecords.tenantId],
+    references: [tenants.id]
+  }),
+  student: one(students, {
+    fields: [evidenceRecords.studentId],
+    references: [students.id]
+  }),
+  skill: one(skills, {
+    fields: [evidenceRecords.skillId],
+    references: [skills.id]
+  }),
+  validator: one(users, {
+    fields: [evidenceRecords.validatedBy],
+    references: [users.id]
+  })
+}));
+
+export const skillAssessmentsRelations = relations(skillAssessments, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [skillAssessments.tenantId],
+    references: [tenants.id]
+  }),
+  student: one(students, {
+    fields: [skillAssessments.studentId],
+    references: [students.id]
+  }),
+  skill: one(skills, {
+    fields: [skillAssessments.skillId],
+    references: [skills.id]
+  })
+}));
+
+export const academicSemestersRelations = relations(academicSemesters, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [academicSemesters.tenantId],
+    references: [tenants.id]
+  }),
+  student: one(students, {
+    fields: [academicSemesters.studentId],
+    references: [students.id]
+  })
+}));
+
 export const companiesRelations = relations(companies, ({ many }) => ({
   jobRoles: many(jobRoles)
 }));
@@ -621,7 +914,19 @@ export const jobRolesRelations = relations(jobRoles, ({ one, many }) => ({
     references: [companies.id]
   }),
   requirements: many(jobRequirements),
-  placementDrives: many(placementDrives)
+  placementDrives: many(placementDrives),
+  gapAnalyses: many(skillGapAnalyses)
+}));
+
+export const jobRequirementsRelations = relations(jobRequirements, ({ one }) => ({
+  jobRole: one(jobRoles, {
+    fields: [jobRequirements.jobRoleId],
+    references: [jobRoles.id]
+  }),
+  skill: one(skills, {
+    fields: [jobRequirements.skillId],
+    references: [skills.id]
+  })
 }));
 
 export const placementDrivesRelations = relations(placementDrives, ({ one, many }) => ({
@@ -633,7 +938,8 @@ export const placementDrivesRelations = relations(placementDrives, ({ one, many 
     fields: [placementDrives.jobRoleId],
     references: [jobRoles.id]
   }),
-  applications: many(applications)
+  applications: many(applications),
+  predictions: many(placementPredictions)
 }));
 
 export const applicationsRelations = relations(applications, ({ one, many }) => ({
@@ -700,7 +1006,77 @@ export const invitationsRelations = relations(invitations, ({ one }) => ({
   })
 }));
 
-// Export inferred types for safety
+export const skillGapAnalysesRelations = relations(skillGapAnalyses, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [skillGapAnalyses.tenantId],
+    references: [tenants.id]
+  }),
+  student: one(students, {
+    fields: [skillGapAnalyses.studentId],
+    references: [students.id]
+  }),
+  jobRole: one(jobRoles, {
+    fields: [skillGapAnalyses.jobRoleId],
+    references: [jobRoles.id]
+  })
+}));
+
+export const placementPredictionsRelations = relations(placementPredictions, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [placementPredictions.tenantId],
+    references: [tenants.id]
+  }),
+  student: one(students, {
+    fields: [placementPredictions.studentId],
+    references: [students.id]
+  }),
+  drive: one(placementDrives, {
+    fields: [placementPredictions.driveId],
+    references: [placementDrives.id]
+  })
+}));
+
+export const learningRecommendationsRelations = relations(learningRecommendations, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [learningRecommendations.tenantId],
+    references: [tenants.id]
+  }),
+  student: one(students, {
+    fields: [learningRecommendations.studentId],
+    references: [students.id]
+  }),
+  skill: one(skills, {
+    fields: [learningRecommendations.skillId],
+    references: [skills.id]
+  }),
+  targetRole: one(jobRoles, {
+    fields: [learningRecommendations.targetRoleId],
+    references: [jobRoles.id]
+  })
+}));
+
+export const agentExecutionLogsRelations = relations(agentExecutionLogs, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [agentExecutionLogs.tenantId],
+    references: [tenants.id]
+  }),
+  triggerUser: one(users, {
+    fields: [agentExecutionLogs.triggeredBy],
+    references: [users.id]
+  })
+}));
+
+export const agentWorkflowsRelations = relations(agentWorkflows, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [agentWorkflows.tenantId],
+    references: [tenants.id]
+  })
+}));
+
+// ============================================================================
+// Exported Inferred Types for Safety
+// ============================================================================
+
 export type Tenant = typeof tenants.$inferSelect;
 export type NewTenant = typeof tenants.$inferInsert;
 
@@ -715,6 +1091,24 @@ export type NewSkill = typeof skills.$inferInsert;
 
 export type StudentSkill = typeof studentSkills.$inferSelect;
 export type NewStudentSkill = typeof studentSkills.$inferInsert;
+
+export type EvidenceRecord = typeof evidenceRecords.$inferSelect;
+export type NewEvidenceRecord = typeof evidenceRecords.$inferInsert;
+
+export type SkillAssessment = typeof skillAssessments.$inferSelect;
+export type NewSkillAssessment = typeof skillAssessments.$inferInsert;
+
+export type AcademicSemester = typeof academicSemesters.$inferSelect;
+export type NewAcademicSemester = typeof academicSemesters.$inferInsert;
+
+export type Company = typeof companies.$inferSelect;
+export type NewCompany = typeof companies.$inferInsert;
+
+export type JobRole = typeof jobRoles.$inferSelect;
+export type NewJobRole = typeof jobRoles.$inferInsert;
+
+export type JobRequirement = typeof jobRequirements.$inferSelect;
+export type NewJobRequirement = typeof jobRequirements.$inferInsert;
 
 export type PlacementDrive = typeof placementDrives.$inferSelect;
 export type NewPlacementDrive = typeof placementDrives.$inferInsert;
@@ -733,3 +1127,18 @@ export type NewNotification = typeof notifications.$inferInsert;
 
 export type Invitation = typeof invitations.$inferSelect;
 export type NewInvitation = typeof invitations.$inferInsert;
+
+export type SkillGapAnalysis = typeof skillGapAnalyses.$inferSelect;
+export type NewSkillGapAnalysis = typeof skillGapAnalyses.$inferInsert;
+
+export type PlacementPrediction = typeof placementPredictions.$inferSelect;
+export type NewPlacementPrediction = typeof placementPredictions.$inferInsert;
+
+export type LearningRecommendation = typeof learningRecommendations.$inferSelect;
+export type NewLearningRecommendation = typeof learningRecommendations.$inferInsert;
+
+export type AgentExecutionLog = typeof agentExecutionLogs.$inferSelect;
+export type NewAgentExecutionLog = typeof agentExecutionLogs.$inferInsert;
+
+export type AgentWorkflow = typeof agentWorkflows.$inferSelect;
+export type NewAgentWorkflow = typeof agentWorkflows.$inferInsert;

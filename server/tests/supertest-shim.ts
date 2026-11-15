@@ -32,6 +32,13 @@ export class TestRequest implements PromiseLike<Response> {
   private path: string;
   private headers: Record<string, string> = {};
   private bodyData: any = undefined;
+  private formFields: Array<{ name: string; value: string }> = [];
+  private formAttachments: Array<{
+    name: string;
+    buffer: Buffer;
+    filename: string;
+    contentType?: string;
+  }> = [];
 
   constructor(app: any, method: string, path: string) {
     this.app = app;
@@ -47,6 +54,45 @@ export class TestRequest implements PromiseLike<Response> {
         this.headers[k.toLowerCase()] = String(v);
       }
     }
+    return this;
+  }
+
+  field(name: string, value: any): this {
+    this.formFields.push({ name, value: String(value) });
+    return this;
+  }
+
+  attach(
+    name: string,
+    file: Buffer | string,
+    optionsOrFilename?: string | { filename?: string; contentType?: string }
+  ): this {
+    let buffer: Buffer;
+    let filename = 'file.bin';
+    let contentType: string | undefined = undefined;
+
+    if (Buffer.isBuffer(file)) {
+      buffer = file;
+    } else if (typeof file === 'string') {
+      buffer = Buffer.from(file);
+    } else {
+      buffer = Buffer.alloc(0);
+    }
+
+    if (typeof optionsOrFilename === 'string') {
+      filename = optionsOrFilename;
+    } else if (optionsOrFilename && typeof optionsOrFilename === 'object') {
+      if (optionsOrFilename.filename) filename = optionsOrFilename.filename;
+      if (optionsOrFilename.contentType) contentType = optionsOrFilename.contentType;
+    }
+
+    this.formAttachments.push({
+      name,
+      buffer,
+      filename,
+      contentType
+    });
+
     return this;
   }
 
@@ -67,6 +113,45 @@ export class TestRequest implements PromiseLike<Response> {
     return this;
   }
 
+  private buildMultipartBuffer(boundary: string): Buffer {
+    const parts: Buffer[] = [];
+
+    // Append regular text fields
+    for (const field of this.formFields) {
+      parts.push(
+        Buffer.from(
+          `--${boundary}\r\nContent-Disposition: form-data; name="${field.name}"\r\n\r\n${field.value}\r\n`
+        )
+      );
+    }
+
+    // Append file attachments
+    for (const file of this.formAttachments) {
+      const ext = file.filename.split('.').pop()?.toLowerCase();
+      let mime = file.contentType;
+      if (!mime) {
+        if (ext === 'pdf') mime = 'application/pdf';
+        else if (ext === 'png') mime = 'image/png';
+        else if (ext === 'jpg' || ext === 'jpeg') mime = 'image/jpeg';
+        else if (ext === 'docx')
+          mime = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+        else mime = 'application/octet-stream';
+      }
+
+      const header = Buffer.from(
+        `--${boundary}\r\nContent-Disposition: form-data; name="${file.name}"; filename="${file.filename}"\r\nContent-Type: ${mime}\r\n\r\n`
+      );
+      parts.push(header);
+      parts.push(file.buffer);
+      parts.push(Buffer.from('\r\n'));
+    }
+
+    // Final boundary
+    parts.push(Buffer.from(`--${boundary}--\r\n`));
+
+    return Buffer.concat(parts);
+  }
+
   private execute(): Promise<Response> {
     return new Promise((resolve, reject) => {
       try {
@@ -76,7 +161,13 @@ export class TestRequest implements PromiseLike<Response> {
         req.url = this.path;
 
         let payloadBuffer: Buffer | null = null;
-        if (this.bodyData !== undefined) {
+
+        if (this.formAttachments.length > 0 || this.formFields.length > 0) {
+          const boundary = `----CarrerSyncFormBoundary${Date.now()}${Math.floor(Math.random() * 100000)}`;
+          payloadBuffer = this.buildMultipartBuffer(boundary);
+          this.headers['content-type'] = `multipart/form-data; boundary=${boundary}`;
+          this.headers['content-length'] = String(payloadBuffer.length);
+        } else if (this.bodyData !== undefined) {
           if (typeof this.bodyData === 'string') {
             payloadBuffer = Buffer.from(this.bodyData);
             if (!this.headers['content-type']) {
@@ -163,10 +254,13 @@ export class TestRequest implements PromiseLike<Response> {
           throw new Error('Provided app is not a valid Express application');
         }
 
-        if (payloadBuffer) {
-          req.push(payloadBuffer);
-        }
-        req.push(null);
+        process.nextTick(() => {
+          if (payloadBuffer) {
+            req.push(payloadBuffer);
+          }
+          req.push(null);
+          (req as any).complete = true;
+        });
       } catch (err) {
         reject(err);
       }

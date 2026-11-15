@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   User,
   GraduationCap,
@@ -11,7 +11,12 @@ import {
   Edit2,
   Save,
   CheckCircle2,
-  FolderGit2
+  FolderGit2,
+  FileText,
+  UploadCloud,
+  Download,
+  Trash2,
+  Clock
 } from 'lucide-react';
 import PageHeader from '../../components/ui/PageHeader';
 import Card from '../../components/ui/Card';
@@ -19,10 +24,16 @@ import Button from '../../components/ui/Button';
 import Input from '../../components/ui/Input';
 import Badge from '../../components/ui/Badge';
 import StatusBadge from '../../components/ui/StatusBadge';
+import DocumentUploadModal from '../../components/documents/DocumentUploadModal';
+import fileService from '../../services/fileService';
 
 export default function StudentProfile() {
   const [isEditing, setIsEditing] = useState(false);
   const [savedSuccess, setSavedSuccess] = useState(false);
+  const [uploadedDocuments, setUploadedDocuments] = useState([]);
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const [modalInitialType, setModalInitialType] = useState('resume');
+  const [loadingDocs, setLoadingDocs] = useState(false);
 
   const [formData, setFormData] = useState({
     name: 'Priya Sharma',
@@ -38,6 +49,42 @@ export default function StudentProfile() {
     portfolio: 'https://priyasharma.me',
     leetcode: 'https://leetcode.com/priya_codes'
   });
+
+  const loadDocuments = async () => {
+    try {
+      setLoadingDocs(true);
+      const res = await fileService.listDocuments();
+      if (res && res.documents) {
+        setUploadedDocuments(res.documents);
+      }
+    } catch {
+      // Fallback
+    } finally {
+      setLoadingDocs(false);
+    }
+  };
+
+  useEffect(() => {
+    loadDocuments();
+  }, []);
+
+  const handleDownload = async (doc) => {
+    try {
+      await fileService.downloadFile(doc.id, doc.original_filename);
+    } catch (err) {
+      alert('Download error: ' + err.message);
+    }
+  };
+
+  const handleDelete = async (docId) => {
+    if (!window.confirm('Are you sure you want to delete this document?')) return;
+    try {
+      await fileService.deleteFile(docId);
+      setUploadedDocuments((prev) => prev.filter((d) => d.id !== docId));
+    } catch (err) {
+      alert('Delete error: ' + err.message);
+    }
+  };
 
   const breadcrumbs = [
     { label: 'Student', href: '/student' },
@@ -214,6 +261,98 @@ export default function StudentProfile() {
         </div>
       </Card>
 
+      {/* Institutional Document & Resume Vault Card (Phase 08) */}
+      <Card className="p-6 border-slate-200">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+          <div>
+            <div className="flex items-center gap-2">
+              <FileText className="h-5 w-5 text-indigo-600" />
+              <h3 className="text-sm font-bold text-slate-900">Document Vault & Student Resumes</h3>
+              <Badge variant="emerald" size="sm">Encrypted & Isolated</Badge>
+            </div>
+            <p className="text-xs text-slate-500 mt-1">
+              Upload your official resume, academic degrees, and verified certificates.
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <Button
+              onClick={() => {
+                setModalInitialType('resume');
+                setIsUploadModalOpen(true);
+              }}
+              variant="primary"
+              size="sm"
+            >
+              <UploadCloud className="h-4 w-4 mr-1.5" />
+              Upload Resume
+            </Button>
+            <Button
+              onClick={() => {
+                setModalInitialType('academic_certificate');
+                setIsUploadModalOpen(true);
+              }}
+              variant="outline"
+              size="sm"
+            >
+              <Award className="h-4 w-4 mr-1.5" />
+              Upload Certificate
+            </Button>
+          </div>
+        </div>
+
+        <div className="mt-4">
+          {uploadedDocuments.length === 0 ? (
+            <div className="p-6 text-center border border-dashed border-slate-200 rounded-xl bg-slate-50/50">
+              <FileText className="h-8 w-8 text-slate-300 mx-auto mb-2" />
+              <p className="text-xs font-semibold text-slate-600">No documents uploaded yet</p>
+              <p className="text-[11px] text-slate-400 mt-0.5">
+                Upload your resume in PDF or DOCX format to enable automated skill profiling.
+              </p>
+            </div>
+          ) : (
+            <div className="divide-y divide-slate-100">
+              {uploadedDocuments.map((doc) => (
+                <div key={doc.id} className="py-3 flex items-center justify-between gap-4 hover:bg-slate-50/50 px-2 rounded-lg transition-colors">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg shrink-0">
+                      <FileText className="h-4 w-4" />
+                    </div>
+                    <div className="min-w-0 truncate">
+                      <p className="text-xs font-semibold text-slate-900 truncate">
+                        {doc.original_filename}
+                      </p>
+                      <div className="flex items-center gap-2 text-[10px] text-slate-400 mt-0.5">
+                        <span className="capitalize">{doc.document_type.replace('_', ' ')}</span>
+                        <span>•</span>
+                        <span>{(doc.file_size / (1024 * 1024)).toFixed(2)} MB</span>
+                        <span>•</span>
+                        <span>{new Date(doc.created_at).toLocaleDateString()}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-1 shrink-0">
+                    <button
+                      onClick={() => handleDownload(doc)}
+                      className="p-1.5 text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+                      title="Download document"
+                    >
+                      <Download className="h-4 w-4" />
+                    </button>
+                    <button
+                      onClick={() => handleDelete(doc.id)}
+                      className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
+                      title="Delete document"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </Card>
+
       {/* Projects & Certifications Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Featured Projects */}
@@ -281,6 +420,13 @@ export default function StudentProfile() {
           </div>
         </Card>
       </div>
+
+      <DocumentUploadModal
+        isOpen={isUploadModalOpen}
+        onClose={() => setIsUploadModalOpen(false)}
+        onSuccess={loadDocuments}
+        initialType={modalInitialType}
+      />
     </div>
   );
 }

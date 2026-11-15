@@ -164,6 +164,28 @@ describe('Auth API Routes Integration (/api/v1/auth)', () => {
       expect(data.success).toBe(false);
       expect(data.error).toBe('Validation failed');
     });
+
+    it('should reject public registration for superadmin role with 403 SUPERADMIN_REGISTRATION_PROHIBITED', async () => {
+      const payload = {
+        email: 'attacker@carrersync.io',
+        password: 'AttackerPassword123!',
+        fullName: 'Attacker Super Admin',
+        role: 'superadmin',
+        tenantId: testTenantId,
+      };
+
+      const res = await app.request('/api/v1/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      expect(res.status).toBe(403);
+      const data = (await res.json()) as any;
+      expect(data.success).toBe(false);
+      expect(data.code).toBe('SUPERADMIN_REGISTRATION_PROHIBITED');
+      expect(data.error).toContain('Super Admin registration is prohibited');
+    });
   });
 
   describe('POST /api/v1/auth/login', () => {

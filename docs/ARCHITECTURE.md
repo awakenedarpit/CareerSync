@@ -576,3 +576,92 @@ CarrerSync implements an agentic AI architecture that guarantees **100% operatio
    - *Predictive Analytics*: Weighted multi-factor readiness scoring formula.
    - *Drive Orchestration*: Deterministic finite-state machine (FSM).
 3. **Core Platform Operations Immunity**: Critical business logic—including authentication, password validation, tenant isolation, role verification, academic eligibility evaluation, and drive shortlisting—**never invokes external LLMs**. Core decisions remain tamper-proof, auditable, and mathematically deterministic.
+
+---
+
+## 11. Phase 07: Database & Authentication Reconciliation Specification
+
+### 11.1 Live Database Catalog Discovery & Audit
+A catalog-level discovery was executed against the active Neon Serverless PostgreSQL instance (`neondb` on PostgreSQL 18.7), querying `information_schema` and `pg_catalog` via `scripts/inspect_live_db.py` and `scripts/inspect_live_db.ts`:
+- **Physical Relational Inventory**: Exactly **22 relational tables** (21 application domain tables + 1 `alembic_version` table tracking revision `fdf3af0b3748`).
+- **Column Volume**: Exactly **207 columns** with data types, nullability, and application-layer defaults.
+- **Foreign Key Cascades**: **44 foreign keys**, with all tenant-child domain tables enforcing `ON DELETE CASCADE` referencing `tenants.id`.
+- **Indexing**: **85 indexes** (22 primary keys, 12 unique constraints, and 51 composite tenancy and query indexes).
+- **Enum Catalog State**: 0 native PostgreSQL enums in `pg_type`/`pg_enum`; domain enums stored as `character varying(50)` (and `character varying(19)` on `users.role`), with application-layer validation.
+- **Row-Level Security (RLS) Baseline**: Live database catalogs indicated `rls_enabled = false` and 0 active policies in `pg_policies`, establishing that multi-tenant isolation currently exists primarily at the application middleware and query composite index layer.
+
+### 11.2 Multi-Tenant RLS Pooling Isolation Hardening
+Because connection poolers (Neon connection pooler, PgBouncer) share physical database sessions across diverse requests, executing `SET app.current_tenant_id` at the session level introduces severe risk of tenant context leaking to subsequent requests. In `server/src/db/client.ts`, `withTenantContext` has been hardened to eliminate pooling leakage:
+1. **Dedicated Pool Client**: Acquires a dedicated client instance via `pool.connect()`.
+2. **Transaction Scope**: Explicitly executes `BEGIN`, ensuring all operations remain isolated within a database transaction.
+3. **Transaction-Local GUC Configuration**: Sets tenant context using `SELECT set_config('app.current_tenant_id', :tenantId, true)` and `SET LOCAL app.current_tenant_id = :tenantId`. The third parameter `is_local = true` ensures PostgreSQL automatically discards the setting when the transaction commits or aborts.
+4. **Guaranteed Context Teardown**: In a mandatory `finally` block before releasing the client back to the pool, executes `RESET app.current_tenant_id` and `SELECT set_config('app.current_tenant_id', '', false)`.
+5. **Injection Defense**: Strictly sanitizes and validates tenant UUID format prior to GUC assignment.
+
+### 11.3 Drizzle ORM Schema Reconciliation & Non-Destructive Column Compatibility
+`server/src/db/schema.ts` has been established as the canonical source of truth for Drizzle ORM:
+- **Full Domain Coverage**: Implements all 16 canonical domain tables, the `invitations` table, and all 5 AI/analytics tables (`skill_gap_analyses`, `placement_predictions`, `learning_recommendations`, `agent_execution_logs`, `agent_workflows`).
+- **Non-Destructive Column Compatibility**:
+  - `students`: Defines canonical `resumeR2Url` (`resume_r2_url`) alongside `resumeUrl` (`resume_url`), backed by `resolveStudentResumeUrl` dual-read resolver and `normalizeStudentResumeInput`.
+  - `evidenceRecords`: Defines canonical `r2StorageKey` (`r2_storage_key`) alongside `fileStorageKey` (`file_storage_key`), backed by `resolveEvidenceStorageKey` dual-read resolver and `normalizeEvidenceStorageInput`.
+  - Ensures zero existing columns are dropped or broken while maintaining forward compatibility.
+- **Role Hierarchy**: `userRoleEnum` explicitly includes `tpo_admin` alongside `superadmin`, `college_admin`, `faculty_coordinator`, `recruiter`, and `student`.
+
+### 11.4 Authentication Provider Architectural Decision
+**Decision**: CarrerSync preserves its custom, self-hosted **stateless JWT (HS256) + bcryptjs (10 salt rounds)** authentication engine, explicitly rejecting migrations to Neon Auth (Managed Better Auth) or external third-party identity providers (Auth0, Clerk, Supabase Auth).
+
+**Architectural Justification**:
+1. **Strict ₹0 Zero-Cost Compliance**: External identity providers charge per Monthly Active User (MAU) beyond minimal free tiers. For university cohorts with tens of thousands of active students and alumni, external auth creates uncontrolled monthly financial liabilities.
+2. **Multi-Tenant Data Ownership & Colocation**: Authentication credentials (`users.password_hash`), tenant bindings (`users.tenant_id`), roles, and student profiles reside directly within CarrerSync's Neon PostgreSQL instance, guaranteeing atomic transactions and zero cross-cloud metadata sync delays.
+3. **Open Standards & Runtime Portability**: Standard RFC 7519 JWT and bcrypt are 100% portable across Node.js Express, Python FastAPI, Cloudflare Workers, and edge runtimes with zero vendor lock-in.
+4. **Self-Contained Offline Verification**: The test suites (`Vitest` in `server/` and `Pytest` in `backend/`) run 100% offline with zero external network dependencies, ensuring lightning-fast CI/CD execution.
+5. **Zero Credential or PII Egress**: No student email addresses, passwords, or session tokens are transmitted to external SaaS identity vendors.
+
+### 11.5 Five-Role RBAC & Super Admin Platform Security
+- **Role Hierarchy**:
+  - `SUPER_ADMIN`: System-wide governance, college provisioning/suspension, cross-tenant user management, audit logs.
+  - `COLLEGE_ADMIN`: Institutional placement director, company approvals, drive rules, cohort analytics.
+  - `TPO_ADMIN`: Training & Placement operational execution, student tracking, drive monitoring.
+  - `RECRUITER`: Corporate talent acquisition, candidate evaluation, interview scheduling.
+  - `STUDENT`: Candidate portfolio, verified skill proofs, drive applications.
+- **Server-Side Enforcement**: All `/api/v1/super-admin/*` endpoints enforce `requireAuth` and `requireRole(['superadmin'])`. Unauthorized callers receive 401 `MISSING_BEARER_TOKEN` or 403 `FORBIDDEN_INSUFFICIENT_ROLE`.
+- **Public Registration Protection**: `POST /api/v1/auth/register` explicitly forbids `role: 'superadmin'`, returning 403 `SUPERADMIN_REGISTRATION_PROHIBITED`. Platform Super Admins must be provisioned out-of-band via CLI bootstrapper (`scripts/provision_superadmin.ts` / `.py`).
+- **Cryptographic Invitation Lifecycle**: Expiring single-use tokens generated with 192-bit cryptographic entropy (`crypto.randomBytes(24)`), enforced with atomic redemption, status transition (`pending` → `accepted` / `revoked` / `expired`), and 410 error on re-use.
+
+### 11.6 Student Privacy & Ethical Data Protection
+- **Under-18 Protection**: Relational database CHECK constraint on `students.date_of_birth` strictly enforces age $\ge 18$.
+- **Zero Behavioral Surveillance**: The platform explicitly forbids background keystroke logging, webcam monitoring, eye-tracking, or ambient surveillance.
+- **No Student Data Egress to External AI**: No student PII, academic transcripts, or resume data is forwarded to proprietary external AI models. All profiling and evaluation workflows run through deterministic rule fallbacks or offline AST parsers.
+
+---
+
+## 12. Phase 08 — Provider-Independent File Storage Subsystem
+
+### 12.1 Overview & Provider Independence
+CarrerSync implements a provider-independent storage architecture under `server/src/storage/` governed by the `IStorageService` interface. The subsystem decouples application controllers and student workflows from specific cloud vendors, enabling seamless operation across local disk (development/test) and S3-compatible cloud storage (production).
+
+### 12.2 Storage Engines
+1. **Local Disk Storage Engine (`local.storage.ts`)**:
+   - Designed strictly for **Development, CI, and Automated Testing**.
+   - Implements strict path traversal prevention, restricting operations to `STORAGE_LOCAL_DIRECTORY`.
+   - Files are written with mode `0o600` (read/write by owner only); directories with `0o700`.
+   - **Ephemeral Notice**: Render's container filesystem is ephemeral and resets on each redeploy. Local storage is never used as persistent production storage.
+2. **S3-Compatible Cloud Storage Engine (`s3-compatible.storage.ts`)**:
+   - Production adapter built on AWS SDK v3 (`@aws-sdk/client-s3`), supporting Neon Object Storage, MinIO, and AWS S3.
+   - Configured with `forcePathStyle: true` and AWS SigV4 presigned download URLs.
+
+### 12.3 Relational Document Registry (`documents` Table)
+File metadata is persisted in the PostgreSQL `documents` table, enforcing:
+- **Tenant Isolation**: Every file record is bound to `tenant_id` with `ON DELETE CASCADE`.
+- **Owner Binding**: Bound to `owner_user_id` (`users.id`).
+- **Integrity**: SHA-256 cryptographic checksum verified on upload.
+- **Categories**: `resume`, `academic_certificate`, `technical_certificate`, `project_evidence`, `portfolio_attachment`, `placement_document`.
+
+### 12.4 Validation & Five-Role Access Control
+- **Validation**: Enforces 5 MB file size limit, MIME type whitelist, file extension match, and magic binary signatures (PDF `%PDF-`, PNG `\x89PNG`, JPEG `\xFF\xD8\xFF`, DOCX `PK\x03\x04`).
+- **Access Control**:
+  - `STUDENT`: Can access, download, and delete only their own documents.
+  - `TPO_ADMIN` & `COLLEGE_ADMIN`: Can view/download documents belonging to their assigned college tenant.
+  - `RECRUITER`: Permitted access only to shared placement resumes/evidence within their authorized drive scope.
+  - `SUPER_ADMIN`: Platform compliance view with explicit audit event logging.
+- **Delivery**: Binary streams served with `Content-Disposition: attachment; filename="..."`, `X-Content-Type-Options: nosniff`, and `Cache-Control: private, no-cache`.

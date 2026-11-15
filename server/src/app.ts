@@ -6,6 +6,7 @@ import { errorHandler, notFoundHandler } from './middleware/error';
 import { authRoutes } from './routes/auth.routes';
 import { tenantRoutes } from './routes/tenant.routes';
 import { superAdminRoutes } from './routes/superadmin.routes';
+import fileRoutes from './routes/file.routes';
 import { getHealthData, getApiHealthData } from './routes/health.routes';
 
 const app: Express = express();
@@ -89,6 +90,7 @@ app.use('/api', tenantMiddleware);
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/tenants', tenantRoutes);
 app.use('/api/v1/super-admin', superAdminRoutes);
+app.use('/api/v1/files', fileRoutes);
 
 // ---------------------------------------------------------------------------
 // 404 & Centralized Error Handlers

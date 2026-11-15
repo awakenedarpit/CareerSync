@@ -118,6 +118,38 @@ Statuses strictly reflect verified work.
 
 ---
 
+## Phase 07: Database & Authentication Reconciliation
+
+| Milestone / Component | Description | Status | Verification Evidence |
+| :--- | :--- | :--- | :--- |
+| **Live Database Catalog Audit** | Exhaustive catalog inspection of Neon PostgreSQL (`neondb` on PG 18.7) via standalone scripts (`scripts/inspect_live_db.py` & `inspect_live_db.ts`), cataloging 22 tables, 207 columns, 44 FKs with cascade, 85 indexes, 0 custom enums (stored as varchar), and RLS state | `COMPLETED` | Documented in `docs/DATABASE_SCHEMA_AUDIT_PHASE07.md` & `scripts/live_db_inventory.json` |
+| **Drizzle ORM Schema Reconciliation** | Reconciled `server/src/db/schema.ts` as canonical truth: 16 core domain tables, `invitations`, 5 AI/analytics tables, relations, and composite constraints matching live PostgreSQL | `COMPLETED` | Verified in `server/src/db/schema.ts`; clean compile |
+| **Non-Destructive Column Compatibility** | Dual-read support and normalization resolvers for `resumeUrl` (fallback `resume_r2_url`) and `fileStorageKey` (fallback `r2_storage_key`) ensuring zero column drops or breakages | `COMPLETED` | Implemented in `server/src/db/schema.ts`, tested in `server/tests/reconciliation.test.ts` |
+| **Multi-Tenant RLS Pooling Isolation** | Hardened `withTenantContext` in `server/src/db/client.ts` with dedicated pool client (`pool.connect()`), transaction boundaries, `SET LOCAL app.current_tenant_id`, and guaranteed `finally` reset preventing connection pool context leakage | `COMPLETED` | Verified in `server/src/db/client.ts`, 14 tests in `server/tests/reconciliation.test.ts` |
+| **Authentication Provider Decision** | Preserved custom stateless JWT (HS256) + bcryptjs (10 salt rounds) authentication engine inside Node.js Express, formally rejecting migrations to Neon Auth / external auth to eliminate MAU fees, maintain data colocation, and prevent lock-in | `COMPLETED` | Documented in `docs/ARCHITECTURE.md` Section 11 |
+| **Five-Role RBAC & Public Registration Gate** | Server-side RBAC validation across 5 roles (`SUPER_ADMIN`, `COLLEGE_ADMIN`, `TPO_ADMIN`, `RECRUITER`, `STUDENT`); public Super Admin registration blocked with 403 `SUPERADMIN_REGISTRATION_PROHIBITED`; out-of-band CLI bootstrapper | `COMPLETED` | Tested in `server/tests/auth.test.ts` & `server/tests/superadmin.test.ts` |
+| **Student Privacy & Ethical Data Protection** | Relational under-18 CHECK constraint (`date_of_birth <= CURRENT_DATE - INTERVAL '18 years'`); zero behavioral surveillance (no keystroke/webcam tracking); zero student PII or resume data egress to external AI; deterministic offline rule fallbacks | `COMPLETED` | Verified in database schema, `ai.service.js`, and compliance policies |
+| **Automated Test Regression Gate** | Full regression verification: 127/127 tests in `server/`, 113/113 tests in `workers/`, 12/12 tests in `backend/`, clean `npm run typecheck`, and 300ms clean Vite production build | `COMPLETED` | 100% test pass rate across all active and standby runtimes |
+| **Strict ₹0 Zero-Cost Budget Compliance** | Render Free Tier Web Service + Neon Serverless PostgreSQL Free Tier + Vercel / Render Static Free Tier + Provider-independent storage abstraction; zero paid cloud services or API dependencies | `COMPLETED` | ₹0 operational cost guaranteed |
+
+---
+
+## Phase 08: File Storage Architecture & Secure Upload System
+
+| Milestone / Component | Description | Status | Verification Evidence |
+| :--- | :--- | :--- | :--- |
+| **Storage Provider Research & Audit** | Exhaustive official documentation evaluation of Neon Object Storage across 10 points (S3 compatibility, `aws-ap-southeast-1`, 5GB allowance, cardless Free Plan, no billing activation); formal decision marking production storage as blocked pending approval | `COMPLETED` | Documented in `docs/STORAGE_ARCHITECTURE_PHASE08.md` |
+| **Provider-Independent Storage Abstraction** | Authoritative contract (`IStorageService`), types, errors, factory (`StorageFactory`), and generic S3-compatible cloud storage adapter (`S3CompatibleStorageEngine`) built on AWS SDK v3 | `COMPLETED` | Implemented in `server/src/storage/` |
+| **Local Development Storage Engine** | Isolated disk storage engine (`LocalStorageEngine`) with mode `0o600`, strict path traversal prevention, SHA-256 calculation, and explicit ephemeral Render warnings | `COMPLETED` | Verified in `server/src/storage/local.storage.ts` |
+| **File Validation & Magic Signature Detection** | Binary signature verification (PDF, PNG, JPEG, DOCX), 5MB size limit, MIME/extension verification, and dangerous character sanitization | `COMPLETED` | Verified in `server/src/utils/file-validator.ts` |
+| **Relational Metadata Registry (`documents`)** | Canonical `documents` table with tenant isolation, owner binding, SHA-256 checksum, document categories, relations, and non-destructive integration | `COMPLETED` | Implemented in `server/src/db/schema.ts` |
+| **REST Upload & Secure Download API** | Multipart upload endpoint (`POST /upload`), metadata endpoint (`GET /:id`), secure authenticated streaming (`GET /:id/download`) with `nosniff`, and deletion (`DELETE /:id`) | `COMPLETED` | Verified in `server/src/routes/file.routes.ts` |
+| **Five-Role Access Control & Tenant Isolation** | Strict server-side enforcement: Students access own documents only; TPO Admin accesses own tenant; Recruiters access shared placement files; cross-tenant blocked | `COMPLETED` | 22/22 tests passing in `server/tests/files.test.ts` |
+| **Frontend Document & Resume Integration** | Student Profile Document Vault card, DocumentUploadModal component, and fileService integration in React frontend with progress bar and download anchors | `COMPLETED` | Verified in `client/src/pages/student/Profile.jsx`, 364ms clean build |
+| **Automated Test Gate & Zero Regressions** | Full suite verification: 149/149 tests in `server/` (10 test files), 113/113 tests in `workers/`, 12/12 in `backend/`, and 0 TypeScript errors | `COMPLETED` | 100% test pass rate across all tiers |
+
+---
+
 ## Future Phase Roadmap
 
 | Phase | Milestone | Status |

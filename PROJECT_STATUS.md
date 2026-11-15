@@ -1,7 +1,7 @@
 # CarrerSync Master Project Status Tracker
 
 > **Project**: CarrerSync — Agentic Placement Intelligence Platform  
-> **Approved Master Stack**: React, JavaScript/TypeScript, Vite, Tailwind CSS, Node.js + Express (Render Web Service), Cloudflare Workers (Standby/Rollback), Neon PostgreSQL, Drizzle ORM / SQLAlchemy 2.0 (asyncpg), Neon Auth, Cloudflare R2, Hyperdrive, Zod, OpenAPI, Provider-Independent Hybrid AI.  
+> **Approved Master Stack**: React, JavaScript/TypeScript, Vite, Tailwind CSS, Node.js + Express (Render Web Service), Standby Engine (Temporary Rollback), Neon PostgreSQL, Drizzle ORM / SQLAlchemy 2.0 (asyncpg), Provider-Independent Object Storage, Zod, OpenAPI, Provider-Independent Hybrid AI.  
 > **Policy**: Strict ₹0 Zero-Cost Architecture.
 
 **Allowed Status Values**:
@@ -47,26 +47,34 @@
 | **Super Admin Platform Portal (8 Pages)** | Platform Overview, College Management, Register College, User Management, Create User, Invitations, Audit Trail, Platform Settings | `COMPLETED` | Verified across [client/src/pages/superadmin/](file:///Users/user/CarrerSync/client/src/pages/superadmin/) and navigation |
 | **Super Admin Initial Provisioning Utilities** | Out-of-band TypeScript (`scripts/provision_superadmin.ts`) and Python (`scripts/provision_superadmin.py`) bootstrapper utilities | `COMPLETED` | Verified with `--dry-run` and documented in [scripts/README.md](file:///Users/user/CarrerSync/scripts/README.md) |
 | **Super Admin Platform Audit Trail** | Tamper-proof, immutable compliance logging for all platform and institutional mutations | `COMPLETED` | Verified in `audit_events` relational logging and `AuditLogs.jsx` viewer |
-| **Cloudflare R2 Integration** | Private student resume & code artifact storage bucket | `PLANNED` | Schema keys prepared (`resume_r2_url`, `r2_storage_key`) |
+| **Live Database Catalog Audit (Phase 07)** | Discovery of 22 tables, 207 columns, 44 foreign keys with cascade, 85 indexes, and RLS catalog status via standalone scripts (`scripts/inspect_live_db.py` / `.ts`) | `COMPLETED` | Documented in `docs/DATABASE_SCHEMA_AUDIT_PHASE07.md` |
+| **Drizzle Schema Reconciliation (Phase 07)** | Canonical Drizzle schema covering all 16 domain tables, `invitations`, and 5 AI/analytics tables with non-destructive column compatibility (`resumeUrl` & `fileStorageKey` dual-read resolvers) | `COMPLETED` | Verified in `server/src/db/schema.ts` |
+| **Multi-Tenant RLS Pooling Hardening (Phase 07)**| `withTenantContext` transaction-scoped RLS isolation helper with dedicated pool client, `SET LOCAL app.current_tenant_id`, and guaranteed `finally` reset preventing pool leakage | `COMPLETED` | Verified in `server/src/db/client.ts` and `server/tests/reconciliation.test.ts` |
+| **Authentication System Reconciliation (Phase 07)**| Formal decision preserving custom stateless JWT (HS256) + bcryptjs (10 salt rounds) for ₹0 cost, zero lock-in, data colocation, and offline test reliability; rejected external auth (Neon Auth / Clerk / Auth0) | `COMPLETED` | Documented in `docs/ARCHITECTURE.md` Section 11 |
+| **Super Admin Security & Registration Gate** | Server-side gate rejecting public Super Admin self-registration with 403 `SUPERADMIN_REGISTRATION_PROHIBITED`; out-of-band CLI bootstrapper (`scripts/provision_superadmin.ts` / `.py`); 5-role RBAC enforcement | `COMPLETED` | Verified in `server/src/routes/auth.routes.ts` & `server/tests/auth.test.ts` |
+| **Student Privacy & Ethical Data Protection** | Relational under-18 CHECK constraint (`date_of_birth <= CURRENT_DATE - INTERVAL '18 years'`); zero behavioral monitoring / surveillance; zero student PII or resume data egress to external AI; deterministic offline rule fallbacks | `COMPLETED` | Verified in database schema, `ai.service.js`, and compliance policies |
+| **Provider-Independent File Storage Subsystem (Phase 08)** | Full storage abstraction (`IStorageService`, `LocalStorageEngine`, `S3CompatibleStorageEngine`, `StorageFactory`), magic bytes verification, 5MB cap, 5-role RBAC, `documents` metadata table, download streaming, and student UI integration | `COMPLETED` | Verified in `server/src/storage/`, `server/tests/files.test.ts` (22/22 tests), and [docs/STORAGE_ARCHITECTURE_PHASE08.md](file:///Users/user/CarrerSync/docs/STORAGE_ARCHITECTURE_PHASE08.md) |
 | **AI Agents Activation** | Profiling, Skill-Gap, Predictive Analytics, Placement Orchestration | `PLANNED` | Database models & execution logs ready |
 
 ---
 
 ## Verification Test Summary
-- **Active Server Automated Test Suite (Vitest)**: **112 passed across all 8 test suites in 1.85s** (`npm test` in `server/`)
+- **Active Server Automated Test Suite (Vitest)**: **149 passed across all 10 test suites in 2.03s** (`npm test` in `server/`)
   - `crypto.test.ts`: 14 passed (Password hashing bcryptjs, salt randomness, unicode, 3-segment JWT signing, exp claim, tampering & signature checks)
   - `rbac.test.ts`: 18 passed (requireAuth, 401 MISSING_BEARER_TOKEN, EMPTY_BEARER_TOKEN, TOKEN_VERIFICATION_FAILED, MALFORMED_CLAIMS; requireRole, 401 UNAUTHENTICATED, 403 FORBIDDEN_INSUFFICIENT_ROLE across all roles)
   - `tenant.test.ts`: 14 passed (isValidUuid, enforceTenantIsolation, 403 CROSS_TENANT_VIOLATION, requireTenant 400 MISSING_TENANT_CONTEXT, 403 TENANT_SPOOFING_REJECTED via header & mutating body)
-  - `auth.test.ts`: 14 passed (POST /register, 400 TENANT_REQUIRED, malformed JSON, password length; POST /login, GET /me with verified tenant binding, POST /logout)
+  - `auth.test.ts`: 15 passed (POST /register, 403 SUPERADMIN_REGISTRATION_PROHIBITED, 400 TENANT_REQUIRED, malformed JSON, password length; POST /login, GET /me with verified tenant binding, POST /logout)
   - `tenants-api.test.ts`: 10 passed (GET /tenants, POST /tenants with slug validation & conflict detection, GET /tenants/:id by UUID and slug, GET /health, GET /api/v1/health, 404 NOT_FOUND)
   - `db-branches.test.ts`: 6 passed (404 tenant not found, 403 tenant deactivated, 409 duplicate user in tenant, 401 INVALID_CREDENTIALS for user not found and password mismatch, 409 TENANT_CONFLICT)
   - `superadmin.test.ts`: 21 passed (RBAC root protection, GET /stats, college provisioning, duplicate handling, suspension & reactivation, user lifecycle across all 5 roles, invitations, audit logs, settings)
   - `invitations.test.ts`: 15 passed (Expiring tokens across 4 roles, 409 INVITATION_ALREADY_EXISTS, 409 USER_ALREADY_EXISTS, single-use acceptance, 410 INVITATION_ALREADY_USED, 410 INVITATION_EXPIRED, refresh/resend, revocation, 400 on revoking accepted invite, comprehensive audit logging)
+  - `reconciliation.test.ts`: 14 passed (Schema exports & relations consistency, transaction-scoped RLS context isolation & connection pool leak prevention, non-destructive dual-read column compatibility, FK multi-tenant integrity)
+  - `files.test.ts`: 22 passed (Storage engine mode 0o600, path traversal prevention, magic signature detection, MIME mismatch rejection, 5MB limit, 5-role RBAC access control, authenticated download streaming, deletion cleanup, cross-tenant isolation)
 - **Active Server TypeScript Check**: `npm run typecheck` in `server/` completed with **zero type errors**
-- **Standby Edge Automated Test Suite (Vitest)**: **112 passed across 8 test suites in 1.65s** (`npm test` in `workers/`)
-- **Frontend Vite Build**: `npm run build` completed in **371ms** (`dist/` generated with zero errors across all 40 pages)
-- **Backend Pytest**: `12 passed in 2.81s` (models, repositories, services, RLS)
+- **Standby Edge Automated Test Suite (Vitest)**: **113 passed across 8 test suites in 1.47s** (`npm test` in `workers/`)
+- **Frontend Vite Build**: `npm run build` completed in **364ms** (`dist/` generated with zero errors across all 40 pages)
+- **Backend Pytest**: `12 passed in 2.77s` (models, repositories, services, RLS)
 - **Alembic Migrations**: Async migration cycle (`upgrade head` / `downgrade base`) verified
 - **Database Seeder**: 2 Tenants, 8 Skills, 3 Students, 5 Skill States, Drives, Applications seeded
 - **Express Health Check**: Verified on `GET /health` and `GET /api/v1/health`
-- **Zero-Cost Budget**: Render Free Tier Web Service + Neon PostgreSQL Free Tier + Cloudflare R2 Free Tier; no paid services introduced
+- **Zero-Cost Budget**: Render Free Tier Web Service + Neon PostgreSQL Free Tier + Provider-Independent Storage; no paid services introduced

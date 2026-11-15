@@ -1,0 +1,5342 @@
+{
+  "meta": {
+    "version": "PostgreSQL 18.7 (a21afb5) on aarch64-unknown-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit",
+    "database": "neondb",
+    "user": "neondb_owner",
+    "extensions": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  "enums": {},
+  "tables": [
+    {
+      "table_name": "academic_semesters",
+      "table_type": "BASE TABLE",
+      "row_count": 0,
+      "size_pretty": "32 kB",
+      "size_bytes": 32768,
+      "rls": {
+        "enabled": false,
+        "forced": false
+      }
+    },
+    {
+      "table_name": "agent_execution_logs",
+      "table_type": "BASE TABLE",
+      "row_count": 0,
+      "size_pretty": "32 kB",
+      "size_bytes": 32768,
+      "rls": {
+        "enabled": false,
+        "forced": false
+      }
+    },
+    {
+      "table_name": "agent_workflows",
+      "table_type": "BASE TABLE",
+      "row_count": 0,
+      "size_pretty": "32 kB",
+      "size_bytes": 32768,
+      "rls": {
+        "enabled": false,
+        "forced": false
+      }
+    },
+    {
+      "table_name": "alembic_version",
+      "table_type": "BASE TABLE",
+      "row_count": 1,
+      "size_pretty": "24 kB",
+      "size_bytes": 24576,
+      "rls": {
+        "enabled": false,
+        "forced": false
+      }
+    },
+    {
+      "table_name": "applications",
+      "table_type": "BASE TABLE",
+      "row_count": 0,
+      "size_pretty": "48 kB",
+      "size_bytes": 49152,
+      "rls": {
+        "enabled": false,
+        "forced": false
+      }
+    },
+    {
+      "table_name": "audit_events",
+      "table_type": "BASE TABLE",
+      "row_count": 0,
+      "size_pretty": "40 kB",
+      "size_bytes": 40960,
+      "rls": {
+        "enabled": false,
+        "forced": false
+      }
+    },
+    {
+      "table_name": "companies",
+      "table_type": "BASE TABLE",
+      "row_count": 0,
+      "size_pretty": "24 kB",
+      "size_bytes": 24576,
+      "rls": {
+        "enabled": false,
+        "forced": false
+      }
+    },
+    {
+      "table_name": "evidence_records",
+      "table_type": "BASE TABLE",
+      "row_count": 0,
+      "size_pretty": "48 kB",
+      "size_bytes": 49152,
+      "rls": {
+        "enabled": false,
+        "forced": false
+      }
+    },
+    {
+      "table_name": "interviews",
+      "table_type": "BASE TABLE",
+      "row_count": 0,
+      "size_pretty": "32 kB",
+      "size_bytes": 32768,
+      "rls": {
+        "enabled": false,
+        "forced": false
+      }
+    },
+    {
+      "table_name": "job_requirements",
+      "table_type": "BASE TABLE",
+      "row_count": 0,
+      "size_pretty": "32 kB",
+      "size_bytes": 32768,
+      "rls": {
+        "enabled": false,
+        "forced": false
+      }
+    },
+    {
+      "table_name": "job_roles",
+      "table_type": "BASE TABLE",
+      "row_count": 0,
+      "size_pretty": "24 kB",
+      "size_bytes": 24576,
+      "rls": {
+        "enabled": false,
+        "forced": false
+      }
+    },
+    {
+      "table_name": "learning_recommendations",
+      "table_type": "BASE TABLE",
+      "row_count": 0,
+      "size_pretty": "40 kB",
+      "size_bytes": 40960,
+      "rls": {
+        "enabled": false,
+        "forced": false
+      }
+    },
+    {
+      "table_name": "notifications",
+      "table_type": "BASE TABLE",
+      "row_count": 0,
+      "size_pretty": "40 kB",
+      "size_bytes": 40960,
+      "rls": {
+        "enabled": false,
+        "forced": false
+      }
+    },
+    {
+      "table_name": "placement_drives",
+      "table_type": "BASE TABLE",
+      "row_count": 0,
+      "size_pretty": "40 kB",
+      "size_bytes": 40960,
+      "rls": {
+        "enabled": false,
+        "forced": false
+      }
+    },
+    {
+      "table_name": "placement_predictions",
+      "table_type": "BASE TABLE",
+      "row_count": 0,
+      "size_pretty": "40 kB",
+      "size_bytes": 40960,
+      "rls": {
+        "enabled": false,
+        "forced": false
+      }
+    },
+    {
+      "table_name": "skill_assessments",
+      "table_type": "BASE TABLE",
+      "row_count": 0,
+      "size_pretty": "40 kB",
+      "size_bytes": 40960,
+      "rls": {
+        "enabled": false,
+        "forced": false
+      }
+    },
+    {
+      "table_name": "skill_gap_analyses",
+      "table_type": "BASE TABLE",
+      "row_count": 0,
+      "size_pretty": "48 kB",
+      "size_bytes": 49152,
+      "rls": {
+        "enabled": false,
+        "forced": false
+      }
+    },
+    {
+      "table_name": "skills",
+      "table_type": "BASE TABLE",
+      "row_count": 0,
+      "size_pretty": "32 kB",
+      "size_bytes": 32768,
+      "rls": {
+        "enabled": false,
+        "forced": false
+      }
+    },
+    {
+      "table_name": "student_skills",
+      "table_type": "BASE TABLE",
+      "row_count": 0,
+      "size_pretty": "48 kB",
+      "size_bytes": 49152,
+      "rls": {
+        "enabled": false,
+        "forced": false
+      }
+    },
+    {
+      "table_name": "students",
+      "table_type": "BASE TABLE",
+      "row_count": 0,
+      "size_pretty": "56 kB",
+      "size_bytes": 57344,
+      "rls": {
+        "enabled": false,
+        "forced": false
+      }
+    },
+    {
+      "table_name": "tenants",
+      "table_type": "BASE TABLE",
+      "row_count": 0,
+      "size_pretty": "32 kB",
+      "size_bytes": 32768,
+      "rls": {
+        "enabled": false,
+        "forced": false
+      }
+    },
+    {
+      "table_name": "users",
+      "table_type": "BASE TABLE",
+      "row_count": 0,
+      "size_pretty": "48 kB",
+      "size_bytes": 49152,
+      "rls": {
+        "enabled": false,
+        "forced": false
+      }
+    }
+  ],
+  "columns": {
+    "academic_semesters": [
+      {
+        "table_name": "academic_semesters",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "academic_semesters",
+        "column_name": "student_id",
+        "ordinal_position": 2,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "academic_semesters",
+        "column_name": "semester_number",
+        "ordinal_position": 3,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "integer",
+        "udt_name": "int4",
+        "character_maximum_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0
+      },
+      {
+        "table_name": "academic_semesters",
+        "column_name": "sgpa",
+        "ordinal_position": 4,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 4,
+        "numeric_scale": 2
+      },
+      {
+        "table_name": "academic_semesters",
+        "column_name": "credits_earned",
+        "ordinal_position": 5,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 4,
+        "numeric_scale": 1
+      },
+      {
+        "table_name": "academic_semesters",
+        "column_name": "backlogs_in_semester",
+        "ordinal_position": 6,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "integer",
+        "udt_name": "int4",
+        "character_maximum_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0
+      },
+      {
+        "table_name": "academic_semesters",
+        "column_name": "tenant_id",
+        "ordinal_position": 7,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "academic_semesters",
+        "column_name": "created_at",
+        "ordinal_position": 8,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "academic_semesters",
+        "column_name": "updated_at",
+        "ordinal_position": 9,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      }
+    ],
+    "agent_execution_logs": [
+      {
+        "table_name": "agent_execution_logs",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "agent_execution_logs",
+        "column_name": "agent_type",
+        "ordinal_position": 2,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 23,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "agent_execution_logs",
+        "column_name": "triggered_by",
+        "ordinal_position": 3,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "agent_execution_logs",
+        "column_name": "execution_mode",
+        "ordinal_position": 4,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 50,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "agent_execution_logs",
+        "column_name": "input_payload_digest",
+        "ordinal_position": 5,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 64,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "agent_execution_logs",
+        "column_name": "tokens_consumed",
+        "ordinal_position": 6,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "integer",
+        "udt_name": "int4",
+        "character_maximum_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0
+      },
+      {
+        "table_name": "agent_execution_logs",
+        "column_name": "latency_ms",
+        "ordinal_position": 7,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "integer",
+        "udt_name": "int4",
+        "character_maximum_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0
+      },
+      {
+        "table_name": "agent_execution_logs",
+        "column_name": "status",
+        "ordinal_position": 8,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 13,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "agent_execution_logs",
+        "column_name": "error_message",
+        "ordinal_position": 9,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "text",
+        "udt_name": "text",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "agent_execution_logs",
+        "column_name": "executed_at",
+        "ordinal_position": 10,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "agent_execution_logs",
+        "column_name": "tenant_id",
+        "ordinal_position": 11,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      }
+    ],
+    "agent_workflows": [
+      {
+        "table_name": "agent_workflows",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "agent_workflows",
+        "column_name": "workflow_name",
+        "ordinal_position": 2,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 150,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "agent_workflows",
+        "column_name": "target_entity_type",
+        "ordinal_position": 3,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 50,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "agent_workflows",
+        "column_name": "target_entity_id",
+        "ordinal_position": 4,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "agent_workflows",
+        "column_name": "current_stage",
+        "ordinal_position": 5,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 100,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "agent_workflows",
+        "column_name": "state_history",
+        "ordinal_position": 6,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "json",
+        "udt_name": "json",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "agent_workflows",
+        "column_name": "tenant_id",
+        "ordinal_position": 7,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "agent_workflows",
+        "column_name": "created_at",
+        "ordinal_position": 8,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "agent_workflows",
+        "column_name": "updated_at",
+        "ordinal_position": 9,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      }
+    ],
+    "alembic_version": [
+      {
+        "table_name": "alembic_version",
+        "column_name": "version_num",
+        "ordinal_position": 1,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 32,
+        "numeric_precision": null,
+        "numeric_scale": null
+      }
+    ],
+    "applications": [
+      {
+        "table_name": "applications",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "applications",
+        "column_name": "drive_id",
+        "ordinal_position": 2,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "applications",
+        "column_name": "student_id",
+        "ordinal_position": 3,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "applications",
+        "column_name": "status",
+        "ordinal_position": 4,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 19,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "applications",
+        "column_name": "final_decision_by",
+        "ordinal_position": 5,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "applications",
+        "column_name": "tenant_id",
+        "ordinal_position": 6,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "applications",
+        "column_name": "created_at",
+        "ordinal_position": 7,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "applications",
+        "column_name": "updated_at",
+        "ordinal_position": 8,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      }
+    ],
+    "audit_events": [
+      {
+        "table_name": "audit_events",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "audit_events",
+        "column_name": "actor_id",
+        "ordinal_position": 2,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "audit_events",
+        "column_name": "actor_email",
+        "ordinal_position": 3,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "audit_events",
+        "column_name": "action",
+        "ordinal_position": 4,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 100,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "audit_events",
+        "column_name": "resource_type",
+        "ordinal_position": 5,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 100,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "audit_events",
+        "column_name": "resource_id",
+        "ordinal_position": 6,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 100,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "audit_events",
+        "column_name": "changes_diff",
+        "ordinal_position": 7,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "json",
+        "udt_name": "json",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "audit_events",
+        "column_name": "ip_address",
+        "ordinal_position": 8,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 45,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "audit_events",
+        "column_name": "timestamp",
+        "ordinal_position": 9,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "audit_events",
+        "column_name": "tenant_id",
+        "ordinal_position": 10,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      }
+    ],
+    "companies": [
+      {
+        "table_name": "companies",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "companies",
+        "column_name": "name",
+        "ordinal_position": 2,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "companies",
+        "column_name": "industry_domain",
+        "ordinal_position": 3,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 150,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "companies",
+        "column_name": "website",
+        "ordinal_position": 4,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 512,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "companies",
+        "column_name": "created_at",
+        "ordinal_position": 5,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "companies",
+        "column_name": "updated_at",
+        "ordinal_position": 6,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      }
+    ],
+    "evidence_records": [
+      {
+        "table_name": "evidence_records",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "evidence_records",
+        "column_name": "student_id",
+        "ordinal_position": 2,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "evidence_records",
+        "column_name": "skill_id",
+        "ordinal_position": 3,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "evidence_records",
+        "column_name": "evidence_type",
+        "ordinal_position": 4,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 20,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "evidence_records",
+        "column_name": "source_url",
+        "ordinal_position": 5,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 1024,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "evidence_records",
+        "column_name": "r2_storage_key",
+        "ordinal_position": 6,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 512,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "evidence_records",
+        "column_name": "metadata_json",
+        "ordinal_position": 7,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "json",
+        "udt_name": "json",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "evidence_records",
+        "column_name": "verification_status",
+        "ordinal_position": 8,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 14,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "evidence_records",
+        "column_name": "validated_by",
+        "ordinal_position": 9,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "evidence_records",
+        "column_name": "tenant_id",
+        "ordinal_position": 10,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "evidence_records",
+        "column_name": "created_at",
+        "ordinal_position": 11,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "evidence_records",
+        "column_name": "updated_at",
+        "ordinal_position": 12,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      }
+    ],
+    "interviews": [
+      {
+        "table_name": "interviews",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "interviews",
+        "column_name": "application_id",
+        "ordinal_position": 2,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "interviews",
+        "column_name": "round_number",
+        "ordinal_position": 3,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "integer",
+        "udt_name": "int4",
+        "character_maximum_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0
+      },
+      {
+        "table_name": "interviews",
+        "column_name": "round_type",
+        "ordinal_position": 4,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 11,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "interviews",
+        "column_name": "scheduled_at",
+        "ordinal_position": 5,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "interviews",
+        "column_name": "status",
+        "ordinal_position": 6,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 9,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "interviews",
+        "column_name": "interviewer_feedback",
+        "ordinal_position": 7,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "text",
+        "udt_name": "text",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "interviews",
+        "column_name": "tenant_id",
+        "ordinal_position": 8,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "interviews",
+        "column_name": "created_at",
+        "ordinal_position": 9,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "interviews",
+        "column_name": "updated_at",
+        "ordinal_position": 10,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      }
+    ],
+    "job_requirements": [
+      {
+        "table_name": "job_requirements",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "job_requirements",
+        "column_name": "job_role_id",
+        "ordinal_position": 2,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "job_requirements",
+        "column_name": "skill_id",
+        "ordinal_position": 3,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "job_requirements",
+        "column_name": "is_mandatory",
+        "ordinal_position": 4,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "boolean",
+        "udt_name": "bool",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "job_requirements",
+        "column_name": "min_proficiency",
+        "ordinal_position": 5,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 12,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "job_requirements",
+        "column_name": "weight",
+        "ordinal_position": 6,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 3,
+        "numeric_scale": 2
+      },
+      {
+        "table_name": "job_requirements",
+        "column_name": "created_at",
+        "ordinal_position": 7,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "job_requirements",
+        "column_name": "updated_at",
+        "ordinal_position": 8,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      }
+    ],
+    "job_roles": [
+      {
+        "table_name": "job_roles",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "job_roles",
+        "column_name": "company_id",
+        "ordinal_position": 2,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "job_roles",
+        "column_name": "title",
+        "ordinal_position": 3,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "job_roles",
+        "column_name": "description",
+        "ordinal_position": 4,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "text",
+        "udt_name": "text",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "job_roles",
+        "column_name": "experience_level",
+        "ordinal_position": 5,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 50,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "job_roles",
+        "column_name": "ctc_lpa",
+        "ordinal_position": 6,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 6,
+        "numeric_scale": 2
+      },
+      {
+        "table_name": "job_roles",
+        "column_name": "created_at",
+        "ordinal_position": 7,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "job_roles",
+        "column_name": "updated_at",
+        "ordinal_position": 8,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      }
+    ],
+    "learning_recommendations": [
+      {
+        "table_name": "learning_recommendations",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "learning_recommendations",
+        "column_name": "student_id",
+        "ordinal_position": 2,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "learning_recommendations",
+        "column_name": "skill_id",
+        "ordinal_position": 3,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "learning_recommendations",
+        "column_name": "target_role_id",
+        "ordinal_position": 4,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "learning_recommendations",
+        "column_name": "title",
+        "ordinal_position": 5,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "learning_recommendations",
+        "column_name": "action_type",
+        "ordinal_position": 6,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 17,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "learning_recommendations",
+        "column_name": "description",
+        "ordinal_position": 7,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "text",
+        "udt_name": "text",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "learning_recommendations",
+        "column_name": "estimated_hours",
+        "ordinal_position": 8,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "integer",
+        "udt_name": "int4",
+        "character_maximum_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0
+      },
+      {
+        "table_name": "learning_recommendations",
+        "column_name": "is_completed",
+        "ordinal_position": 9,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "boolean",
+        "udt_name": "bool",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "learning_recommendations",
+        "column_name": "tenant_id",
+        "ordinal_position": 10,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "learning_recommendations",
+        "column_name": "created_at",
+        "ordinal_position": 11,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "learning_recommendations",
+        "column_name": "updated_at",
+        "ordinal_position": 12,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      }
+    ],
+    "notifications": [
+      {
+        "table_name": "notifications",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "notifications",
+        "column_name": "recipient_user_id",
+        "ordinal_position": 2,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "notifications",
+        "column_name": "title",
+        "ordinal_position": 3,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "notifications",
+        "column_name": "message",
+        "ordinal_position": 4,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "text",
+        "udt_name": "text",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "notifications",
+        "column_name": "type",
+        "ordinal_position": 5,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 18,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "notifications",
+        "column_name": "is_read",
+        "ordinal_position": 6,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "boolean",
+        "udt_name": "bool",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "notifications",
+        "column_name": "tenant_id",
+        "ordinal_position": 7,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "notifications",
+        "column_name": "created_at",
+        "ordinal_position": 8,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "notifications",
+        "column_name": "updated_at",
+        "ordinal_position": 9,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      }
+    ],
+    "placement_drives": [
+      {
+        "table_name": "placement_drives",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "placement_drives",
+        "column_name": "job_role_id",
+        "ordinal_position": 2,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "placement_drives",
+        "column_name": "batch_year",
+        "ordinal_position": 3,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "integer",
+        "udt_name": "int4",
+        "character_maximum_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0
+      },
+      {
+        "table_name": "placement_drives",
+        "column_name": "min_cgpa",
+        "ordinal_position": 4,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 4,
+        "numeric_scale": 2
+      },
+      {
+        "table_name": "placement_drives",
+        "column_name": "max_backlogs_allowed",
+        "ordinal_position": 5,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "integer",
+        "udt_name": "int4",
+        "character_maximum_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0
+      },
+      {
+        "table_name": "placement_drives",
+        "column_name": "eligible_departments",
+        "ordinal_position": 6,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "json",
+        "udt_name": "json",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "placement_drives",
+        "column_name": "registration_start",
+        "ordinal_position": 7,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "placement_drives",
+        "column_name": "registration_end",
+        "ordinal_position": 8,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "placement_drives",
+        "column_name": "drive_date",
+        "ordinal_position": 9,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "placement_drives",
+        "column_name": "status",
+        "ordinal_position": 10,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 9,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "placement_drives",
+        "column_name": "tenant_id",
+        "ordinal_position": 11,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "placement_drives",
+        "column_name": "created_at",
+        "ordinal_position": 12,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "placement_drives",
+        "column_name": "updated_at",
+        "ordinal_position": 13,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      }
+    ],
+    "placement_predictions": [
+      {
+        "table_name": "placement_predictions",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "placement_predictions",
+        "column_name": "student_id",
+        "ordinal_position": 2,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "placement_predictions",
+        "column_name": "drive_id",
+        "ordinal_position": 3,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "placement_predictions",
+        "column_name": "probability_score",
+        "ordinal_position": 4,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 5,
+        "numeric_scale": 2
+      },
+      {
+        "table_name": "placement_predictions",
+        "column_name": "risk_tier",
+        "ordinal_position": 5,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 13,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "placement_predictions",
+        "column_name": "contributing_factors_json",
+        "ordinal_position": 6,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "json",
+        "udt_name": "json",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "placement_predictions",
+        "column_name": "is_advisory_only",
+        "ordinal_position": 7,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "boolean",
+        "udt_name": "bool",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "placement_predictions",
+        "column_name": "tenant_id",
+        "ordinal_position": 8,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "placement_predictions",
+        "column_name": "created_at",
+        "ordinal_position": 9,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "placement_predictions",
+        "column_name": "updated_at",
+        "ordinal_position": 10,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      }
+    ],
+    "skill_assessments": [
+      {
+        "table_name": "skill_assessments",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "skill_assessments",
+        "column_name": "student_id",
+        "ordinal_position": 2,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "skill_assessments",
+        "column_name": "skill_id",
+        "ordinal_position": 3,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "skill_assessments",
+        "column_name": "assessment_name",
+        "ordinal_position": 4,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "skill_assessments",
+        "column_name": "score",
+        "ordinal_position": 5,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 5,
+        "numeric_scale": 2
+      },
+      {
+        "table_name": "skill_assessments",
+        "column_name": "max_score",
+        "ordinal_position": 6,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 5,
+        "numeric_scale": 2
+      },
+      {
+        "table_name": "skill_assessments",
+        "column_name": "evaluation_metrics",
+        "ordinal_position": 7,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "json",
+        "udt_name": "json",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "skill_assessments",
+        "column_name": "completed_at",
+        "ordinal_position": 8,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "skill_assessments",
+        "column_name": "tenant_id",
+        "ordinal_position": 9,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "skill_assessments",
+        "column_name": "created_at",
+        "ordinal_position": 10,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "skill_assessments",
+        "column_name": "updated_at",
+        "ordinal_position": 11,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      }
+    ],
+    "skill_gap_analyses": [
+      {
+        "table_name": "skill_gap_analyses",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "skill_gap_analyses",
+        "column_name": "student_id",
+        "ordinal_position": 2,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "skill_gap_analyses",
+        "column_name": "job_role_id",
+        "ordinal_position": 3,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "skill_gap_analyses",
+        "column_name": "match_percentage",
+        "ordinal_position": 4,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 5,
+        "numeric_scale": 2
+      },
+      {
+        "table_name": "skill_gap_analyses",
+        "column_name": "missing_skills_json",
+        "ordinal_position": 5,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "json",
+        "udt_name": "json",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "skill_gap_analyses",
+        "column_name": "matching_skills_json",
+        "ordinal_position": 6,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "json",
+        "udt_name": "json",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "skill_gap_analyses",
+        "column_name": "analysis_mode",
+        "ordinal_position": 7,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 50,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "skill_gap_analyses",
+        "column_name": "tenant_id",
+        "ordinal_position": 8,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "skill_gap_analyses",
+        "column_name": "created_at",
+        "ordinal_position": 9,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "skill_gap_analyses",
+        "column_name": "updated_at",
+        "ordinal_position": 10,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      }
+    ],
+    "skills": [
+      {
+        "table_name": "skills",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "skills",
+        "column_name": "name",
+        "ordinal_position": 2,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 150,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "skills",
+        "column_name": "canonical_slug",
+        "ordinal_position": 3,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 150,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "skills",
+        "column_name": "category",
+        "ordinal_position": 4,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 21,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "skills",
+        "column_name": "description",
+        "ordinal_position": 5,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "text",
+        "udt_name": "text",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "skills",
+        "column_name": "created_at",
+        "ordinal_position": 6,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "skills",
+        "column_name": "updated_at",
+        "ordinal_position": 7,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      }
+    ],
+    "student_skills": [
+      {
+        "table_name": "student_skills",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "student_skills",
+        "column_name": "student_id",
+        "ordinal_position": 2,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "student_skills",
+        "column_name": "skill_id",
+        "ordinal_position": 3,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "student_skills",
+        "column_name": "state",
+        "ordinal_position": 4,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 15,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "student_skills",
+        "column_name": "proficiency_level",
+        "ordinal_position": 5,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 12,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "student_skills",
+        "column_name": "confidence_score",
+        "ordinal_position": 6,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 4,
+        "numeric_scale": 3
+      },
+      {
+        "table_name": "student_skills",
+        "column_name": "verified_at",
+        "ordinal_position": 7,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "student_skills",
+        "column_name": "verified_by_user_id",
+        "ordinal_position": 8,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "student_skills",
+        "column_name": "expiry_date",
+        "ordinal_position": 9,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "student_skills",
+        "column_name": "tenant_id",
+        "ordinal_position": 10,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "student_skills",
+        "column_name": "created_at",
+        "ordinal_position": 11,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "student_skills",
+        "column_name": "updated_at",
+        "ordinal_position": 12,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      }
+    ],
+    "students": [
+      {
+        "table_name": "students",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "students",
+        "column_name": "user_id",
+        "ordinal_position": 2,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "students",
+        "column_name": "roll_number",
+        "ordinal_position": 3,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 50,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "students",
+        "column_name": "department",
+        "ordinal_position": 4,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 100,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "students",
+        "column_name": "batch_year",
+        "ordinal_position": 5,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "integer",
+        "udt_name": "int4",
+        "character_maximum_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0
+      },
+      {
+        "table_name": "students",
+        "column_name": "degree",
+        "ordinal_position": 6,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 50,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "students",
+        "column_name": "cgpa",
+        "ordinal_position": 7,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 4,
+        "numeric_scale": 2
+      },
+      {
+        "table_name": "students",
+        "column_name": "backlog_count",
+        "ordinal_position": 8,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "integer",
+        "udt_name": "int4",
+        "character_maximum_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0
+      },
+      {
+        "table_name": "students",
+        "column_name": "date_of_birth",
+        "ordinal_position": 9,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "date",
+        "udt_name": "date",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "students",
+        "column_name": "resume_r2_url",
+        "ordinal_position": 10,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 512,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "students",
+        "column_name": "readiness_score",
+        "ordinal_position": 11,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "numeric",
+        "udt_name": "numeric",
+        "character_maximum_length": null,
+        "numeric_precision": 5,
+        "numeric_scale": 2
+      },
+      {
+        "table_name": "students",
+        "column_name": "tenant_id",
+        "ordinal_position": 12,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "students",
+        "column_name": "created_at",
+        "ordinal_position": 13,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "students",
+        "column_name": "updated_at",
+        "ordinal_position": 14,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      }
+    ],
+    "tenants": [
+      {
+        "table_name": "tenants",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "tenants",
+        "column_name": "name",
+        "ordinal_position": 2,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "tenants",
+        "column_name": "slug",
+        "ordinal_position": 3,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 100,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "tenants",
+        "column_name": "domain",
+        "ordinal_position": 4,
+        "column_default": null,
+        "is_nullable": "YES",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "tenants",
+        "column_name": "is_active",
+        "ordinal_position": 5,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "boolean",
+        "udt_name": "bool",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "tenants",
+        "column_name": "created_at",
+        "ordinal_position": 6,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "tenants",
+        "column_name": "updated_at",
+        "ordinal_position": 7,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      }
+    ],
+    "users": [
+      {
+        "table_name": "users",
+        "column_name": "id",
+        "ordinal_position": 1,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "users",
+        "column_name": "email",
+        "ordinal_position": 2,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "users",
+        "column_name": "password_hash",
+        "ordinal_position": 3,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "users",
+        "column_name": "full_name",
+        "ordinal_position": 4,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "users",
+        "column_name": "role",
+        "ordinal_position": 5,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "character varying",
+        "udt_name": "varchar",
+        "character_maximum_length": 19,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "users",
+        "column_name": "is_active",
+        "ordinal_position": 6,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "boolean",
+        "udt_name": "bool",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "users",
+        "column_name": "is_verified",
+        "ordinal_position": 7,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "boolean",
+        "udt_name": "bool",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "users",
+        "column_name": "tenant_id",
+        "ordinal_position": 8,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "uuid",
+        "udt_name": "uuid",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "users",
+        "column_name": "created_at",
+        "ordinal_position": 9,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      },
+      {
+        "table_name": "users",
+        "column_name": "updated_at",
+        "ordinal_position": 10,
+        "column_default": null,
+        "is_nullable": "NO",
+        "data_type": "timestamp with time zone",
+        "udt_name": "timestamptz",
+        "character_maximum_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null
+      }
+    ]
+  },
+  "key_constraints": [
+    {
+      "table_name": "academic_semesters",
+      "constraint_name": "academic_semesters_pkey",
+      "constraint_type": "PRIMARY KEY",
+      "column_name": "id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "academic_semesters",
+      "constraint_name": "academic_semesters_student_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "student_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "academic_semesters",
+      "constraint_name": "academic_semesters_tenant_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "tenant_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "academic_semesters",
+      "constraint_name": "uq_semester_student_num",
+      "constraint_type": "UNIQUE",
+      "column_name": "student_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "academic_semesters",
+      "constraint_name": "uq_semester_student_num",
+      "constraint_type": "UNIQUE",
+      "column_name": "semester_number",
+      "ordinal_position": 2
+    },
+    {
+      "table_name": "agent_execution_logs",
+      "constraint_name": "agent_execution_logs_pkey",
+      "constraint_type": "PRIMARY KEY",
+      "column_name": "id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "agent_execution_logs",
+      "constraint_name": "agent_execution_logs_tenant_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "tenant_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "agent_execution_logs",
+      "constraint_name": "agent_execution_logs_triggered_by_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "triggered_by",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "agent_workflows",
+      "constraint_name": "agent_workflows_pkey",
+      "constraint_type": "PRIMARY KEY",
+      "column_name": "id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "agent_workflows",
+      "constraint_name": "agent_workflows_tenant_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "tenant_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "alembic_version",
+      "constraint_name": "alembic_version_pkc",
+      "constraint_type": "PRIMARY KEY",
+      "column_name": "version_num",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "applications",
+      "constraint_name": "applications_drive_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "drive_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "applications",
+      "constraint_name": "applications_final_decision_by_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "final_decision_by",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "applications",
+      "constraint_name": "applications_pkey",
+      "constraint_type": "PRIMARY KEY",
+      "column_name": "id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "applications",
+      "constraint_name": "applications_student_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "student_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "applications",
+      "constraint_name": "applications_tenant_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "tenant_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "applications",
+      "constraint_name": "uq_applications_drive_student",
+      "constraint_type": "UNIQUE",
+      "column_name": "drive_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "applications",
+      "constraint_name": "uq_applications_drive_student",
+      "constraint_type": "UNIQUE",
+      "column_name": "student_id",
+      "ordinal_position": 2
+    },
+    {
+      "table_name": "audit_events",
+      "constraint_name": "audit_events_actor_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "actor_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "audit_events",
+      "constraint_name": "audit_events_pkey",
+      "constraint_type": "PRIMARY KEY",
+      "column_name": "id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "audit_events",
+      "constraint_name": "audit_events_tenant_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "tenant_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "companies",
+      "constraint_name": "companies_pkey",
+      "constraint_type": "PRIMARY KEY",
+      "column_name": "id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "evidence_records",
+      "constraint_name": "evidence_records_pkey",
+      "constraint_type": "PRIMARY KEY",
+      "column_name": "id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "evidence_records",
+      "constraint_name": "evidence_records_skill_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "skill_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "evidence_records",
+      "constraint_name": "evidence_records_student_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "student_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "evidence_records",
+      "constraint_name": "evidence_records_tenant_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "tenant_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "evidence_records",
+      "constraint_name": "evidence_records_validated_by_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "validated_by",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "interviews",
+      "constraint_name": "interviews_application_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "application_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "interviews",
+      "constraint_name": "interviews_pkey",
+      "constraint_type": "PRIMARY KEY",
+      "column_name": "id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "interviews",
+      "constraint_name": "interviews_tenant_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "tenant_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "job_requirements",
+      "constraint_name": "job_requirements_job_role_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "job_role_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "job_requirements",
+      "constraint_name": "job_requirements_pkey",
+      "constraint_type": "PRIMARY KEY",
+      "column_name": "id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "job_requirements",
+      "constraint_name": "job_requirements_skill_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "skill_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "job_requirements",
+      "constraint_name": "uq_job_req_role_skill",
+      "constraint_type": "UNIQUE",
+      "column_name": "job_role_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "job_requirements",
+      "constraint_name": "uq_job_req_role_skill",
+      "constraint_type": "UNIQUE",
+      "column_name": "skill_id",
+      "ordinal_position": 2
+    },
+    {
+      "table_name": "job_roles",
+      "constraint_name": "job_roles_company_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "company_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "job_roles",
+      "constraint_name": "job_roles_pkey",
+      "constraint_type": "PRIMARY KEY",
+      "column_name": "id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "learning_recommendations",
+      "constraint_name": "learning_recommendations_pkey",
+      "constraint_type": "PRIMARY KEY",
+      "column_name": "id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "learning_recommendations",
+      "constraint_name": "learning_recommendations_skill_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "skill_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "learning_recommendations",
+      "constraint_name": "learning_recommendations_student_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "student_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "learning_recommendations",
+      "constraint_name": "learning_recommendations_target_role_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "target_role_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "learning_recommendations",
+      "constraint_name": "learning_recommendations_tenant_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "tenant_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "notifications",
+      "constraint_name": "notifications_pkey",
+      "constraint_type": "PRIMARY KEY",
+      "column_name": "id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "notifications",
+      "constraint_name": "notifications_recipient_user_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "recipient_user_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "notifications",
+      "constraint_name": "notifications_tenant_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "tenant_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "placement_drives",
+      "constraint_name": "placement_drives_job_role_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "job_role_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "placement_drives",
+      "constraint_name": "placement_drives_pkey",
+      "constraint_type": "PRIMARY KEY",
+      "column_name": "id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "placement_drives",
+      "constraint_name": "placement_drives_tenant_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "tenant_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "placement_predictions",
+      "constraint_name": "placement_predictions_drive_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "drive_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "placement_predictions",
+      "constraint_name": "placement_predictions_pkey",
+      "constraint_type": "PRIMARY KEY",
+      "column_name": "id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "placement_predictions",
+      "constraint_name": "placement_predictions_student_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "student_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "placement_predictions",
+      "constraint_name": "placement_predictions_tenant_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "tenant_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "skill_assessments",
+      "constraint_name": "skill_assessments_pkey",
+      "constraint_type": "PRIMARY KEY",
+      "column_name": "id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "skill_assessments",
+      "constraint_name": "skill_assessments_skill_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "skill_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "skill_assessments",
+      "constraint_name": "skill_assessments_student_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "student_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "skill_assessments",
+      "constraint_name": "skill_assessments_tenant_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "tenant_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "skill_gap_analyses",
+      "constraint_name": "skill_gap_analyses_job_role_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "job_role_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "skill_gap_analyses",
+      "constraint_name": "skill_gap_analyses_pkey",
+      "constraint_type": "PRIMARY KEY",
+      "column_name": "id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "skill_gap_analyses",
+      "constraint_name": "skill_gap_analyses_student_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "student_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "skill_gap_analyses",
+      "constraint_name": "skill_gap_analyses_tenant_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "tenant_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "skills",
+      "constraint_name": "skills_pkey",
+      "constraint_type": "PRIMARY KEY",
+      "column_name": "id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "student_skills",
+      "constraint_name": "student_skills_pkey",
+      "constraint_type": "PRIMARY KEY",
+      "column_name": "id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "student_skills",
+      "constraint_name": "student_skills_skill_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "skill_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "student_skills",
+      "constraint_name": "student_skills_student_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "student_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "student_skills",
+      "constraint_name": "student_skills_tenant_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "tenant_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "student_skills",
+      "constraint_name": "student_skills_verified_by_user_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "verified_by_user_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "student_skills",
+      "constraint_name": "uq_student_skills_student_skill",
+      "constraint_type": "UNIQUE",
+      "column_name": "student_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "student_skills",
+      "constraint_name": "uq_student_skills_student_skill",
+      "constraint_type": "UNIQUE",
+      "column_name": "skill_id",
+      "ordinal_position": 2
+    },
+    {
+      "table_name": "students",
+      "constraint_name": "students_pkey",
+      "constraint_type": "PRIMARY KEY",
+      "column_name": "id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "students",
+      "constraint_name": "students_tenant_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "tenant_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "students",
+      "constraint_name": "students_user_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "user_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "students",
+      "constraint_name": "students_user_id_key",
+      "constraint_type": "UNIQUE",
+      "column_name": "user_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "students",
+      "constraint_name": "uq_students_tenant_roll",
+      "constraint_type": "UNIQUE",
+      "column_name": "tenant_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "students",
+      "constraint_name": "uq_students_tenant_roll",
+      "constraint_type": "UNIQUE",
+      "column_name": "roll_number",
+      "ordinal_position": 2
+    },
+    {
+      "table_name": "tenants",
+      "constraint_name": "tenants_pkey",
+      "constraint_type": "PRIMARY KEY",
+      "column_name": "id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "users",
+      "constraint_name": "uq_users_tenant_email",
+      "constraint_type": "UNIQUE",
+      "column_name": "tenant_id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "users",
+      "constraint_name": "uq_users_tenant_email",
+      "constraint_type": "UNIQUE",
+      "column_name": "email",
+      "ordinal_position": 2
+    },
+    {
+      "table_name": "users",
+      "constraint_name": "users_pkey",
+      "constraint_type": "PRIMARY KEY",
+      "column_name": "id",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "users",
+      "constraint_name": "users_tenant_id_fkey",
+      "constraint_type": "FOREIGN KEY",
+      "column_name": "tenant_id",
+      "ordinal_position": 1
+    }
+  ],
+  "foreign_keys": [
+    {
+      "table_name": "academic_semesters",
+      "constraint_name": "academic_semesters_student_id_fkey",
+      "column_name": "student_id",
+      "foreign_table_name": "students",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "academic_semesters",
+      "constraint_name": "academic_semesters_tenant_id_fkey",
+      "column_name": "tenant_id",
+      "foreign_table_name": "tenants",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "agent_execution_logs",
+      "constraint_name": "agent_execution_logs_tenant_id_fkey",
+      "column_name": "tenant_id",
+      "foreign_table_name": "tenants",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "agent_execution_logs",
+      "constraint_name": "agent_execution_logs_triggered_by_fkey",
+      "column_name": "triggered_by",
+      "foreign_table_name": "users",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "SET NULL"
+    },
+    {
+      "table_name": "agent_workflows",
+      "constraint_name": "agent_workflows_tenant_id_fkey",
+      "column_name": "tenant_id",
+      "foreign_table_name": "tenants",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "applications",
+      "constraint_name": "applications_drive_id_fkey",
+      "column_name": "drive_id",
+      "foreign_table_name": "placement_drives",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "applications",
+      "constraint_name": "applications_final_decision_by_fkey",
+      "column_name": "final_decision_by",
+      "foreign_table_name": "users",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "SET NULL"
+    },
+    {
+      "table_name": "applications",
+      "constraint_name": "applications_student_id_fkey",
+      "column_name": "student_id",
+      "foreign_table_name": "students",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "applications",
+      "constraint_name": "applications_tenant_id_fkey",
+      "column_name": "tenant_id",
+      "foreign_table_name": "tenants",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "audit_events",
+      "constraint_name": "audit_events_actor_id_fkey",
+      "column_name": "actor_id",
+      "foreign_table_name": "users",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "SET NULL"
+    },
+    {
+      "table_name": "audit_events",
+      "constraint_name": "audit_events_tenant_id_fkey",
+      "column_name": "tenant_id",
+      "foreign_table_name": "tenants",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "evidence_records",
+      "constraint_name": "evidence_records_skill_id_fkey",
+      "column_name": "skill_id",
+      "foreign_table_name": "skills",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "evidence_records",
+      "constraint_name": "evidence_records_student_id_fkey",
+      "column_name": "student_id",
+      "foreign_table_name": "students",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "evidence_records",
+      "constraint_name": "evidence_records_tenant_id_fkey",
+      "column_name": "tenant_id",
+      "foreign_table_name": "tenants",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "evidence_records",
+      "constraint_name": "evidence_records_validated_by_fkey",
+      "column_name": "validated_by",
+      "foreign_table_name": "users",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "SET NULL"
+    },
+    {
+      "table_name": "interviews",
+      "constraint_name": "interviews_application_id_fkey",
+      "column_name": "application_id",
+      "foreign_table_name": "applications",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "interviews",
+      "constraint_name": "interviews_tenant_id_fkey",
+      "column_name": "tenant_id",
+      "foreign_table_name": "tenants",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "job_requirements",
+      "constraint_name": "job_requirements_job_role_id_fkey",
+      "column_name": "job_role_id",
+      "foreign_table_name": "job_roles",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "job_requirements",
+      "constraint_name": "job_requirements_skill_id_fkey",
+      "column_name": "skill_id",
+      "foreign_table_name": "skills",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "job_roles",
+      "constraint_name": "job_roles_company_id_fkey",
+      "column_name": "company_id",
+      "foreign_table_name": "companies",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "learning_recommendations",
+      "constraint_name": "learning_recommendations_skill_id_fkey",
+      "column_name": "skill_id",
+      "foreign_table_name": "skills",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "learning_recommendations",
+      "constraint_name": "learning_recommendations_student_id_fkey",
+      "column_name": "student_id",
+      "foreign_table_name": "students",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "learning_recommendations",
+      "constraint_name": "learning_recommendations_target_role_id_fkey",
+      "column_name": "target_role_id",
+      "foreign_table_name": "job_roles",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "SET NULL"
+    },
+    {
+      "table_name": "learning_recommendations",
+      "constraint_name": "learning_recommendations_tenant_id_fkey",
+      "column_name": "tenant_id",
+      "foreign_table_name": "tenants",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "notifications",
+      "constraint_name": "notifications_recipient_user_id_fkey",
+      "column_name": "recipient_user_id",
+      "foreign_table_name": "users",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "notifications",
+      "constraint_name": "notifications_tenant_id_fkey",
+      "column_name": "tenant_id",
+      "foreign_table_name": "tenants",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "placement_drives",
+      "constraint_name": "placement_drives_job_role_id_fkey",
+      "column_name": "job_role_id",
+      "foreign_table_name": "job_roles",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "placement_drives",
+      "constraint_name": "placement_drives_tenant_id_fkey",
+      "column_name": "tenant_id",
+      "foreign_table_name": "tenants",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "placement_predictions",
+      "constraint_name": "placement_predictions_drive_id_fkey",
+      "column_name": "drive_id",
+      "foreign_table_name": "placement_drives",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "placement_predictions",
+      "constraint_name": "placement_predictions_student_id_fkey",
+      "column_name": "student_id",
+      "foreign_table_name": "students",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "placement_predictions",
+      "constraint_name": "placement_predictions_tenant_id_fkey",
+      "column_name": "tenant_id",
+      "foreign_table_name": "tenants",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "skill_assessments",
+      "constraint_name": "skill_assessments_skill_id_fkey",
+      "column_name": "skill_id",
+      "foreign_table_name": "skills",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "skill_assessments",
+      "constraint_name": "skill_assessments_student_id_fkey",
+      "column_name": "student_id",
+      "foreign_table_name": "students",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "skill_assessments",
+      "constraint_name": "skill_assessments_tenant_id_fkey",
+      "column_name": "tenant_id",
+      "foreign_table_name": "tenants",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "skill_gap_analyses",
+      "constraint_name": "skill_gap_analyses_job_role_id_fkey",
+      "column_name": "job_role_id",
+      "foreign_table_name": "job_roles",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "skill_gap_analyses",
+      "constraint_name": "skill_gap_analyses_student_id_fkey",
+      "column_name": "student_id",
+      "foreign_table_name": "students",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "skill_gap_analyses",
+      "constraint_name": "skill_gap_analyses_tenant_id_fkey",
+      "column_name": "tenant_id",
+      "foreign_table_name": "tenants",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "student_skills",
+      "constraint_name": "student_skills_skill_id_fkey",
+      "column_name": "skill_id",
+      "foreign_table_name": "skills",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "student_skills",
+      "constraint_name": "student_skills_student_id_fkey",
+      "column_name": "student_id",
+      "foreign_table_name": "students",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "student_skills",
+      "constraint_name": "student_skills_tenant_id_fkey",
+      "column_name": "tenant_id",
+      "foreign_table_name": "tenants",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "student_skills",
+      "constraint_name": "student_skills_verified_by_user_id_fkey",
+      "column_name": "verified_by_user_id",
+      "foreign_table_name": "users",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "SET NULL"
+    },
+    {
+      "table_name": "students",
+      "constraint_name": "students_tenant_id_fkey",
+      "column_name": "tenant_id",
+      "foreign_table_name": "tenants",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "students",
+      "constraint_name": "students_user_id_fkey",
+      "column_name": "user_id",
+      "foreign_table_name": "users",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    },
+    {
+      "table_name": "users",
+      "constraint_name": "users_tenant_id_fkey",
+      "column_name": "tenant_id",
+      "foreign_table_name": "tenants",
+      "foreign_column_name": "id",
+      "update_rule": "NO ACTION",
+      "delete_rule": "CASCADE"
+    }
+  ],
+  "check_constraints": [
+    {
+      "table_name": "academic_semesters",
+      "constraint_name": "academic_semesters_backlogs_in_semester_not_null",
+      "check_clause": "backlogs_in_semester IS NOT NULL"
+    },
+    {
+      "table_name": "academic_semesters",
+      "constraint_name": "academic_semesters_created_at_not_null",
+      "check_clause": "created_at IS NOT NULL"
+    },
+    {
+      "table_name": "academic_semesters",
+      "constraint_name": "academic_semesters_credits_earned_not_null",
+      "check_clause": "credits_earned IS NOT NULL"
+    },
+    {
+      "table_name": "academic_semesters",
+      "constraint_name": "academic_semesters_id_not_null",
+      "check_clause": "id IS NOT NULL"
+    },
+    {
+      "table_name": "academic_semesters",
+      "constraint_name": "academic_semesters_semester_number_not_null",
+      "check_clause": "semester_number IS NOT NULL"
+    },
+    {
+      "table_name": "academic_semesters",
+      "constraint_name": "academic_semesters_sgpa_not_null",
+      "check_clause": "sgpa IS NOT NULL"
+    },
+    {
+      "table_name": "academic_semesters",
+      "constraint_name": "academic_semesters_student_id_not_null",
+      "check_clause": "student_id IS NOT NULL"
+    },
+    {
+      "table_name": "academic_semesters",
+      "constraint_name": "academic_semesters_tenant_id_not_null",
+      "check_clause": "tenant_id IS NOT NULL"
+    },
+    {
+      "table_name": "academic_semesters",
+      "constraint_name": "academic_semesters_updated_at_not_null",
+      "check_clause": "updated_at IS NOT NULL"
+    },
+    {
+      "table_name": "agent_execution_logs",
+      "constraint_name": "agent_execution_logs_agent_type_not_null",
+      "check_clause": "agent_type IS NOT NULL"
+    },
+    {
+      "table_name": "agent_execution_logs",
+      "constraint_name": "agent_execution_logs_executed_at_not_null",
+      "check_clause": "executed_at IS NOT NULL"
+    },
+    {
+      "table_name": "agent_execution_logs",
+      "constraint_name": "agent_execution_logs_execution_mode_not_null",
+      "check_clause": "execution_mode IS NOT NULL"
+    },
+    {
+      "table_name": "agent_execution_logs",
+      "constraint_name": "agent_execution_logs_id_not_null",
+      "check_clause": "id IS NOT NULL"
+    },
+    {
+      "table_name": "agent_execution_logs",
+      "constraint_name": "agent_execution_logs_latency_ms_not_null",
+      "check_clause": "latency_ms IS NOT NULL"
+    },
+    {
+      "table_name": "agent_execution_logs",
+      "constraint_name": "agent_execution_logs_status_not_null",
+      "check_clause": "status IS NOT NULL"
+    },
+    {
+      "table_name": "agent_execution_logs",
+      "constraint_name": "agent_execution_logs_tenant_id_not_null",
+      "check_clause": "tenant_id IS NOT NULL"
+    },
+    {
+      "table_name": "agent_execution_logs",
+      "constraint_name": "agent_execution_logs_tokens_consumed_not_null",
+      "check_clause": "tokens_consumed IS NOT NULL"
+    },
+    {
+      "table_name": "agent_workflows",
+      "constraint_name": "agent_workflows_created_at_not_null",
+      "check_clause": "created_at IS NOT NULL"
+    },
+    {
+      "table_name": "agent_workflows",
+      "constraint_name": "agent_workflows_current_stage_not_null",
+      "check_clause": "current_stage IS NOT NULL"
+    },
+    {
+      "table_name": "agent_workflows",
+      "constraint_name": "agent_workflows_id_not_null",
+      "check_clause": "id IS NOT NULL"
+    },
+    {
+      "table_name": "agent_workflows",
+      "constraint_name": "agent_workflows_state_history_not_null",
+      "check_clause": "state_history IS NOT NULL"
+    },
+    {
+      "table_name": "agent_workflows",
+      "constraint_name": "agent_workflows_target_entity_id_not_null",
+      "check_clause": "target_entity_id IS NOT NULL"
+    },
+    {
+      "table_name": "agent_workflows",
+      "constraint_name": "agent_workflows_target_entity_type_not_null",
+      "check_clause": "target_entity_type IS NOT NULL"
+    },
+    {
+      "table_name": "agent_workflows",
+      "constraint_name": "agent_workflows_tenant_id_not_null",
+      "check_clause": "tenant_id IS NOT NULL"
+    },
+    {
+      "table_name": "agent_workflows",
+      "constraint_name": "agent_workflows_updated_at_not_null",
+      "check_clause": "updated_at IS NOT NULL"
+    },
+    {
+      "table_name": "agent_workflows",
+      "constraint_name": "agent_workflows_workflow_name_not_null",
+      "check_clause": "workflow_name IS NOT NULL"
+    },
+    {
+      "table_name": "alembic_version",
+      "constraint_name": "alembic_version_version_num_not_null",
+      "check_clause": "version_num IS NOT NULL"
+    },
+    {
+      "table_name": "applications",
+      "constraint_name": "applications_created_at_not_null",
+      "check_clause": "created_at IS NOT NULL"
+    },
+    {
+      "table_name": "applications",
+      "constraint_name": "applications_drive_id_not_null",
+      "check_clause": "drive_id IS NOT NULL"
+    },
+    {
+      "table_name": "applications",
+      "constraint_name": "applications_id_not_null",
+      "check_clause": "id IS NOT NULL"
+    },
+    {
+      "table_name": "applications",
+      "constraint_name": "applications_status_not_null",
+      "check_clause": "status IS NOT NULL"
+    },
+    {
+      "table_name": "applications",
+      "constraint_name": "applications_student_id_not_null",
+      "check_clause": "student_id IS NOT NULL"
+    },
+    {
+      "table_name": "applications",
+      "constraint_name": "applications_tenant_id_not_null",
+      "check_clause": "tenant_id IS NOT NULL"
+    },
+    {
+      "table_name": "applications",
+      "constraint_name": "applications_updated_at_not_null",
+      "check_clause": "updated_at IS NOT NULL"
+    },
+    {
+      "table_name": "audit_events",
+      "constraint_name": "audit_events_action_not_null",
+      "check_clause": "action IS NOT NULL"
+    },
+    {
+      "table_name": "audit_events",
+      "constraint_name": "audit_events_changes_diff_not_null",
+      "check_clause": "changes_diff IS NOT NULL"
+    },
+    {
+      "table_name": "audit_events",
+      "constraint_name": "audit_events_id_not_null",
+      "check_clause": "id IS NOT NULL"
+    },
+    {
+      "table_name": "audit_events",
+      "constraint_name": "audit_events_resource_type_not_null",
+      "check_clause": "resource_type IS NOT NULL"
+    },
+    {
+      "table_name": "audit_events",
+      "constraint_name": "audit_events_tenant_id_not_null",
+      "check_clause": "tenant_id IS NOT NULL"
+    },
+    {
+      "table_name": "audit_events",
+      "constraint_name": "audit_events_timestamp_not_null",
+      "check_clause": "timestamp IS NOT NULL"
+    },
+    {
+      "table_name": "companies",
+      "constraint_name": "companies_created_at_not_null",
+      "check_clause": "created_at IS NOT NULL"
+    },
+    {
+      "table_name": "companies",
+      "constraint_name": "companies_id_not_null",
+      "check_clause": "id IS NOT NULL"
+    },
+    {
+      "table_name": "companies",
+      "constraint_name": "companies_name_not_null",
+      "check_clause": "name IS NOT NULL"
+    },
+    {
+      "table_name": "companies",
+      "constraint_name": "companies_updated_at_not_null",
+      "check_clause": "updated_at IS NOT NULL"
+    },
+    {
+      "table_name": "evidence_records",
+      "constraint_name": "evidence_records_created_at_not_null",
+      "check_clause": "created_at IS NOT NULL"
+    },
+    {
+      "table_name": "evidence_records",
+      "constraint_name": "evidence_records_evidence_type_not_null",
+      "check_clause": "evidence_type IS NOT NULL"
+    },
+    {
+      "table_name": "evidence_records",
+      "constraint_name": "evidence_records_id_not_null",
+      "check_clause": "id IS NOT NULL"
+    },
+    {
+      "table_name": "evidence_records",
+      "constraint_name": "evidence_records_metadata_json_not_null",
+      "check_clause": "metadata_json IS NOT NULL"
+    },
+    {
+      "table_name": "evidence_records",
+      "constraint_name": "evidence_records_skill_id_not_null",
+      "check_clause": "skill_id IS NOT NULL"
+    },
+    {
+      "table_name": "evidence_records",
+      "constraint_name": "evidence_records_source_url_not_null",
+      "check_clause": "source_url IS NOT NULL"
+    },
+    {
+      "table_name": "evidence_records",
+      "constraint_name": "evidence_records_student_id_not_null",
+      "check_clause": "student_id IS NOT NULL"
+    },
+    {
+      "table_name": "evidence_records",
+      "constraint_name": "evidence_records_tenant_id_not_null",
+      "check_clause": "tenant_id IS NOT NULL"
+    },
+    {
+      "table_name": "evidence_records",
+      "constraint_name": "evidence_records_updated_at_not_null",
+      "check_clause": "updated_at IS NOT NULL"
+    },
+    {
+      "table_name": "evidence_records",
+      "constraint_name": "evidence_records_verification_status_not_null",
+      "check_clause": "verification_status IS NOT NULL"
+    },
+    {
+      "table_name": "interviews",
+      "constraint_name": "interviews_application_id_not_null",
+      "check_clause": "application_id IS NOT NULL"
+    },
+    {
+      "table_name": "interviews",
+      "constraint_name": "interviews_created_at_not_null",
+      "check_clause": "created_at IS NOT NULL"
+    },
+    {
+      "table_name": "interviews",
+      "constraint_name": "interviews_id_not_null",
+      "check_clause": "id IS NOT NULL"
+    },
+    {
+      "table_name": "interviews",
+      "constraint_name": "interviews_round_number_not_null",
+      "check_clause": "round_number IS NOT NULL"
+    },
+    {
+      "table_name": "interviews",
+      "constraint_name": "interviews_round_type_not_null",
+      "check_clause": "round_type IS NOT NULL"
+    },
+    {
+      "table_name": "interviews",
+      "constraint_name": "interviews_scheduled_at_not_null",
+      "check_clause": "scheduled_at IS NOT NULL"
+    },
+    {
+      "table_name": "interviews",
+      "constraint_name": "interviews_status_not_null",
+      "check_clause": "status IS NOT NULL"
+    },
+    {
+      "table_name": "interviews",
+      "constraint_name": "interviews_tenant_id_not_null",
+      "check_clause": "tenant_id IS NOT NULL"
+    },
+    {
+      "table_name": "interviews",
+      "constraint_name": "interviews_updated_at_not_null",
+      "check_clause": "updated_at IS NOT NULL"
+    },
+    {
+      "table_name": "job_requirements",
+      "constraint_name": "job_requirements_created_at_not_null",
+      "check_clause": "created_at IS NOT NULL"
+    },
+    {
+      "table_name": "job_requirements",
+      "constraint_name": "job_requirements_id_not_null",
+      "check_clause": "id IS NOT NULL"
+    },
+    {
+      "table_name": "job_requirements",
+      "constraint_name": "job_requirements_is_mandatory_not_null",
+      "check_clause": "is_mandatory IS NOT NULL"
+    },
+    {
+      "table_name": "job_requirements",
+      "constraint_name": "job_requirements_job_role_id_not_null",
+      "check_clause": "job_role_id IS NOT NULL"
+    },
+    {
+      "table_name": "job_requirements",
+      "constraint_name": "job_requirements_min_proficiency_not_null",
+      "check_clause": "min_proficiency IS NOT NULL"
+    },
+    {
+      "table_name": "job_requirements",
+      "constraint_name": "job_requirements_skill_id_not_null",
+      "check_clause": "skill_id IS NOT NULL"
+    },
+    {
+      "table_name": "job_requirements",
+      "constraint_name": "job_requirements_updated_at_not_null",
+      "check_clause": "updated_at IS NOT NULL"
+    },
+    {
+      "table_name": "job_requirements",
+      "constraint_name": "job_requirements_weight_not_null",
+      "check_clause": "weight IS NOT NULL"
+    },
+    {
+      "table_name": "job_roles",
+      "constraint_name": "job_roles_company_id_not_null",
+      "check_clause": "company_id IS NOT NULL"
+    },
+    {
+      "table_name": "job_roles",
+      "constraint_name": "job_roles_created_at_not_null",
+      "check_clause": "created_at IS NOT NULL"
+    },
+    {
+      "table_name": "job_roles",
+      "constraint_name": "job_roles_description_not_null",
+      "check_clause": "description IS NOT NULL"
+    },
+    {
+      "table_name": "job_roles",
+      "constraint_name": "job_roles_experience_level_not_null",
+      "check_clause": "experience_level IS NOT NULL"
+    },
+    {
+      "table_name": "job_roles",
+      "constraint_name": "job_roles_id_not_null",
+      "check_clause": "id IS NOT NULL"
+    },
+    {
+      "table_name": "job_roles",
+      "constraint_name": "job_roles_title_not_null",
+      "check_clause": "title IS NOT NULL"
+    },
+    {
+      "table_name": "job_roles",
+      "constraint_name": "job_roles_updated_at_not_null",
+      "check_clause": "updated_at IS NOT NULL"
+    },
+    {
+      "table_name": "learning_recommendations",
+      "constraint_name": "learning_recommendations_action_type_not_null",
+      "check_clause": "action_type IS NOT NULL"
+    },
+    {
+      "table_name": "learning_recommendations",
+      "constraint_name": "learning_recommendations_created_at_not_null",
+      "check_clause": "created_at IS NOT NULL"
+    },
+    {
+      "table_name": "learning_recommendations",
+      "constraint_name": "learning_recommendations_description_not_null",
+      "check_clause": "description IS NOT NULL"
+    },
+    {
+      "table_name": "learning_recommendations",
+      "constraint_name": "learning_recommendations_estimated_hours_not_null",
+      "check_clause": "estimated_hours IS NOT NULL"
+    },
+    {
+      "table_name": "learning_recommendations",
+      "constraint_name": "learning_recommendations_id_not_null",
+      "check_clause": "id IS NOT NULL"
+    },
+    {
+      "table_name": "learning_recommendations",
+      "constraint_name": "learning_recommendations_is_completed_not_null",
+      "check_clause": "is_completed IS NOT NULL"
+    },
+    {
+      "table_name": "learning_recommendations",
+      "constraint_name": "learning_recommendations_skill_id_not_null",
+      "check_clause": "skill_id IS NOT NULL"
+    },
+    {
+      "table_name": "learning_recommendations",
+      "constraint_name": "learning_recommendations_student_id_not_null",
+      "check_clause": "student_id IS NOT NULL"
+    },
+    {
+      "table_name": "learning_recommendations",
+      "constraint_name": "learning_recommendations_tenant_id_not_null",
+      "check_clause": "tenant_id IS NOT NULL"
+    },
+    {
+      "table_name": "learning_recommendations",
+      "constraint_name": "learning_recommendations_title_not_null",
+      "check_clause": "title IS NOT NULL"
+    },
+    {
+      "table_name": "learning_recommendations",
+      "constraint_name": "learning_recommendations_updated_at_not_null",
+      "check_clause": "updated_at IS NOT NULL"
+    },
+    {
+      "table_name": "notifications",
+      "constraint_name": "notifications_created_at_not_null",
+      "check_clause": "created_at IS NOT NULL"
+    },
+    {
+      "table_name": "notifications",
+      "constraint_name": "notifications_id_not_null",
+      "check_clause": "id IS NOT NULL"
+    },
+    {
+      "table_name": "notifications",
+      "constraint_name": "notifications_is_read_not_null",
+      "check_clause": "is_read IS NOT NULL"
+    },
+    {
+      "table_name": "notifications",
+      "constraint_name": "notifications_message_not_null",
+      "check_clause": "message IS NOT NULL"
+    },
+    {
+      "table_name": "notifications",
+      "constraint_name": "notifications_recipient_user_id_not_null",
+      "check_clause": "recipient_user_id IS NOT NULL"
+    },
+    {
+      "table_name": "notifications",
+      "constraint_name": "notifications_tenant_id_not_null",
+      "check_clause": "tenant_id IS NOT NULL"
+    },
+    {
+      "table_name": "notifications",
+      "constraint_name": "notifications_title_not_null",
+      "check_clause": "title IS NOT NULL"
+    },
+    {
+      "table_name": "notifications",
+      "constraint_name": "notifications_type_not_null",
+      "check_clause": "type IS NOT NULL"
+    },
+    {
+      "table_name": "notifications",
+      "constraint_name": "notifications_updated_at_not_null",
+      "check_clause": "updated_at IS NOT NULL"
+    },
+    {
+      "table_name": "placement_drives",
+      "constraint_name": "placement_drives_batch_year_not_null",
+      "check_clause": "batch_year IS NOT NULL"
+    },
+    {
+      "table_name": "placement_drives",
+      "constraint_name": "placement_drives_created_at_not_null",
+      "check_clause": "created_at IS NOT NULL"
+    },
+    {
+      "table_name": "placement_drives",
+      "constraint_name": "placement_drives_eligible_departments_not_null",
+      "check_clause": "eligible_departments IS NOT NULL"
+    },
+    {
+      "table_name": "placement_drives",
+      "constraint_name": "placement_drives_id_not_null",
+      "check_clause": "id IS NOT NULL"
+    },
+    {
+      "table_name": "placement_drives",
+      "constraint_name": "placement_drives_job_role_id_not_null",
+      "check_clause": "job_role_id IS NOT NULL"
+    },
+    {
+      "table_name": "placement_drives",
+      "constraint_name": "placement_drives_max_backlogs_allowed_not_null",
+      "check_clause": "max_backlogs_allowed IS NOT NULL"
+    },
+    {
+      "table_name": "placement_drives",
+      "constraint_name": "placement_drives_min_cgpa_not_null",
+      "check_clause": "min_cgpa IS NOT NULL"
+    },
+    {
+      "table_name": "placement_drives",
+      "constraint_name": "placement_drives_registration_end_not_null",
+      "check_clause": "registration_end IS NOT NULL"
+    },
+    {
+      "table_name": "placement_drives",
+      "constraint_name": "placement_drives_registration_start_not_null",
+      "check_clause": "registration_start IS NOT NULL"
+    },
+    {
+      "table_name": "placement_drives",
+      "constraint_name": "placement_drives_status_not_null",
+      "check_clause": "status IS NOT NULL"
+    },
+    {
+      "table_name": "placement_drives",
+      "constraint_name": "placement_drives_tenant_id_not_null",
+      "check_clause": "tenant_id IS NOT NULL"
+    },
+    {
+      "table_name": "placement_drives",
+      "constraint_name": "placement_drives_updated_at_not_null",
+      "check_clause": "updated_at IS NOT NULL"
+    },
+    {
+      "table_name": "placement_predictions",
+      "constraint_name": "placement_predictions_contributing_factors_json_not_null",
+      "check_clause": "contributing_factors_json IS NOT NULL"
+    },
+    {
+      "table_name": "placement_predictions",
+      "constraint_name": "placement_predictions_created_at_not_null",
+      "check_clause": "created_at IS NOT NULL"
+    },
+    {
+      "table_name": "placement_predictions",
+      "constraint_name": "placement_predictions_id_not_null",
+      "check_clause": "id IS NOT NULL"
+    },
+    {
+      "table_name": "placement_predictions",
+      "constraint_name": "placement_predictions_is_advisory_only_not_null",
+      "check_clause": "is_advisory_only IS NOT NULL"
+    },
+    {
+      "table_name": "placement_predictions",
+      "constraint_name": "placement_predictions_probability_score_not_null",
+      "check_clause": "probability_score IS NOT NULL"
+    },
+    {
+      "table_name": "placement_predictions",
+      "constraint_name": "placement_predictions_risk_tier_not_null",
+      "check_clause": "risk_tier IS NOT NULL"
+    },
+    {
+      "table_name": "placement_predictions",
+      "constraint_name": "placement_predictions_student_id_not_null",
+      "check_clause": "student_id IS NOT NULL"
+    },
+    {
+      "table_name": "placement_predictions",
+      "constraint_name": "placement_predictions_tenant_id_not_null",
+      "check_clause": "tenant_id IS NOT NULL"
+    },
+    {
+      "table_name": "placement_predictions",
+      "constraint_name": "placement_predictions_updated_at_not_null",
+      "check_clause": "updated_at IS NOT NULL"
+    },
+    {
+      "table_name": "skill_assessments",
+      "constraint_name": "skill_assessments_assessment_name_not_null",
+      "check_clause": "assessment_name IS NOT NULL"
+    },
+    {
+      "table_name": "skill_assessments",
+      "constraint_name": "skill_assessments_completed_at_not_null",
+      "check_clause": "completed_at IS NOT NULL"
+    },
+    {
+      "table_name": "skill_assessments",
+      "constraint_name": "skill_assessments_created_at_not_null",
+      "check_clause": "created_at IS NOT NULL"
+    },
+    {
+      "table_name": "skill_assessments",
+      "constraint_name": "skill_assessments_evaluation_metrics_not_null",
+      "check_clause": "evaluation_metrics IS NOT NULL"
+    },
+    {
+      "table_name": "skill_assessments",
+      "constraint_name": "skill_assessments_id_not_null",
+      "check_clause": "id IS NOT NULL"
+    },
+    {
+      "table_name": "skill_assessments",
+      "constraint_name": "skill_assessments_max_score_not_null",
+      "check_clause": "max_score IS NOT NULL"
+    },
+    {
+      "table_name": "skill_assessments",
+      "constraint_name": "skill_assessments_score_not_null",
+      "check_clause": "score IS NOT NULL"
+    },
+    {
+      "table_name": "skill_assessments",
+      "constraint_name": "skill_assessments_skill_id_not_null",
+      "check_clause": "skill_id IS NOT NULL"
+    },
+    {
+      "table_name": "skill_assessments",
+      "constraint_name": "skill_assessments_student_id_not_null",
+      "check_clause": "student_id IS NOT NULL"
+    },
+    {
+      "table_name": "skill_assessments",
+      "constraint_name": "skill_assessments_tenant_id_not_null",
+      "check_clause": "tenant_id IS NOT NULL"
+    },
+    {
+      "table_name": "skill_assessments",
+      "constraint_name": "skill_assessments_updated_at_not_null",
+      "check_clause": "updated_at IS NOT NULL"
+    },
+    {
+      "table_name": "skill_gap_analyses",
+      "constraint_name": "skill_gap_analyses_analysis_mode_not_null",
+      "check_clause": "analysis_mode IS NOT NULL"
+    },
+    {
+      "table_name": "skill_gap_analyses",
+      "constraint_name": "skill_gap_analyses_created_at_not_null",
+      "check_clause": "created_at IS NOT NULL"
+    },
+    {
+      "table_name": "skill_gap_analyses",
+      "constraint_name": "skill_gap_analyses_id_not_null",
+      "check_clause": "id IS NOT NULL"
+    },
+    {
+      "table_name": "skill_gap_analyses",
+      "constraint_name": "skill_gap_analyses_job_role_id_not_null",
+      "check_clause": "job_role_id IS NOT NULL"
+    },
+    {
+      "table_name": "skill_gap_analyses",
+      "constraint_name": "skill_gap_analyses_match_percentage_not_null",
+      "check_clause": "match_percentage IS NOT NULL"
+    },
+    {
+      "table_name": "skill_gap_analyses",
+      "constraint_name": "skill_gap_analyses_matching_skills_json_not_null",
+      "check_clause": "matching_skills_json IS NOT NULL"
+    },
+    {
+      "table_name": "skill_gap_analyses",
+      "constraint_name": "skill_gap_analyses_missing_skills_json_not_null",
+      "check_clause": "missing_skills_json IS NOT NULL"
+    },
+    {
+      "table_name": "skill_gap_analyses",
+      "constraint_name": "skill_gap_analyses_student_id_not_null",
+      "check_clause": "student_id IS NOT NULL"
+    },
+    {
+      "table_name": "skill_gap_analyses",
+      "constraint_name": "skill_gap_analyses_tenant_id_not_null",
+      "check_clause": "tenant_id IS NOT NULL"
+    },
+    {
+      "table_name": "skill_gap_analyses",
+      "constraint_name": "skill_gap_analyses_updated_at_not_null",
+      "check_clause": "updated_at IS NOT NULL"
+    },
+    {
+      "table_name": "skills",
+      "constraint_name": "skills_canonical_slug_not_null",
+      "check_clause": "canonical_slug IS NOT NULL"
+    },
+    {
+      "table_name": "skills",
+      "constraint_name": "skills_category_not_null",
+      "check_clause": "category IS NOT NULL"
+    },
+    {
+      "table_name": "skills",
+      "constraint_name": "skills_created_at_not_null",
+      "check_clause": "created_at IS NOT NULL"
+    },
+    {
+      "table_name": "skills",
+      "constraint_name": "skills_id_not_null",
+      "check_clause": "id IS NOT NULL"
+    },
+    {
+      "table_name": "skills",
+      "constraint_name": "skills_name_not_null",
+      "check_clause": "name IS NOT NULL"
+    },
+    {
+      "table_name": "skills",
+      "constraint_name": "skills_updated_at_not_null",
+      "check_clause": "updated_at IS NOT NULL"
+    },
+    {
+      "table_name": "student_skills",
+      "constraint_name": "student_skills_confidence_score_not_null",
+      "check_clause": "confidence_score IS NOT NULL"
+    },
+    {
+      "table_name": "student_skills",
+      "constraint_name": "student_skills_created_at_not_null",
+      "check_clause": "created_at IS NOT NULL"
+    },
+    {
+      "table_name": "student_skills",
+      "constraint_name": "student_skills_id_not_null",
+      "check_clause": "id IS NOT NULL"
+    },
+    {
+      "table_name": "student_skills",
+      "constraint_name": "student_skills_proficiency_level_not_null",
+      "check_clause": "proficiency_level IS NOT NULL"
+    },
+    {
+      "table_name": "student_skills",
+      "constraint_name": "student_skills_skill_id_not_null",
+      "check_clause": "skill_id IS NOT NULL"
+    },
+    {
+      "table_name": "student_skills",
+      "constraint_name": "student_skills_state_not_null",
+      "check_clause": "state IS NOT NULL"
+    },
+    {
+      "table_name": "student_skills",
+      "constraint_name": "student_skills_student_id_not_null",
+      "check_clause": "student_id IS NOT NULL"
+    },
+    {
+      "table_name": "student_skills",
+      "constraint_name": "student_skills_tenant_id_not_null",
+      "check_clause": "tenant_id IS NOT NULL"
+    },
+    {
+      "table_name": "student_skills",
+      "constraint_name": "student_skills_updated_at_not_null",
+      "check_clause": "updated_at IS NOT NULL"
+    },
+    {
+      "table_name": "students",
+      "constraint_name": "students_backlog_count_not_null",
+      "check_clause": "backlog_count IS NOT NULL"
+    },
+    {
+      "table_name": "students",
+      "constraint_name": "students_batch_year_not_null",
+      "check_clause": "batch_year IS NOT NULL"
+    },
+    {
+      "table_name": "students",
+      "constraint_name": "students_cgpa_not_null",
+      "check_clause": "cgpa IS NOT NULL"
+    },
+    {
+      "table_name": "students",
+      "constraint_name": "students_created_at_not_null",
+      "check_clause": "created_at IS NOT NULL"
+    },
+    {
+      "table_name": "students",
+      "constraint_name": "students_degree_not_null",
+      "check_clause": "degree IS NOT NULL"
+    },
+    {
+      "table_name": "students",
+      "constraint_name": "students_department_not_null",
+      "check_clause": "department IS NOT NULL"
+    },
+    {
+      "table_name": "students",
+      "constraint_name": "students_id_not_null",
+      "check_clause": "id IS NOT NULL"
+    },
+    {
+      "table_name": "students",
+      "constraint_name": "students_readiness_score_not_null",
+      "check_clause": "readiness_score IS NOT NULL"
+    },
+    {
+      "table_name": "students",
+      "constraint_name": "students_roll_number_not_null",
+      "check_clause": "roll_number IS NOT NULL"
+    },
+    {
+      "table_name": "students",
+      "constraint_name": "students_tenant_id_not_null",
+      "check_clause": "tenant_id IS NOT NULL"
+    },
+    {
+      "table_name": "students",
+      "constraint_name": "students_updated_at_not_null",
+      "check_clause": "updated_at IS NOT NULL"
+    },
+    {
+      "table_name": "students",
+      "constraint_name": "students_user_id_not_null",
+      "check_clause": "user_id IS NOT NULL"
+    },
+    {
+      "table_name": "tenants",
+      "constraint_name": "tenants_created_at_not_null",
+      "check_clause": "created_at IS NOT NULL"
+    },
+    {
+      "table_name": "tenants",
+      "constraint_name": "tenants_id_not_null",
+      "check_clause": "id IS NOT NULL"
+    },
+    {
+      "table_name": "tenants",
+      "constraint_name": "tenants_is_active_not_null",
+      "check_clause": "is_active IS NOT NULL"
+    },
+    {
+      "table_name": "tenants",
+      "constraint_name": "tenants_name_not_null",
+      "check_clause": "name IS NOT NULL"
+    },
+    {
+      "table_name": "tenants",
+      "constraint_name": "tenants_slug_not_null",
+      "check_clause": "slug IS NOT NULL"
+    },
+    {
+      "table_name": "tenants",
+      "constraint_name": "tenants_updated_at_not_null",
+      "check_clause": "updated_at IS NOT NULL"
+    },
+    {
+      "table_name": "users",
+      "constraint_name": "users_created_at_not_null",
+      "check_clause": "created_at IS NOT NULL"
+    },
+    {
+      "table_name": "users",
+      "constraint_name": "users_email_not_null",
+      "check_clause": "email IS NOT NULL"
+    },
+    {
+      "table_name": "users",
+      "constraint_name": "users_full_name_not_null",
+      "check_clause": "full_name IS NOT NULL"
+    },
+    {
+      "table_name": "users",
+      "constraint_name": "users_id_not_null",
+      "check_clause": "id IS NOT NULL"
+    },
+    {
+      "table_name": "users",
+      "constraint_name": "users_is_active_not_null",
+      "check_clause": "is_active IS NOT NULL"
+    },
+    {
+      "table_name": "users",
+      "constraint_name": "users_is_verified_not_null",
+      "check_clause": "is_verified IS NOT NULL"
+    },
+    {
+      "table_name": "users",
+      "constraint_name": "users_password_hash_not_null",
+      "check_clause": "password_hash IS NOT NULL"
+    },
+    {
+      "table_name": "users",
+      "constraint_name": "users_role_not_null",
+      "check_clause": "role IS NOT NULL"
+    },
+    {
+      "table_name": "users",
+      "constraint_name": "users_tenant_id_not_null",
+      "check_clause": "tenant_id IS NOT NULL"
+    },
+    {
+      "table_name": "users",
+      "constraint_name": "users_updated_at_not_null",
+      "check_clause": "updated_at IS NOT NULL"
+    }
+  ],
+  "indexes": [
+    {
+      "schemaname": "public",
+      "tablename": "academic_semesters",
+      "indexname": "academic_semesters_pkey",
+      "indexdef": "CREATE UNIQUE INDEX academic_semesters_pkey ON public.academic_semesters USING btree (id)",
+      "is_unique": true,
+      "is_primary": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "academic_semesters",
+      "indexname": "ix_academic_semesters_student_id",
+      "indexdef": "CREATE INDEX ix_academic_semesters_student_id ON public.academic_semesters USING btree (student_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "academic_semesters",
+      "indexname": "ix_academic_semesters_tenant_id",
+      "indexdef": "CREATE INDEX ix_academic_semesters_tenant_id ON public.academic_semesters USING btree (tenant_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "academic_semesters",
+      "indexname": "uq_semester_student_num",
+      "indexdef": "CREATE UNIQUE INDEX uq_semester_student_num ON public.academic_semesters USING btree (student_id, semester_number)",
+      "is_unique": true,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "agent_execution_logs",
+      "indexname": "agent_execution_logs_pkey",
+      "indexdef": "CREATE UNIQUE INDEX agent_execution_logs_pkey ON public.agent_execution_logs USING btree (id)",
+      "is_unique": true,
+      "is_primary": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "agent_execution_logs",
+      "indexname": "ix_agent_execution_logs_tenant_id",
+      "indexdef": "CREATE INDEX ix_agent_execution_logs_tenant_id ON public.agent_execution_logs USING btree (tenant_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "agent_execution_logs",
+      "indexname": "ix_agent_logs_tenant_type_status",
+      "indexdef": "CREATE INDEX ix_agent_logs_tenant_type_status ON public.agent_execution_logs USING btree (tenant_id, agent_type, status)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "agent_workflows",
+      "indexname": "agent_workflows_pkey",
+      "indexdef": "CREATE UNIQUE INDEX agent_workflows_pkey ON public.agent_workflows USING btree (id)",
+      "is_unique": true,
+      "is_primary": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "agent_workflows",
+      "indexname": "ix_agent_workflows_tenant_id",
+      "indexdef": "CREATE INDEX ix_agent_workflows_tenant_id ON public.agent_workflows USING btree (tenant_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "agent_workflows",
+      "indexname": "ix_workflows_tenant_entity",
+      "indexdef": "CREATE INDEX ix_workflows_tenant_entity ON public.agent_workflows USING btree (tenant_id, target_entity_type, target_entity_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "alembic_version",
+      "indexname": "alembic_version_pkc",
+      "indexdef": "CREATE UNIQUE INDEX alembic_version_pkc ON public.alembic_version USING btree (version_num)",
+      "is_unique": true,
+      "is_primary": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "applications",
+      "indexname": "applications_pkey",
+      "indexdef": "CREATE UNIQUE INDEX applications_pkey ON public.applications USING btree (id)",
+      "is_unique": true,
+      "is_primary": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "applications",
+      "indexname": "ix_applications_drive_id",
+      "indexdef": "CREATE INDEX ix_applications_drive_id ON public.applications USING btree (drive_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "applications",
+      "indexname": "ix_applications_student_id",
+      "indexdef": "CREATE INDEX ix_applications_student_id ON public.applications USING btree (student_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "applications",
+      "indexname": "ix_applications_tenant_id",
+      "indexdef": "CREATE INDEX ix_applications_tenant_id ON public.applications USING btree (tenant_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "applications",
+      "indexname": "ix_applications_tenant_status",
+      "indexdef": "CREATE INDEX ix_applications_tenant_status ON public.applications USING btree (tenant_id, status, drive_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "applications",
+      "indexname": "uq_applications_drive_student",
+      "indexdef": "CREATE UNIQUE INDEX uq_applications_drive_student ON public.applications USING btree (drive_id, student_id)",
+      "is_unique": true,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "audit_events",
+      "indexname": "audit_events_pkey",
+      "indexdef": "CREATE UNIQUE INDEX audit_events_pkey ON public.audit_events USING btree (id)",
+      "is_unique": true,
+      "is_primary": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "audit_events",
+      "indexname": "ix_audit_events_tenant_id",
+      "indexdef": "CREATE INDEX ix_audit_events_tenant_id ON public.audit_events USING btree (tenant_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "audit_events",
+      "indexname": "ix_audit_tenant_action",
+      "indexdef": "CREATE INDEX ix_audit_tenant_action ON public.audit_events USING btree (tenant_id, action)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "audit_events",
+      "indexname": "ix_audit_tenant_timestamp",
+      "indexdef": "CREATE INDEX ix_audit_tenant_timestamp ON public.audit_events USING btree (tenant_id, \"timestamp\")",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "companies",
+      "indexname": "companies_pkey",
+      "indexdef": "CREATE UNIQUE INDEX companies_pkey ON public.companies USING btree (id)",
+      "is_unique": true,
+      "is_primary": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "companies",
+      "indexname": "ix_companies_name",
+      "indexdef": "CREATE UNIQUE INDEX ix_companies_name ON public.companies USING btree (name)",
+      "is_unique": true,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "evidence_records",
+      "indexname": "evidence_records_pkey",
+      "indexdef": "CREATE UNIQUE INDEX evidence_records_pkey ON public.evidence_records USING btree (id)",
+      "is_unique": true,
+      "is_primary": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "evidence_records",
+      "indexname": "ix_evidence_records_skill_id",
+      "indexdef": "CREATE INDEX ix_evidence_records_skill_id ON public.evidence_records USING btree (skill_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "evidence_records",
+      "indexname": "ix_evidence_records_student_id",
+      "indexdef": "CREATE INDEX ix_evidence_records_student_id ON public.evidence_records USING btree (student_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "evidence_records",
+      "indexname": "ix_evidence_records_tenant_id",
+      "indexdef": "CREATE INDEX ix_evidence_records_tenant_id ON public.evidence_records USING btree (tenant_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "evidence_records",
+      "indexname": "ix_evidence_tenant_student_skill",
+      "indexdef": "CREATE INDEX ix_evidence_tenant_student_skill ON public.evidence_records USING btree (tenant_id, student_id, skill_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "interviews",
+      "indexname": "interviews_pkey",
+      "indexdef": "CREATE UNIQUE INDEX interviews_pkey ON public.interviews USING btree (id)",
+      "is_unique": true,
+      "is_primary": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "interviews",
+      "indexname": "ix_interviews_application_id",
+      "indexdef": "CREATE INDEX ix_interviews_application_id ON public.interviews USING btree (application_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "interviews",
+      "indexname": "ix_interviews_tenant_id",
+      "indexdef": "CREATE INDEX ix_interviews_tenant_id ON public.interviews USING btree (tenant_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "job_requirements",
+      "indexname": "ix_job_requirements_job_role_id",
+      "indexdef": "CREATE INDEX ix_job_requirements_job_role_id ON public.job_requirements USING btree (job_role_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "job_requirements",
+      "indexname": "ix_job_requirements_skill_id",
+      "indexdef": "CREATE INDEX ix_job_requirements_skill_id ON public.job_requirements USING btree (skill_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "job_requirements",
+      "indexname": "job_requirements_pkey",
+      "indexdef": "CREATE UNIQUE INDEX job_requirements_pkey ON public.job_requirements USING btree (id)",
+      "is_unique": true,
+      "is_primary": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "job_requirements",
+      "indexname": "uq_job_req_role_skill",
+      "indexdef": "CREATE UNIQUE INDEX uq_job_req_role_skill ON public.job_requirements USING btree (job_role_id, skill_id)",
+      "is_unique": true,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "job_roles",
+      "indexname": "ix_job_roles_company_id",
+      "indexdef": "CREATE INDEX ix_job_roles_company_id ON public.job_roles USING btree (company_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "job_roles",
+      "indexname": "job_roles_pkey",
+      "indexdef": "CREATE UNIQUE INDEX job_roles_pkey ON public.job_roles USING btree (id)",
+      "is_unique": true,
+      "is_primary": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "learning_recommendations",
+      "indexname": "ix_learning_recommendations_skill_id",
+      "indexdef": "CREATE INDEX ix_learning_recommendations_skill_id ON public.learning_recommendations USING btree (skill_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "learning_recommendations",
+      "indexname": "ix_learning_recommendations_student_id",
+      "indexdef": "CREATE INDEX ix_learning_recommendations_student_id ON public.learning_recommendations USING btree (student_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "learning_recommendations",
+      "indexname": "ix_learning_recommendations_tenant_id",
+      "indexdef": "CREATE INDEX ix_learning_recommendations_tenant_id ON public.learning_recommendations USING btree (tenant_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "learning_recommendations",
+      "indexname": "learning_recommendations_pkey",
+      "indexdef": "CREATE UNIQUE INDEX learning_recommendations_pkey ON public.learning_recommendations USING btree (id)",
+      "is_unique": true,
+      "is_primary": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "notifications",
+      "indexname": "ix_notifications_recipient_user_id",
+      "indexdef": "CREATE INDEX ix_notifications_recipient_user_id ON public.notifications USING btree (recipient_user_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "notifications",
+      "indexname": "ix_notifications_tenant_id",
+      "indexdef": "CREATE INDEX ix_notifications_tenant_id ON public.notifications USING btree (tenant_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "notifications",
+      "indexname": "ix_notifications_tenant_recipient",
+      "indexdef": "CREATE INDEX ix_notifications_tenant_recipient ON public.notifications USING btree (tenant_id, recipient_user_id, is_read)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "notifications",
+      "indexname": "notifications_pkey",
+      "indexdef": "CREATE UNIQUE INDEX notifications_pkey ON public.notifications USING btree (id)",
+      "is_unique": true,
+      "is_primary": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "placement_drives",
+      "indexname": "ix_drives_tenant_status_batch",
+      "indexdef": "CREATE INDEX ix_drives_tenant_status_batch ON public.placement_drives USING btree (tenant_id, status, batch_year)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "placement_drives",
+      "indexname": "ix_placement_drives_job_role_id",
+      "indexdef": "CREATE INDEX ix_placement_drives_job_role_id ON public.placement_drives USING btree (job_role_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "placement_drives",
+      "indexname": "ix_placement_drives_tenant_id",
+      "indexdef": "CREATE INDEX ix_placement_drives_tenant_id ON public.placement_drives USING btree (tenant_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "placement_drives",
+      "indexname": "placement_drives_pkey",
+      "indexdef": "CREATE UNIQUE INDEX placement_drives_pkey ON public.placement_drives USING btree (id)",
+      "is_unique": true,
+      "is_primary": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "placement_predictions",
+      "indexname": "ix_placement_predictions_student_id",
+      "indexdef": "CREATE INDEX ix_placement_predictions_student_id ON public.placement_predictions USING btree (student_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "placement_predictions",
+      "indexname": "ix_placement_predictions_tenant_id",
+      "indexdef": "CREATE INDEX ix_placement_predictions_tenant_id ON public.placement_predictions USING btree (tenant_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "placement_predictions",
+      "indexname": "ix_predictions_tenant_student",
+      "indexdef": "CREATE INDEX ix_predictions_tenant_student ON public.placement_predictions USING btree (tenant_id, student_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "placement_predictions",
+      "indexname": "placement_predictions_pkey",
+      "indexdef": "CREATE UNIQUE INDEX placement_predictions_pkey ON public.placement_predictions USING btree (id)",
+      "is_unique": true,
+      "is_primary": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "skill_assessments",
+      "indexname": "ix_skill_assessments_skill_id",
+      "indexdef": "CREATE INDEX ix_skill_assessments_skill_id ON public.skill_assessments USING btree (skill_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "skill_assessments",
+      "indexname": "ix_skill_assessments_student_id",
+      "indexdef": "CREATE INDEX ix_skill_assessments_student_id ON public.skill_assessments USING btree (student_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "skill_assessments",
+      "indexname": "ix_skill_assessments_tenant_id",
+      "indexdef": "CREATE INDEX ix_skill_assessments_tenant_id ON public.skill_assessments USING btree (tenant_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "skill_assessments",
+      "indexname": "skill_assessments_pkey",
+      "indexdef": "CREATE UNIQUE INDEX skill_assessments_pkey ON public.skill_assessments USING btree (id)",
+      "is_unique": true,
+      "is_primary": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "skill_gap_analyses",
+      "indexname": "ix_gap_analysis_tenant_student_role",
+      "indexdef": "CREATE INDEX ix_gap_analysis_tenant_student_role ON public.skill_gap_analyses USING btree (tenant_id, student_id, job_role_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "skill_gap_analyses",
+      "indexname": "ix_skill_gap_analyses_job_role_id",
+      "indexdef": "CREATE INDEX ix_skill_gap_analyses_job_role_id ON public.skill_gap_analyses USING btree (job_role_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "skill_gap_analyses",
+      "indexname": "ix_skill_gap_analyses_student_id",
+      "indexdef": "CREATE INDEX ix_skill_gap_analyses_student_id ON public.skill_gap_analyses USING btree (student_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "skill_gap_analyses",
+      "indexname": "ix_skill_gap_analyses_tenant_id",
+      "indexdef": "CREATE INDEX ix_skill_gap_analyses_tenant_id ON public.skill_gap_analyses USING btree (tenant_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "skill_gap_analyses",
+      "indexname": "skill_gap_analyses_pkey",
+      "indexdef": "CREATE UNIQUE INDEX skill_gap_analyses_pkey ON public.skill_gap_analyses USING btree (id)",
+      "is_unique": true,
+      "is_primary": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "skills",
+      "indexname": "ix_skills_canonical_slug",
+      "indexdef": "CREATE UNIQUE INDEX ix_skills_canonical_slug ON public.skills USING btree (canonical_slug)",
+      "is_unique": true,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "skills",
+      "indexname": "ix_skills_name",
+      "indexdef": "CREATE UNIQUE INDEX ix_skills_name ON public.skills USING btree (name)",
+      "is_unique": true,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "skills",
+      "indexname": "skills_pkey",
+      "indexdef": "CREATE UNIQUE INDEX skills_pkey ON public.skills USING btree (id)",
+      "is_unique": true,
+      "is_primary": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "student_skills",
+      "indexname": "ix_student_skills_skill_id",
+      "indexdef": "CREATE INDEX ix_student_skills_skill_id ON public.student_skills USING btree (skill_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "student_skills",
+      "indexname": "ix_student_skills_student_id",
+      "indexdef": "CREATE INDEX ix_student_skills_student_id ON public.student_skills USING btree (student_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "student_skills",
+      "indexname": "ix_student_skills_tenant_id",
+      "indexdef": "CREATE INDEX ix_student_skills_tenant_id ON public.student_skills USING btree (tenant_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "student_skills",
+      "indexname": "ix_student_skills_tenant_state",
+      "indexdef": "CREATE INDEX ix_student_skills_tenant_state ON public.student_skills USING btree (tenant_id, state, skill_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "student_skills",
+      "indexname": "student_skills_pkey",
+      "indexdef": "CREATE UNIQUE INDEX student_skills_pkey ON public.student_skills USING btree (id)",
+      "is_unique": true,
+      "is_primary": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "student_skills",
+      "indexname": "uq_student_skills_student_skill",
+      "indexdef": "CREATE UNIQUE INDEX uq_student_skills_student_skill ON public.student_skills USING btree (student_id, skill_id)",
+      "is_unique": true,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "students",
+      "indexname": "ix_students_tenant_batch_dept",
+      "indexdef": "CREATE INDEX ix_students_tenant_batch_dept ON public.students USING btree (tenant_id, batch_year, department)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "students",
+      "indexname": "ix_students_tenant_cgpa",
+      "indexdef": "CREATE INDEX ix_students_tenant_cgpa ON public.students USING btree (tenant_id, cgpa)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "students",
+      "indexname": "ix_students_tenant_id",
+      "indexdef": "CREATE INDEX ix_students_tenant_id ON public.students USING btree (tenant_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "students",
+      "indexname": "students_pkey",
+      "indexdef": "CREATE UNIQUE INDEX students_pkey ON public.students USING btree (id)",
+      "is_unique": true,
+      "is_primary": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "students",
+      "indexname": "students_user_id_key",
+      "indexdef": "CREATE UNIQUE INDEX students_user_id_key ON public.students USING btree (user_id)",
+      "is_unique": true,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "students",
+      "indexname": "uq_students_tenant_roll",
+      "indexdef": "CREATE UNIQUE INDEX uq_students_tenant_roll ON public.students USING btree (tenant_id, roll_number)",
+      "is_unique": true,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "tenants",
+      "indexname": "ix_tenants_name",
+      "indexdef": "CREATE UNIQUE INDEX ix_tenants_name ON public.tenants USING btree (name)",
+      "is_unique": true,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "tenants",
+      "indexname": "ix_tenants_slug",
+      "indexdef": "CREATE UNIQUE INDEX ix_tenants_slug ON public.tenants USING btree (slug)",
+      "is_unique": true,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "tenants",
+      "indexname": "tenants_pkey",
+      "indexdef": "CREATE UNIQUE INDEX tenants_pkey ON public.tenants USING btree (id)",
+      "is_unique": true,
+      "is_primary": true
+    },
+    {
+      "schemaname": "public",
+      "tablename": "users",
+      "indexname": "ix_users_email",
+      "indexdef": "CREATE INDEX ix_users_email ON public.users USING btree (email)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "users",
+      "indexname": "ix_users_tenant_id",
+      "indexdef": "CREATE INDEX ix_users_tenant_id ON public.users USING btree (tenant_id)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "users",
+      "indexname": "ix_users_tenant_role",
+      "indexdef": "CREATE INDEX ix_users_tenant_role ON public.users USING btree (tenant_id, role)",
+      "is_unique": false,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "users",
+      "indexname": "uq_users_tenant_email",
+      "indexdef": "CREATE UNIQUE INDEX uq_users_tenant_email ON public.users USING btree (tenant_id, email)",
+      "is_unique": true,
+      "is_primary": false
+    },
+    {
+      "schemaname": "public",
+      "tablename": "users",
+      "indexname": "users_pkey",
+      "indexdef": "CREATE UNIQUE INDEX users_pkey ON public.users USING btree (id)",
+      "is_unique": true,
+      "is_primary": true
+    }
+  ],
+  "rls_policies": [],
+  "triggers": []
+}

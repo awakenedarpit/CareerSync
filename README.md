@@ -46,11 +46,13 @@ CarrerSync is engineered under a **strict ₹0 budget policy**. All services lev
   - Drizzle ORM (type-safe SQL query generation)
   - Retained for side-by-side comparison and instant rollback per Section 14
 - **Canonical Database**:
-  - Neon Serverless PostgreSQL (Canonical relational source of truth)
-  - 16 normalized relational tables with PostgreSQL Row-Level Security (RLS)
-  - Neon Auth / Better Auth compatibility
+  - Neon Serverless PostgreSQL (Canonical relational source of truth, audited at catalog level)
+  - 22 normalized relational tables (21 domain tables + alembic migration tracker), 207 columns, 44 foreign keys with cascade
+  - Hardened multi-tenant transaction-scoped RLS isolation helper (`withTenantContext`) preventing connection pool leakage
+  - Preserved stateless JWT (HS256) + bcryptjs (10 salt rounds) authentication (rejecting external auth dependencies)
 - **Object Storage & Acceleration**:
   - Cloudflare R2 (zero-egress S3-compatible private object store for code proofs & resumes)
+  - Non-destructive column compatibility: dual-read support for `resumeUrl`/`resume_r2_url` and `fileStorageKey`/`r2_storage_key`
   - Neon connection caching & transaction-scoped RLS context helper
 - **AI Architecture**:
   - Provider-independent hybrid AI: Google Gemini API Free Tier with offline deterministic rule fallbacks
@@ -365,11 +367,16 @@ Expected output:
 
 ---
 
-## 7. Current Implementation Status (Phases 1–6 Complete)
+## 7. Current Implementation Status (Phases 1–7 Complete)
 
 | Component / Layer | Status | Verification & Deliverables |
 | :--- | :--- | :--- |
-| **Node.js + Express Backend (Phase 06)** | **COMPLETED** | Active primary REST engine (`server/src/server.ts`, `app.ts`) on Render $PORT with Drizzle ORM, dual-layer RLS context, auth/superadmin/tenant routes, and 112/112 Vitest tests passing |
+| **Database & Schema Reconciliation (Phase 07)** | **COMPLETED** | Live Neon PostgreSQL catalog audit (22 tables, 207 columns, 44 FKs with CASCADE, 85 indexes); Drizzle schema canonical truth with non-destructive column compatibility (`resumeUrl` & `fileStorageKey` dual-read resolvers); 14 reconciliation tests |
+| **Multi-Tenant RLS Pooling Hardening (Phase 07)** | **COMPLETED** | `withTenantContext` hardened in `server/src/db/client.ts` with dedicated pool client, transaction scope, `SET LOCAL app.current_tenant_id`, and guaranteed `finally` reset preventing connection pool context leakage |
+| **Authentication System Reconciliation (Phase 07)** | **COMPLETED** | Formal Authentication Provider Decision preserving custom stateless JWT (HS256) + bcryptjs (10 rounds) for ₹0 cost, zero vendor lock-in, data colocation, and offline test reliability; rejected external auth (Neon Auth / Clerk / Auth0) |
+| **Super Admin Security & Anti-Escalation (Phase 07)** | **COMPLETED** | Server-side registration gate rejecting public Super Admin self-registration with 403 `SUPERADMIN_REGISTRATION_PROHIBITED`; out-of-band CLI bootstrapper (`scripts/provision_superadmin.ts` / `.py`); 5-role RBAC enforcement |
+| **Student Privacy & Ethical Data Protection** | **COMPLETED** | Relational under-18 CHECK constraint (`date_of_birth <= CURRENT_DATE - INTERVAL '18 years'`); zero behavioral monitoring / surveillance; zero student PII or resume data egress to external AI; deterministic offline rule fallbacks |
+| **Node.js + Express Backend (Phase 06)** | **COMPLETED** | Active primary REST engine (`server/src/server.ts`, `app.ts`) on Render $PORT with Drizzle ORM, dual-layer RLS context, auth/superadmin/tenant routes, and 127/127 Vitest tests passing |
 | **Super Admin Portal (8 Pages)** | **COMPLETED** | Overview, College Management, Register College, User Management, Create User, Invitations, Audit Trail, Platform Settings (`client/src/pages/superadmin/`) |
 | **Super Admin REST API** | **COMPLETED** | `/api/v1/super-admin` with stats, college provisioning/suspension, cross-college user management, expiring single-use invitations, and audit event query engine |
 | **Super Admin Initial Bootstrapper** | **COMPLETED** | Out-of-band CLI provisioning scripts (`scripts/provision_superadmin.ts` & `scripts/provision_superadmin.py`) for zero-risk root platform administrator bootstrapping |
@@ -379,9 +386,9 @@ Expected output:
 | **Unified UI/UX Design System** | **COMPLETED** | 22 reusable primitives in `client/src/components/ui/`, responsive layout shell with mobile drawer, consistent institutional light theme tokens |
 | **Multi-Tenant Security & Isolation** | **COMPLETED** | Dual-layer tenant isolation, anti-spoofing header rejection (403 `TENANT_SPOOFING_REJECTED`), UUID validation, PostgreSQL RLS kernel policies |
 | **Stateless Authentication & RBAC** | **COMPLETED** | HMAC-SHA256 JWT tokens with role guard middleware (`superadmin`, `college_admin`, `tpo_admin`, `faculty_coordinator`, `recruiter`, `student`), bcrypt hashing (salt rounds: 10) |
-| **Canonical Relational Engine** | **COMPLETED** | Neon PostgreSQL serverless database with 16 normalized tables, composite unique constraints, and foreign key cascades |
-| **Automated Verification Test Suite** | **COMPLETED** | 112/112 Vitest tests passing in `server/`, 12/12 Pytest tests passing in `backend/`, 112/112 tests passing in `workers/` (100% test parity gate met) |
-| **Zero-Cost Budget Policy** | **COMPLETED** | 100% free-tier architecture (Node.js/Render Free Tier, Neon PostgreSQL Free Tier, Cloudflare Pages, Cloudflare R2). Zero paid third-party dependencies |
+| **Canonical Relational Engine** | **COMPLETED** | Neon PostgreSQL serverless database with 22 audited tables, composite unique constraints, and foreign key cascades |
+| **Automated Verification Test Suite** | **COMPLETED** | 127/127 Vitest tests passing in `server/`, 12/12 Pytest tests passing in `backend/`, 113/113 tests passing in `workers/` (100% test parity gate met across all suites) |
+| **Zero-Cost Budget Policy** | **COMPLETED** | 100% free-tier architecture (Node.js/Render Free Tier, Neon PostgreSQL Free Tier, Vercel/Render Static Free Tier, Provider-Independent Storage). Zero paid third-party dependencies |
 
 ---
 
