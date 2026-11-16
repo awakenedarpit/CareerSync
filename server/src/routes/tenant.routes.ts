@@ -5,6 +5,7 @@ import crypto from 'crypto';
 import { getDb } from '../db/client';
 import { tenants } from '../db/schema';
 import { isValidUuid } from '../middleware/tenant';
+import { authenticateToken, requireRole } from '../middleware/auth';
 import env from '../config/env';
 
 const router = Router();
@@ -23,9 +24,9 @@ const CreateTenantSchema = z.object({
 
 /**
  * GET /api/v1/tenants/
- * List active college tenants.
+ * List active college tenants. (Protected: superadmin only)
  */
-router.get('/', async (req: Request, res: Response) => {
+router.get('/', authenticateToken, requireRole(['superadmin']), async (req: Request, res: Response) => {
   const dbUrl = env.DATABASE_URL || process.env.DATABASE_URL;
 
   if (dbUrl) {
@@ -77,9 +78,9 @@ router.get('/', async (req: Request, res: Response) => {
 
 /**
  * POST /api/v1/tenants/
- * Provision a new college tenant.
+ * Provision a new college tenant. (Protected: superadmin only)
  */
-router.post('/', async (req: Request, res: Response) => {
+router.post('/', authenticateToken, requireRole(['superadmin']), async (req: Request, res: Response) => {
   const parseResult = CreateTenantSchema.safeParse(req.body);
   if (!parseResult.success) {
     return res.status(400).json({

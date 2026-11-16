@@ -203,11 +203,11 @@ export default function LearningPath() {
       )}
 
       {/* Overall Progress Banner */}
-      <Card className="p-6 border-indigo-100 bg-gradient-to-br from-indigo-50/50 via-white to-purple-50/20">
+      <Card className="p-6 border-[#02E8A7]/30 bg-gradient-to-br from-indigo-50/50 via-white to-purple-50/20">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 max-w-xl">
             <div className="flex items-center gap-2">
-              <Badge variant="indigo" size="sm">Target: {learningData?.targetRole || 'Full Stack Engineer'}</Badge>
+              <Badge variant="aqua" size="sm">Target: {learningData?.targetRole || 'Full Stack Engineer'}</Badge>
               <span className="text-xs text-slate-500 font-medium">
                 {completedCount} of {tasks.length} Modules Verified
               </span>
@@ -221,9 +221,9 @@ export default function LearningPath() {
           <div className="w-full md:w-64 space-y-1.5 bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
             <div className="flex items-center justify-between text-xs">
               <span className="font-semibold text-slate-700">Path Completion</span>
-              <span className="font-bold text-indigo-700">{progressPercent}%</span>
+              <span className="font-bold text-[#004D36]">{progressPercent}%</span>
             </div>
-            <ProgressBar value={progressPercent} color="indigo" />
+            <ProgressBar value={progressPercent} color="teal" />
             <div className="text-[10px] text-slate-400 text-right pt-0.5">
               ~{learningData?.estimatedHoursRemaining || 8.5} hours remaining
             </div>
@@ -240,7 +240,7 @@ export default function LearningPath() {
               onClick={() => setActiveCategory(cat)}
               className={`text-xs font-semibold px-3 py-1.5 rounded-lg border transition-all ${
                 activeCategory === cat
-                  ? 'bg-indigo-600 text-white border-indigo-600 shadow-xs'
+                  ? 'bg-[#02E8A7] text-[#002020] font-bold border-indigo-600 shadow-xs'
                   : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
               }`}
             >
@@ -266,7 +266,7 @@ export default function LearningPath() {
                 isCompleted
                   ? 'border-emerald-200 bg-emerald-50/10'
                   : isInProgress
-                  ? 'border-indigo-200 bg-indigo-50/10'
+                  ? 'border-[#02E8A7]/40 bg-[#BDF9F9]/30/10'
                   : 'border-slate-200 bg-white'
               }`}
             >
@@ -298,7 +298,7 @@ export default function LearningPath() {
                         href={task.resourceUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs text-indigo-600 hover:text-indigo-800 font-medium"
+                        className="inline-flex items-center gap-1 text-xs text-[#009669] hover:text-[#002020] font-medium"
                       >
                         <ExternalLink className="h-3 w-3" />
                         {task.resourceTitle}

@@ -502,7 +502,7 @@ superAdminRoutes.get('/stats', async (req: Request, res: Response) => {
         pendingInvitations: invitationRes?.count || 0
       };
 
-      return res.status(409).json({ success: true, stats });
+      return res.status(200).json({ success: true, stats });
     } catch (err: any) {
       console.error('Fetch stats database error:', err);
       return res.status(500).json(
@@ -1231,15 +1231,20 @@ superAdminRoutes.post('/users', async (req: Request, res: Response) => {
   const specifiedCollege = data.tenantId || data.collegeId;
   const dbUrl = env.DATABASE_URL || process.env.DATABASE_URL;
 
+  let resolvedTenantId: string | undefined = undefined;
+
   // Validate college existence if specified
   if (specifiedCollege) {
     if (dbUrl) {
       try {
         const db = getDb(dbUrl);
+        const condition = isValidUuid(specifiedCollege)
+          ? eq(tenants.id, specifiedCollege)
+          : eq(tenants.slug, specifiedCollege.toLowerCase().trim());
         const [foundTenant] = await db
           .select({ id: tenants.id })
           .from(tenants)
-          .where(eq(tenants.id, specifiedCollege))
+          .where(condition)
           .limit(1);
         if (!foundTenant) {
           return res.status(400).json(
@@ -1249,12 +1254,13 @@ superAdminRoutes.post('/users', async (req: Request, res: Response) => {
               code: 'INVALID_COLLEGE'
             });
         }
+        resolvedTenantId = foundTenant.id;
       } catch (err: any) {
         // Continue to main handler if DB check fails
       }
     } else {
       const foundTenant = mockColleges.find(
-        (col) => col.id === specifiedCollege || col.slug === specifiedCollege
+        (col) => col.id === specifiedCollege || col.slug === specifiedCollege.toLowerCase().trim()
       );
       if (!foundTenant) {
         return res.status(400).json(
@@ -1264,15 +1270,29 @@ superAdminRoutes.post('/users', async (req: Request, res: Response) => {
             code: 'INVALID_COLLEGE'
           });
       }
+      resolvedTenantId = foundTenant.id;
     }
   }
 
-  let resolvedTenantId = specifiedCollege;
+  // If no tenant is provided, resolve appropriate default tenant
+  if (!resolvedTenantId && dbUrl) {
+    try {
+      const db = getDb(dbUrl);
+      const targetSlug = data.role === 'superadmin' ? 'carrersync-platform' : 'apex-institute';
+      const [defaultTenant] = await db
+        .select({ id: tenants.id })
+        .from(tenants)
+        .where(or(eq(tenants.slug, targetSlug), eq(tenants.isActive, true)))
+        .limit(1);
+      if (defaultTenant) {
+        resolvedTenantId = defaultTenant.id;
+      }
+    } catch {
+      // Continue to fallback
+    }
+  }
 
-  // If no tenant is provided for a college-bound role, check if one can be derived
-  if (!resolvedTenantId && data.role !== 'superadmin') {
-    resolvedTenantId = '11111111-1111-4111-8111-111111111111';
-  } else if (!resolvedTenantId) {
+  if (!resolvedTenantId) {
     resolvedTenantId = '11111111-1111-4111-8111-111111111111';
   }
 

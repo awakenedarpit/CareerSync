@@ -50,6 +50,20 @@
       "when": 1794762662332,
       "tag": "0006_previous_eternity",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1794767299384,
+      "tag": "0007_hot_human_fly",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1794769483514,
+      "tag": "0008_numerous_morg",
+      "breakpoints": true
     }
   ]
 }

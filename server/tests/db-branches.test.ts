@@ -5,7 +5,7 @@ import { authRoutes } from '../src/routes/auth.routes';
 import { tenantRoutes } from '../src/routes/tenant.routes';
 import { tenantMiddleware } from '../src/middleware/tenant';
 import * as dbClientModule from '../src/db/client';
-import { hashPassword } from '../src/utils/crypto';
+import { hashPassword, createJwtToken } from '../src/utils/crypto';
 import env from '../src/config/env';
 
 // Mock the db client
@@ -226,9 +226,15 @@ describe('Database Integration & Conflict Handling Branch Tests', () => {
       };
       vi.mocked(dbClientModule.getDb).mockReturnValue(mockDb as any);
 
+      const adminToken = await createJwtToken(
+        { sub: 'admin-uuid', tenant_id: mockTenantId, role: 'superadmin', email: 'admin@test.com' },
+        mockJwtSecret
+      );
+
       const res = await request(app)
         .post('/api/v1/tenants')
         .set('Content-Type', 'application/json')
+        .set('Authorization', `Bearer ${adminToken}`)
         .send({
           name: 'Apex Institute',
           slug: 'apex-institute',

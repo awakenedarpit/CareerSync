@@ -94,7 +94,7 @@ export default function CompanyProfile() {
               rows={3}
               value={profile.about}
               onChange={(e) => setProfile({ ...profile, about: e.target.value })}
-              className="w-full rounded-lg border border-slate-200 p-2 text-xs text-slate-900 focus:border-indigo-500 focus:outline-hidden"
+              className="w-full rounded-lg border border-slate-200 p-2 text-xs text-slate-900 focus:border-[#02E8A7] focus:outline-hidden"
             />
           </div>
         </form>

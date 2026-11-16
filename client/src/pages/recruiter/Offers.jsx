@@ -200,7 +200,7 @@ export default function RecruiterOffers() {
       case 'APPROVED':
         return <Badge variant="primary" size="sm">TPO Approved</Badge>;
       case 'RELEASED':
-        return <Badge variant="indigo" size="sm">Released to Student</Badge>;
+        return <Badge variant="aqua" size="sm">Released to Student</Badge>;
       case 'ACCEPTED':
         return <Badge variant="success" size="sm">Offer Accepted</Badge>;
       case 'DECLINED':
@@ -234,8 +234,8 @@ export default function RecruiterOffers() {
       />
 
       {toastMessage && (
-        <div className="p-3 bg-indigo-50 border border-indigo-200 text-indigo-900 rounded-xl text-xs flex items-center gap-2">
-          <CheckCircle2 className="h-4 w-4 text-indigo-600 flex-shrink-0" />
+        <div className="p-3 bg-[#BDF9F9]/30 border border-[#02E8A7]/40 text-[#002020] rounded-xl text-xs flex items-center gap-2">
+          <CheckCircle2 className="h-4 w-4 text-[#009669] flex-shrink-0" />
           <span>{toastMessage}</span>
         </div>
       )}
@@ -272,7 +272,7 @@ export default function RecruiterOffers() {
       <Card className="border-slate-200">
         <div className="p-4 border-b border-slate-100 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <FileCheck className="h-5 w-5 text-indigo-600" />
+            <FileCheck className="h-5 w-5 text-[#009669]" />
             <h3 className="font-bold text-slate-900 text-sm">Placement Offers Lifecycle Registry</h3>
           </div>
           <span className="text-xs text-slate-500">{offers.length} total records</span>
@@ -299,7 +299,7 @@ export default function RecruiterOffers() {
                     <div className="text-[11px] text-slate-400">{offer.candidateRoll || offer.studentId || 'ID: ' + offer.id.slice(0, 8)}</div>
                   </td>
                   <td className="py-3.5 px-4 font-medium text-slate-800">{offer.roleTitle}</td>
-                  <td className="py-3.5 px-4 font-bold text-indigo-600">₹{offer.ctcLpa} LPA</td>
+                  <td className="py-3.5 px-4 font-bold text-[#009669]">₹{offer.ctcLpa} LPA</td>
                   <td className="py-3.5 px-4 text-slate-600">{offer.joiningDate || 'TBD'}</td>
                   <td className="py-3.5 px-4 text-slate-600">{offer.expiryDate || 'N/A'}</td>
                   <td className="py-3.5 px-4">
@@ -422,7 +422,7 @@ export default function RecruiterOffers() {
                   <div className="flex items-center gap-2">
                     <span className="font-bold text-slate-800">
                       {item.previousStatus ? `${item.previousStatus} → ` : 'CREATED: '}
-                      <span className="text-indigo-600">{item.newStatus}</span>
+                      <span className="text-[#009669]">{item.newStatus}</span>
                     </span>
                     <Badge variant="secondary" size="sm">{item.changedBy}</Badge>
                   </div>

@@ -151,19 +151,19 @@ export default function ForecastingTab({
                 </p>
               </div>
 
-              <div className="p-4 rounded-xl border border-indigo-200 bg-indigo-50/40 space-y-2">
+              <div className="p-4 rounded-xl border border-[#02E8A7]/40 bg-[#BDF9F9]/20 space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase text-indigo-800">
+                  <span className="text-xs font-bold uppercase text-[#002020]">
                     Baseline Scenario
                   </span>
-                  <span className="text-xl font-black text-indigo-900">
+                  <span className="text-xl font-black text-[#002020]">
                     {scenarios.baselineScenario?.rate || 84.5}%
                   </span>
                 </div>
                 <div className="text-xs text-indigo-950 font-semibold">
                   Estimated {scenarios.baselineScenario?.offers || 405} offers
                 </div>
-                <p className="text-[11px] text-indigo-800 leading-normal">
+                <p className="text-[11px] text-[#002020] leading-normal">
                   {scenarios.baselineScenario?.assumption}
                 </p>
               </div>

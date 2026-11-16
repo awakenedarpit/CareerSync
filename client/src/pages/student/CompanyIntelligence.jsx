@@ -76,7 +76,7 @@ export default function CompanyIntelligence() {
               <span className="text-xs font-bold text-slate-800 uppercase tracking-wider">
                 Recruiter Confidentiality & Privacy Guard Active
               </span>
-              <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+              <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-[#BDF9F9]/30 text-[#004D36] border border-[#02E8A7]/40">
                 Ethical Placement Governance
               </span>
             </div>
@@ -113,13 +113,13 @@ export default function CompanyIntelligence() {
                   onClick={() => setSelectedCompany(comp)}
                   className={`p-4 rounded-xl border cursor-pointer transition-all ${
                     isSelected
-                      ? 'border-indigo-500 bg-indigo-50/40 shadow-xs ring-1 ring-indigo-500/20'
+                      ? 'border-indigo-500 bg-[#BDF9F9]/20 shadow-xs ring-1 ring-[#02E8A7]/20'
                       : 'border-slate-200 bg-white hover:border-slate-300 hover:shadow-2xs'
                   }`}
                 >
                   <div className="flex items-start justify-between gap-2 mb-1.5">
                     <h4 className="text-sm font-bold text-slate-900">{comp.companyName}</h4>
-                    <span className="text-xs font-black text-indigo-700">{comp.readinessScore}% Match</span>
+                    <span className="text-xs font-black text-[#004D36]">{comp.readinessScore}% Match</span>
                   </div>
                   <div className="text-xs text-slate-500 mb-2">{comp.industry}</div>
 
@@ -128,7 +128,7 @@ export default function CompanyIntelligence() {
                       <Calendar className="h-3 w-3" />
                       Drive: {comp.visitingDate}
                     </span>
-                    <span className="font-medium text-indigo-600 flex items-center">
+                    <span className="font-medium text-[#009669] flex items-center">
                       View Calibration <ChevronRight className="h-3 w-3" />
                     </span>
                   </div>
@@ -146,9 +146,9 @@ export default function CompanyIntelligence() {
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-5 border-b border-slate-100">
                 <div>
                   <div className="flex items-center gap-2 mb-1">
-                    <Building2 className="h-5 w-5 text-indigo-600" />
+                    <Building2 className="h-5 w-5 text-[#009669]" />
                     <h3 className="text-xl font-black text-slate-900">{selectedCompany.companyName}</h3>
-                    <Badge variant="indigo" size="sm">Approved Partner</Badge>
+                    <Badge variant="aqua" size="sm">Approved Partner</Badge>
                   </div>
                   <div className="text-xs text-slate-500">
                     Sector: <strong className="text-slate-700">{selectedCompany.industry}</strong> • Drive Scheduled:{' '}
@@ -158,7 +158,7 @@ export default function CompanyIntelligence() {
 
                 <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center sm:text-right min-w-[140px]">
                   <span className="text-[11px] text-slate-500 font-medium block">Personalized Readiness</span>
-                  <span className="text-2xl font-black text-indigo-600">{selectedCompany.readinessScore}%</span>
+                  <span className="text-2xl font-black text-[#009669]">{selectedCompany.readinessScore}%</span>
                   <div className="w-full mt-1.5">
                     <ProgressBar
                       value={selectedCompany.readinessScore}
@@ -244,23 +244,23 @@ export default function CompanyIntelligence() {
               </div>
 
               {/* Recommended Company Prep Actions */}
-              <div className="p-4 rounded-xl border border-indigo-100 bg-indigo-50/40">
+              <div className="p-4 rounded-xl border border-[#02E8A7]/30 bg-[#BDF9F9]/20">
                 <div className="flex items-center gap-2 mb-2">
-                  <Sparkles className="h-4 w-4 text-indigo-600" />
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-indigo-900">
+                  <Sparkles className="h-4 w-4 text-[#009669]" />
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#002020]">
                     Targeted Preparation Playbook for {selectedCompany.companyName}
                   </h4>
                 </div>
                 <ul className="space-y-2 mb-4">
                   {selectedCompany.recommendedPreparation.map((prep, idx) => (
                     <li key={idx} className="flex items-start gap-2 text-xs text-slate-700">
-                      <ChevronRight className="h-3.5 w-3.5 text-indigo-600 mt-0.5 shrink-0" />
+                      <ChevronRight className="h-3.5 w-3.5 text-[#009669] mt-0.5 shrink-0" />
                       <span>{prep}</span>
                     </li>
                   ))}
                 </ul>
 
-                <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-indigo-100">
+                <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[#02E8A7]/30">
                   <Button
                     variant="primary"
                     size="sm"

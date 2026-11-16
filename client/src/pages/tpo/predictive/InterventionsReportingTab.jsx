@@ -247,11 +247,11 @@ export default function InterventionsReportingTab({
               >
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-indigo-600 shrink-0" />
+                    <FileText className="w-4 h-4 text-[#009669] shrink-0" />
                     <span className="font-semibold text-slate-900 text-sm">
                       {rep.title}
                     </span>
-                    <Badge variant="indigo" size="sm">
+                    <Badge variant="aqua" size="sm">
                       {rep.format}
                     </Badge>
                   </div>
@@ -317,7 +317,7 @@ export default function InterventionsReportingTab({
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. Intensive Algorithmic Practice Sprint"
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#02E8A7]/20 focus:border-[#02E8A7]"
             />
           </div>
 
@@ -383,7 +383,7 @@ export default function InterventionsReportingTab({
               value={objective}
               onChange={(e) => setObjective(e.target.value)}
               placeholder="e.g. Elevate technical coding clearance rate by 15% before Super Dream drives..."
-              className="w-full rounded-lg border border-slate-300 p-2.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+              className="w-full rounded-lg border border-slate-300 p-2.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#02E8A7]/20 focus:border-[#02E8A7]"
             />
           </div>
 
@@ -396,7 +396,7 @@ export default function InterventionsReportingTab({
               value={coordinators}
               onChange={(e) => setCoordinators(e.target.value)}
               placeholder="Dr. Rajiv Menon, Prof. Alok Gupta"
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#02E8A7]/20 focus:border-[#02E8A7]"
             />
           </div>
 
@@ -410,7 +410,7 @@ export default function InterventionsReportingTab({
               value={rationale}
               onChange={(e) => setRationale(e.target.value)}
               placeholder="e.g. Identified dynamic programming speed deficit in Phase 12 mock test."
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#02E8A7]/20 focus:border-[#02E8A7]"
             />
           </div>
 
@@ -472,7 +472,7 @@ export default function InterventionsReportingTab({
                 value={statusNotes}
                 onChange={(e) => setStatusNotes(e.target.value)}
                 placeholder="Log milestone details, schedule adjustments, or completion notes..."
-                className="w-full rounded-lg border border-slate-300 p-2.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                className="w-full rounded-lg border border-slate-300 p-2.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#02E8A7]/20 focus:border-[#02E8A7]"
               />
             </div>
 
@@ -524,7 +524,7 @@ export default function InterventionsReportingTab({
                   </div>
                   <div className="p-2.5 rounded-lg border border-slate-200 bg-white">
                     <span className="text-[10px] text-slate-500 block uppercase">Projected Rate</span>
-                    <span className="text-lg font-black text-indigo-700">{viewingReport.summaryMetrics.predictedPlacementRate}</span>
+                    <span className="text-lg font-black text-[#004D36]">{viewingReport.summaryMetrics.predictedPlacementRate}</span>
                   </div>
                 </div>
                 <div className="p-2.5 rounded-lg bg-emerald-50 border border-emerald-100 text-emerald-800">

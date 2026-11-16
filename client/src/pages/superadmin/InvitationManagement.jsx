@@ -257,7 +257,7 @@ export default function InvitationManagement() {
         <div className="flex items-center justify-end gap-1.5">
           <button
             onClick={() => handleOpenLinkModal(row)}
-            className="p-1.5 text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+            className="p-1.5 text-slate-500 hover:text-[#009669] hover:bg-[#BDF9F9]/30 rounded-lg transition-colors"
             title="Inspect / Copy Invite Link"
           >
             <Copy className="h-4 w-4" />
@@ -327,7 +327,7 @@ export default function InvitationManagement() {
               placeholder="Search by recipient email or institution..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-lg border border-slate-200 bg-slate-50/70 py-2 pl-9 pr-3 text-xs text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-indigo-100"
+              className="w-full rounded-lg border border-slate-200 bg-slate-50/70 py-2 pl-9 pr-3 text-xs text-slate-900 placeholder:text-slate-400 focus:border-[#02E8A7] focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-indigo-100"
             />
           </div>
 

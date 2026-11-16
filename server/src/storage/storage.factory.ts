@@ -21,7 +21,10 @@ export class StorageFactory {
     }
 
     const provider: StorageProviderType =
-      forceProvider || (process.env.STORAGE_PROVIDER as StorageProviderType) || 'local';
+      forceProvider ||
+      (process.env.STORAGE_DRIVER as StorageProviderType) ||
+      (process.env.STORAGE_PROVIDER as StorageProviderType) ||
+      'local';
 
     if (provider === 's3') {
       this.instance = new S3CompatibleStorageEngine();

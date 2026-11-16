@@ -85,7 +85,7 @@ export default function EligibilityRules() {
 
               <div className="flex md:flex-col items-end justify-between md:justify-center gap-2 shrink-0">
                 <span className="text-xs text-slate-500">
-                  Qualifying Students: <strong className="text-indigo-600 text-sm">{rule.studentsQualifying}</strong>
+                  Qualifying Students: <strong className="text-[#009669] text-sm">{rule.studentsQualifying}</strong>
                 </span>
                 <Button variant="outline" size="sm">
                   Modify Rule

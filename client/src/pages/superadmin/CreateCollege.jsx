@@ -111,7 +111,7 @@ export default function CreateCollege() {
             </div>
             <div className="bg-white p-3.5 rounded-xl border border-emerald-100">
               <span className="text-slate-400 font-semibold uppercase">Activation Token</span>
-              <p className="text-indigo-600 font-mono font-bold text-xs truncate mt-0.5">{successResult.invitationToken}</p>
+              <p className="text-[#009669] font-mono font-bold text-xs truncate mt-0.5">{successResult.invitationToken}</p>
             </div>
           </div>
 
@@ -169,7 +169,7 @@ export default function CreateCollege() {
         {/* Section 1: Institutional Profile */}
         <Card>
           <div className="flex items-center gap-2 pb-4 border-b border-slate-100">
-            <Building2 className="h-5 w-5 text-indigo-600" />
+            <Building2 className="h-5 w-5 text-[#009669]" />
             <div>
               <h3 className="font-bold text-slate-900 text-sm">Institutional Profile & Domain</h3>
               <p className="text-xs text-slate-500">Core parameters defining the tenant boundary.</p>
@@ -241,7 +241,7 @@ export default function CreateCollege() {
         {/* Section 2: Initial College Administrator */}
         <Card>
           <div className="flex items-center gap-2 pb-4 border-b border-slate-100">
-            <User className="h-5 w-5 text-purple-600" />
+            <User className="h-5 w-5 text-[#009669]" />
             <div>
               <h3 className="font-bold text-slate-900 text-sm">Initial Institutional Administrator</h3>
               <p className="text-xs text-slate-500">The primary administrative authority who manages T&P staff and drives.</p>
@@ -288,7 +288,7 @@ export default function CreateCollege() {
                 type="checkbox"
                 checked={formData.sendInvitation}
                 onChange={(e) => setFormData({ ...formData, sendInvitation: e.target.checked })}
-                className="h-4 w-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500"
+                className="h-4 w-4 text-[#009669] rounded border-slate-300 focus:ring-[#02E8A7]"
               />
               <label htmlFor="sendInvitation" className="text-xs text-slate-700 font-medium select-none">
                 Dispatch cryptographic invitation email with one-time onboarding link to this administrator

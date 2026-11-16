@@ -3,6 +3,7 @@ import { Search, X } from 'lucide-react';
 
 /**
  * Reusable SearchBar Component
+ * CarrerSync Mint Design System compliant.
  */
 export default function SearchBar({
   placeholder = 'Search...',
@@ -19,19 +20,21 @@ export default function SearchBar({
 
   return (
     <div className={`relative flex items-center w-full max-w-md ${className}`}>
-      <Search className="absolute left-3 w-4 h-4 text-slate-400 pointer-events-none" />
+      <Search className="absolute left-3 w-4 h-4 text-[#6B7B71] pointer-events-none" />
       <input
         type="text"
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange?.(e.target.value)}
-        className={`w-full rounded-lg border border-slate-300 bg-white text-slate-800 placeholder-slate-400 shadow-sm transition-all focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 ${sizeStyles[size] || sizeStyles.md}`}
+        className={`w-full rounded-lg border border-[#BACBC0] bg-white text-[#002020] placeholder-[#6B7B71]/60 shadow-2xs transition-all focus:border-[#02E8A7] focus:outline-none focus:ring-2 focus:ring-[#02E8A7]/30 ${
+          sizeStyles[size] || sizeStyles.md
+        }`}
       />
       {value && onClear && (
         <button
           type="button"
           onClick={onClear}
-          className="absolute right-2.5 p-0.5 text-slate-400 hover:text-slate-600 rounded-full"
+          className="absolute right-2.5 p-0.5 text-[#6B7B71] hover:text-[#002020] rounded-full focus:outline-none focus:ring-1 focus:ring-[#02E8A7]"
         >
           <X className="w-3.5 h-3.5" />
         </button>

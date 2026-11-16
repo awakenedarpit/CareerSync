@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Sparkles, ShieldCheck } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
+import BrandLogo from '../ui/BrandLogo';
 
 export default function Footer() {
   return (
@@ -9,16 +10,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 mb-12">
           {/* Brand Col */}
           <div className="lg:col-span-2">
-            <Link to="/" className="flex items-center gap-3 mb-4">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 p-0.5 shadow-md">
-                <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-indigo-400" />
-                </div>
-              </div>
-              <span className="text-xl font-black tracking-tight text-white">
-                Carrer<span className="text-indigo-400">Sync</span>
-              </span>
-            </Link>
+            <BrandLogo variant="card" size="md" withLink={true} to="/" className="mb-4 max-w-[200px]" />
             <p className="text-sm text-slate-400 leading-relaxed max-w-sm mb-6">
               Transforming traditional campus placement into an evidence-based placement intelligence ecosystem. Connecting verified skills, real industry demand, and multi-agent hiring orchestration.
             </p>

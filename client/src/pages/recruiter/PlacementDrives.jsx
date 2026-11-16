@@ -61,7 +61,7 @@ export default function RecruiterPlacementDrives() {
               </div>
               <div>
                 <span className="text-slate-400 block">Total Eligible Pool</span>
-                <strong className="text-indigo-600">{drv.eligibleCandidates} Students</strong>
+                <strong className="text-[#009669]">{drv.eligibleCandidates} Students</strong>
               </div>
               <div>
                 <span className="text-slate-400 block">Applications Submitted</span>

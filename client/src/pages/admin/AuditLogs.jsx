@@ -36,7 +36,7 @@ export default function AdminAuditLogs() {
     {
       key: 'action',
       label: 'Event Action',
-      render: (val) => <Badge variant="indigo" size="sm">{val}</Badge>
+      render: (val) => <Badge variant="aqua" size="sm">{val}</Badge>
     },
     { key: 'resource', label: 'Affected Entity' },
     { key: 'details', label: 'Audit Details' }
@@ -70,7 +70,7 @@ export default function AdminAuditLogs() {
             placeholder="Search audit trail by actor or action..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-lg border border-slate-200 bg-slate-50 py-1.5 pl-8.5 pr-3 text-xs text-slate-900 focus:border-indigo-500 focus:outline-hidden"
+            className="w-full rounded-lg border border-slate-200 bg-slate-50 py-1.5 pl-8.5 pr-3 text-xs text-slate-900 focus:border-[#02E8A7] focus:outline-hidden"
           />
         </div>
       </div>

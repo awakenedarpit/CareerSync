@@ -10,9 +10,15 @@ import env from '../config/env';
  * Attaches the authenticated user context (including tenantId and role) to req.user and req.tenantId.
  */
 export async function requireAuth(req: Request, res: Response, next: NextFunction) {
-  const authHeader = req.headers['authorization'];
+  const rawHeader = req.headers['authorization'];
+  const authHeader = typeof rawHeader === 'string'
+    ? rawHeader.trim()
+    : Array.isArray(rawHeader as any)
+    ? (rawHeader as any)[0].trim()
+    : undefined;
 
-  if (!authHeader || (!authHeader.startsWith('Bearer ') && authHeader.trim() !== 'Bearer')) {
+  // Safely validate Bearer scheme case-insensitively
+  if (!authHeader || !/^Bearer(\s+|$)/i.test(authHeader)) {
     return res.status(401).json({
       success: false,
       error: 'Unauthorized: Missing or malformed authorization header',
@@ -20,8 +26,9 @@ export async function requireAuth(req: Request, res: Response, next: NextFunctio
     });
   }
 
-  const token = authHeader.replace(/^Bearer\s*/i, '').trim();
-  if (!token) {
+  // Strip single or duplicate Bearer prefixes case-insensitively
+  const token = authHeader.replace(/^(bearer(\s+|$))+/i, '').trim();
+  if (!token || token.toLowerCase() === 'null' || token.toLowerCase() === 'undefined') {
     return res.status(401).json({
       success: false,
       error: 'Unauthorized: Empty bearer token provided',
@@ -76,6 +83,11 @@ export async function requireAuth(req: Request, res: Response, next: NextFunctio
     });
   }
 }
+
+/**
+ * Standard alias for requireAuth.
+ */
+export const authenticateToken = requireAuth;
 
 /**
  * Role-Based Access Control (RBAC) Middleware for Express.

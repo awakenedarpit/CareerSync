@@ -185,7 +185,7 @@ export default function AdminPlacementDrives() {
               onClick={() => setFilterStatus(st)}
               className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${
                 filterStatus === st
-                  ? 'bg-indigo-600 text-white'
+                  ? 'bg-[#02E8A7] text-[#002020] font-bold'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
@@ -201,7 +201,7 @@ export default function AdminPlacementDrives() {
             placeholder="Search company or role..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-lg border border-slate-200 bg-slate-50 py-1.5 pl-8.5 pr-3 text-xs text-slate-900 focus:border-indigo-500 focus:outline-hidden"
+            className="w-full rounded-lg border border-slate-200 bg-slate-50 py-1.5 pl-8.5 pr-3 text-xs text-slate-900 focus:border-[#02E8A7] focus:outline-hidden"
           />
         </div>
       </div>

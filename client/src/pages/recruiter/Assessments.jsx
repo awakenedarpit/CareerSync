@@ -160,8 +160,8 @@ export default function RecruiterAssessments() {
       />
 
       {toastMessage && (
-        <div className="p-3 bg-indigo-50 border border-indigo-200 text-indigo-900 rounded-xl text-xs flex items-center gap-2">
-          <CheckCircle2 className="h-4 w-4 text-indigo-600 flex-shrink-0" />
+        <div className="p-3 bg-[#BDF9F9]/30 border border-[#02E8A7]/40 text-[#002020] rounded-xl text-xs flex items-center gap-2">
+          <CheckCircle2 className="h-4 w-4 text-[#009669] flex-shrink-0" />
           <span>{toastMessage}</span>
         </div>
       )}
@@ -192,7 +192,7 @@ export default function RecruiterAssessments() {
       <Card className="border-slate-200">
         <div className="p-4 border-b border-slate-100 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Code2 className="h-5 w-5 text-indigo-600" />
+            <Code2 className="h-5 w-5 text-[#009669]" />
             <h3 className="font-bold text-slate-900 text-sm">Assessment Rounds Registry</h3>
           </div>
           <span className="text-xs text-slate-500">{assessments.length} configured rounds</span>
@@ -225,7 +225,7 @@ export default function RecruiterAssessments() {
                       href={asm.platformLink}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex items-center gap-1 text-indigo-600 hover:underline"
+                      className="flex items-center gap-1 text-[#009669] hover:underline"
                     >
                       <ExternalLink className="h-3.5 w-3.5" />
                       Assessment Platform URL

@@ -128,21 +128,21 @@ export default function NotificationDrawer({ isOpen, onClose }) {
       case 'EVIDENCE_REQUESTED':
         return <FileText className="w-4 h-4 text-amber-600" />;
       case 'ROADMAP_UPDATED':
-        return <Compass className="w-4 h-4 text-indigo-600" />;
+        return <Compass className="w-4 h-4 text-[#009669]" />;
       case 'MOCK_ASSESSMENT_COMPLETED':
-        return <Award className="w-4 h-4 text-indigo-600" />;
+        return <Award className="w-4 h-4 text-[#009669]" />;
       case 'DRIVE_PUBLISHED':
         return <Building2 className="w-4 h-4 text-blue-600" />;
       case 'ELIGIBILITY_UPDATED':
-        return <Briefcase className="w-4 h-4 text-purple-600" />;
+        return <Briefcase className="w-4 h-4 text-[#009669]" />;
       case 'INTERVIEW_SCHEDULED':
         return <Calendar className="w-4 h-4 text-emerald-600" />;
       case 'DELEGATION_GRANTED':
-        return <Shield className="w-4 h-4 text-purple-600" />;
+        return <Shield className="w-4 h-4 text-[#009669]" />;
       case 'DELEGATION_REVOKED':
         return <ShieldOff className="w-4 h-4 text-amber-600" />;
       default:
-        return <Sparkles className="w-4 h-4 text-indigo-600" />;
+        return <Sparkles className="w-4 h-4 text-[#009669]" />;
     }
   };
 
@@ -174,14 +174,14 @@ export default function NotificationDrawer({ isOpen, onClose }) {
           <div className="p-4 border-b border-slate-200 bg-slate-50/70">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="h-8 w-8 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600">
+                <div className="h-8 w-8 rounded-lg bg-[#BDF9F9]/30 border border-[#02E8A7]/30 flex items-center justify-center text-[#009669]">
                   <Bell className="w-4 h-4" />
                 </div>
                 <div>
                   <h2 className="text-sm font-semibold text-slate-900 flex items-center gap-2">
                     Notification Center
                     {unreadCount > 0 && (
-                      <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-indigo-100 text-indigo-700">
+                      <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-[#BDF9F9]/50 text-[#004D36]">
                         {unreadCount} unread
                       </span>
                     )}
@@ -196,7 +196,7 @@ export default function NotificationDrawer({ isOpen, onClose }) {
                 {unreadCount > 0 && (
                   <button
                     onClick={handleMarkAllRead}
-                    className="flex items-center gap-1 text-[11px] font-medium text-indigo-600 hover:text-indigo-800 p-1.5 rounded-md hover:bg-indigo-50 transition-colors"
+                    className="flex items-center gap-1 text-[11px] font-medium text-[#009669] hover:text-[#002020] p-1.5 rounded-md hover:bg-[#BDF9F9]/30 transition-colors"
                     title="Mark all as read"
                   >
                     <CheckCheck className="w-3.5 h-3.5" />
@@ -221,7 +221,7 @@ export default function NotificationDrawer({ isOpen, onClose }) {
                   onClick={() => setSelectedCategory(cat.id)}
                   className={`text-[11px] font-medium px-2.5 py-1 rounded-full whitespace-nowrap transition-colors ${
                     selectedCategory === cat.id
-                      ? 'bg-indigo-600 text-white shadow-2xs'
+                      ? 'bg-[#02E8A7] text-[#002020] font-bold shadow-2xs'
                       : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-100'
                   }`}
                 >
@@ -259,14 +259,14 @@ export default function NotificationDrawer({ isOpen, onClose }) {
                     onClick={() => handleActionClick(notification)}
                     className={`p-4 transition-colors cursor-pointer group ${
                       isUnread
-                        ? 'bg-indigo-50/30 hover:bg-indigo-50/60'
+                        ? 'bg-[#BDF9F9]/30/30 hover:bg-[#BDF9F9]/30/60'
                         : 'bg-white hover:bg-slate-50'
                     }`}
                   >
                     <div className="flex items-start gap-3">
                       {/* Icon */}
                       <div className={`mt-0.5 p-1.5 rounded-lg shrink-0 ${
-                        isUnread ? 'bg-white shadow-2xs border border-indigo-100' : 'bg-slate-100'
+                        isUnread ? 'bg-white shadow-2xs border border-[#02E8A7]/30' : 'bg-slate-100'
                       }`}>
                         {getEventIcon(notification.eventType)}
                       </div>
@@ -278,7 +278,7 @@ export default function NotificationDrawer({ isOpen, onClose }) {
                             {notification.title}
                           </h4>
                           {isUnread && (
-                            <span className="h-1.5 w-1.5 rounded-full bg-indigo-600 shrink-0" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-[#02E8A7] shrink-0" />
                           )}
                         </div>
 
@@ -294,7 +294,7 @@ export default function NotificationDrawer({ isOpen, onClose }) {
 
                           <div className="flex items-center gap-2">
                             {notification.metadata?.actionUrl && (
-                              <span className="flex items-center gap-0.5 text-indigo-600 group-hover:underline font-medium">
+                              <span className="flex items-center gap-0.5 text-[#009669] group-hover:underline font-medium">
                                 View action <ArrowRight className="w-2.5 h-2.5" />
                               </span>
                             )}
@@ -328,7 +328,7 @@ export default function NotificationDrawer({ isOpen, onClose }) {
                 onClose();
                 navigate('/tpo/orchestration?tab=workflows');
               }}
-              className="text-indigo-600 hover:text-indigo-800 font-medium hover:underline"
+              className="text-[#009669] hover:text-[#002020] font-medium hover:underline"
             >
               Orchestration Center &rarr;
             </button>

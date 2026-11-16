@@ -45,7 +45,7 @@ export default function MockDriveIntelligenceTab({
             >
               <div>
                 <div className="flex items-center justify-between mb-1.5">
-                  <span className="text-xs font-bold uppercase tracking-wider text-indigo-600">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#009669]">
                     Round {round.roundNumber}
                   </span>
                   <Badge variant={round.passPercentage >= 75 ? 'emerald' : 'indigo'} size="sm">
@@ -108,7 +108,7 @@ export default function MockDriveIntelligenceTab({
                 <div className="text-[11px] text-slate-500">
                   Category: <strong>{w.category}</strong>
                 </div>
-                <div className="text-[11px] text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded font-medium">
+                <div className="text-[11px] text-[#004D36] bg-[#BDF9F9]/30 px-2 py-0.5 rounded font-medium">
                   Prescription: {w.recommendedIntervention}
                 </div>
               </div>
@@ -158,7 +158,7 @@ export default function MockDriveIntelligenceTab({
                       +{traj.growthPercentage}%
                     </Badge>
                   </td>
-                  <td className="py-3.5 px-4 text-center text-xs font-bold text-indigo-700">
+                  <td className="py-3.5 px-4 text-center text-xs font-bold text-[#004D36]">
                     {traj.verifiedDeltas}
                   </td>
                   <td className="py-3.5 px-4">

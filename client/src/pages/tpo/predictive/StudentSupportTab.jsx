@@ -80,13 +80,13 @@ export default function StudentSupportTab({
   return (
     <div className="space-y-6">
       {/* Guiding Principles Banner */}
-      <div className="rounded-xl border border-indigo-100 bg-indigo-50/60 p-4 text-xs text-indigo-950 shadow-xs flex items-start gap-3">
-        <HeartHandshake className="w-5 h-5 text-indigo-600 shrink-0 mt-0.5" />
+      <div className="rounded-xl border border-[#02E8A7]/30 bg-[#BDF9F9]/30/60 p-4 text-xs text-indigo-950 shadow-xs flex items-start gap-3">
+        <HeartHandshake className="w-5 h-5 text-[#009669] shrink-0 mt-0.5" />
         <div className="space-y-1">
-          <p className="font-bold text-sm text-indigo-900">
+          <p className="font-bold text-sm text-[#002020]">
             Constructive & Growth-Oriented Student Support Framework
           </p>
-          <p className="text-indigo-800 leading-relaxed">
+          <p className="text-[#002020] leading-relaxed">
             All diagnostic recommendations utilize supportive, non-stigmatizing language. Support categories identify concrete opportunities for practice sprints, interview simulations, and project refinement rather than labeling students as deficit-ridden. TPO oversight ensures every intervention is approved with human care.
           </p>
         </div>
@@ -152,7 +152,7 @@ export default function StudentSupportTab({
                     {/* Header Bar */}
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex items-center gap-2">
-                        <div className="p-2 rounded-lg bg-indigo-50 text-indigo-600">
+                        <div className="p-2 rounded-lg bg-[#BDF9F9]/30 text-[#009669]">
                           <CatIcon className="w-4 h-4" />
                         </div>
                         <div>
@@ -277,7 +277,7 @@ export default function StudentSupportTab({
                 type="text"
                 value={assignedMentor}
                 onChange={(e) => setAssignedMentor(e.target.value)}
-                className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#02E8A7]/20 focus:border-[#02E8A7]"
                 placeholder="e.g. Prof. Alok Gupta, Alumni Circle"
               />
             </div>
@@ -290,7 +290,7 @@ export default function StudentSupportTab({
                 rows={3}
                 value={reviewNotes}
                 onChange={(e) => setReviewNotes(e.target.value)}
-                className="w-full rounded-lg border border-slate-300 p-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                className="w-full rounded-lg border border-slate-300 p-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#02E8A7]/20 focus:border-[#02E8A7]"
                 placeholder="Record guidance, workshop slot, or dismissal rationale..."
               />
             </div>

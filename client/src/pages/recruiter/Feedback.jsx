@@ -73,7 +73,7 @@ export default function CandidateFeedback() {
               rows={4}
               value={feedbackText}
               onChange={(e) => setFeedbackText(e.target.value)}
-              className="w-full rounded-lg border border-slate-200 p-2.5 text-xs text-slate-900 focus:border-indigo-500 focus:outline-hidden"
+              className="w-full rounded-lg border border-slate-200 p-2.5 text-xs text-slate-900 focus:border-[#02E8A7] focus:outline-hidden"
               placeholder="Provide constructive technical notes..."
             />
             <p className="text-[11px] text-slate-400">

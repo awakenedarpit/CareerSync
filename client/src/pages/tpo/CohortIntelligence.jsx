@@ -100,7 +100,7 @@ export default function CohortIntelligence() {
       {/* Filter Toolbar */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-xl border border-slate-200 bg-white shadow-2xs">
         <div className="flex items-center gap-2 text-xs font-semibold text-slate-700">
-          <Filter className="h-4 w-4 text-indigo-600" />
+          <Filter className="h-4 w-4 text-[#009669]" />
           <span>Cohort Filter Controls:</span>
         </div>
         <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
@@ -170,7 +170,7 @@ export default function CohortIntelligence() {
         <div className="flex items-center justify-between mb-4">
           <div>
             <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-              <Target className="h-4 w-4 text-indigo-600" />
+              <Target className="h-4 w-4 text-[#009669]" />
               Target Role Distribution & Institutional Preparedness
             </h3>
             <p className="text-xs text-slate-500">
@@ -199,7 +199,7 @@ export default function CohortIntelligence() {
               <div className="space-y-1.5 pt-2 border-t border-slate-200">
                 <div className="flex justify-between text-xs">
                   <span className="text-slate-500">Average Role Fit:</span>
-                  <span className="font-bold text-indigo-600">{item.avgFit}%</span>
+                  <span className="font-bold text-[#009669]">{item.avgFit}%</span>
                 </div>
                 <ProgressBar
                   value={item.avgFit}
@@ -245,7 +245,7 @@ export default function CohortIntelligence() {
                 <p className="text-xs text-slate-600">
                   <span className="font-semibold text-slate-700">Affected Candidates:</span> {gap.affectedStudents} students lack verified evidence or passed benchmarks.
                 </p>
-                <p className="text-xs text-indigo-700 font-medium">
+                <p className="text-xs text-[#004D36] font-medium">
                   <span className="text-slate-500">Remediation:</span> {gap.recommendedIntervention}
                 </p>
               </div>
@@ -267,7 +267,7 @@ export default function CohortIntelligence() {
         <div className="flex items-center justify-between mb-4">
           <div>
             <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-              <BarChart3 className="h-4 w-4 text-indigo-600" />
+              <BarChart3 className="h-4 w-4 text-[#009669]" />
               Department-Wise Capability Matrix
             </h3>
             <p className="text-xs text-slate-500">
@@ -344,7 +344,7 @@ export default function CohortIntelligence() {
               <div>
                 <div className="flex items-start justify-between gap-2 mb-2">
                   <h4 className="text-sm font-bold text-slate-900">{interv.title}</h4>
-                  <Badge variant="indigo" size="sm">
+                  <Badge variant="aqua" size="sm">
                     {interv.type.replace('_', ' ')}
                   </Badge>
                 </div>

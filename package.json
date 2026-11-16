@@ -1,4 +1,22 @@
 {
+  "name": "carrersync",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CarrerSync — Agentic Placement Intelligence Platform",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "build:client": "npm run build --prefix client",
+    "build:server": "npm run build --prefix server",
+    "build": "npm run build:client && npm run build:server",
+    "test:server": "npm test --prefix server",
+    "typecheck:server": "npm run typecheck --prefix server",
+    "db:seed:demo": "npm run db:seed:demo --prefix server",
+    "start": "npm start --prefix server"
+  },
   "dependencies": {
     "@neon/config": "^1.14.0",
     "@neon/env": "^2.1.3"

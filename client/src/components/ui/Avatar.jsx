@@ -2,6 +2,7 @@ import React from 'react';
 
 /**
  * Reusable Avatar Component
+ * CarrerSync Mint Design System compliant.
  */
 export default function Avatar({
   name = 'User',
@@ -25,9 +26,9 @@ export default function Avatar({
   };
 
   const statusColors = {
-    online: 'bg-emerald-500',
+    online: 'bg-[#02E8A7]',
     busy: 'bg-rose-500',
-    offline: 'bg-slate-400',
+    offline: 'bg-[#6B7B71]',
   };
 
   const getInitials = (n) => {
@@ -45,11 +46,11 @@ export default function Avatar({
         <img
           src={src}
           alt={name}
-          className={`rounded-full object-cover border border-slate-200 ${sizeStyles[size] || sizeStyles.md}`}
+          className={`rounded-full object-cover border border-[#BACBC0]/50 ${sizeStyles[size] || sizeStyles.md}`}
         />
       ) : (
         <div
-          className={`rounded-full bg-indigo-100 text-indigo-700 font-semibold flex items-center justify-center border border-indigo-200 select-none ${
+          className={`rounded-full bg-[#BDF9F9] text-[#004D36] font-bold flex items-center justify-center border border-[#02E8A7]/40 select-none ${
             sizeStyles[size] || sizeStyles.md
           }`}
         >

@@ -52,7 +52,7 @@ export default function CompanyManagement() {
             placeholder="Search company..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-lg border border-slate-200 bg-slate-50 py-1.5 pl-8.5 pr-3 text-xs text-slate-900 focus:border-indigo-500 focus:outline-hidden"
+            className="w-full rounded-lg border border-slate-200 bg-slate-50 py-1.5 pl-8.5 pr-3 text-xs text-slate-900 focus:border-[#02E8A7] focus:outline-hidden"
           />
         </div>
       </div>
@@ -63,7 +63,7 @@ export default function CompanyManagement() {
             <div>
               <div className="flex items-start justify-between gap-2 mb-2">
                 <h4 className="text-base font-bold text-slate-900">{co.name}</h4>
-                <Badge variant="indigo" size="sm">{co.tier}</Badge>
+                <Badge variant="aqua" size="sm">{co.tier}</Badge>
               </div>
               <div className="text-xs text-slate-500 space-y-1 mt-2">
                 <div>Avg Package: <strong className="text-slate-800">{co.avgPackage}</strong></div>
@@ -74,7 +74,7 @@ export default function CompanyManagement() {
 
             <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
               <span className="text-emerald-600 font-medium">{co.relationship}</span>
-              <button className="text-indigo-600 font-semibold hover:underline">
+              <button className="text-[#009669] font-semibold hover:underline">
                 View Past Drives
               </button>
             </div>

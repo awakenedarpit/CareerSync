@@ -336,6 +336,81 @@ Statuses strictly reflect verified work.
 
 ---
 
+---
+
+## Phase 17: Institutional Intelligence, Accreditation Reporting & Governance Suite
+
+| Milestone / Component | Description | Status | Verification Evidence |
+| :--- | :--- | :--- | :--- |
+| **Institutional KPI & Placement Analytics Engine** | Empirical Placement Rate calculation ($N_{\text{placed}} / N_{\text{eligible}}$ with explicit denominator), Verified Skill Coverage, Skill-Gap Closure Rate, Shortlist-to-Offer Ratio, Time-to-Shortlist, explainable Recruiter Engagement Score (0–100), and `INSUFFICIENT_DATA` guards | `COMPLETED` | Verified in `server/src/institutional/institutional-kpi.service.ts`, `server/tests/institutional-governance-e2e.test.ts` |
+| **Cohort Skill Intelligence & 5D Heatmaps** | Multi-dimensional matrix heatmaps across 5 analytical dimensions: Department vs Skill, Batch vs Skill, Target Role vs Benchmark, Verified vs Missing Evidence, and Gap vs Intervention | `COMPLETED` | Verified in `server/src/institutional/cohort-skill-intelligence.service.ts`, `server/tests/phase17-gov-backend.test.ts` |
+| **Training Intervention Management Lifecycle** | Upskilling programs lifecycle (`PROPOSED` -> `APPROVED` -> `IN_PROGRESS` -> `EVALUATING` -> `COMPLETED` -> `CANCELLED`); strict enforcement that course attendance alone != skill mastery; student project evidence & TPO verification required | `COMPLETED` | Verified in `server/src/institutional/cohort-skill-intelligence.service.ts`, `server/tests/institutional-governance-e2e.test.ts` |
+| **Supportive Student Support Classifications** | Non-stigmatizing support categories (`SUPPORT_RECOMMENDED`, `ADDITIONAL_PRACTICE_SUGGESTED`, `INSUFFICIENT_DATA`, `PROGRESSING`, `NO_ACTION_REQUIRED`); zero public rankings; zero automated punitive decisions | `COMPLETED` | Verified in `server/src/institutional/cohort-skill-intelligence.service.ts`, `server/tests/institutional-governance-e2e.test.ts` |
+| **Selection Funnel & Disparity Analysis** | 7-stage recruitment funnel analysis (Eligible -> Applications -> Shortlisted -> Assessments -> Interviews -> Offers -> Confirmed) with stage-by-stage pass-through conversion metrics | `COMPLETED` | Verified in `server/src/institutional/fairness-governance.service.ts`, `server/tests/phase17-gov-backend.test.ts` |
+| **EEOC Four-Fifths Benchmarking & Governance** | Disparity Ratio = Group Selection Rate / Reference Group Selection Rate; ratio < 0.80 triggers human review flag; explicit statutory disclaimer (statistical alert, NOT automated discrimination finding) | `COMPLETED` | Verified in `server/src/institutional/fairness-governance.service.ts`, `server/tests/institutional-governance-e2e.test.ts` |
+| **Small-Group Privacy Suppression (N < 5)** | Sub-cohorts and branches with $N < 5$ are suppressed from public ratios to protect student privacy pursuant to educational privacy standards | `COMPLETED` | Verified in `server/src/institutional/fairness-governance.service.ts`, `server/tests/institutional-governance-e2e.test.ts` |
+| **Ethical Guardrails & Sensitive Attributes** | Zero demographic, caste, religious, or sensitive attribute collection or inference; zero ranking or sorting of candidates by demographic variables | `COMPLETED` | Verified in `server/src/institutional/fairness-governance.service.ts`, `server/tests/institutional-governance-e2e.test.ts` |
+| **Fairness Review Case Adjudication Queue** | Adjudication workflow (`FLAGGED` -> `UNDER_REVIEW` -> `EXPLANATION_REQUESTED` -> `RESOLVED` -> `ESCALATED`) with complete timestamped audit trail and mandatory resolution reasons | `COMPLETED` | Verified in `server/src/institutional/fairness-governance.service.ts`, `server/tests/phase17-gov-backend.test.ts` |
+| **Accreditation Reporting Suite (14 Templates)** | Pre-configured compliance templates for NAAC Criterion 5, NIRF Metric 5.2.1/5.2.2, NBA Criterion 10, Branch Summaries, Salary Distributions, and longitudinal academic-year comparisons | `COMPLETED` | Verified in `server/src/institutional/accreditation-reporting.service.ts`, `server/tests/phase17-gov-backend.test.ts` |
+| **Evidence Traceability & Audit Matrix** | Granular evidence traceability linking aggregate reported metrics to underlying PostgreSQL relational tables (`placement_offers`, `students`, `student_skills`, `training_interventions`, `placement_drives`) and sample record IDs | `COMPLETED` | Verified in `server/src/institutional/accreditation-reporting.service.ts`, `server/tests/institutional-governance-e2e.test.ts` |
+| **Multi-Format Export Engine & Isolation** | Exporting compliance reports in JSON, CSV, and formatted text/PDF representations; strict cross-tenant isolation rejecting unauthorized foreign tenant access with HTTP 403 | `COMPLETED` | Verified in `server/src/institutional/accreditation-reporting.service.ts`, `server/tests/institutional-governance-e2e.test.ts` |
+| **Recruiter Outreach Campaign Management** | Targeted recruiter drive invitations across 5 stages (`DRAFT`, `UNDER_REVIEW`, `APPROVED`, `QUEUED`, `SENT`); dynamic personalization copy placeholders (`{{company_name}}`, `{{batch_year}}`, `{{tpo_name}}`) | `COMPLETED` | Verified in `server/src/institutional/recruiter-outreach.service.ts`, `server/tests/phase17-gov-backend.test.ts` |
+| **Mandatory Human Approval Gate for Outreach** | Dispatch strictly blocked while campaign is in `DRAFT` or `UNDER_REVIEW` (HTTP 422 error); explicit human TPO approval required prior to message delivery | `COMPLETED` | Verified in `server/src/institutional/recruiter-outreach.service.ts`, `server/tests/institutional-governance-e2e.test.ts` |
+| **Duplicate Prevention & Suppression Lists** | Canonical lowercase email deduplication within campaigns; automated filtering of opted-out and unsubscribed recruiter contacts | `COMPLETED` | Verified in `server/src/institutional/recruiter-outreach.service.ts`, `server/tests/institutional-governance-e2e.test.ts` |
+| **₹0 Cardless Mail Merge Export Fallback** | Instant CSV mail merge export containing resolved recipient names, companies, emails, subjects, and personalized body copy with zero paid third-party dependencies | `COMPLETED` | Verified in `server/src/institutional/recruiter-outreach.service.ts`, `server/tests/institutional-governance-e2e.test.ts` |
+| **Phase 17 Express 5 REST API Suite (25+ Routes)** | Endpoints under `/api/v1/tpo/*` and `/api/v1/college-admin/*` protected by `requireAuth`, `tenantMiddleware`, and `requireTpoAuthority` (HTTP 403 on students & recruiters) | `COMPLETED` | Verified in `server/src/routes/institutional.routes.ts`, `interventions.routes.ts`, `fairness.routes.ts`, `accreditation.routes.ts`, `outreach.routes.ts` |
+| **Phase 17 Frontend Portals & Dashboards** | `InstitutionalIntelligence.jsx`, `CohortSkillIntelligence.jsx`, `FairnessGovernance.jsx`, `AccreditationReports.jsx`, `RecruiterOutreach.jsx`, updated navigation and sidebar for TPO & College Admin | `COMPLETED` | Verified in `client/src/pages/tpo/`, `npm run build --prefix client` clean in 418ms |
+| **Database Migration & Schema Extensions** | 5 domain enums, 9 relational tables (tables 96–104) with multi-tenant foreign keys and indexes; non-destructive additive Drizzle migration `0007_hot_human_fly.sql` (0 drops, 0 truncates) | `COMPLETED` | Verified in `server/src/db/schema.ts`, `server/drizzle/0007_hot_human_fly.sql`, `server/tests/phase17-schema.test.ts` |
+| **Section 15 E2E Integration Suite (20 Scenarios)**| Full coverage of all 20 regression scenarios in `server/tests/institutional-governance-e2e.test.ts` (20/20 passing) | `COMPLETED` | Verified in `server/tests/institutional-governance-e2e.test.ts` |
+| **Multi-Tier Regression Suite (1,036 Tests)** | Full regression suite: Server (911/911 across 47 test files), Workers standby (113/113 across 8 suites), Python backend (12/12 across 4 files), typecheck (0 errors), client build (clean in 418ms). 100% pass rate | `COMPLETED` | Documented in [docs/PHASE_17_FINAL_REPORT.md](file:///Users/user/CarrerSync/docs/PHASE_17_FINAL_REPORT.md) |
+
+---
+
+## Phase 18: Student Profile Management, Platform Audits & Production Readiness
+
+| Milestone / Component | Description | Status | Verification Evidence |
+| :--- | :--- | :--- | :--- |
+| **Student Profile Relational Extensions** | 28 extended columns in `students`, new tables `student_custom_links` and `academic_correction_requests` with multi-tenant foreign keys and indexes; non-destructive additive Drizzle migration `0008_numerous_morg.sql` | `COMPLETED` | Verified in `server/src/db/schema.ts`, `server/drizzle/0008_numerous_morg.sql` |
+| **Student Profile Service Subsystem** | `student-profile.service.ts` implementing profile retrieval, mutable bio updates, contact info with login email protection, competitive coding links, 13-dimension weighted completeness scoring (0-100%), and actionable suggestions | `COMPLETED` | Verified in `server/src/services/student-profile.service.ts`, `server/tests/student-profile.test.ts` |
+| **Academic Records Immutability & Correction Ledger** | Direct student modification of CGPA, rollNumber, department rejected with HTTP 400 `ACADEMIC_FIELDS_LOCKED`; formal correction workflow in `academic_correction_requests` with audit logging | `COMPLETED` | Verified in `server/src/services/student-profile.service.ts`, `server/tests/student-profile.test.ts` |
+| **Student Profile REST API Routes** | Express 5 routes (`/api/v1/student/profile/*`) guarded by `requireAuth`, `tenantMiddleware`, and `requireRole(['STUDENT'])` with Zod schema validation and protocol whitelisting | `COMPLETED` | Verified in `server/src/routes/student-profile.routes.ts`, `server/src/app.ts` |
+| **Student Profile Frontend Editing Portal** | Comprehensive 6-tab editing interface (`StudentProfileEdit.jsx`), live completeness progress bar, suggestions carousel, 10+ platform badges (`SocialPlatformIcons.jsx`), and academic correction modal | `COMPLETED` | Verified in `client/src/pages/student/StudentProfileEdit.jsx`, `client/src/services/studentProfileService.js`, `npm run build --prefix client` clean |
+| **Anti-Tampering & Security Defenses** | Rejection of role tampering (`403 ROLE_TAMPERING_FORBIDDEN`), tenant spoofing (`403 TENANT_SPOOFING_REJECTED`), self-verification (`403 SELF_VERIFICATION_FORBIDDEN`), and login email lock (`400 LOGIN_EMAIL_IMMUTABLE`) | `COMPLETED` | Verified in `server/tests/student-profile.test.ts` (9 security test suites) |
+| **Master Forensic System Audit** | Platform-wide forensic inspection across Phases 01-18, Zero Cloudflare enforcement verification, strict ₹0 budget validation, and cross-functional user journeys | `COMPLETED` | Documented in `docs/PHASE_18_SYSTEM_AUDIT.md` and `docs/PHASE_18_SECURITY_VALIDATION.md` |
+| **Database Persistence Matrix** | Forensic catalog of all 106 PostgreSQL tables across migrations 0000-0008, cold-start survivability analysis, and in-memory vs database persistence boundary mapping | `COMPLETED` | Documented in `docs/PHASE_18_DATABASE_PERSISTENCE_MATRIX.md` and `docs/PHASE_18_KNOWN_LIMITATIONS.md` |
+| **Deployment Readiness & IaC Verification** | Hosting topology assessment for Render Web Service, Vercel/Render Static frontend, and Neon PostgreSQL; cold-start mitigation and environment checklist | `COMPLETED` | Documented in `docs/PHASE_18_DEPLOYMENT_READINESS.md` |
+| **Multi-Tier Regression Suite (1,060 Tests)** | Full multi-tier regression suite: Server (935/935 across 48 test files), Workers standby (113/113 across 8 suites), Python backend (12/12 across 4 files), typecheck (0 errors), client build (clean in 400ms). 100% pass rate | `COMPLETED` | Documented in `docs/PHASE_18_INTEGRATION_TEST_REPORT.md` |
+
+---
+
+## Phase 19: Pilot Deployment Readiness, Operational Governance & Production Operations
+
+| Milestone / Component | Description | Status | Verification Evidence |
+| :--- | :--- | :--- | :--- |
+| **Zero-Cost Operational Monitoring Runbook** | Native observability guide using Render live log streaming, Neon metric graphs, Express health checks (`/health`, `/api/v1/health`), failure detection playbooks (5xx errors, pool saturation, 15m cold starts, WebSocket drops), and PII/credential log sanitization | `COMPLETED` | Verified in [docs/PHASE_19_MONITORING_RUNBOOK.md](file:///Users/user/CarrerSync/docs/PHASE_19_MONITORING_RUNBOOK.md) |
+| **Synthetic Pilot Validation & Test Report** | Comprehensive pilot testing across all 5 roles (`SUPER_ADMIN`, `COLLEGE_ADMIN`, `TPO_ADMIN`, `RECRUITER`, `STUDENT`) using synthetic datasets; response time benchmarks; Render free-tier cold start resilience analysis | `COMPLETED` | Verified in [docs/PHASE_19_PILOT_TEST_REPORT.md](file:///Users/user/CarrerSync/docs/PHASE_19_PILOT_TEST_REPORT.md) |
+| **Multi-Tier Production Rollback Plan** | Actionable rollback procedures for Frontend (Vercel/Render instant promote), Backend (Render manual rollback / prior deployment activation), and Database (100% additive Drizzle migration reversibility, zero destructive drops) | `COMPLETED` | Verified in [docs/PHASE_19_ROLLBACK_PLAN.md](file:///Users/user/CarrerSync/docs/PHASE_19_ROLLBACK_PLAN.md) |
+| **Master Executive Deployment Report** | Complete Section 15 evaluation; comprehensive certification of `DEPLOYMENT PREPARED — USER ACTION REQUIRED` status ensuring zero agent credential handling and 5-minute user deployment guide | `COMPLETED` | Verified in [docs/PHASE_19_DEPLOYMENT_REPORT.md](file:///Users/user/CarrerSync/docs/PHASE_19_DEPLOYMENT_REPORT.md) |
+| **Multi-Tier Automated Quality Gate (1,070 Tests)**| 5-tier test execution: Server Vitest (945/945 across 49 files), Workers standby (113/113 across 8 files), Python backend (12/12 across 4 files), Server TypeScript (0 errors), Client Vite build (clean in 388ms). 100% pass rate | `COMPLETED` | Verified in [docs/PHASE_19_PILOT_TEST_REPORT.md](file:///Users/user/CarrerSync/docs/PHASE_19_PILOT_TEST_REPORT.md) |
+| **Additive Migration & Schema Certification** | Verification of all 9 Drizzle migrations (`0000` through `0008`) across 106 tables; zero DROP/TRUNCATE statements; Neon pooled connection limits (`max: 10`) | `COMPLETED` | Verified in `server/drizzle/`, `server/src/db/schema.ts`, `server/src/db/client.ts` |
+| **Standby Edge Runtime Retention** | Cloudflare Workers edge runtime retained in `workers/` per Section 14 with identical 113/113 test parity for zero-downtime disaster recovery | `COMPLETED` | Verified in `workers/`; 113/113 Vitest tests passing |
+
+---
+
+## Phase 20: Release Candidate Hardening, Disaster Recovery & Systems Audit
+
+| Milestone / Component | Description | Status | Verification Evidence |
+| :--- | :--- | :--- | :--- |
+| **Durable File Storage Investigation** | Assessment of `IStorageService`, `LocalStorageEngine`, and `S3CompatibleStorageEngine`; market evaluation of zero-cost cloud storage options under strict ₹0/no-card policy; established limitation documentation and prohibited real student documents in pilot | `COMPLETED` | Documented in `docs/PHASE_20_RELEASE_CANDIDATE_REPORT.md` and `docs/PHASE_20_KNOWN_LIMITATIONS.md` |
+| **Database Backup & Disaster Recovery Plan** | Comprehensive Neon PostgreSQL disaster recovery runbook covering continuous WAL archiving, 24-hour Point-in-Time Recovery (PITR), copy-on-write branch snapshots (< 2s, ₹0 cost), connection limits (`max: 10`), and 5 failure playbooks | `COMPLETED` | Documented in `docs/PHASE_20_DATABASE_RECOVERY_PLAN.md` |
+| **AI Experience Polish & Notifications** | Verification of 4 domain agents, deterministic rule-based fallback, PII scrubber (`pii-filter.ts`), ethical AI boundaries (`canExcludeStudent: false`), EEOC Four-Fifths benchmark calculations, and in-app notification center | `COMPLETED` | Verified in `server/src/ai/`, `server/src/orchestration/`, and regression tests |
+| **Security Regression Suite** | Comprehensive regression across 6-role RBAC, anti-spoofing tenant isolation (`403 TENANT_SPOOFING_REJECTED`), student profile anti-tampering (`ACADEMIC_FIELDS_LOCKED`), file permissions, and ethical AI | `COMPLETED` | Verified in `tests/rbac.test.ts`, `tests/tenant.test.ts`, `tests/verification-security.test.ts`, `tests/student-profile.test.ts` (138 passed) |
+| **Multi-Tier Automated Quality Gate (1,070 Tests)** | Full verification across all 5 tiers: Server Vitest (945/945 across 49 files in 7.14s), Workers standby (113/113 across 8 files in 1.58s), Python backend (12/12 across 4 files in 2.76s), Server TypeScript (0 errors in 5.8s), Client Vite build (clean in 386ms). 100% pass rate | `COMPLETED` | Documented in `docs/PHASE_20_RELEASE_CANDIDATE_REPORT.md` |
+| **Exhaustive Known Limitations Catalog** | Honest, transparent catalog of all active platform limitations: ephemeral file storage on Render, in-memory repositories for Phase 13/14/17 analytics, 15-minute Render cold starts, synthetic pilot data requirement | `COMPLETED` | Documented in `docs/PHASE_20_KNOWN_LIMITATIONS.md` |
+| **Release Candidate Master Evaluation** | Executive evaluation certifying `RELEASE CANDIDATE READY WITH LIMITATIONS` status for CarrerSync v1.0.0-RC1, pilot launch protocols, and go-live gates | `COMPLETED` | Documented in `docs/PHASE_20_RELEASE_CANDIDATE_REPORT.md` |
+
+---
+
 ## Future Phase Roadmap
 
 | Phase | Milestone | Status |
@@ -343,4 +418,8 @@ Statuses strictly reflect verified work.
 | **Phase 14** | Predictive Placement Analytics, Institutional Forecasting & Ethical AI Governance Engine | `COMPLETED` |
 | **Phase 15** | Cross-Agent Integration, End-to-End Workflow & Platform Reliability Engine | `COMPLETED` |
 | **Phase 16** | Alumni Mentorship Network, Live Peer Mock Interviews & Realtime Collaboration | `COMPLETED` |
-| **Phase 17** | Next Platform Extension | `NOT STARTED` |
+| **Phase 17** | Institutional Intelligence, Accreditation Reporting & Governance Suite | `COMPLETED` |
+| **Phase 18** | Student Profile Management, Platform Audits & Production Readiness | `COMPLETED` |
+| **Phase 19** | Pilot Deployment Readiness, Operational Governance & Production Operations | `COMPLETED` |
+| **Phase 20** | Release Candidate Hardening, Disaster Recovery & Systems Audit | `COMPLETED` |
+| **Phase 21** | End-to-End Database Wiring & Cloud Hardening | `NOT STARTED` |

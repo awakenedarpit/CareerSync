@@ -1,37 +1,45 @@
 @import "tailwindcss";
+@import "./styles/design-tokens.css";
+@import "./styles/typography.css";
+@import "./styles/globals.css";
 
 @layer base {
   :root {
-    --color-primary-navy: #111827;
-    --color-primary-indigo: #4F46E5;
-    --color-primary-violet: #7C3AED;
-    --color-bg-light: #F8FAFC;
-    --color-surface-white: #FFFFFF;
-    --color-text-slate: #334155;
-    --color-text-muted: #64748B;
+    /* Legacy variable mappings re-pointed to authoritative Mint design system */
+    --color-primary-navy: var(--color-text-main);
+    --color-primary-indigo: var(--color-primary-mint);
+    --color-primary-violet: var(--color-secondary-aqua);
+    --color-bg-light: var(--color-background);
+    --color-surface-white: var(--color-surface);
+    --color-text-slate: var(--color-text-secondary);
+    --color-text-muted: var(--color-text-muted);
+
+    /* Brand variables mapped to Mint system */
+    --brand-midnight-navy: var(--color-text-main);
+    --brand-midnight-surface: var(--color-surface-container);
+    --brand-midnight-text: var(--color-text-main);
+    --brand-purple: var(--color-primary-mint);
+    --brand-purple-dark: var(--color-primary-mint-hover);
+    --brand-purple-light: var(--color-secondary-aqua);
+    --brand-purple-soft: var(--color-surface-low);
+    --brand-teal: var(--color-secondary-aqua);
+    --brand-teal-vibrant: var(--color-primary-mint);
+    --brand-teal-dark: var(--color-text-main);
+    --brand-teal-soft: var(--color-surface-container);
+    --brand-gold: var(--color-tertiary-amber);
+    --brand-gold-light: var(--color-tertiary-amber-light);
+    --brand-gold-dark: #D97706;
+    --brand-gold-soft: #FFF8E7;
+    --brand-white: var(--color-surface);
+    --brand-bg-canvas: var(--color-background);
   }
 
   body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    color: var(--color-text-slate);
-    background-color: var(--color-bg-light);
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: var(--color-text-main);
+    background-color: var(--color-background);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-}
-
-/* Custom subtle scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
 }

@@ -66,6 +66,25 @@ export function getPool(connectionString?: string): Pool {
 }
 
 /**
+ * Gracefully terminates all cached connection pools and resets client caches.
+ */
+export async function closeDatabaseConnections(): Promise<void> {
+  const closePromises: Promise<void>[] = [];
+  for (const pool of poolCache.values()) {
+    try {
+      if (typeof pool.end === 'function') {
+        closePromises.push(pool.end());
+      }
+    } catch {
+      // Suppress pool close errors during shutdown
+    }
+  }
+  await Promise.allSettled(closePromises);
+  poolCache.clear();
+  dbCache.clear();
+}
+
+/**
  * Hardened transaction-scoped RLS context helper executing SET LOCAL app.current_tenant_id = :tenantId.
  *
  * Pooling Safety Guarantees:

@@ -55,7 +55,7 @@ export default function AdminSettings() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card className="p-6 border-slate-200">
           <div className="flex items-center gap-2 mb-4">
-            <Building className="h-4 w-4 text-indigo-600" />
+            <Building className="h-4 w-4 text-[#009669]" />
             <h3 className="text-sm font-bold text-slate-900">College & Placement Cell Profile</h3>
           </div>
 
@@ -92,14 +92,14 @@ export default function AdminSettings() {
 
         <Card className="p-6 border-slate-200">
           <div className="flex items-center gap-2 mb-4">
-            <Database className="h-4 w-4 text-purple-600" />
+            <Database className="h-4 w-4 text-[#009669]" />
             <h3 className="text-sm font-bold text-slate-900">Tenant Isolation & Free-Tier Quota</h3>
           </div>
 
           <div className="space-y-4 text-xs">
             <div className="p-3 bg-slate-50 rounded-lg border border-slate-100">
               <span className="text-slate-400 block mb-0.5">Assigned Tenant Key (RLS Scope)</span>
-              <code className="text-xs font-mono font-bold text-indigo-700">{settings.tenantId}</code>
+              <code className="text-xs font-mono font-bold text-[#004D36]">{settings.tenantId}</code>
             </div>
 
             <div className="space-y-2">

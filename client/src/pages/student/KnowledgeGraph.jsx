@@ -224,12 +224,12 @@ export default function KnowledgeGraph() {
       {/* Legend Bar */}
       <div className="flex flex-wrap items-center gap-3 p-3 bg-white rounded-xl border border-slate-200 text-xs">
         <span className="font-semibold text-slate-700 mr-2 flex items-center gap-1.5">
-          <Layers className="h-3.5 w-3.5 text-indigo-600" />
+          <Layers className="h-3.5 w-3.5 text-[#009669]" />
           Node Types:
         </span>
-        <div className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-indigo-600" /><span>Student</span></div>
+        <div className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-[#02E8A7]" /><span>Student</span></div>
         <div className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-emerald-600" /><span>Verified Skill</span></div>
-        <div className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-indigo-500" /><span>Evidence-linked</span></div>
+        <div className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-[#BDF9F9]/300" /><span>Evidence-linked</span></div>
         <div className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-sky-500" /><span>Observed</span></div>
         <div className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-slate-500" /><span>Claimed</span></div>
         <div className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-orange-600" /><span>Expired</span></div>
@@ -284,7 +284,7 @@ export default function KnowledgeGraph() {
               </div>
 
               <div className="p-3 rounded-xl border border-slate-100 bg-slate-50 mb-4">
-                <span className="text-[10px] font-semibold text-indigo-600 uppercase">
+                <span className="text-[10px] font-semibold text-[#009669] uppercase">
                   {selectedNode.type}
                 </span>
                 <h3 className="text-base font-bold text-slate-900 whitespace-pre-line mt-0.5">

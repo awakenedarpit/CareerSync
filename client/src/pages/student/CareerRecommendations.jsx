@@ -114,7 +114,7 @@ export default function CareerRecommendations() {
       case 'DEVELOPING_MATCH':
       default:
         return (
-          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-purple-100 text-purple-800 border border-purple-300">
+          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-[#BDF9F9]/50 text-[#002020] border border-purple-300">
             Developing (&lt;50%)
           </span>
         );
@@ -185,7 +185,7 @@ export default function CareerRecommendations() {
               key={rec.id}
               className={`p-6 border transition-all ${
                 rec.isPrimary
-                  ? 'border-indigo-300 ring-2 ring-indigo-500/10 bg-gradient-to-r from-indigo-50/30 via-white to-white'
+                  ? 'border-[#02E8A7]/50 ring-2 ring-[#02E8A7]/10 bg-gradient-to-r from-indigo-50/30 via-white to-white'
                   : 'border-slate-200'
               }`}
             >
@@ -194,7 +194,7 @@ export default function CareerRecommendations() {
                   <div className="flex items-center gap-2.5 mb-1.5">
                     <h3 className="text-lg font-black text-slate-900">{rec.roleTitle}</h3>
                     {rec.isPrimary && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-600 text-white">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#02E8A7] text-[#002020] font-bold">
                         <Star className="h-3 w-3 fill-current" />
                         Primary Target Role
                       </span>
@@ -266,13 +266,13 @@ export default function CareerRecommendations() {
               {/* Suggested Portfolio Projects */}
               <div className="p-4 rounded-xl border border-slate-200 bg-slate-50/60 mb-5">
                 <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">
-                  <FolderGit2 className="h-4 w-4 text-indigo-600" />
+                  <FolderGit2 className="h-4 w-4 text-[#009669]" />
                   Prescribed Portfolio Projects to Unlock Tier-1 Placement
                 </div>
                 <ul className="space-y-1.5">
                   {(rec.suggestedProjects || []).map((proj, idx) => (
                     <li key={idx} className="flex items-start gap-2 text-xs text-slate-700">
-                      <ChevronRight className="h-3.5 w-3.5 text-indigo-500 mt-0.5 shrink-0" />
+                      <ChevronRight className="h-3.5 w-3.5 text-[#009669] mt-0.5 shrink-0" />
                       <span>{proj}</span>
                     </li>
                   ))}

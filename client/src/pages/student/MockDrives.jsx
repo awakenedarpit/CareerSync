@@ -100,7 +100,7 @@ export default function MockDrives() {
       key: 'percentile',
       label: 'Cohort Rank',
       render: (val) => (
-        <Badge variant="indigo" size="sm">{val}</Badge>
+        <Badge variant="aqua" size="sm">{val}</Badge>
       )
     },
     {
@@ -118,7 +118,7 @@ export default function MockDrives() {
       render: (_, row) => (
         <Link
           to={`/student/mock-drives/reports/${row.id}`}
-          className="text-xs font-medium text-indigo-600 hover:text-indigo-800 flex items-center gap-1"
+          className="text-xs font-medium text-[#009669] hover:text-[#002020] flex items-center gap-1"
         >
           View Diagnostics <ChevronRight className="h-3 w-3" />
         </Link>
@@ -174,7 +174,7 @@ export default function MockDrives() {
           trend="up"
           trendValue="Above Cutoff"
           icon={CheckCircle2}
-          color="indigo"
+          color="teal"
         />
         <StatCard
           title="Coding Speed & Quality"
@@ -183,7 +183,7 @@ export default function MockDrives() {
           trend="up"
           trendValue="18 Test cases passed"
           icon={Code}
-          color="violet"
+          color="aqua"
         />
         <StatCard
           title="Target Role Alignment"
@@ -214,10 +214,10 @@ export default function MockDrives() {
           <Card hover className="p-5 border-slate-200 flex flex-col justify-between bg-gradient-to-br from-white to-indigo-50/20">
             <div>
               <div className="flex items-center justify-between mb-3">
-                <span className="p-2.5 rounded-lg bg-indigo-100 text-indigo-700">
+                <span className="p-2.5 rounded-lg bg-[#BDF9F9]/50 text-[#004D36]">
                   <FileQuestion className="h-5 w-5" />
                 </span>
-                <Badge variant="indigo" size="sm">Timed MCQ</Badge>
+                <Badge variant="aqua" size="sm">Timed MCQ</Badge>
               </div>
               <h3 className="text-base font-bold text-slate-900 mb-1">Cognitive & CS Aptitude</h3>
               <p className="text-xs text-slate-600 leading-relaxed mb-4">
@@ -312,7 +312,7 @@ export default function MockDrives() {
           {selectedRoleFilter !== 'all' && (
             <button
               onClick={() => setSelectedRoleFilter('all')}
-              className="text-xs text-indigo-600 hover:text-indigo-800 font-medium"
+              className="text-xs text-[#009669] hover:text-[#002020] font-medium"
             >
               Clear Role Filter
             </button>
@@ -328,7 +328,7 @@ export default function MockDrives() {
                 onClick={() => setSelectedRoleFilter(isSelected ? 'all' : role.id)}
                 className={`p-3 rounded-xl border text-left transition-all duration-150 ${
                   isSelected
-                    ? 'border-indigo-600 bg-indigo-50/70 shadow-sm ring-1 ring-indigo-600'
+                    ? 'border-indigo-600 bg-[#BDF9F9]/30 shadow-sm ring-1 ring-indigo-600'
                     : 'border-slate-200 bg-white hover:border-slate-300 hover:shadow-xs'
                 }`}
               >
@@ -389,7 +389,7 @@ export default function MockDrives() {
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-slate-500">Cutoff Score:</span>
-                      <span className="font-semibold text-indigo-700">{drive.cutoffScore}% Pass Mark</span>
+                      <span className="font-semibold text-[#004D36]">{drive.cutoffScore}% Pass Mark</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-slate-500">Target Roles:</span>
@@ -489,7 +489,7 @@ export default function MockDrives() {
                 <span className="text-slate-500">Company / Tier:</span>
                 <p className="font-semibold text-slate-900 text-sm">{selectedDriveModal.company} ({selectedDriveModal.companyTier})</p>
               </div>
-              <Badge variant="indigo" size="md">Cutoff: {selectedDriveModal.cutoffScore}%</Badge>
+              <Badge variant="aqua" size="md">Cutoff: {selectedDriveModal.cutoffScore}%</Badge>
             </div>
 
             <div>
@@ -504,12 +504,12 @@ export default function MockDrives() {
               <div><strong>Difficulty:</strong> {selectedDriveModal.difficulty}</div>
             </div>
 
-            <div className="p-3 bg-indigo-50 border border-indigo-200 rounded-lg text-indigo-900">
+            <div className="p-3 bg-[#BDF9F9]/30 border border-[#02E8A7]/40 rounded-lg text-[#002020]">
               <div className="flex items-center gap-1.5 font-semibold mb-1">
-                <ShieldCheck className="h-4 w-4 text-indigo-600" />
+                <ShieldCheck className="h-4 w-4 text-[#009669]" />
                 Ethical Proctoring Policy
               </div>
-              <p className="text-[11px] leading-relaxed text-indigo-800">
+              <p className="text-[11px] leading-relaxed text-[#002020]">
                 CarrerSync guarantees ethical privacy. This assessment does not record your screen, webcam, or microphone in the background. Automated evaluations run against code output and MCQ answer correctness only.
               </p>
             </div>

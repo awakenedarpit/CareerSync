@@ -116,12 +116,12 @@ export default function SkillGapAnalysis() {
       case 'STRONG_MATCH':
         return <Badge variant="emerald" size="lg">Strong Role Fit (80%+)</Badge>;
       case 'GOOD_MATCH':
-        return <Badge variant="indigo" size="lg">Good Match (65-79%)</Badge>;
+        return <Badge variant="aqua" size="lg">Good Match (65-79%)</Badge>;
       case 'POTENTIAL_MATCH':
         return <Badge variant="amber" size="lg">Potential Match (50-64%)</Badge>;
       case 'DEVELOPING_MATCH':
       default:
-        return <Badge variant="purple" size="lg">Developing Foundation (&lt;50%)</Badge>;
+        return <Badge variant="mint" size="lg">Developing Foundation (&lt;50%)</Badge>;
     }
   };
 
@@ -173,10 +173,10 @@ export default function SkillGapAnalysis() {
       />
 
       {/* Target Role Selector & Overall Fit Banner */}
-      <div className="p-5 rounded-2xl border border-indigo-100 bg-gradient-to-r from-indigo-50/70 via-white to-purple-50/50 shadow-xs">
+      <div className="p-5 rounded-2xl border border-[#02E8A7]/30 bg-gradient-to-r from-indigo-50/70 via-white to-purple-50/50 shadow-xs">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
           <div className="flex items-center gap-3">
-            <div className="h-12 w-12 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-sm">
+            <div className="h-12 w-12 rounded-xl bg-[#02E8A7] text-[#002020] font-bold flex items-center justify-center shrink-0 shadow-sm">
               <BarChart3 className="h-6 w-6" />
             </div>
             <div>
@@ -210,7 +210,7 @@ export default function SkillGapAnalysis() {
 
           <div className="flex items-baseline gap-2 shrink-0">
             <span className="text-xs text-slate-500 font-medium">Composite Readiness:</span>
-            <span className="text-2xl font-black text-indigo-700">{gapData?.overallFitScore || 78}%</span>
+            <span className="text-2xl font-black text-[#004D36]">{gapData?.overallFitScore || 78}%</span>
           </div>
         </div>
       </div>
@@ -269,7 +269,7 @@ export default function SkillGapAnalysis() {
                 onClick={() => setTierFilter(filter)}
                 className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
                   tierFilter === filter
-                    ? 'bg-indigo-600 text-white shadow-xs'
+                    ? 'bg-[#02E8A7] text-[#002020] font-bold shadow-xs'
                     : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                 }`}
               >
@@ -401,7 +401,7 @@ export default function SkillGapAnalysis() {
           ]).map((task) => (
             <div
               key={task.id}
-              className="p-4 rounded-xl border border-slate-200 bg-white hover:border-indigo-200 shadow-2xs flex flex-col justify-between"
+              className="p-4 rounded-xl border border-slate-200 bg-white hover:border-[#02E8A7]/40 shadow-2xs flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-start justify-between gap-2 mb-1.5">
@@ -410,7 +410,7 @@ export default function SkillGapAnalysis() {
                     {task.priority} Priority
                   </Badge>
                 </div>
-                <div className="text-xs text-indigo-700 font-semibold mb-2">
+                <div className="text-xs text-[#004D36] font-semibold mb-2">
                   Target Skill: {task.skill} • {task.estimatedHours} hrs
                 </div>
                 <p className="text-xs text-slate-600 mb-3 leading-relaxed">

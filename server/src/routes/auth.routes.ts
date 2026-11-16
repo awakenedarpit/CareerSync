@@ -2,7 +2,7 @@ import { Router, type Request, type Response } from 'express';
 import crypto from 'crypto';
 import env from '../config/env';
 import { z } from 'zod';
-import { eq, and } from 'drizzle-orm';
+import { eq, and, or, inArray } from 'drizzle-orm';
 import type { UserRole } from '../types';
 import { getDb } from '../db/client';
 import { users, students, tenants, auditEvents, invitations } from '../db/schema';
@@ -19,10 +19,12 @@ const RegisterSchema = z.object({
   password: z.string().min(8, 'Password must be at least 8 characters long'),
   fullName: z.string().min(2, 'Full name must be at least 2 characters'),
   role: z
-    .enum(['student', 'college_admin', 'faculty_coordinator', 'recruiter', 'superadmin'])
+    .enum(['student', 'college_admin', 'faculty_coordinator', 'recruiter', 'superadmin', 'tpo_admin', 'alumni'])
     .default('student'),
   tenantId: z.string().uuid().optional(),
   tenantSlug: z.string().optional(),
+  invitationToken: z.string().optional(),
+  token: z.string().optional(),
   // Optional student fields if role === 'student'
   rollNumber: z.string().optional(),
   department: z.string().optional(),
@@ -68,7 +70,25 @@ authRoutes.post('/register', async (req: Request, res: Response) => {
     });
   }
 
+  // Security Gate: Non-student roles (college_admin, faculty_coordinator, recruiter, tpo_admin, alumni)
+  // require a valid single-use invitation token. Self-registration is restricted strictly to students.
+  const inviteToken = data.invitationToken || data.token;
+  if (data.role !== 'student' && !inviteToken) {
+    return res.status(403).json({
+      success: false,
+      error: `Self-registration is only permitted for students. Role '${data.role}' requires a valid invitation token.`,
+      code: 'INVITATION_REQUIRED'
+    });
+  }
+
   const dbUrl = (env.DATABASE_URL || process.env.DATABASE_URL);
+  if (!dbUrl) {
+    return res.status(503).json({
+      success: false,
+      error: 'Database service is currently unavailable. Registration cannot be processed offline.',
+      code: 'DATABASE_UNAVAILABLE'
+    });
+  }
 
   // Resolve tenantId: body -> header -> context
   let resolvedTenantId =
@@ -76,182 +96,264 @@ authRoutes.post('/register', async (req: Request, res: Response) => {
     (req.headers['x-tenant-id'] as string)?.trim() ||
     req.tenantId;
 
-  if (!resolvedTenantId && !data.tenantSlug) {
-    return res.status(400).json(
-      {
-        success: false,
-        error: 'Tenant context required. Provide tenantId or tenantSlug.',
-        code: 'TENANT_REQUIRED'
-      });
-  }
-
   const secret = (env.JWT_SECRET || process.env.JWT_SECRET) || 'carrersync_jwt_default_secret_dev_key_32_chars';
   const hashedPassword = await hashPassword(data.password);
   const normalizedEmail = data.email.toLowerCase().trim();
 
-  if (dbUrl) {
-    try {
-      const db = getDb(dbUrl);
+  try {
+    const db = getDb(dbUrl);
 
-      // Resolve tenant slug if tenantId wasn't passed directly
-      if (!resolvedTenantId && data.tenantSlug) {
-        const [foundTenant] = await db
-          .select()
-          .from(tenants)
-          .where(eq(tenants.slug, data.tenantSlug.toLowerCase().trim()))
-          .limit(1);
+    // If an invitation token is provided for registration, validate it
+    let verifiedInvitation: any = null;
+    if (inviteToken) {
+      const [inv] = await db
+        .select()
+        .from(invitations)
+        .where(eq(invitations.token, inviteToken.trim()))
+        .limit(1);
 
-        if (!foundTenant) {
-          return res.status(404).json(
-            { success: false, error: `Tenant with slug '${data.tenantSlug}' not found` });
-        }
-        resolvedTenantId = foundTenant.id;
+      if (!inv) {
+        return res.status(404).json({
+          success: false,
+          error: 'Invitation token not found',
+          code: 'INVITATION_NOT_FOUND'
+        });
       }
 
-      if (!resolvedTenantId || !isValidUuid(resolvedTenantId)) {
-        return res.json({ success: false, error: 'Invalid or unresolved tenant UUID' });
+      if (inv.status === 'revoked') {
+        return res.status(410).json({
+          success: false,
+          error: 'Invitation has been revoked',
+          code: 'INVITATION_REVOKED'
+        });
       }
 
-      // Check tenant status
-      const [targetTenant] = await db
+      if (inv.status === 'accepted') {
+        return res.status(410).json({
+          success: false,
+          error: 'Invitation has already been used',
+          code: 'INVITATION_ALREADY_USED'
+        });
+      }
+
+      const isExpired = new Date(inv.expiresAt).getTime() <= Date.now();
+      if (isExpired || inv.status === 'expired') {
+        return res.status(410).json({
+          success: false,
+          error: 'Invitation has expired',
+          code: 'INVITATION_EXPIRED'
+        });
+      }
+
+      verifiedInvitation = inv;
+      if (!resolvedTenantId && inv.tenantId) {
+        resolvedTenantId = inv.tenantId;
+      }
+    }
+
+    if (!resolvedTenantId && !data.tenantSlug) {
+      return res.status(400).json({
+        success: false,
+        error: 'Tenant context required. Provide tenantId or tenantSlug.',
+        code: 'TENANT_REQUIRED'
+      });
+    }
+
+    // Resolve tenant slug if tenantId wasn't passed directly
+    if (!resolvedTenantId && data.tenantSlug) {
+      const inputSlug = data.tenantSlug.toLowerCase().trim();
+      const slugOptions = [inputSlug];
+      if (inputSlug === 'apex-tech') slugOptions.push('apex-institute');
+      if (inputSlug === 'apex-institute') slugOptions.push('apex-tech');
+
+      const [foundTenant] = await db
         .select()
         .from(tenants)
-        .where(eq(tenants.id, resolvedTenantId))
+        .where(inArray(tenants.slug, slugOptions))
         .limit(1);
 
-      if (!targetTenant) {
-        return res.status(404).json({ success: false, error: 'Target tenant does not exist' });
+      if (!foundTenant) {
+        return res.status(404).json({
+          success: false,
+          error: `Tenant with slug '${data.tenantSlug}' not found`,
+          code: 'TENANT_NOT_FOUND'
+        });
       }
+      resolvedTenantId = foundTenant.id;
+    }
 
-      if (!targetTenant.isActive) {
-        return res.status(403).json({ success: false, error: 'Tenant is currently deactivated' });
-      }
+    if (!resolvedTenantId || !isValidUuid(resolvedTenantId)) {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid or unresolved tenant UUID',
+        code: 'INVALID_TENANT'
+      });
+    }
 
-      // Check for duplicate user under same tenant
-      const [existingUser] = await db
-        .select()
-        .from(users)
-        .where(
-          and(
-            eq(users.tenantId, resolvedTenantId),
-            eq(users.email, normalizedEmail)
-          )
+    // Check tenant status
+    const [targetTenant] = await db
+      .select()
+      .from(tenants)
+      .where(eq(tenants.id, resolvedTenantId))
+      .limit(1);
+
+    if (!targetTenant) {
+      return res.status(404).json({
+        success: false,
+        error: 'Target tenant does not exist',
+        code: 'TENANT_NOT_FOUND'
+      });
+    }
+
+    if (!targetTenant.isActive) {
+      return res.status(403).json({
+        success: false,
+        error: 'Tenant is currently deactivated',
+        code: 'TENANT_DEACTIVATED'
+      });
+    }
+
+    // Check for duplicate user under same tenant
+    const [existingUser] = await db
+      .select()
+      .from(users)
+      .where(
+        and(
+          eq(users.tenantId, resolvedTenantId),
+          eq(users.email, normalizedEmail)
         )
-        .limit(1);
+      )
+      .limit(1);
 
-      if (existingUser) {
-        return res.status(409).json(
-          {
-            success: false,
-            error: 'User with this email already exists in this institution'
-          });
-      }
+    if (existingUser) {
+      return res.status(409).json({
+        success: false,
+        error: 'User with this email already exists in this institution',
+        code: 'USER_EXISTS'
+      });
+    }
 
-      // Insert User
-      const [createdUser] = await db
-        .insert(users)
+    // Insert User
+    const assignedRole = verifiedInvitation?.role || data.role;
+    const [createdUser] = await db
+      .insert(users)
+      .values({
+        tenantId: resolvedTenantId,
+        email: normalizedEmail,
+        passwordHash: hashedPassword,
+        fullName: data.fullName.trim(),
+        role: assignedRole as any,
+        isActive: true,
+        isVerified: assignedRole !== 'student'
+      })
+      .returning();
+
+    // If student role, insert student profile
+    let studentRecord = null;
+    if (assignedRole === 'student') {
+      const [createdStudent] = await db
+        .insert(students)
         .values({
           tenantId: resolvedTenantId,
-          email: normalizedEmail,
-          passwordHash: hashedPassword,
-          fullName: data.fullName.trim(),
-          role: data.role as any,
-          isActive: true,
-          isVerified: data.role === 'college_admin'
+          userId: createdUser.id,
+          rollNumber: data.rollNumber || `CS-${Math.floor(10000 + Math.random() * 90000)}`,
+          department: data.department || 'Computer Science and Engineering',
+          batchYear: data.batchYear || new Date().getFullYear(),
+          degree: data.degree || 'B.Tech',
+          cgpa: data.cgpa ? String(data.cgpa) : '0.00'
         })
         .returning();
-
-      // If student role, insert student profile
-      let studentRecord = null;
-      if (data.role === 'student') {
-        const [createdStudent] = await db
-          .insert(students)
-          .values({
-            tenantId: resolvedTenantId,
-            userId: createdUser.id,
-            rollNumber: data.rollNumber || `CS-${Math.floor(10000 + Math.random() * 90000)}`,
-            department: data.department || 'Computer Science and Engineering',
-            batchYear: data.batchYear || new Date().getFullYear(),
-            degree: data.degree || 'B.Tech',
-            cgpa: data.cgpa ? String(data.cgpa) : '0.00'
-          })
-          .returning();
-        studentRecord = createdStudent;
-      }
-
-      // Log audit event
-      try {
-        await db.insert(auditEvents).values({
-          tenantId: resolvedTenantId,
-          actorId: createdUser.id,
-          actorEmail: createdUser.email,
-          action: 'USER_REGISTERED',
-          resourceType: 'user',
-          resourceId: createdUser.id,
-          changesDiff: { role: createdUser.role, fullName: createdUser.fullName }
-        });
-      } catch (auditErr) {
-        console.warn('Audit logging failed silently:', auditErr);
-      }
-
-      // Issue JWT
-      const token = await createJwtToken(
-        {
-          sub: createdUser.id,
-          tenant_id: createdUser.tenantId,
-          role: createdUser.role,
-          email: createdUser.email
-        },
-        secret
-      );
-
-      return res.status(201).json(
-        {
-          success: true,
-          message: 'User registered successfully',
-          token,
-          user: {
-            id: createdUser.id,
-            email: createdUser.email,
-            fullName: createdUser.fullName,
-            role: createdUser.role,
-            tenantId: createdUser.tenantId,
-            student: studentRecord
-          }
-        });
-    } catch (err: any) {
-      console.error('Registration database error:', err);
-      return res.status(500).json(
-        { success: false, error: 'Database error during registration', details: err?.message });
+      studentRecord = createdStudent;
     }
-  }
 
-  // Fallback for tests when DB is mocked/offline
-  const mockUserId = crypto.randomUUID();
-  resolvedTenantId = resolvedTenantId || crypto.randomUUID();
-  const token = await createJwtToken(
-    {
-      sub: mockUserId,
-      tenant_id: resolvedTenantId,
-      role: data.role,
-      email: normalizedEmail
-    },
-    secret
-  );
+    // If registered via invitation, mark invitation as accepted
+    if (verifiedInvitation) {
+      await db
+        .update(invitations)
+        .set({
+          status: 'accepted',
+          acceptedAt: new Date(),
+          updatedAt: new Date()
+        })
+        .where(eq(invitations.id, verifiedInvitation.id));
+    }
 
-  return res.status(201).json(
-    {
+    // Log audit event
+    try {
+      await db.insert(auditEvents).values({
+        tenantId: resolvedTenantId,
+        actorId: createdUser.id,
+        actorEmail: createdUser.email,
+        action: 'USER_REGISTERED',
+        resourceType: 'user',
+        resourceId: createdUser.id,
+        changesDiff: { role: createdUser.role, fullName: createdUser.fullName }
+      });
+    } catch (auditErr) {
+      console.warn('Audit logging failed silently:', auditErr);
+    }
+
+    // Issue JWT with clean claims: sub, tenant_id, role, email
+    const token = await createJwtToken(
+      {
+        sub: createdUser.id,
+        tenant_id: createdUser.tenantId,
+        role: createdUser.role,
+        email: createdUser.email
+      },
+      secret
+    );
+
+    return res.status(201).json({
       success: true,
-      message: 'User registered successfully (offline mode)',
+      message: 'User registered successfully',
       token,
       user: {
-        id: mockUserId,
-        email: normalizedEmail,
-        fullName: data.fullName,
-        role: data.role,
-        tenantId: resolvedTenantId
+        id: createdUser.id,
+        email: createdUser.email,
+        fullName: createdUser.fullName,
+        role: createdUser.role,
+        tenantId: createdUser.tenantId,
+        student: studentRecord
       }
     });
+  } catch (err: any) {
+    const isConnError = err?.message?.includes('fetch failed') ||
+      err?.message?.includes('ENOTFOUND') ||
+      err?.message?.includes('ECONNREFUSED') ||
+      err?.code === 'ECONNREFUSED' ||
+      err?.code === 'ENOTFOUND';
+
+    console.error('Registration database error:', {
+      message: err?.message,
+      code: err?.code,
+      isConnError
+    });
+
+    if (isConnError) {
+      return res.status(503).json({
+        success: false,
+        error: 'Database connection unavailable. Please check database connectivity.',
+        code: 'DATABASE_UNAVAILABLE',
+        details: err?.message
+      });
+    }
+
+    if (err?.code === '23505' || err?.message?.includes('users_email_unique') || err?.message?.includes('unique constraint')) {
+      return res.status(409).json({
+        success: false,
+        error: 'An account with this email address already exists.',
+        code: 'EMAIL_ALREADY_EXISTS'
+      });
+    }
+
+    return res.status(503).json({
+      success: false,
+      error: 'Database error during registration',
+      code: 'DATABASE_ERROR',
+      details: err?.message
+    });
+  }
 });
 
 /**
@@ -278,114 +380,123 @@ authRoutes.post('/login', async (req: Request, res: Response) => {
 
   let resolvedTenantId = tenantId || (req.headers['x-tenant-id'] as string)?.trim() || req.tenantId;
 
-  if (dbUrl) {
-    try {
-      const db = getDb(dbUrl);
-
-      // Resolve tenant slug if provided
-      if (!resolvedTenantId && tenantSlug) {
-        const [foundTenant] = await db
-          .select()
-          .from(tenants)
-          .where(eq(tenants.slug, tenantSlug.toLowerCase().trim()))
-          .limit(1);
-
-        if (foundTenant) {
-          resolvedTenantId = foundTenant.id;
-        }
-      }
-
-      // Build query conditions
-      const conditions = [
-        eq(users.email, normalizedEmail),
-        eq(users.isActive, true)
-      ];
-
-      if (resolvedTenantId && isValidUuid(resolvedTenantId)) {
-        conditions.push(eq(users.tenantId, resolvedTenantId));
-      }
-
-      const [user] = await db
-        .select()
-        .from(users)
-        .where(and(...conditions))
-        .limit(1);
-
-      if (!user) {
-        return res.status(401).json(
-          {
-            success: false,
-            error: 'Invalid credentials or inactive account',
-            code: 'INVALID_CREDENTIALS'
-          });
-      }
-
-      // Verify password
-      const isPasswordValid = await verifyPassword(password, user.passwordHash);
-      if (!isPasswordValid) {
-        return res.status(401).json(
-          {
-            success: false,
-            error: 'Invalid credentials or inactive account',
-            code: 'INVALID_CREDENTIALS'
-          });
-      }
-
-      // Issue signed JWT
-      const token = await createJwtToken(
-        {
-          sub: user.id,
-          tenant_id: user.tenantId,
-          role: user.role,
-          email: user.email
-        },
-        secret
-      );
-
-      return res.json({
-        success: true,
-        message: 'Authentication successful',
-        token,
-        user: {
-          id: user.id,
-          email: user.email,
-          fullName: user.fullName,
-          role: user.role,
-          tenantId: user.tenantId
-        }
-      });
-    } catch (err: any) {
-      console.error('Login database error:', err);
-      return res.status(500).json(
-        { success: false, error: 'Database error during authentication', details: err?.message });
-    }
+  if (!dbUrl) {
+    return res.status(503).json({
+      success: false,
+      error: 'Database service is currently unavailable. Authentication cannot be processed offline.',
+      code: 'DATABASE_UNAVAILABLE'
+    });
   }
 
-  // Offline / Demo fallback for testing without DB
-  const mockUserId = crypto.randomUUID();
-  const mockTenantId = resolvedTenantId || crypto.randomUUID();
-  const token = await createJwtToken(
-    {
-      sub: mockUserId,
-      tenant_id: mockTenantId,
-      role: 'student',
-      email: normalizedEmail
-    },
-    secret
-  );
+  try {
+    const db = getDb(dbUrl);
 
-  return res.json({
-    success: true,
-    message: 'Authentication successful (offline mode)',
-    token,
-    user: {
-      id: mockUserId,
-      email: normalizedEmail,
-      fullName: 'Demo User',
-      role: 'student',
-      tenantId: mockTenantId
+    // Resolve tenant slug if provided
+    if (!resolvedTenantId && tenantSlug) {
+      const inputSlug = tenantSlug.toLowerCase().trim();
+      const slugOptions = [inputSlug];
+      if (inputSlug === 'apex-tech') slugOptions.push('apex-institute');
+      if (inputSlug === 'apex-institute') slugOptions.push('apex-tech');
+
+      const [foundTenant] = await db
+        .select()
+        .from(tenants)
+        .where(inArray(tenants.slug, slugOptions))
+        .limit(1);
+
+      if (foundTenant) {
+        resolvedTenantId = foundTenant.id;
+      }
     }
-  });
+
+    // Build query conditions
+    const conditions = [
+      eq(users.email, normalizedEmail),
+      eq(users.isActive, true)
+    ];
+
+    if (resolvedTenantId && isValidUuid(resolvedTenantId)) {
+      conditions.push(eq(users.tenantId, resolvedTenantId));
+    }
+
+    const [user] = await db
+      .select()
+      .from(users)
+      .where(and(...conditions))
+      .limit(1);
+
+    if (!user) {
+      return res.status(401).json(
+        {
+          success: false,
+          error: 'Invalid credentials or inactive account',
+          code: 'INVALID_CREDENTIALS'
+        });
+    }
+
+    // Verify password with bcrypt
+    const isPasswordValid = await verifyPassword(password, user.passwordHash);
+    if (!isPasswordValid) {
+      return res.status(401).json(
+        {
+          success: false,
+          error: 'Invalid credentials or inactive account',
+          code: 'INVALID_CREDENTIALS'
+        });
+    }
+
+    // Issue signed JWT with clean claims: sub, tenant_id, role, email
+    const token = await createJwtToken(
+      {
+        sub: user.id,
+        tenant_id: user.tenantId,
+        role: user.role,
+        email: user.email
+      },
+      secret
+    );
+
+    return res.json({
+      success: true,
+      message: 'Authentication successful',
+      token,
+      user: {
+        id: user.id,
+        email: user.email,
+        fullName: user.fullName,
+        role: user.role,
+        tenantId: user.tenantId
+      }
+    });
+  } catch (err: any) {
+    const isConnError = err?.message?.includes('fetch failed') ||
+      err?.message?.includes('ENOTFOUND') ||
+      err?.message?.includes('ECONNREFUSED') ||
+      err?.code === 'ECONNREFUSED' ||
+      err?.code === 'ENOTFOUND';
+
+    console.error('Login database error:', {
+      message: err?.message,
+      code: err?.code,
+      isConnError
+    });
+
+    if (isConnError) {
+      return res.status(503).json({
+        success: false,
+        error: 'Database connection unavailable. Please check database connectivity.',
+        code: 'DATABASE_UNAVAILABLE',
+        details: err?.message
+      });
+    }
+
+    return res.status(503).json({
+      success: false,
+      error: 'Database error during authentication',
+      code: 'DATABASE_ERROR',
+      details: err?.message
+    });
+  }
 });
 
 /**
@@ -416,7 +527,7 @@ authRoutes.get('/me', requireAuth, async (req: Request, res: Response) => {
         .limit(1);
 
       if (!dbUser) {
-        return res.json({ success: false, error: 'User record not found' });
+        return res.status(404).json({ success: false, error: 'User record not found', code: 'USER_NOT_FOUND' });
       }
 
       // If student, fetch student profile

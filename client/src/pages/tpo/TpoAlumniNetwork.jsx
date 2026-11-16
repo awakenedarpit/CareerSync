@@ -175,8 +175,8 @@ export default function TpoAlumniNetwork() {
           title="Verified Alumni Mentors"
           value={(analytics?.verifiedMentors || alumniDirectory.length || 86).toString()}
           icon={GraduationCap}
-          iconColor="text-indigo-600"
-          bgColor="bg-indigo-50"
+          iconColor="text-[#009669]"
+          bgColor="bg-[#BDF9F9]/30"
           subtitle="Active institutional network"
         />
         <StatCard
@@ -210,7 +210,7 @@ export default function TpoAlumniNetwork() {
             onClick={() => setActiveTab(tab.id)}
             className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors ${
               activeTab === tab.id
-                ? 'bg-purple-600 text-white shadow-xs'
+                ? 'bg-[#02E8A7] text-[#002020] font-bold shadow-xs'
                 : 'text-slate-600 hover:bg-slate-100'
             }`}
           >
@@ -264,7 +264,7 @@ export default function TpoAlumniNetwork() {
                           href={item.linkedinUrl}
                           target="_blank"
                           rel="noreferrer"
-                          className="text-indigo-600 hover:underline flex items-center gap-1 font-semibold"
+                          className="text-[#009669] hover:underline flex items-center gap-1 font-semibold"
                         >
                           <span>LinkedIn Profile</span>
                           <ExternalLink className="h-3 w-3" />
@@ -335,7 +335,7 @@ export default function TpoAlumniNetwork() {
                         <h3 className="font-bold text-slate-900">{mentor.fullName}</h3>
                         <Badge variant="emerald" size="xs">Verified</Badge>
                       </div>
-                      <p className="text-xs text-purple-700 font-medium">{mentor.role} @ {mentor.company}</p>
+                      <p className="text-xs text-[#004D36] font-medium">{mentor.role} @ {mentor.company}</p>
                       <p className="text-xs text-slate-500">Class of {mentor.graduationYear} • {mentor.branch}</p>
                     </div>
                     <span className="flex items-center gap-1 text-xs font-bold text-slate-800">
@@ -385,7 +385,7 @@ export default function TpoAlumniNetwork() {
                       <span className="font-bold text-slate-900">{item.percent}% ({item.count})</span>
                     </div>
                     <div className="h-2 w-full rounded-full bg-slate-100 overflow-hidden">
-                      <div className="h-full bg-purple-600 rounded-full" style={{ width: `${item.percent}%` }} />
+                      <div className="h-full bg-[#02E8A7] rounded-full" style={{ width: `${item.percent}%` }} />
                     </div>
                   </div>
                 ))}
@@ -402,7 +402,7 @@ export default function TpoAlumniNetwork() {
                   <strong className="text-emerald-950 block mb-0.5">Mock Drive Success Lift:</strong>
                   Students completing at least 2 alumni mock sessions achieved a <strong>34% higher pass rate</strong> in final technical rounds.
                 </div>
-                <div className="p-3 rounded-lg bg-purple-50 border border-purple-100">
+                <div className="p-3 rounded-lg bg-[#BDF9F9]/30 border border-[#02E8A7]/30">
                   <strong className="text-purple-950 block mb-0.5">Average Mentorship Rating:</strong>
                   <strong>4.92 / 5.0</strong> institutional satisfaction across 312 completed sessions.
                 </div>
@@ -476,7 +476,7 @@ export default function TpoAlumniNetwork() {
                     <Button
                       variant="primary"
                       size="sm"
-                      className="bg-purple-600 hover:bg-purple-700 text-white shrink-0"
+                      className="bg-[#02E8A7] hover:bg-purple-700 text-white shrink-0"
                       onClick={() => setSelectedReportForResolve(report)}
                     >
                       Adjudicate Report

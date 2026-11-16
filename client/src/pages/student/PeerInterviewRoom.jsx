@@ -290,7 +290,7 @@ export default function PeerInterviewRoom() {
           {room?.mode === 'STRUCTURED_INTERVIEW' && (
             <button
               onClick={handleRoleSwitch}
-              className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-lg bg-indigo-600/80 hover:bg-indigo-600 text-white transition-colors"
+              className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-lg bg-[#02E8A7]/80 hover:bg-[#02E8A7] text-[#002020] font-bold transition-colors"
               title="Switch roles between Interviewer and Candidate"
             >
               <RotateCcw className="h-3.5 w-3.5" />
@@ -454,7 +454,7 @@ export default function PeerInterviewRoom() {
                 value={sharedNotes}
                 onChange={(e) => handleNotesChange(e.target.value)}
                 placeholder="// Type collaborative solutions, function signatures, complexity analysis..."
-                className="w-full flex-1 bg-slate-950 font-mono text-xs text-emerald-300 p-4 rounded-xl border border-slate-800 focus:outline-none focus:border-indigo-500 resize-none leading-relaxed"
+                className="w-full flex-1 bg-slate-950 font-mono text-xs text-emerald-300 p-4 rounded-xl border border-slate-800 focus:outline-none focus:border-[#02E8A7] resize-none leading-relaxed"
                 spellCheck="false"
               />
             </div>
@@ -472,7 +472,7 @@ export default function PeerInterviewRoom() {
                       key={msg.id}
                       className={`flex flex-col text-xs p-2.5 rounded-lg max-w-[85%] ${
                         msg.senderName === 'You'
-                          ? 'ml-auto bg-indigo-600/30 border border-indigo-500/40 text-slate-200'
+                          ? 'ml-auto bg-[#02E8A7]/30 border border-indigo-500/40 text-slate-200'
                           : 'mr-auto bg-slate-800 border border-slate-700 text-slate-200'
                       }`}
                     >
@@ -492,7 +492,7 @@ export default function PeerInterviewRoom() {
                   placeholder="Type a message to peer..."
                   value={newChatMessage}
                   onChange={(e) => setNewChatMessage(e.target.value)}
-                  className="flex-1 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-indigo-500"
+                  className="flex-1 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-[#02E8A7]"
                 />
                 <Button type="submit" variant="primary" size="sm">
                   <Send className="h-3.5 w-3.5" />
@@ -512,7 +512,7 @@ export default function PeerInterviewRoom() {
           <div className="rounded-xl border border-slate-800 bg-slate-900 p-3 space-y-2 relative overflow-hidden">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="h-6 w-6 rounded-full bg-indigo-600 flex items-center justify-center text-xs font-bold text-white">
+                <div className="h-6 w-6 rounded-full bg-[#02E8A7] flex items-center justify-center text-xs font-bold text-white">
                   PS
                 </div>
                 <div>
@@ -649,7 +649,7 @@ export default function PeerInterviewRoom() {
             </div>
           ) : (
             <form onSubmit={handleSubmitRubric} className="space-y-4 text-slate-700">
-              <div className="rounded-lg bg-indigo-50 p-3 border border-indigo-100 text-xs text-indigo-900">
+              <div className="rounded-lg bg-[#BDF9F9]/30 p-3 border border-[#02E8A7]/30 text-xs text-[#002020]">
                 <strong>Peer-Provided Assessment:</strong> Evaluate your peer objectively across the 5 core interview dimensions.
               </div>
 
@@ -675,7 +675,7 @@ export default function PeerInterviewRoom() {
                           onClick={() => setRubricScores((prev) => ({ ...prev, [item.key]: val }))}
                           className={`h-7 w-7 rounded text-xs font-bold transition-colors ${
                             rubricScores[item.key] === val
-                              ? 'bg-indigo-600 text-white shadow-xs'
+                              ? 'bg-[#02E8A7] text-[#002020] font-bold shadow-xs'
                               : 'bg-white border border-slate-300 text-slate-600 hover:bg-slate-100'
                           }`}
                         >
@@ -697,7 +697,7 @@ export default function PeerInterviewRoom() {
                   placeholder="What did the peer execute exceptionally well during the interview?"
                   value={qualitativeStrengths}
                   onChange={(e) => setQualitativeStrengths(e.target.value)}
-                  className="w-full rounded-lg border border-slate-300 p-2.5 text-xs focus:outline-none focus:border-indigo-500"
+                  className="w-full rounded-lg border border-slate-300 p-2.5 text-xs focus:outline-none focus:border-[#02E8A7]"
                 />
               </div>
 
@@ -711,7 +711,7 @@ export default function PeerInterviewRoom() {
                   placeholder="Specific actionable areas to practice before real company placement drives..."
                   value={qualitativeImprovements}
                   onChange={(e) => setQualitativeImprovements(e.target.value)}
-                  className="w-full rounded-lg border border-slate-300 p-2.5 text-xs focus:outline-none focus:border-indigo-500"
+                  className="w-full rounded-lg border border-slate-300 p-2.5 text-xs focus:outline-none focus:border-[#02E8A7]"
                 />
               </div>
 
@@ -768,7 +768,7 @@ export default function PeerInterviewRoom() {
                 <select
                   value={reportReason}
                   onChange={(e) => setReportReason(e.target.value)}
-                  className="w-full rounded-lg border border-slate-300 p-2 text-xs focus:outline-none focus:border-indigo-500"
+                  className="w-full rounded-lg border border-slate-300 p-2 text-xs focus:outline-none focus:border-[#02E8A7]"
                 >
                   {MODERATION_REASONS.map((r) => (
                     <option key={r.id} value={r.id}>{r.label}</option>
@@ -786,7 +786,7 @@ export default function PeerInterviewRoom() {
                   placeholder="Describe the specific behavior, inappropriate language, or academic dishonesty observed..."
                   value={reportDescription}
                   onChange={(e) => setReportDescription(e.target.value)}
-                  className="w-full rounded-lg border border-slate-300 p-2 text-xs focus:outline-none focus:border-indigo-500"
+                  className="w-full rounded-lg border border-slate-300 p-2 text-xs focus:outline-none focus:border-[#02E8A7]"
                 />
               </div>
 

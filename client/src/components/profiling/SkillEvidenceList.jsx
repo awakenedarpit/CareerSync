@@ -68,8 +68,8 @@ export default function SkillEvidenceList({
       case 'NEEDS_MORE_EVIDENCE':
         return {
           label: 'NEEDS MORE INFO',
-          color: 'bg-purple-50 text-purple-700 border-purple-200',
-          dot: 'bg-purple-500',
+          color: 'bg-[#BDF9F9]/30 text-purple-700 border-purple-200',
+          dot: 'bg-[#BDF9F9]/300',
           icon: HelpCircle,
           description: 'Reviewer requested additional documentation or credentials'
         };
@@ -158,7 +158,7 @@ export default function SkillEvidenceList({
   const filterTabs = [
     { key: 'ALL', label: 'All Skills', count: counts.ALL },
     { key: 'VERIFIED', label: 'Verified', count: counts.VERIFIED, dot: 'bg-emerald-500' },
-    { key: 'NEEDS_MORE_EVIDENCE', label: 'Needs Info', count: counts.NEEDS_MORE_EVIDENCE, dot: 'bg-purple-500' },
+    { key: 'NEEDS_MORE_EVIDENCE', label: 'Needs Info', count: counts.NEEDS_MORE_EVIDENCE, dot: 'bg-[#BDF9F9]/300' },
     { key: 'REJECTED', label: 'Rejected', count: counts.REJECTED, dot: 'bg-rose-500' },
     { key: 'EVIDENCE_FOUND', label: 'Evidence Found', count: counts.EVIDENCE_FOUND, dot: 'bg-blue-500' },
     { key: 'PENDING_REVIEW', label: 'Pending Review', count: counts.PENDING_REVIEW, dot: 'bg-amber-500' },
@@ -177,7 +177,7 @@ export default function SkillEvidenceList({
               onClick={() => setSelectedFilter(tab.key)}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 selectedFilter === tab.key
-                  ? 'bg-indigo-600 text-white shadow-2xs'
+                  ? 'bg-[#02E8A7] text-[#002020] font-bold shadow-2xs'
                   : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'
               }`}
             >
@@ -210,14 +210,14 @@ export default function SkillEvidenceList({
               placeholder="Search skills or documents..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-lg border border-slate-200 bg-white py-1.5 pl-8.5 pr-3 text-xs text-slate-900 focus:border-indigo-500 focus:outline-hidden"
+              className="w-full rounded-lg border border-slate-200 bg-white py-1.5 pl-8.5 pr-3 text-xs text-slate-900 focus:border-[#02E8A7] focus:outline-hidden"
             />
           </div>
           {onRefresh && (
             <button
               type="button"
               onClick={onRefresh}
-              className="p-1.5 text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 border border-slate-200 rounded-lg transition-colors shrink-0"
+              className="p-1.5 text-slate-500 hover:text-[#009669] hover:bg-[#BDF9F9]/30 border border-slate-200 rounded-lg transition-colors shrink-0"
               title="Refresh evidence list"
             >
               <RotateCw className="w-4 h-4" />
@@ -279,7 +279,7 @@ export default function SkillEvidenceList({
                       <span>Confidence:</span>
                       <div className="grow bg-slate-100 rounded-full h-1.5 overflow-hidden">
                         <div
-                          className="bg-indigo-600 h-full rounded-full"
+                          className="bg-[#02E8A7] h-full rounded-full"
                           style={{ width: `${Math.min(100, Math.round(Number(confidence) <= 1 ? Number(confidence) * 100 : Number(confidence)))}%` }}
                         />
                       </div>
@@ -292,7 +292,7 @@ export default function SkillEvidenceList({
                   {/* Linked Document Reference */}
                   {docName && (
                     <div className="flex items-center gap-1.5 text-[11px] text-slate-600 bg-slate-50 p-2 rounded-lg border border-slate-100 mb-2">
-                      <FileText className="w-3.5 h-3.5 text-indigo-500 shrink-0" />
+                      <FileText className="w-3.5 h-3.5 text-[#009669] shrink-0" />
                       <span className="truncate" title={docName}>
                         {docName}
                       </span>
@@ -308,7 +308,7 @@ export default function SkillEvidenceList({
                       <p
                         className={`p-2 rounded text-[11px] leading-relaxed border ${
                           normalizeStatus(item.verificationStatus || item.status) === 'NEEDS_MORE_EVIDENCE'
-                            ? 'bg-purple-50 text-purple-900 border-purple-200'
+                            ? 'bg-[#BDF9F9]/30 text-purple-900 border-purple-200'
                             : normalizeStatus(item.verificationStatus || item.status) === 'REJECTED'
                             ? 'bg-rose-50 text-rose-900 border-rose-200'
                             : 'bg-emerald-50/50 text-slate-700 border-emerald-100/60'
@@ -333,7 +333,7 @@ export default function SkillEvidenceList({
                       <button
                         type="button"
                         onClick={() => onResubmit(item)}
-                        className="inline-flex items-center gap-1 text-[11px] font-semibold text-purple-700 bg-purple-50 hover:bg-purple-100 border border-purple-200 px-2 py-1 rounded cursor-pointer transition-colors"
+                        className="inline-flex items-center gap-1 text-[11px] font-semibold text-purple-700 bg-[#BDF9F9]/30 hover:bg-purple-100 border border-purple-200 px-2 py-1 rounded cursor-pointer transition-colors"
                       >
                         <Upload className="w-3 h-3" />
                         <span>Resubmit Evidence</span>

@@ -107,7 +107,7 @@ export default function AdminSkillGapAnalysis() {
           </Card>
 
           <Card className="p-5 border-slate-200">
-            <div className="flex items-center gap-2 mb-2 text-indigo-600">
+            <div className="flex items-center gap-2 mb-2 text-[#009669]">
               <BookOpen className="h-4.5 w-4.5" />
               <h4 className="text-sm font-bold text-slate-900">Vitest Automated Testing Workshop</h4>
             </div>

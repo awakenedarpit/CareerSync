@@ -26,7 +26,13 @@ import { alumniRoutes, mentorshipRoutes, tpoAlumniRoutes } from './routes/alumni
 import { peerInterviewRoutes } from './routes/peer-interview.routes';
 import { collaborationRoutes } from './routes/collaboration.routes';
 import { moderationRoutes, tpoModerationRoutes } from './routes/moderation.routes';
-import { getHealthData, getApiHealthData } from './routes/health.routes';
+import { institutionalRoutes, collegeAdminInstitutionalRoutes } from './routes/institutional.routes';
+import { interventionsRoutes } from './routes/interventions.routes';
+import { fairnessRoutes } from './routes/fairness.routes';
+import { accreditationRoutes } from './routes/accreditation.routes';
+import { outreachRoutes } from './routes/outreach.routes';
+import { studentProfileRoutes } from './routes/student-profile.routes';
+import { healthRoutes, getHealthData, getApiHealthData } from './routes/health.routes';
 
 const app: Express = express();
 
@@ -44,11 +50,17 @@ app.use((req, res, next) => {
 });
 
 // CORS configuration — Vite dev, Vercel production, and client URL
+const configuredOrigins = (process.env.ALLOWED_ORIGINS || env.ALLOWED_ORIGINS || '')
+  .split(',')
+  .map((o) => o.trim())
+  .filter(Boolean);
+
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:3000',
   'https://carrersync.vercel.app',
-  env.CLIENT_URL
+  env.CLIENT_URL,
+  ...configuredOrigins
 ].filter(Boolean);
 
 app.use(
@@ -58,7 +70,8 @@ app.use(
       if (
         allowedOrigins.includes(origin) ||
         origin.endsWith('.vercel.app') ||
-        origin.startsWith('http://localhost:')
+        origin.startsWith('http://localhost:') ||
+        origin.startsWith('http://127.0.0.1:')
       ) {
         return callback(null, true);
       }
@@ -87,6 +100,10 @@ app.use((req, res, next) => {
 // ---------------------------------------------------------------------------
 // Health & Info Routes
 // ---------------------------------------------------------------------------
+
+app.use(healthRoutes);
+app.use('/api', healthRoutes);
+app.use('/api/v1', healthRoutes);
 
 app.get('/health', (req, res) => {
   return res.json(getHealthData());
@@ -133,6 +150,9 @@ app.use('/api/v1/recruiter', recruiterRoutes);
 app.use('/api/v1/tpo/approvals', tpoApprovalRoutes);
 app.use('/api/v1/student/offers', studentOfferRoutes);
 
+// Phase 18 — Student Profile Management, Professional/Social Links & Academic Verification Safeguards
+app.use('/api/v1/student/profile', studentProfileRoutes);
+
 // Phase 12 — Student Mock Drive, Assessment Engine & Personalized Learning Intelligence Routes
 app.use('/api/v1/student/learning-path', studentLearningRoutes);
 app.use('/api/v1/student', studentAssessmentRoutes);
@@ -141,6 +161,14 @@ app.use('/api/v1/tpo/mock-drives', tpoMockDriveRoutes);
 // Phase 16 — Alumni & Moderation TPO Institutional Routes (mounted before broad /api/v1/tpo)
 app.use('/api/v1/tpo/alumni', tpoAlumniRoutes);
 app.use('/api/v1/tpo/moderation', tpoModerationRoutes);
+
+// Phase 17 — Institutional Intelligence, Accreditation, Fairness Governance & Recruiter Outreach
+app.use('/api/v1/tpo/institutional', institutionalRoutes);
+app.use('/api/v1/college-admin/institutional', collegeAdminInstitutionalRoutes);
+app.use('/api/v1/tpo/interventions', interventionsRoutes);
+app.use('/api/v1/tpo/fairness', fairnessRoutes);
+app.use('/api/v1/tpo/accreditation', accreditationRoutes);
+app.use('/api/v1/tpo/outreach', outreachRoutes);
 
 // Phase 13 — Industry Skill Intelligence, Career Recommendation & Skill-Gap Analysis Engine Routes
 app.use('/api/v1/tpo', tpoIndustryRoutes);

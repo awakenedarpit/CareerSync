@@ -223,7 +223,7 @@ export default function TpoApprovalsQueue() {
             onClick={() => setActiveTab(tab.key)}
             className={`px-3 py-1.5 rounded-lg font-semibold transition-colors ${
               activeTab === tab.key
-                ? 'bg-indigo-600 text-white'
+                ? 'bg-[#02E8A7] text-[#002020] font-bold'
                 : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
@@ -236,7 +236,7 @@ export default function TpoApprovalsQueue() {
       <Card className="border-slate-200">
         <div className="p-4 border-b border-slate-100 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <ShieldCheck className="h-5 w-5 text-indigo-600" />
+            <ShieldCheck className="h-5 w-5 text-[#009669]" />
             <h3 className="font-bold text-slate-900 text-sm">Action Items Requiring TPO Endorsement</h3>
           </div>
           <span className="text-xs text-slate-500">{filteredItems.length} pending items</span>
@@ -254,7 +254,7 @@ export default function TpoApprovalsQueue() {
               <div key={item.id} className="p-4 hover:bg-slate-50/70 transition-colors flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                 <div className="space-y-1.5 max-w-2xl">
                   <div className="flex items-center gap-2">
-                    <Badge variant="indigo" size="sm">{item.category}</Badge>
+                    <Badge variant="aqua" size="sm">{item.category}</Badge>
                     <h4 className="font-bold text-slate-900 text-sm">{item.title}</h4>
                   </div>
                   <p className="font-medium text-slate-700">{item.subtitle}</p>
@@ -311,7 +311,7 @@ export default function TpoApprovalsQueue() {
               Institutional Justification Reason (Required for Audit Trail)
             </label>
             <textarea
-              className="w-full h-24 p-2.5 border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              className="w-full h-24 p-2.5 border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-[#02E8A7] focus:outline-none"
               value={reviewReason}
               onChange={(e) => setReviewReason(e.target.value)}
               required

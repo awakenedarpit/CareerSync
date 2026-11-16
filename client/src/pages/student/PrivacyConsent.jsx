@@ -17,17 +17,21 @@ import Card from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
 import Badge from '../../components/ui/Badge';
 import DataTable from '../../components/ui/DataTable';
+import authService from '../../services/authService';
 
 export default function PrivacyConsent() {
+  const currentUser = authService.getCurrentUser();
+  const isDemoStudent = ['aditya.sharma@apex.edu', 'student@apex.edu', 'priya.sharma21@college.edu'].includes(currentUser?.email);
+
   const [recruiterSharing, setRecruiterSharing] = useState(true);
   const [repoExtraction, setRepoExtraction] = useState(true);
   const [anonymizedReporting, setAnonymizedReporting] = useState(true);
   const [actionNotice, setActionNotice] = useState('');
 
-  const connectedServices = [
+  const connectedServices = isDemoStudent ? [
     {
       name: 'GitHub',
-      handle: '@priyasharma-dev',
+      handle: '@adityasharma-dev',
       icon: FolderGit2,
       status: 'Connected',
       lastSynced: '2 hours ago',
@@ -35,7 +39,7 @@ export default function PrivacyConsent() {
     },
     {
       name: 'LeetCode',
-      handle: 'priya_codes',
+      handle: 'aditya_codes',
       icon: Code2,
       status: 'Connected',
       lastSynced: 'Yesterday',
@@ -49,13 +53,40 @@ export default function PrivacyConsent() {
       lastSynced: 'Never',
       permissions: 'Work history and verified endorsements'
     }
+  ] : [
+    {
+      name: 'GitHub',
+      handle: 'Not Connected',
+      icon: FolderGit2,
+      status: 'Disconnected',
+      lastSynced: 'Never',
+      permissions: 'Read-only public repositories and commit metadata'
+    },
+    {
+      name: 'LeetCode',
+      handle: 'Not Connected',
+      icon: Code2,
+      status: 'Disconnected',
+      lastSynced: 'Never',
+      permissions: 'Solved problem count and contest rating'
+    },
+    {
+      name: 'LinkedIn',
+      handle: 'Not Connected',
+      icon: Globe,
+      status: 'Disconnected',
+      lastSynced: 'Never',
+      permissions: 'Work history and verified endorsements'
+    }
   ];
 
-  const consentLogs = [
+  const consentLogs = isDemoStudent ? [
     { id: 'LOG-01', timestamp: '2024-11-12 14:32', event: 'Recruiter Sharing Consent Granted', scope: 'TCS Digital Drive', status: 'Active' },
     { id: 'LOG-02', timestamp: '2024-11-04 09:15', event: 'GitHub OAuth Access Token Refreshed', scope: 'Public Repositories', status: 'Active' },
     { id: 'LOG-03', timestamp: '2024-10-18 16:40', event: 'Academic Transcript Evidence Verified', scope: 'Institutional Records', status: 'Immutable' },
     { id: 'LOG-04', timestamp: '2024-10-01 10:00', event: 'Initial Terms & Privacy Policy Accepted', scope: 'Tenant Default', status: 'Active' }
+  ] : [
+    { id: 'LOG-01', timestamp: new Date().toLocaleDateString(), event: 'Initial Terms & Privacy Policy Accepted', scope: 'Tenant Default', status: 'Active' }
   ];
 
   const columns = [
@@ -106,8 +137,8 @@ export default function PrivacyConsent() {
       />
 
       {actionNotice && (
-        <div className="p-3 bg-indigo-50 border border-indigo-200 text-indigo-900 rounded-xl text-xs flex items-center gap-2">
-          <CheckCircle2 className="h-4 w-4 text-indigo-600 shrink-0" />
+        <div className="p-3 bg-[#BDF9F9]/30 border border-[#02E8A7]/40 text-[#002020] rounded-xl text-xs flex items-center gap-2">
+          <CheckCircle2 className="h-4 w-4 text-[#009669] shrink-0" />
           <span>{actionNotice}</span>
         </div>
       )}
@@ -115,7 +146,7 @@ export default function PrivacyConsent() {
       {/* Ethical AI Guarantees */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card className="p-4 border-slate-200 bg-slate-50/60">
-          <div className="flex items-center gap-2 text-indigo-600 mb-2">
+          <div className="flex items-center gap-2 text-[#009669] mb-2">
             <EyeOff className="h-4.5 w-4.5" />
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900">Zero Surveillance</h4>
           </div>
@@ -135,7 +166,7 @@ export default function PrivacyConsent() {
         </Card>
 
         <Card className="p-4 border-slate-200 bg-slate-50/60">
-          <div className="flex items-center gap-2 text-purple-600 mb-2">
+          <div className="flex items-center gap-2 text-[#009669] mb-2">
             <ShieldCheck className="h-4.5 w-4.5" />
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900">Human Sign-Off</h4>
           </div>
@@ -163,7 +194,7 @@ export default function PrivacyConsent() {
                 onChange={(e) => setRecruiterSharing(e.target.checked)}
                 className="sr-only peer"
               />
-              <div className="w-9 h-5 bg-slate-200 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600"></div>
+              <div className="w-9 h-5 bg-slate-200 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#02E8A7]"></div>
             </label>
           </div>
 
@@ -181,7 +212,7 @@ export default function PrivacyConsent() {
                 onChange={(e) => setRepoExtraction(e.target.checked)}
                 className="sr-only peer"
               />
-              <div className="w-9 h-5 bg-slate-200 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600"></div>
+              <div className="w-9 h-5 bg-slate-200 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#02E8A7]"></div>
             </label>
           </div>
 
@@ -199,7 +230,7 @@ export default function PrivacyConsent() {
                 onChange={(e) => setAnonymizedReporting(e.target.checked)}
                 className="sr-only peer"
               />
-              <div className="w-9 h-5 bg-slate-200 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600"></div>
+              <div className="w-9 h-5 bg-slate-200 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#02E8A7]"></div>
             </label>
           </div>
         </div>
@@ -228,7 +259,7 @@ export default function PrivacyConsent() {
                 </div>
                 <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
                   <span className="text-slate-400">Synced: {svc.lastSynced}</span>
-                  <button className="text-indigo-600 font-semibold hover:underline">
+                  <button className="text-[#009669] font-semibold hover:underline">
                     {svc.status === 'Connected' ? 'Re-sync' : 'Connect'}
                   </button>
                 </div>

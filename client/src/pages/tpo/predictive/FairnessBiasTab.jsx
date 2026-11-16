@@ -106,7 +106,7 @@ export default function FairnessBiasTab({
           {/* Missing Data Audit */}
           <div className="p-4 rounded-xl border border-slate-200 bg-white space-y-2">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
-              <HelpCircle className="w-3.5 h-3.5 text-indigo-600" />
+              <HelpCircle className="w-3.5 h-3.5 text-[#009669]" />
               Missing Data Disparity Safeguard
             </h4>
             <p className="text-xs text-slate-600 leading-relaxed">

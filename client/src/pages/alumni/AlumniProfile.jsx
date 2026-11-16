@@ -191,7 +191,7 @@ export default function AlumniProfile() {
         {/* Section 1: Professional Background */}
         <Card className="p-6 border-slate-200 shadow-xs space-y-4">
           <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
-            <Building2 className="h-5 w-5 text-indigo-600" />
+            <Building2 className="h-5 w-5 text-[#009669]" />
             <h2 className="text-base font-bold text-slate-900">Current Professional Role</h2>
           </div>
 
@@ -205,7 +205,7 @@ export default function AlumniProfile() {
                 required
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-indigo-500 focus:outline-none"
+                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-[#02E8A7] focus:outline-none"
               />
             </div>
 
@@ -219,7 +219,7 @@ export default function AlumniProfile() {
                 value={headline}
                 onChange={(e) => setHeadline(e.target.value)}
                 placeholder="e.g. Senior Staff Software Engineer @ Google"
-                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-indigo-500 focus:outline-none"
+                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-[#02E8A7] focus:outline-none"
               />
             </div>
 
@@ -232,7 +232,7 @@ export default function AlumniProfile() {
                 required
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
-                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-indigo-500 focus:outline-none"
+                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-[#02E8A7] focus:outline-none"
               />
             </div>
 
@@ -245,7 +245,7 @@ export default function AlumniProfile() {
                 required
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
-                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-indigo-500 focus:outline-none"
+                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-[#02E8A7] focus:outline-none"
               />
             </div>
 
@@ -256,7 +256,7 @@ export default function AlumniProfile() {
               <select
                 value={domain}
                 onChange={(e) => setDomain(e.target.value)}
-                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-indigo-500 focus:outline-none bg-white"
+                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-[#02E8A7] focus:outline-none bg-white"
               >
                 {MENTOR_DOMAINS.map((d) => (
                   <option key={d} value={d}>{d}</option>
@@ -274,7 +274,7 @@ export default function AlumniProfile() {
                 max="40"
                 value={yearsExperience}
                 onChange={(e) => setYearsExperience(e.target.value)}
-                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-indigo-500 focus:outline-none"
+                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-[#02E8A7] focus:outline-none"
               />
             </div>
           </div>
@@ -288,7 +288,7 @@ export default function AlumniProfile() {
               value={bio}
               onChange={(e) => setBio(e.target.value)}
               placeholder="Tell students about your career journey, the challenges you navigated, and how you can best support them..."
-              className="w-full rounded-lg border border-slate-300 p-2.5 text-sm focus:border-indigo-500 focus:outline-none"
+              className="w-full rounded-lg border border-slate-300 p-2.5 text-sm focus:border-[#02E8A7] focus:outline-none"
             />
           </div>
         </Card>
@@ -296,7 +296,7 @@ export default function AlumniProfile() {
         {/* Section 2: College Alumni Credentials */}
         <Card className="p-6 border-slate-200 shadow-xs space-y-4">
           <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
-            <GraduationCap className="h-5 w-5 text-indigo-600" />
+            <GraduationCap className="h-5 w-5 text-[#009669]" />
             <h2 className="text-base font-bold text-slate-900">Alma Mater & Graduation Details</h2>
           </div>
 
@@ -309,7 +309,7 @@ export default function AlumniProfile() {
                 type="number"
                 value={graduationYear}
                 onChange={(e) => setGraduationYear(e.target.value)}
-                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-indigo-500 focus:outline-none"
+                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-[#02E8A7] focus:outline-none"
               />
             </div>
 
@@ -321,7 +321,7 @@ export default function AlumniProfile() {
                 type="text"
                 value={degree}
                 onChange={(e) => setDegree(e.target.value)}
-                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-indigo-500 focus:outline-none"
+                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-[#02E8A7] focus:outline-none"
               />
             </div>
 
@@ -333,7 +333,7 @@ export default function AlumniProfile() {
                 type="text"
                 value={branch}
                 onChange={(e) => setBranch(e.target.value)}
-                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-indigo-500 focus:outline-none"
+                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-[#02E8A7] focus:outline-none"
               />
             </div>
           </div>
@@ -342,7 +342,7 @@ export default function AlumniProfile() {
         {/* Section 3: Mentorship Topics & Capacity */}
         <Card className="p-6 border-slate-200 shadow-xs space-y-4">
           <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
-            <Sparkles className="h-5 w-5 text-indigo-600" />
+            <Sparkles className="h-5 w-5 text-[#009669]" />
             <h2 className="text-base font-bold text-slate-900">Mentorship Topics & Capacity</h2>
           </div>
 
@@ -360,7 +360,7 @@ export default function AlumniProfile() {
                     onClick={() => toggleTopic(topic)}
                     className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all ${
                       isSelected
-                        ? 'bg-indigo-600 text-white shadow-xs'
+                        ? 'bg-[#02E8A7] text-[#002020] font-bold shadow-xs'
                         : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                     }`}
                   >
@@ -379,7 +379,7 @@ export default function AlumniProfile() {
               <select
                 value={capacityWeekly}
                 onChange={(e) => setCapacityWeekly(e.target.value)}
-                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-indigo-500 focus:outline-none bg-white"
+                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-[#02E8A7] focus:outline-none bg-white"
               >
                 <option value="1">1 Session per week</option>
                 <option value="2">2 Sessions per week (Recommended)</option>
@@ -429,7 +429,7 @@ export default function AlumniProfile() {
         <Card className="p-6 border-slate-200 shadow-xs space-y-4">
           <div className="flex items-center justify-between border-b border-slate-200 pb-3">
             <div className="flex items-center gap-2">
-              <Clock className="h-5 w-5 text-indigo-600" />
+              <Clock className="h-5 w-5 text-[#009669]" />
               <h2 className="text-base font-bold text-slate-900">Weekly Availability Slots</h2>
             </div>
             <Button

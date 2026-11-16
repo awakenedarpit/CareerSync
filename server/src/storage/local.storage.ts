@@ -34,7 +34,12 @@ export class LocalStorageEngine implements IStorageService {
 
   constructor(customDirectory?: string) {
     const defaultDir = path.resolve(process.cwd(), 'uploads');
-    this.baseDirectory = path.resolve(customDirectory || process.env.STORAGE_LOCAL_DIRECTORY || defaultDir);
+    this.baseDirectory = path.resolve(
+      customDirectory ||
+      process.env.UPLOAD_DIR ||
+      process.env.STORAGE_LOCAL_DIRECTORY ||
+      defaultDir
+    );
 
     // Ensure the base directory exists with restricted permissions (0o700: rwx------)
     if (!fs.existsSync(this.baseDirectory)) {

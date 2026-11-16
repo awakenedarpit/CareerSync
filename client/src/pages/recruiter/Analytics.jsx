@@ -94,7 +94,7 @@ export default function RecruiterAnalytics() {
   const funnelSteps = [
     { label: 'Discovered', count: overview.totalCandidatesDiscovered, color: 'bg-slate-400', pct: '100%' },
     { label: 'Shortlisted', count: overview.totalShortlisted, color: 'bg-blue-500', pct: `${conversionRates.discoveryToShortlistPct}%` },
-    { label: 'Assessed', count: overview.totalAssessed, color: 'bg-indigo-500', pct: `${conversionRates.shortlistToAssessmentPct}%` },
+    { label: 'Assessed', count: overview.totalAssessed, color: 'bg-[#BDF9F9]/300', pct: `${conversionRates.shortlistToAssessmentPct}%` },
     { label: 'Interviewed', count: overview.totalInterviewed, color: 'bg-violet-500', pct: `${conversionRates.assessmentToInterviewPct}%` },
     { label: 'Offered', count: overview.totalOffersReleased, color: 'bg-amber-500', pct: `${conversionRates.interviewToOfferPct}%` },
     { label: 'Accepted', count: overview.totalOffersAccepted, color: 'bg-emerald-500', pct: `${conversionRates.offerAcceptancePct}%` }
@@ -151,7 +151,7 @@ export default function RecruiterAnalytics() {
       <Card className="p-6 border-slate-200">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
-            <Layers className="h-5 w-5 text-indigo-600" />
+            <Layers className="h-5 w-5 text-[#009669]" />
             <h3 className="font-bold text-slate-900 text-sm">Recruitment Progression Funnel</h3>
           </div>
           <span className="text-xs text-slate-500">End-to-End Pipeline Health</span>
@@ -190,7 +190,7 @@ export default function RecruiterAnalytics() {
         <Card className="p-6 border-slate-200">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
-              <Award className="h-5 w-5 text-indigo-600" />
+              <Award className="h-5 w-5 text-[#009669]" />
               <h3 className="font-bold text-slate-900 text-sm">Target Skill Demand & Verification Rates</h3>
             </div>
             <span className="text-xs text-slate-400">Verified Evidence</span>
@@ -202,7 +202,7 @@ export default function RecruiterAnalytics() {
                 <div className="flex items-center justify-between">
                   <span className="font-medium text-slate-800">{item.skill}</span>
                   <div className="flex items-center gap-2">
-                    <span className="text-indigo-600 font-semibold">{item.count} requisitions</span>
+                    <span className="text-[#009669] font-semibold">{item.count} requisitions</span>
                     <span className="text-slate-400">•</span>
                     <span className="text-emerald-700 font-bold">{item.verifiedCohortPct}% verified</span>
                   </div>
@@ -217,7 +217,7 @@ export default function RecruiterAnalytics() {
         <Card className="p-6 border-slate-200">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
-              <Calendar className="h-5 w-5 text-indigo-600" />
+              <Calendar className="h-5 w-5 text-[#009669]" />
               <h3 className="font-bold text-slate-900 text-sm">Placement Drive Conversion Performance</h3>
             </div>
             <span className="text-xs text-slate-400">Active Campus Drives</span>
@@ -228,7 +228,7 @@ export default function RecruiterAnalytics() {
               <div key={drive.id} className="p-4 bg-slate-50/70 rounded-xl border border-slate-200/60 space-y-2">
                 <div className="flex items-center justify-between">
                   <h4 className="font-bold text-slate-900 text-xs">{drive.title}</h4>
-                  <Badge variant="indigo" size="sm">{drive.acceptanceRate}% Acceptance</Badge>
+                  <Badge variant="aqua" size="sm">{drive.acceptanceRate}% Acceptance</Badge>
                 </div>
                 <div className="grid grid-cols-3 gap-2 text-center pt-1 text-xs">
                   <div className="bg-white p-2 rounded-lg border border-slate-100">
@@ -237,7 +237,7 @@ export default function RecruiterAnalytics() {
                   </div>
                   <div className="bg-white p-2 rounded-lg border border-slate-100">
                     <div className="text-slate-400 text-[10px]">Released Offers</div>
-                    <div className="font-bold text-indigo-600 text-sm">{drive.offersReleased}</div>
+                    <div className="font-bold text-[#009669] text-sm">{drive.offersReleased}</div>
                   </div>
                   <div className="bg-white p-2 rounded-lg border border-slate-100">
                     <div className="text-slate-400 text-[10px]">Accepted Offers</div>

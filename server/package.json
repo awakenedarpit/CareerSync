@@ -2,13 +2,18 @@
   "name": "carrersync-server",
   "version": "1.0.0",
   "description": "CarrerSync Backend Express API Server with Drizzle ORM and Neon PostgreSQL",
-  "main": "src/server.ts",
+  "main": "src/index.ts",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
-    "start": "tsx src/server.ts",
-    "dev": "tsx watch src/server.ts",
+    "start": "tsx src/index.ts",
+    "build": "tsc --noEmit",
+    "dev": "tsx watch src/index.ts",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "db:generate": "drizzle-kit generate --config=drizzle.config.ts"
+    "db:generate": "drizzle-kit generate --config=drizzle.config.ts",
+    "db:seed:demo": "tsx src/db/seed-demo.ts"
   },
   "keywords": [
     "carrersync",
@@ -34,6 +39,7 @@
     "express": "^5.3.0",
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.5.0",
+    "tsx": "^4.19.3",
     "ws": "^8.23.0",
     "zod": "^3.24.2"
   },
@@ -47,7 +53,6 @@
     "drizzle-kit": "^0.30.6",
     "nodemon": "^3.1.9",
     "supertest": "^7.0.0",
-    "tsx": "^4.19.3",
     "typescript": "^5.7.3",
     "vitest": "^3.0.5"
   }

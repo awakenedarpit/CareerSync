@@ -1215,16 +1215,22 @@ export class MockDriveService {
 
   public listStudentReports(studentId: string, tenantId: string): MockDrivePerformanceReport[] {
     const reports = Array.from(this.performanceReports.values()).filter(
-      (r) => r.studentId === studentId
+      (r) => r.studentId === studentId && (!tenantId || r.tenantId === tenantId)
     );
     if (reports.length === 0) {
-      // Auto-generate default report for mock drive
-      const defaultReport = this.generatePerformanceReport({
-        studentId,
-        tenantId,
-        driveId: 'mock-drive-standard-01'
-      });
-      return [defaultReport];
+      // Only auto-generate diagnostic report if the student has explicitly registered for a drive
+      const userRegistrations = Array.from(this.driveRegistrations.values()).filter(
+        (r) => r.studentId === studentId && (!tenantId || r.tenantId === tenantId)
+      );
+      if (userRegistrations.length > 0) {
+        const defaultReport = this.generatePerformanceReport({
+          studentId,
+          tenantId,
+          driveId: userRegistrations[0].driveId
+        });
+        return [defaultReport];
+      }
+      return [];
     }
     return reports;
   }

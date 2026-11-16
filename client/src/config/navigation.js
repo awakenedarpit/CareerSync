@@ -32,7 +32,9 @@ import {
   Sparkles,
   Activity,
   Cpu,
-  GraduationCap
+  GraduationCap,
+  Scale,
+  Send
 } from 'lucide-react';
 
 export const studentNavItems = [
@@ -57,6 +59,11 @@ export const studentNavItems = [
 
 export const adminNavItems = [
   { label: 'Overview', path: '/admin', icon: LayoutDashboard },
+  { label: 'Institutional Intelligence', path: '/tpo/institutional-intelligence', icon: Building2 },
+  { label: 'Cohort Skill Heatmaps', path: '/tpo/institutional-intelligence/cohort', icon: Award },
+  { label: 'Fairness & Governance', path: '/tpo/institutional-intelligence/fairness', icon: Scale },
+  { label: 'Accreditation (NAAC/NIRF)', path: '/tpo/accreditation', icon: FileSpreadsheet },
+  { label: 'Recruiter Outreach', path: '/tpo/recruiter-outreach', icon: Send },
   { label: 'Alumni & Moderation', path: '/tpo/alumni-network', icon: GraduationCap },
   { label: 'Agent Orchestration', path: '/tpo/orchestration', icon: Sparkles },
   { label: 'Approvals Queue', path: '/tpo/approvals', icon: ShieldAlert },
@@ -77,6 +84,19 @@ export const adminNavItems = [
   { label: 'Recruiters', path: '/admin/recruiters', icon: UserCheck },
   { label: 'Reports & Export', path: '/admin/reports', icon: FileSpreadsheet },
   { label: 'Audit Trail', path: '/admin/audit', icon: History },
+  { label: 'Settings', path: '/admin/settings', icon: Settings },
+];
+
+export const collegeAdminNavItems = [
+  { label: 'Institutional Overview', path: '/college-admin/institutional-intelligence', icon: LayoutDashboard },
+  { label: 'Cohort Skill Matrix', path: '/tpo/institutional-intelligence/cohort', icon: Award },
+  { label: 'Fairness & Equity Review', path: '/tpo/institutional-intelligence/fairness', icon: Scale },
+  { label: 'Accreditation Reports (NAAC/NIRF)', path: '/tpo/accreditation', icon: FileSpreadsheet },
+  { label: 'Recruiter Outreach', path: '/tpo/recruiter-outreach', icon: Send },
+  { label: 'Placement Drives', path: '/admin/drives', icon: Calendar },
+  { label: 'Cohort Readiness', path: '/tpo/readiness', icon: LineChart },
+  { label: 'Company Partners', path: '/admin/companies', icon: Building2 },
+  { label: 'Audit Trail & Compliance', path: '/admin/audit', icon: History },
   { label: 'Settings', path: '/admin/settings', icon: Settings },
 ];
 

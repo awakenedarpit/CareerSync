@@ -388,7 +388,7 @@ export default function JobEligibilityPortal() {
         )}
         {override?.overridden && (
           <span
-            className="text-[9px] font-black uppercase tracking-wider text-purple-700 bg-purple-50 px-1.5 py-0.2 rounded border border-purple-200"
+            className="text-[9px] font-black uppercase tracking-wider text-[#004D36] bg-[#BDF9F9]/30 px-1.5 py-0.2 rounded border border-[#02E8A7]/40"
             title={`TPO Override: ${override.reason}`}
           >
             Overridden
@@ -512,7 +512,7 @@ export default function JobEligibilityPortal() {
               ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
               : toastMessage.type === 'error'
               ? 'bg-rose-50 border-rose-200 text-rose-800'
-              : 'bg-indigo-50 border-indigo-200 text-indigo-800'
+              : 'bg-[#BDF9F9]/30 border-[#02E8A7]/40 text-[#002020]'
           }`}
         >
           <span>{toastMessage.message}</span>
@@ -533,7 +533,7 @@ export default function JobEligibilityPortal() {
               onClick={() => setSelectedJob(job)}
               className={`p-4 cursor-pointer transition-all ${
                 isSelected
-                  ? 'border-indigo-600 ring-2 ring-indigo-100 bg-indigo-50/20'
+                  ? 'border-indigo-600 ring-2 ring-indigo-100 bg-[#BDF9F9]/20'
                   : 'border-slate-200 bg-white hover:border-slate-300'
               }`}
             >
@@ -561,7 +561,7 @@ export default function JobEligibilityPortal() {
 
       {/* Selected Job Focus Card */}
       {selectedJob && (
-        <Card className="p-5 border-indigo-100 bg-linear-to-r from-slate-50 to-indigo-50/30 space-y-4">
+        <Card className="p-5 border-[#02E8A7]/30 bg-linear-to-r from-slate-50 to-indigo-50/30 space-y-4">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
             <div>
               <div className="flex items-center gap-2">
@@ -606,7 +606,7 @@ export default function JobEligibilityPortal() {
           <div className="pt-2 border-t border-slate-200/70 flex flex-wrap items-center gap-2 text-xs">
             <span className="font-bold text-slate-700 text-[11px] uppercase tracking-wider">Required Skills:</span>
             {selectedJob.requiredSkills.map((s, idx) => (
-              <span key={idx} className="bg-indigo-600 text-white font-medium px-2 py-0.5 rounded text-xs">
+              <span key={idx} className="bg-[#02E8A7] text-[#002020] font-bold font-medium px-2 py-0.5 rounded text-xs">
                 {s}
               </span>
             ))}
@@ -634,7 +634,7 @@ export default function JobEligibilityPortal() {
               placeholder="Search evaluated students by name, roll number, or department..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-hidden focus:ring-1 focus:ring-indigo-500"
+              className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-hidden focus:ring-1 focus:ring-[#02E8A7]"
             />
           </div>
 
@@ -643,7 +643,7 @@ export default function JobEligibilityPortal() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="text-xs bg-white border border-slate-200 rounded-lg px-2.5 py-2 text-slate-700 font-semibold focus:outline-hidden focus:border-indigo-500"
+              className="text-xs bg-white border border-slate-200 rounded-lg px-2.5 py-2 text-slate-700 font-semibold focus:outline-hidden focus:border-[#02E8A7]"
             >
               <option value="ALL">All Candidates</option>
               <option value="ELIGIBLE">Eligible</option>
@@ -770,7 +770,7 @@ export default function JobEligibilityPortal() {
                   </div>
                   <div>
                     <span className="text-slate-500">Evidence Found (Unverified): </span>
-                    <strong className="text-indigo-700">
+                    <strong className="text-[#004D36]">
                       {inspectedCandidate.rules.requiredSkills.matchedEvidence.join(', ') || 'None'}
                     </strong>
                   </div>
@@ -786,15 +786,15 @@ export default function JobEligibilityPortal() {
 
             {/* Override History if any */}
             {inspectedCandidate.override?.overridden && (
-              <div className="p-3 bg-purple-50 border border-purple-200 rounded-lg text-[11px]">
+              <div className="p-3 bg-[#BDF9F9]/30 border border-[#02E8A7]/40 rounded-lg text-[11px]">
                 <span className="font-bold text-purple-900 block flex items-center gap-1">
                   <History className="w-3.5 h-3.5" />
                   TPO Administrative Override Record
                 </span>
-                <p className="text-purple-800 mt-1">
+                <p className="text-[#002020] mt-1">
                   Overridden from <strong>{inspectedCandidate.override.originalStatus}</strong> to <strong>{inspectedCandidate.status}</strong>.
                 </p>
-                <p className="text-purple-700 italic mt-0.5">
+                <p className="text-[#004D36] italic mt-0.5">
                   Reason: "{inspectedCandidate.override.reason}"
                 </p>
               </div>
@@ -836,7 +836,7 @@ export default function JobEligibilityPortal() {
               <select
                 value={overrideTargetStatus}
                 onChange={(e) => setOverrideTargetStatus(e.target.value)}
-                className="w-full text-xs bg-white border border-slate-300 rounded-lg p-2.5 font-bold text-slate-800 focus:outline-hidden focus:border-indigo-500"
+                className="w-full text-xs bg-white border border-slate-300 rounded-lg p-2.5 font-bold text-slate-800 focus:outline-hidden focus:border-[#02E8A7]"
               >
                 <option value="ELIGIBLE">ELIGIBLE (Force Allow)</option>
                 <option value="INELIGIBLE">INELIGIBLE (Force Disqualify)</option>
@@ -854,7 +854,7 @@ export default function JobEligibilityPortal() {
                 value={overrideReason}
                 onChange={(e) => setOverrideReason(e.target.value)}
                 placeholder="e.g., Student has exceptional industrial project evidence compensating for 0.1 CGPA delta; approved by Head of Placement."
-                className="w-full text-xs p-2.5 bg-white border border-slate-300 rounded-lg focus:outline-hidden focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="w-full text-xs p-2.5 bg-white border border-slate-300 rounded-lg focus:outline-hidden focus:border-[#02E8A7] focus:ring-1 focus:ring-[#02E8A7]"
               />
             </div>
 
@@ -925,7 +925,7 @@ export default function JobEligibilityPortal() {
                 <select
                   value={newJobType}
                   onChange={(e) => setNewJobType(e.target.value)}
-                  className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 shadow-xs focus:border-indigo-500 focus:outline-hidden"
+                  className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 shadow-xs focus:border-[#02E8A7] focus:outline-hidden"
                 >
                   <option value="Full-time">Full-time</option>
                   <option value="Internship">Internship</option>

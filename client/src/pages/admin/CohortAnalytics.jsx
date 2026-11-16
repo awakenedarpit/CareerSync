@@ -84,7 +84,7 @@ export default function CohortAnalytics() {
                   <td className="py-3 px-4">
                     <div className="flex items-center gap-2">
                       <div className="w-24 bg-slate-100 rounded-full h-2">
-                        <div className="bg-indigo-600 h-2 rounded-full" style={{ width: `${b.verifiedRate}%` }} />
+                        <div className="bg-[#02E8A7] h-2 rounded-full" style={{ width: `${b.verifiedRate}%` }} />
                       </div>
                       <span className="font-semibold text-slate-800">{b.verifiedRate}%</span>
                     </div>
@@ -148,7 +148,7 @@ export default function CohortAnalytics() {
             {topSkills.map((skill, index) => (
               <div key={skill} className="p-3 rounded-xl border border-slate-100 bg-slate-50/60 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <span className="text-xs font-mono font-bold text-indigo-600">0{index + 1}</span>
+                  <span className="text-xs font-mono font-bold text-[#009669]">0{index + 1}</span>
                   <span className="text-xs font-bold text-slate-900">{skill}</span>
                 </div>
                 <div className="flex items-center gap-2">

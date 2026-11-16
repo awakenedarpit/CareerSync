@@ -28,9 +28,9 @@ export default function Button({
   };
 
   const variantStyles = {
-    primary: 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/25 focus:ring-indigo-500 active:scale-[0.98]',
+    primary: 'bg-[#02E8A7] hover:bg-[#BDF9F9]/300 text-white shadow-lg shadow-indigo-600/25 focus:ring-[#02E8A7] active:scale-[0.98]',
     secondary: 'bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700/80 focus:ring-slate-500 active:scale-[0.98]',
-    outline: 'bg-transparent hover:bg-slate-800/60 text-slate-200 border border-slate-700 focus:ring-indigo-500',
+    outline: 'bg-transparent hover:bg-slate-800/60 text-slate-200 border border-slate-700 focus:ring-[#02E8A7]',
     ghost: 'bg-transparent hover:bg-slate-800/50 text-slate-300 hover:text-white focus:ring-slate-600',
     emerald: 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/20 focus:ring-emerald-500 active:scale-[0.98]',
   };

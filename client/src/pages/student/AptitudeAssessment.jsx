@@ -173,10 +173,10 @@ export default function AptitudeAssessment() {
         />
 
         {/* Score Banner */}
-        <Card className="p-6 border-indigo-100 bg-gradient-to-br from-indigo-50/50 via-white to-purple-50/30">
+        <Card className="p-6 border-[#02E8A7]/30 bg-gradient-to-br from-indigo-50/50 via-white to-purple-50/30">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-4">
-              <div className="h-16 w-16 rounded-2xl bg-indigo-600 text-white flex items-center justify-center font-black text-2xl shadow-md">
+              <div className="h-16 w-16 rounded-2xl bg-[#02E8A7] text-[#002020] font-bold flex items-center justify-center font-black text-2xl shadow-md">
                 {result?.score || 85}%
               </div>
               <div>
@@ -292,7 +292,7 @@ export default function AptitudeAssessment() {
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-base font-bold text-slate-900">Cognitive & CS Aptitude Benchmark</h1>
-            <Badge variant="indigo" size="sm">Live Test</Badge>
+            <Badge variant="aqua" size="sm">Live Test</Badge>
           </div>
           <p className="text-xs text-slate-500">
             Total {totalCount} Questions • Auto-submits when countdown expires
@@ -306,7 +306,7 @@ export default function AptitudeAssessment() {
               ? 'bg-red-50 border-red-300 text-red-600 animate-pulse'
               : timeLeft < 600
               ? 'bg-amber-50 border-amber-300 text-amber-700'
-              : 'bg-indigo-50 border-indigo-200 text-indigo-700'
+              : 'bg-[#BDF9F9]/30 border-[#02E8A7]/40 text-[#004D36]'
           }`}>
             <Clock className="h-4 w-4" />
             <span>{formatTime(timeLeft)}</span>
@@ -335,7 +335,7 @@ export default function AptitudeAssessment() {
                     Question {currentIndex + 1} of {totalCount}
                   </span>
                   <Badge variant="neutral" size="sm">{currentQ.category}</Badge>
-                  <span className="text-xs font-semibold text-indigo-600">{currentQ.topic}</span>
+                  <span className="text-xs font-semibold text-[#009669]">{currentQ.topic}</span>
                 </div>
 
                 <button
@@ -366,13 +366,13 @@ export default function AptitudeAssessment() {
                       onClick={() => handleSelectOption(opt.id)}
                       className={`w-full text-left p-4 rounded-xl border transition-all duration-150 flex items-center justify-between ${
                         isSelected
-                          ? 'border-indigo-600 bg-indigo-50/70 shadow-xs ring-1 ring-indigo-600'
+                          ? 'border-indigo-600 bg-[#BDF9F9]/30 shadow-xs ring-1 ring-indigo-600'
                           : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/50'
                       }`}
                     >
                       <div className="flex items-center gap-3">
                         <span className={`h-6 w-6 rounded-full flex items-center justify-center text-xs font-bold ${
-                          isSelected ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-700'
+                          isSelected ? 'bg-[#02E8A7] text-[#002020] font-bold' : 'bg-slate-100 text-slate-700'
                         }`}>
                           {opt.id}
                         </span>
@@ -380,7 +380,7 @@ export default function AptitudeAssessment() {
                           {opt.text}
                         </span>
                       </div>
-                      {isSelected && <CheckCircle2 className="h-4 w-4 text-indigo-600" />}
+                      {isSelected && <CheckCircle2 className="h-4 w-4 text-[#009669]" />}
                     </button>
                   );
                 })}
@@ -458,7 +458,7 @@ export default function AptitudeAssessment() {
                   onClick={() => setActiveCategoryFilter(cat)}
                   className={`text-[10px] font-medium px-2 py-0.5 rounded-full border transition-colors ${
                     activeCategoryFilter === cat
-                      ? 'bg-indigo-600 text-white border-indigo-600'
+                      ? 'bg-[#02E8A7] text-[#002020] font-bold border-indigo-600'
                       : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
                   }`}
                 >
@@ -521,7 +521,7 @@ export default function AptitudeAssessment() {
               <span>Overall Completion</span>
               <span className="font-semibold text-slate-900">{Math.round((answeredCount / totalCount) * 100)}%</span>
             </div>
-            <ProgressBar value={Math.round((answeredCount / totalCount) * 100)} color="indigo" />
+            <ProgressBar value={Math.round((answeredCount / totalCount) * 100)} color="teal" />
           </Card>
         </div>
       </div>

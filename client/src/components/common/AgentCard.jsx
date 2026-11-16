@@ -20,7 +20,7 @@ export default function AgentCard({
         {/* Header */}
         <div className="flex items-center justify-between gap-3 mb-5">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-indigo-600/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center group-hover:bg-indigo-600/20 group-hover:scale-105 transition-all">
+            <div className="w-12 h-12 rounded-xl bg-[#02E8A7]/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center group-hover:bg-[#02E8A7]/20 group-hover:scale-105 transition-all">
               {Icon ? <Icon className="w-6 h-6" /> : <Cpu className="w-6 h-6" />}
             </div>
             <div>

@@ -52,14 +52,14 @@ export default function OverviewReadinessTab({
   return (
     <div className="space-y-6">
       {/* Distinction Header Banner */}
-      <div className="rounded-xl border border-indigo-100 bg-gradient-to-r from-indigo-50/70 via-white to-sky-50/70 p-4 text-xs text-slate-700 shadow-xs flex items-start gap-3">
-        <Sparkles className="w-5 h-5 text-indigo-600 shrink-0 mt-0.5" />
+      <div className="rounded-xl border border-[#02E8A7]/30 bg-gradient-to-r from-indigo-50/70 via-white to-sky-50/70 p-4 text-xs text-slate-700 shadow-xs flex items-start gap-3">
+        <Sparkles className="w-5 h-5 text-[#009669] shrink-0 mt-0.5" />
         <div className="space-y-1">
           <p className="font-semibold text-slate-900 text-sm">
             Predictive Intelligence & Multi-Dimensional Readiness Architecture
           </p>
           <p className="text-slate-600 leading-relaxed">
-            Metrics rigorously distinguish between <span className="font-semibold text-emerald-800">Actual Historical Outcomes</span> (audited completed cohorts), <span className="font-semibold text-indigo-800">Current Cohort Readiness</span> (multi-factor verified student capabilities), <span className="font-semibold text-purple-800">Statistical Placement Estimates</span> (calibrated logistic probabilities), and <span className="font-semibold text-sky-800">Forecast Projections</span> (longitudinal trend extrapolations).
+            Metrics rigorously distinguish between <span className="font-semibold text-emerald-800">Actual Historical Outcomes</span> (audited completed cohorts), <span className="font-semibold text-[#002020]">Current Cohort Readiness</span> (multi-factor verified student capabilities), <span className="font-semibold text-[#002020]">Statistical Placement Estimates</span> (calibrated logistic probabilities), and <span className="font-semibold text-sky-800">Forecast Projections</span> (longitudinal trend extrapolations).
           </p>
         </div>
       </div>
@@ -169,7 +169,7 @@ export default function OverviewReadinessTab({
                   <span className="truncate pr-2" title={dept.department}>
                     {dept.department}
                   </span>
-                  <span className="text-indigo-600 font-bold shrink-0">
+                  <span className="text-[#009669] font-bold shrink-0">
                     {dept.readinessScore}%
                   </span>
                 </div>
@@ -185,7 +185,7 @@ export default function OverviewReadinessTab({
                   value={dept.readinessScore}
                   max={100}
                   size="xs"
-                  color="indigo"
+                  color="teal"
                 />
               </div>
             ))}
@@ -292,7 +292,7 @@ export default function OverviewReadinessTab({
                               std.overallReadinessScore >= 80
                                 ? 'text-emerald-700'
                                 : std.overallReadinessScore >= 60
-                                ? 'text-indigo-700'
+                                ? 'text-[#004D36]'
                                 : 'text-amber-700'
                             }
                           >
@@ -485,13 +485,13 @@ export default function OverviewReadinessTab({
 
             {/* Support Needs */}
             {inspectingStudent.supportNeeds?.length > 0 && (
-              <div className="p-3 rounded-lg bg-indigo-50 border border-indigo-100 text-xs">
-                <span className="font-semibold text-indigo-900 block mb-1">
+              <div className="p-3 rounded-lg bg-[#BDF9F9]/30 border border-[#02E8A7]/30 text-xs">
+                <span className="font-semibold text-[#002020] block mb-1">
                   Active Support Recommendation Flagged:
                 </span>
                 <div className="flex flex-wrap gap-1.5 mt-1">
                   {inspectingStudent.supportNeeds.map((sn) => (
-                    <Badge key={sn} variant="indigo" size="sm">
+                    <Badge key={sn} variant="aqua" size="sm">
                       {sn.replace('_', ' ')}
                     </Badge>
                   ))}

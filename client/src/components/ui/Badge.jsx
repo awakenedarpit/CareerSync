@@ -2,32 +2,40 @@ import React from 'react';
 
 /**
  * Reusable Category / Count Badge
+ * CarrerSync Mint Design System compliant.
+ * Text contrast meets WCAG 2.1 AA/AAA.
  */
 export default function Badge({
   children,
   variant = 'slate',
   size = 'md',
   className = '',
+  ...props
 }) {
   const sizeStyles = {
-    sm: 'text-[10px] px-2 py-0.5',
-    md: 'text-xs px-2.5 py-0.5',
+    sm: 'text-[10px] px-2 py-0.5 font-medium',
+    md: 'text-xs px-2.5 py-0.5 font-medium',
     lg: 'text-xs px-3 py-1 font-semibold',
   };
 
   const variantStyles = {
-    slate: 'bg-slate-100 text-slate-700 border-slate-200',
-    indigo: 'bg-indigo-50 text-indigo-700 border-indigo-200',
-    purple: 'bg-purple-50 text-purple-700 border-purple-200',
-    emerald: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-    amber: 'bg-amber-50 text-amber-700 border-amber-200',
-    rose: 'bg-rose-50 text-rose-700 border-rose-200',
-    sky: 'bg-sky-50 text-sky-700 border-sky-200',
+    mint: 'bg-[#E6FAF4] text-[#004D36] border-[#02E8A7]/50 font-semibold',
+    aqua: 'bg-[#E3FFFB] text-[#00473C] border-[#11F1CF]/60 font-semibold',
+    amber: 'bg-[#FFF8E7] text-[#7A4E00] border-[#FFC558]/60 font-semibold',
+    slate: 'bg-[#BDF9F9]/30 text-[#002020] border-[#BACBC0]/40 font-medium',
+    indigo: 'bg-[#E6FAF4] text-[#004D36] border-[#02E8A7]/50 font-semibold',
+    purple: 'bg-[#E3FFFB] text-[#00473C] border-[#11F1CF]/60 font-semibold',
+    emerald: 'bg-[#E6FAF4] text-[#004D36] border-[#02E8A7]/50 font-semibold',
+    rose: 'bg-rose-50 text-rose-800 border-rose-200 font-semibold',
+    sky: 'bg-[#E3FFFB] text-[#00473C] border-[#11F1CF]/60 font-medium',
   };
 
   return (
     <span
-      className={`inline-flex items-center font-medium rounded-full border ${sizeStyles[size] || sizeStyles.md} ${variantStyles[variant] || variantStyles.slate} ${className}`}
+      className={`inline-flex items-center rounded-full border ${
+        sizeStyles[size] || sizeStyles.md
+      } ${variantStyles[variant] || variantStyles.slate} ${className}`}
+      {...props}
     >
       {children}
     </span>

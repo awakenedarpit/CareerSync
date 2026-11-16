@@ -128,7 +128,7 @@ export default function PlatformObservability() {
           value={overview.totalWorkflowsExecuted.toLocaleString()}
           subtitle="Workflows dispatched"
           icon={Activity}
-          variant="indigo"
+          variant="aqua"
         />
         <StatCard
           title="Success Rate"
@@ -149,7 +149,7 @@ export default function PlatformObservability() {
           value={`${overview.retryRate}%`}
           subtitle="Exponential backoff"
           icon={RotateCcw}
-          variant="purple"
+          variant="mint"
         />
         <StatCard
           title="Active Pipelines"
@@ -188,7 +188,7 @@ export default function PlatformObservability() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
             {/* Database */}
             <div className="p-3.5 rounded-xl border border-slate-200 bg-slate-50/60 flex items-start gap-3">
-              <div className="p-2 rounded-lg bg-indigo-100 text-indigo-700 shrink-0">
+              <div className="p-2 rounded-lg bg-[#BDF9F9]/50 text-[#004D36] shrink-0">
                 <Database className="w-4 h-4" />
               </div>
               <div className="flex-1 min-w-0">
@@ -207,7 +207,7 @@ export default function PlatformObservability() {
 
             {/* AI Gateway */}
             <div className="p-3.5 rounded-xl border border-slate-200 bg-slate-50/60 flex items-start gap-3">
-              <div className="p-2 rounded-lg bg-purple-100 text-purple-700 shrink-0">
+              <div className="p-2 rounded-lg bg-[#BDF9F9]/50 text-[#004D36] shrink-0">
                 <Cpu className="w-4 h-4" />
               </div>
               <div className="flex-1 min-w-0">
@@ -275,7 +275,7 @@ export default function PlatformObservability() {
                     <span className="w-36 text-slate-700 font-medium truncate">{item.name}</span>
                     <div className="flex-1 h-2 rounded-full bg-slate-100 overflow-hidden">
                       <div
-                        className="h-full rounded-full bg-indigo-600"
+                        className="h-full rounded-full bg-[#02E8A7]"
                         style={{ width: `${item.percent}%` }}
                       />
                     </div>
@@ -412,7 +412,7 @@ export default function PlatformObservability() {
                 placeholder="Filter correlation ID, event..."
                 value={eventSearch}
                 onChange={(e) => setEventSearch(e.target.value)}
-                className="w-full rounded-lg border border-slate-200 bg-white py-1.5 pl-8 pr-3 text-xs focus:border-indigo-500 focus:outline-hidden"
+                className="w-full rounded-lg border border-slate-200 bg-white py-1.5 pl-8 pr-3 text-xs focus:border-[#02E8A7] focus:outline-hidden"
               />
             </div>
 
@@ -420,7 +420,7 @@ export default function PlatformObservability() {
             <select
               value={agentFilter}
               onChange={(e) => setAgentFilter(e.target.value)}
-              className="rounded-lg border border-slate-200 bg-white p-1.5 text-xs text-slate-700 focus:border-indigo-500 focus:outline-hidden"
+              className="rounded-lg border border-slate-200 bg-white p-1.5 text-xs text-slate-700 focus:border-[#02E8A7] focus:outline-hidden"
             >
               <option value="ALL">All Agents</option>
               <option value="CENTRAL_ORCHESTRATOR">Central Orchestrator</option>
@@ -434,7 +434,7 @@ export default function PlatformObservability() {
             <select
               value={severityFilter}
               onChange={(e) => setSeverityFilter(e.target.value)}
-              className="rounded-lg border border-slate-200 bg-white p-1.5 text-xs text-slate-700 focus:border-indigo-500 focus:outline-hidden"
+              className="rounded-lg border border-slate-200 bg-white p-1.5 text-xs text-slate-700 focus:border-[#02E8A7] focus:outline-hidden"
             >
               <option value="ALL">All Severities</option>
               <option value="INFO">INFO</option>
@@ -469,7 +469,7 @@ export default function PlatformObservability() {
                   <tr key={evt.id} className="hover:bg-slate-50/70 transition-colors">
                     <td className="py-2.5 px-3 font-mono text-[11px]">
                       <div className="flex items-center gap-1.5">
-                        <span className="text-indigo-600 font-semibold">{evt.correlationId}</span>
+                        <span className="text-[#009669] font-semibold">{evt.correlationId}</span>
                         <button
                           onClick={() => handleCopy(evt.correlationId)}
                           className="text-slate-400 hover:text-slate-600 p-0.5 rounded"
@@ -542,7 +542,7 @@ export default function PlatformObservability() {
               </div>
               <div>
                 <span className="text-slate-400 block text-[9px] uppercase font-sans font-bold">Correlation ID</span>
-                <span className="text-indigo-600 font-bold">{selectedEvent.correlationId}</span>
+                <span className="text-[#009669] font-bold">{selectedEvent.correlationId}</span>
               </div>
               <div>
                 <span className="text-slate-400 block text-[9px] uppercase font-sans font-bold">Agent Node</span>

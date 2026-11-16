@@ -222,7 +222,7 @@ export default function ReadinessDashboard() {
       header: 'Avg Readiness Score',
       render: (row) => (
         <div className="flex items-center gap-2">
-          <span className="font-bold font-mono text-indigo-700">{row.averageScore}</span>
+          <span className="font-bold font-mono text-[#004D36]">{row.averageScore}</span>
           <span className="text-[10px] text-slate-400">/ 100</span>
         </div>
       )
@@ -238,7 +238,7 @@ export default function ReadinessDashboard() {
     {
       header: 'Developing %',
       render: (row) => (
-        <span className="inline-flex items-center gap-1 font-semibold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded text-xs">
+        <span className="inline-flex items-center gap-1 font-semibold text-[#004D36] bg-[#BDF9F9]/30 px-2 py-0.5 rounded text-xs">
           {row.developingPercentage}%
         </span>
       )
@@ -257,7 +257,7 @@ export default function ReadinessDashboard() {
         <div className="flex items-center gap-2">
           <div className="w-14 bg-slate-100 rounded-full h-1.5 overflow-hidden">
             <div
-              className="bg-indigo-500 h-full rounded-full"
+              className="bg-[#BDF9F9]/300 h-full rounded-full"
               style={{ width: `${Math.round(row.averageCompleteness * 100)}%` }}
             />
           </div>
@@ -321,7 +321,7 @@ export default function ReadinessDashboard() {
           onClick={() => handleOpenDiagnostics(row)}
           variant="outline"
           size="sm"
-          className="hover:border-indigo-500 hover:text-indigo-600"
+          className="hover:border-indigo-500 hover:text-[#009669]"
         >
           <Target className="w-3.5 h-3.5 mr-1" />
           Diagnose Gap
@@ -347,7 +347,7 @@ export default function ReadinessDashboard() {
       {/* Advisory Formula Banner */}
       <div className="p-4 bg-linear-to-r from-blue-50 via-indigo-50 to-purple-50 border border-blue-100 rounded-xl text-xs text-blue-950 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
         <div className="flex items-center gap-2.5">
-          <Sparkles className="w-5 h-5 text-indigo-600 shrink-0" />
+          <Sparkles className="w-5 h-5 text-[#009669] shrink-0" />
           <div>
             <span className="font-bold">Transparent Scoring Dimensions: </span>
             Readiness = Verified Skills (35%) + Evidence Coverage (25%) + Project Depth (20%) + Academics (20%).
@@ -356,7 +356,7 @@ export default function ReadinessDashboard() {
             </span>
           </div>
         </div>
-        <span className="font-mono text-[11px] font-semibold text-indigo-700 bg-white px-2.5 py-1 rounded border border-indigo-200 shrink-0">
+        <span className="font-mono text-[11px] font-semibold text-[#004D36] bg-white px-2.5 py-1 rounded border border-[#02E8A7]/40 shrink-0">
           Deterministic 4-Tier
         </span>
       </div>
@@ -382,20 +382,20 @@ export default function ReadinessDashboard() {
         </Card>
 
         {/* DEVELOPING */}
-        <Card className="p-4 border-indigo-200 bg-indigo-50/20">
+        <Card className="p-4 border-[#02E8A7]/40 bg-[#BDF9F9]/20">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-indigo-800 uppercase tracking-wider">DEVELOPING (60 - 79)</span>
-            <div className="p-1.5 bg-indigo-100 text-indigo-700 rounded-lg">
+            <span className="text-xs font-bold text-[#002020] uppercase tracking-wider">DEVELOPING (60 - 79)</span>
+            <div className="p-1.5 bg-[#BDF9F9]/50 text-[#004D36] rounded-lg">
               <TrendingUp className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-3xl font-black text-indigo-900">{cohortData.distribution.DEVELOPING}</div>
-          <div className="mt-2 text-xs text-indigo-700 flex items-center justify-between">
+          <div className="text-3xl font-black text-[#002020]">{cohortData.distribution.DEVELOPING}</div>
+          <div className="mt-2 text-xs text-[#004D36] flex items-center justify-between">
             <span>{developingPct}% of cohort</span>
             <span className="font-semibold">Minor skill gap fill</span>
           </div>
-          <div className="mt-2 w-full bg-indigo-100 rounded-full h-1.5 overflow-hidden">
-            <div className="bg-indigo-600 h-full rounded-full" style={{ width: `${developingPct}%` }} />
+          <div className="mt-2 w-full bg-[#BDF9F9]/50 rounded-full h-1.5 overflow-hidden">
+            <div className="bg-[#02E8A7] h-full rounded-full" style={{ width: `${developingPct}%` }} />
           </div>
         </Card>
 
@@ -441,21 +441,21 @@ export default function ReadinessDashboard() {
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-              <Target className="w-4 h-4 text-indigo-600" />
+              <Target className="w-4 h-4 text-[#009669]" />
               Cohort Top Skill Gaps
             </h3>
             <p className="text-xs text-slate-500 mt-0.5">
               Aggregated technical competency deficiencies across registered students needing proactive workshops.
             </p>
           </div>
-          <Badge variant="indigo">Cohort Intel</Badge>
+          <Badge variant="aqua">Cohort Intel</Badge>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {cohortData.topSkillGaps.map((item, idx) => (
             <div
               key={idx}
-              className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between hover:bg-white hover:border-indigo-200 transition-all"
+              className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between hover:bg-white hover:border-[#02E8A7]/40 transition-all"
             >
               <div>
                 <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block">
@@ -480,7 +480,7 @@ export default function ReadinessDashboard() {
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-              <Building className="w-4 h-4 text-indigo-600" />
+              <Building className="w-4 h-4 text-[#009669]" />
               Department-Wise Readiness Breakdown
             </h3>
             <p className="text-xs text-slate-500 mt-0.5">
@@ -529,12 +529,12 @@ export default function ReadinessDashboard() {
           maxWidth="max-w-2xl"
         >
           <div className="space-y-4 py-2 text-xs">
-            <div className="p-3 bg-indigo-50 border border-indigo-100 rounded-xl flex items-center justify-between">
+            <div className="p-3 bg-[#BDF9F9]/30 border border-[#02E8A7]/30 rounded-xl flex items-center justify-between">
               <div>
-                <span className="text-[10px] uppercase font-bold text-indigo-900 tracking-wider">Benchmark Role</span>
+                <span className="text-[10px] uppercase font-bold text-[#002020] tracking-wider">Benchmark Role</span>
                 <p className="font-bold text-sm text-indigo-950 mt-0.5">{targetRole}</p>
               </div>
-              <span className="text-xs font-semibold text-indigo-600 bg-white px-2.5 py-1 rounded border border-indigo-200">
+              <span className="text-xs font-semibold text-[#009669] bg-white px-2.5 py-1 rounded border border-[#02E8A7]/40">
                 Live Evaluator
               </span>
             </div>
@@ -550,13 +550,13 @@ export default function ReadinessDashboard() {
                 <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
                   <div className="flex items-center justify-between text-xs font-bold text-slate-800">
                     <span>Role Skill Match:</span>
-                    <span className="font-mono text-indigo-700 text-sm">
+                    <span className="font-mono text-[#004D36] text-sm">
                       {gapDiagnosticsResult.summary.matchPercentage}% Match
                     </span>
                   </div>
                   <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
                     <div
-                      className="bg-indigo-600 h-full rounded-full"
+                      className="bg-[#02E8A7] h-full rounded-full"
                       style={{ width: `${gapDiagnosticsResult.summary.matchPercentage}%` }}
                     />
                   </div>
@@ -580,7 +580,7 @@ export default function ReadinessDashboard() {
                         {item.status === 'VERIFIED_MATCH' ? (
                           <Badge variant="emerald" size="sm">Verified Match</Badge>
                         ) : item.status === 'EVIDENCE_MATCH' ? (
-                          <Badge variant="indigo" size="sm">Evidence Found</Badge>
+                          <Badge variant="aqua" size="sm">Evidence Found</Badge>
                         ) : item.status === 'PENDING_VERIFICATION' ? (
                           <Badge variant="amber" size="sm">Pending TPO Review</Badge>
                         ) : (

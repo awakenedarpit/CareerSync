@@ -200,7 +200,7 @@ export default function CollegeManagement() {
       render: (_, row) => (
         <div>
           <div className="font-semibold text-slate-900 flex items-center gap-1.5">
-            <Building2 className="h-4 w-4 text-indigo-600 shrink-0" />
+            <Building2 className="h-4 w-4 text-[#009669] shrink-0" />
             <span>{row.name}</span>
           </div>
           <div className="text-xs text-slate-500 font-mono mt-0.5">
@@ -224,7 +224,7 @@ export default function CollegeManagement() {
       label: 'Admins',
       align: 'center',
       render: (val) => (
-        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-purple-50 text-purple-700">
+        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-[#BDF9F9]/30 text-[#004D36]">
           {val} Admins
         </span>
       )
@@ -260,7 +260,7 @@ export default function CollegeManagement() {
               setSelectedCollege(row);
               setShowViewModal(true);
             }}
-            className="p-1.5 text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+            className="p-1.5 text-slate-500 hover:text-[#009669] hover:bg-[#BDF9F9]/30 rounded-lg transition-colors"
             title="View Details"
           >
             <Eye className="h-4 w-4" />
@@ -327,7 +327,7 @@ export default function CollegeManagement() {
             placeholder="Search by college name, slug, domain, or location..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-lg border border-slate-200 bg-slate-50/70 py-2 pl-9 pr-3 text-xs text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-indigo-100"
+            className="w-full rounded-lg border border-slate-200 bg-slate-50/70 py-2 pl-9 pr-3 text-xs text-slate-900 placeholder:text-slate-400 focus:border-[#02E8A7] focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-indigo-100"
           />
         </div>
 
@@ -342,7 +342,7 @@ export default function CollegeManagement() {
                 key={status}
                 onClick={() => setStatusFilter(status)}
                 className={`px-3 py-1 rounded-md transition-all ${statusFilter === status
-                  ? 'bg-white text-indigo-700 shadow-xs font-semibold'
+                  ? 'bg-white text-[#004D36] shadow-xs font-semibold'
                   : 'text-slate-600 hover:text-slate-900'
                   }`}
               >
@@ -384,14 +384,14 @@ export default function CollegeManagement() {
               <div>
                 <p className="text-slate-400 font-semibold uppercase">Official Domain</p>
                 <p className="text-slate-900 font-medium text-sm mt-0.5 flex items-center gap-1">
-                  <Globe className="h-3.5 w-3.5 text-indigo-600" />
+                  <Globe className="h-3.5 w-3.5 text-[#009669]" />
                   {selectedCollege.domain}
                 </p>
               </div>
               <div>
                 <p className="text-slate-400 font-semibold uppercase">Campus Location</p>
                 <p className="text-slate-900 font-medium text-sm mt-0.5 flex items-center gap-1">
-                  <MapPin className="h-3.5 w-3.5 text-indigo-600" />
+                  <MapPin className="h-3.5 w-3.5 text-[#009669]" />
                   {selectedCollege.location}
                 </p>
               </div>
@@ -401,14 +401,14 @@ export default function CollegeManagement() {
               <div>
                 <p className="text-slate-400 font-semibold uppercase">Contact Email</p>
                 <p className="text-slate-900 font-medium text-sm mt-0.5 flex items-center gap-1">
-                  <Mail className="h-3.5 w-3.5 text-indigo-600" />
+                  <Mail className="h-3.5 w-3.5 text-[#009669]" />
                   {selectedCollege.contactEmail}
                 </p>
               </div>
               <div>
                 <p className="text-slate-400 font-semibold uppercase">Contact Phone</p>
                 <p className="text-slate-900 font-medium text-sm mt-0.5 flex items-center gap-1">
-                  <Phone className="h-3.5 w-3.5 text-indigo-600" />
+                  <Phone className="h-3.5 w-3.5 text-[#009669]" />
                   {selectedCollege.contactPhone}
                 </p>
               </div>
@@ -417,7 +417,7 @@ export default function CollegeManagement() {
             <div className="grid grid-cols-3 gap-3">
               <div className="p-3 rounded-xl border border-slate-200 bg-white text-center">
                 <span className="text-[11px] text-slate-500 font-semibold uppercase">Admins</span>
-                <p className="text-lg font-bold text-purple-700 mt-0.5">{selectedCollege.admins}</p>
+                <p className="text-lg font-bold text-[#004D36] mt-0.5">{selectedCollege.admins}</p>
               </div>
               <div className="p-3 rounded-xl border border-slate-200 bg-white text-center">
                 <span className="text-[11px] text-slate-500 font-semibold uppercase">Students</span>
@@ -429,12 +429,12 @@ export default function CollegeManagement() {
               </div>
             </div>
 
-            <div className="p-3 rounded-xl bg-indigo-50/70 border border-indigo-100 text-indigo-900">
+            <div className="p-3 rounded-xl bg-[#BDF9F9]/30 border border-[#02E8A7]/30 text-[#002020]">
               <p className="font-semibold flex items-center gap-1.5">
-                <ShieldAlert className="h-4 w-4 text-indigo-600" />
+                <ShieldAlert className="h-4 w-4 text-[#009669]" />
                 Data Isolation Policy
               </p>
-              <p className="text-indigo-800 text-[11px] mt-1">
+              <p className="text-[#002020] text-[11px] mt-1">
                 Cross-institution queries strictly enforced via tenant ID <code>{selectedCollege.slug}</code>. Students and recruiters outside this organization cannot access private resumes without explicit consent.
               </p>
             </div>

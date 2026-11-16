@@ -52,7 +52,7 @@ export const fileService = {
     // Direct browser fetch with responseType blob to trigger download
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     const tenantId = localStorage.getItem('tenant_id') || sessionStorage.getItem('tenant_id');
-    const baseURL = apiClient.defaults.baseURL || 'http://localhost:5050/api/v1';
+    const baseURL = apiClient.defaults.baseURL || '/api/v1';
 
     const response = await fetch(`${baseURL}/files/${fileId}/download`, {
       headers: {

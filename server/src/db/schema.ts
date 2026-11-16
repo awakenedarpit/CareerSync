@@ -6,6 +6,7 @@ import {
   boolean,
   integer,
   numeric,
+  doublePrecision,
   timestamp,
   date,
   jsonb,
@@ -608,6 +609,58 @@ export const moderationActionEnum = pgEnum('moderation_action_enum', [
   'ACCOUNT_SUSPENDED'
 ]);
 
+// ============================================================================
+// Phase 17 — Institutional Governance, Accreditation & Outreach Enums
+// ============================================================================
+
+export const interventionStatusEnum = pgEnum('intervention_status_enum', [
+  'PROPOSED',
+  'APPROVED',
+  'IN_PROGRESS',
+  'EVALUATING',
+  'COMPLETED',
+  'CANCELLED'
+]);
+
+export const fairnessReviewStatusEnum = pgEnum('fairness_review_status_enum', [
+  'FLAGGED',
+  'UNDER_REVIEW',
+  'EXPLANATION_REQUESTED',
+  'RESOLVED',
+  'ESCALATED'
+]);
+
+export const reportFormatEnum = pgEnum('report_format_enum', [
+  'PDF',
+  'EXCEL',
+  'CSV',
+  'JSON'
+]);
+
+export const reportCategoryEnum = pgEnum('report_category_enum', [
+  'PLACEMENT_STATISTICS',
+  'BRANCH_WISE_OUTCOMES',
+  'COMPANY_PARTICIPATION',
+  'SALARY_DISTRIBUTION',
+  'VERIFIED_SKILL_COVERAGE',
+  'SKILL_GAP_CLOSURE',
+  'TRAINING_INTERVENTIONS',
+  'MOCK_ASSESSMENT_PERFORMANCE',
+  'ALUMNI_MENTORSHIP',
+  'ACADEMIC_YEAR_COMPARISON'
+]);
+
+export const outreachCampaignStatusEnum = pgEnum('outreach_campaign_status_enum', [
+  'DRAFT',
+  'UNDER_REVIEW',
+  'APPROVED',
+  'QUEUED',
+  'SENT',
+  'PARTIALLY_SENT',
+  'FAILED',
+  'CANCELLED'
+]);
+
 
 
 // ============================================================================
@@ -689,6 +742,35 @@ export const students = pgTable(
     resumeR2Url: varchar('resume_r2_url', { length: 512 }),
     resumeUrl: varchar('resume_url', { length: 512 }),
     readinessScore: numeric('readiness_score', { precision: 5, scale: 2 }).default('0.00').notNull(),
+    // Added profile fields (additive only)
+    bio: text('bio'),
+    professionalSummary: text('professional_summary'),
+    careerObjective: text('career_objective'),
+    avatarUrl: varchar('avatar_url', { length: 500 }),
+    phoneNumber: varchar('phone_number', { length: 20 }),
+    alternatePhoneNumber: varchar('alternate_phone_number', { length: 20 }),
+    personalEmail: varchar('personal_email', { length: 255 }),
+    preferredContactMethod: varchar('preferred_contact_method', { length: 50 }).default('email'),
+    currentCity: varchar('current_city', { length: 100 }),
+    state: varchar('state', { length: 100 }),
+    country: varchar('country', { length: 100 }).default('India'),
+    githubUrl: varchar('github_url', { length: 500 }),
+    linkedinUrl: varchar('linkedin_url', { length: 500 }),
+    portfolioUrl: varchar('portfolio_url', { length: 500 }),
+    leetcodeUrl: varchar('leetcode_url', { length: 500 }),
+    hackerrankUrl: varchar('hackerrank_url', { length: 500 }),
+    codeforcesUrl: varchar('codeforces_url', { length: 500 }),
+    codechefUrl: varchar('codechef_url', { length: 500 }),
+    kaggleUrl: varchar('kaggle_url', { length: 500 }),
+    geeksforgeeksUrl: varchar('geeksforgeeks_url', { length: 500 }),
+    personalWebsiteUrl: varchar('personal_website_url', { length: 500 }),
+    profileVisibility: jsonb('profile_visibility'),
+    preferredLocations: jsonb('preferred_locations'),
+    targetJobRoles: jsonb('target_job_roles'),
+    preferredIndustries: jsonb('preferred_industries'),
+    preferredEmploymentTypes: jsonb('preferred_employment_types'),
+    careerInterests: text('career_interests'),
+    gender: varchar('gender', { length: 50 }),
     createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
     updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
   },
@@ -3890,6 +3972,403 @@ export const moderationActions = pgTable(
   ]
 );
 
+// ============================================================================
+// Phase 17 — Institutional Governance, Accreditation & Outreach Tables
+// ============================================================================
+
+/**
+ * 96. Institutional Metric Snapshots Table
+ * High-fidelity empirical snapshots of institutional KPIs, cohort analytics, placement rates, and skill coverage.
+ */
+export const institutionalMetricSnapshots = pgTable(
+  'institutional_metric_snapshots',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    snapshotType: varchar('snapshot_type', { length: 50 }).notNull(),
+    academicYear: varchar('academic_year', { length: 20 }),
+    cohortBatch: varchar('cohort_batch', { length: 50 }),
+    department: varchar('department', { length: 150 }),
+    totalStudents: integer('total_students').default(0).notNull(),
+    eligibleStudents: integer('eligible_students').default(0).notNull(),
+    placedStudents: integer('placed_students').default(0).notNull(),
+    placementRate: doublePrecision('placement_rate'),
+    medianSalary: doublePrecision('median_salary'),
+    meanSalary: doublePrecision('mean_salary'),
+    highestSalary: doublePrecision('highest_salary'),
+    lowestSalary: doublePrecision('lowest_salary'),
+    verifiedSkillCoverage: doublePrecision('verified_skill_coverage'),
+    skillGapClosureRate: doublePrecision('skill_gap_closure_rate'),
+    shortlistToOfferRatio: doublePrecision('shortlist_to_offer_ratio'),
+    avgTimeToShortlistDays: doublePrecision('avg_time_to_shortlist_days'),
+    recruiterEngagementScore: doublePrecision('recruiter_engagement_score'),
+    metricsJson: jsonb('metrics_json').default({}).notNull(),
+    dataQualityStatus: varchar('data_quality_status', { length: 50 }).default('COMPLETE').notNull(),
+    dataCompletenessScore: doublePrecision('data_completeness_score').default(1.0).notNull(),
+    calculatedAt: timestamp('calculated_at', { withTimezone: true }).defaultNow().notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_inst_metric_tenant').on(table.tenantId),
+    index('idx_inst_metric_type').on(table.snapshotType),
+    index('idx_inst_metric_academic_year').on(table.academicYear),
+    index('idx_inst_metric_cohort_batch').on(table.cohortBatch),
+    index('idx_inst_metric_dept').on(table.department),
+    index('idx_inst_metric_calc_at').on(table.calculatedAt),
+    index('idx_inst_metric_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 97. Training Interventions Table
+ * Targeted institutional upskilling programs to resolve cohort skill gaps with human TPO governance.
+ */
+export const trainingInterventions = pgTable(
+  'training_interventions',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    title: varchar('title', { length: 255 }).notNull(),
+    description: text('description').notNull(),
+    targetSkill: varchar('target_skill', { length: 150 }).notNull(),
+    targetDepartment: varchar('target_department', { length: 150 }),
+    targetBatch: varchar('target_batch', { length: 50 }),
+    proposedBy: uuid('proposed_by').references(() => users.id, { onDelete: 'set null' }),
+    approvedBy: uuid('approved_by').references(() => users.id, { onDelete: 'set null' }),
+    status: interventionStatusEnum('status').default('PROPOSED').notNull(),
+    startDate: timestamp('start_date', { withTimezone: true }),
+    endDate: timestamp('end_date', { withTimezone: true }),
+    budget: doublePrecision('budget').default(0),
+    actionPlan: text('action_plan'),
+    targetStudentCount: integer('target_student_count').default(0).notNull(),
+    enrolledCount: integer('enrolled_count').default(0).notNull(),
+    completedCount: integer('completed_count').default(0).notNull(),
+    baselineSkillAverage: doublePrecision('baseline_skill_average'),
+    postInterventionSkillAverage: doublePrecision('post_intervention_skill_average'),
+    skillImprovementPercentage: doublePrecision('skill_improvement_percentage'),
+    attendanceOnlyRuleEnforced: boolean('attendance_only_rule_enforced').default(true).notNull(),
+    approvedAt: timestamp('approved_at', { withTimezone: true }),
+    auditTrailJson: jsonb('audit_trail_json').default([]).notNull(),
+    metadata: jsonb('metadata').default({}).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_train_intv_tenant').on(table.tenantId),
+    index('idx_train_intv_status').on(table.status),
+    index('idx_train_intv_skill').on(table.targetSkill),
+    index('idx_train_intv_dept').on(table.targetDepartment),
+    index('idx_train_intv_batch').on(table.targetBatch),
+    index('idx_train_intv_proposed_by').on(table.proposedBy),
+    index('idx_train_intv_approved_by').on(table.approvedBy),
+    index('idx_train_intv_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 98. Training Intervention Participants Table
+ * Student participation in skill interventions, attendance, project submission, and verified mastery.
+ */
+export const trainingInterventionParticipants = pgTable(
+  'training_intervention_participants',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    interventionId: uuid('intervention_id')
+      .notNull()
+      .references(() => trainingInterventions.id, { onDelete: 'cascade' }),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => students.id, { onDelete: 'cascade' }),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    supportClassification: varchar('support_classification', { length: 50 }).default('SUPPORT_RECOMMENDED').notNull(),
+    rollNumber: varchar('roll_number', { length: 50 }),
+    studentDepartment: varchar('student_department', { length: 150 }),
+    attendanceRate: doublePrecision('attendance_rate').default(0).notNull(),
+    attendanceCount: integer('attendance_count').default(0).notNull(),
+    attendanceVerified: boolean('attendance_verified').default(false).notNull(),
+    projectSubmitted: boolean('project_submitted').default(false).notNull(),
+    projectEvidenceSubmitted: boolean('project_evidence_submitted').default(false).notNull(),
+    projectEvidenceUrl: text('project_evidence_url'),
+    projectEvidenceDescription: text('project_evidence_description'),
+    projectScore: doublePrecision('project_score'),
+    verifiedBy: uuid('verified_by').references(() => users.id, { onDelete: 'set null' }),
+    verifiedAt: timestamp('verified_at', { withTimezone: true }),
+    tpoVerified: boolean('tpo_verified').default(false).notNull(),
+    skillMasteryVerified: boolean('skill_mastery_verified').default(false).notNull(),
+    verifiedSkillGainRecorded: boolean('verified_skill_gain_recorded').default(false).notNull(),
+    preScore: doublePrecision('pre_score'),
+    postScore: doublePrecision('post_score'),
+    status: varchar('status', { length: 50 }).default('ENROLLED').notNull(),
+    notes: text('notes'),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    uniqueIndex('uq_train_intv_part_student').on(table.interventionId, table.studentId),
+    index('idx_train_intv_part_tenant').on(table.tenantId),
+    index('idx_train_intv_part_intv').on(table.interventionId),
+    index('idx_train_intv_part_student').on(table.studentId),
+    index('idx_train_intv_part_user').on(table.userId),
+    index('idx_train_intv_part_status').on(table.status),
+    index('idx_train_intv_part_verified').on(table.skillMasteryVerified),
+    index('idx_train_intv_part_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 99. Fairness Review Cases Table
+ * Auditable governance tracking for selection funnel stage disparities and EEOC Four-Fifths benchmark flags.
+ */
+export const fairnessReviewCases = pgTable(
+  'fairness_review_cases',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    driveId: uuid('drive_id').references(() => placementDrives.id, { onDelete: 'set null' }),
+    cohortId: varchar('cohort_id', { length: 100 }),
+    metricName: varchar('metric_name', { length: 150 }),
+    stage: varchar('stage', { length: 100 }).notNull(),
+    demographicCategory: varchar('demographic_category', { length: 100 }).default('GENERAL').notNull(),
+    groupName: varchar('group_name', { length: 100 }).notNull(),
+    referenceGroupName: varchar('reference_group_name', { length: 100 }).notNull(),
+    groupSize: integer('group_size').default(0).notNull(),
+    groupSelectedCount: integer('group_selected_count').default(0).notNull(),
+    groupSelectionRate: doublePrecision('group_selection_rate').notNull(),
+    referenceGroupSize: integer('reference_group_size').default(0).notNull(),
+    referenceGroupSelectedCount: integer('reference_group_selected_count').default(0).notNull(),
+    referenceGroupSelectionRate: doublePrecision('reference_group_selection_rate').notNull(),
+    disparityRatio: doublePrecision('disparity_ratio').notNull(),
+    isSmallGroupSuppressed: boolean('is_small_group_suppressed').default(false).notNull(),
+    status: fairnessReviewStatusEnum('status').default('FLAGGED').notNull(),
+    flaggedReason: text('flagged_reason').default('Disparity ratio below four-fifths threshold').notNull(),
+    reviewedBy: uuid('reviewed_by').references(() => users.id, { onDelete: 'set null' }),
+    reviewedAt: timestamp('reviewed_at', { withTimezone: true }),
+    reviewerNotes: text('reviewer_notes'),
+    resolutionNotes: text('resolution_notes'),
+    resolutionReason: text('resolution_reason'),
+    explanationRequestedFrom: varchar('explanation_requested_from', { length: 255 }),
+    explanationRequestedAt: timestamp('explanation_requested_at', { withTimezone: true }),
+    explanationReceived: text('explanation_received'),
+    explanationProvided: text('explanation_provided'),
+    escalationNotes: text('escalation_notes'),
+    auditTrailJson: jsonb('audit_trail_json').default([]).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_fairness_case_tenant').on(table.tenantId),
+    index('idx_fairness_case_drive').on(table.driveId),
+    index('idx_fairness_case_status').on(table.status),
+    index('idx_fairness_case_stage').on(table.stage),
+    index('idx_fairness_case_ratio').on(table.disparityRatio),
+    index('idx_fairness_case_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 100. Institutional Report Templates Table
+ * Configurable templates for accreditation (NAAC/NIRF/NBA) and internal institutional reporting.
+ */
+export const institutionalReportTemplates = pgTable(
+  'institutional_report_templates',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    name: varchar('name', { length: 255 }).notNull(),
+    description: text('description'),
+    category: reportCategoryEnum('category').notNull(),
+    standard: varchar('standard', { length: 50 }).default('INTERNAL').notNull(),
+    configJson: jsonb('config_json').default({}).notNull(),
+    isSystemDefault: boolean('is_system_default').default(false).notNull(),
+    isActive: boolean('is_active').default(true).notNull(),
+    createdBy: uuid('created_by').references(() => users.id, { onDelete: 'set null' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_report_tmpl_tenant').on(table.tenantId),
+    index('idx_report_tmpl_category').on(table.category),
+    index('idx_report_tmpl_standard').on(table.standard),
+    index('idx_report_tmpl_active').on(table.isActive),
+    index('idx_report_tmpl_created_by').on(table.createdBy),
+    index('idx_report_tmpl_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 101. Institutional Report Runs Table
+ * Audit-ready generation runs, preview snapshots, and exported artifacts with empirical evidence traceability.
+ */
+export const institutionalReportRuns = pgTable(
+  'institutional_report_runs',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    templateId: uuid('template_id').references(() => institutionalReportTemplates.id, { onDelete: 'set null' }),
+    reportTitle: varchar('report_title', { length: 255 }).notNull(),
+    category: reportCategoryEnum('category').notNull(),
+    format: reportFormatEnum('format').notNull(),
+    status: varchar('status', { length: 50 }).default('GENERATED').notNull(),
+    parameters: jsonb('parameters').default({}).notNull(),
+    summaryData: jsonb('summary_data').default({}).notNull(),
+    completenessScore: doublePrecision('completeness_score').default(1.0).notNull(),
+    missingFieldsCount: integer('missing_fields_count').default(0).notNull(),
+    warningFlags: jsonb('warning_flags').default([]).notNull(),
+    evidenceTraceability: jsonb('evidence_traceability').default([]).notNull(),
+    fileUrl: text('file_url'),
+    fileSizeBytes: integer('file_size_bytes'),
+    rowCount: integer('row_count').default(0).notNull(),
+    sha256Hash: varchar('sha256_hash', { length: 64 }),
+    generatedBy: uuid('generated_by').references(() => users.id, { onDelete: 'set null' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_report_run_tenant').on(table.tenantId),
+    index('idx_report_run_tmpl').on(table.templateId),
+    index('idx_report_run_category').on(table.category),
+    index('idx_report_run_format').on(table.format),
+    index('idx_report_run_status').on(table.status),
+    index('idx_report_run_gen_by').on(table.generatedBy),
+    index('idx_report_run_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 102. Outreach Campaigns Table
+ * Recruiter outreach campaigns governed by mandatory human approval confirmation before bulk dispatch.
+ */
+export const outreachCampaigns = pgTable(
+  'outreach_campaigns',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    title: varchar('title', { length: 255 }).notNull(),
+    subject: varchar('subject', { length: 500 }).notNull(),
+    templateBody: text('template_body').notNull(),
+    targetCriteria: jsonb('target_criteria').default({}).notNull(),
+    status: outreachCampaignStatusEnum('status').default('DRAFT').notNull(),
+    requiresHumanApproval: boolean('requires_human_approval').default(true).notNull(),
+    approvedBy: uuid('approved_by').references(() => users.id, { onDelete: 'set null' }),
+    approvedAt: timestamp('approved_at', { withTimezone: true }),
+    approvalNotes: text('approval_notes'),
+    totalRecipients: integer('total_recipients').default(0).notNull(),
+    sentCount: integer('sent_count').default(0).notNull(),
+    deliveredCount: integer('delivered_count').default(0).notNull(),
+    failedCount: integer('failed_count').default(0).notNull(),
+    scheduledAt: timestamp('scheduled_at', { withTimezone: true }),
+    sentAt: timestamp('sent_at', { withTimezone: true }),
+    completedAt: timestamp('completed_at', { withTimezone: true }),
+    auditTrailJson: jsonb('audit_trail_json').default([]).notNull(),
+    createdBy: uuid('created_by')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_outreach_camp_tenant').on(table.tenantId),
+    index('idx_outreach_camp_status').on(table.status),
+    index('idx_outreach_camp_created_by').on(table.createdBy),
+    index('idx_outreach_camp_approved_by').on(table.approvedBy),
+    index('idx_outreach_camp_sched_at').on(table.scheduledAt),
+    index('idx_outreach_camp_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 103. Outreach Campaign Recipients Table
+ * Recruiter contact targets with duplicate suppression and opt-out / unsubscribe tracking.
+ */
+export const outreachCampaignRecipients = pgTable(
+  'outreach_campaign_recipients',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    campaignId: uuid('campaign_id')
+      .notNull()
+      .references(() => outreachCampaigns.id, { onDelete: 'cascade' }),
+    companyId: uuid('company_id').references(() => companies.id, { onDelete: 'set null' }),
+    contactId: varchar('contact_id', { length: 100 }),
+    recipientEmail: varchar('recipient_email', { length: 255 }).notNull(),
+    recipientName: varchar('recipient_name', { length: 255 }),
+    companyName: varchar('company_name', { length: 255 }),
+    status: varchar('status', { length: 50 }).default('QUEUED').notNull(),
+    errorMessage: text('error_message'),
+    sentAt: timestamp('sent_at', { withTimezone: true }),
+    deliveredAt: timestamp('delivered_at', { withTimezone: true }),
+    isUnsubscribed: boolean('is_unsubscribed').default(false).notNull(),
+    personalizedBody: text('personalized_body'),
+    metadata: jsonb('metadata').default({}).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    uniqueIndex('uq_outreach_recip_camp_email').on(table.campaignId, table.recipientEmail),
+    index('idx_outreach_recip_tenant').on(table.tenantId),
+    index('idx_outreach_recip_camp').on(table.campaignId),
+    index('idx_outreach_recip_comp').on(table.companyId),
+    index('idx_outreach_recip_email').on(table.recipientEmail),
+    index('idx_outreach_recip_status').on(table.status),
+    index('idx_outreach_recip_unsub').on(table.isUnsubscribed),
+    index('idx_outreach_recip_created_at').on(table.createdAt)
+  ]
+);
+
+/**
+ * 104. Institutional Data Quality Events Table
+ * Audit logs tracking data completeness, sparse observation alerts, and reconciliation discrepancies.
+ */
+export const institutionalDataQualityEvents = pgTable(
+  'institutional_data_quality_events',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    eventType: varchar('event_type', { length: 100 }).notNull(),
+    entityType: varchar('entity_type', { length: 100 }).notNull(),
+    entityId: uuid('entity_id'),
+    observationCount: integer('observation_count').default(0).notNull(),
+    completenessRatio: doublePrecision('completeness_ratio').default(1.0).notNull(),
+    missingFields: jsonb('missing_fields').default([]).notNull(),
+    details: jsonb('details').default({}).notNull(),
+    severity: varchar('severity', { length: 50 }).default('INFO').notNull(),
+    resolved: boolean('resolved').default(false).notNull(),
+    resolvedBy: uuid('resolved_by').references(() => users.id, { onDelete: 'set null' }),
+    resolvedAt: timestamp('resolved_at', { withTimezone: true }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    index('idx_data_qual_tenant').on(table.tenantId),
+    index('idx_data_qual_event_type').on(table.eventType),
+    index('idx_data_qual_entity_type').on(table.entityType),
+    index('idx_data_qual_severity').on(table.severity),
+    index('idx_data_qual_resolved').on(table.resolved),
+    index('idx_data_qual_created_at').on(table.createdAt)
+  ]
+);
+
 
 
 // ============================================================================
@@ -3937,7 +4416,16 @@ export const tenantsRelations = relations(tenants, ({ many }) => ({
   collaborationMessages: many(collaborationMessages),
   collaborationTasks: many(collaborationTasks),
   moderationReports: many(moderationReports),
-  moderationActions: many(moderationActions)
+  moderationActions: many(moderationActions),
+  institutionalMetricSnapshots: many(institutionalMetricSnapshots),
+  trainingInterventions: many(trainingInterventions),
+  trainingInterventionParticipants: many(trainingInterventionParticipants),
+  fairnessReviewCases: many(fairnessReviewCases),
+  institutionalReportTemplates: many(institutionalReportTemplates),
+  institutionalReportRuns: many(institutionalReportRuns),
+  outreachCampaigns: many(outreachCampaigns),
+  outreachCampaignRecipients: many(outreachCampaignRecipients),
+  institutionalDataQualityEvents: many(institutionalDataQualityEvents)
 }));
 
 export const usersRelations = relations(users, ({ one, many }) => ({
@@ -3984,7 +4472,16 @@ export const usersRelations = relations(users, ({ one, many }) => ({
   moderationReportsFiled: many(moderationReports, { relationName: 'reporterUser' }),
   moderationReportsAgainst: many(moderationReports, { relationName: 'reportedUser' }),
   moderationActionsReceived: many(moderationActions, { relationName: 'targetUser' }),
-  moderationActionsExecuted: many(moderationActions, { relationName: 'executingUser' })
+  moderationActionsExecuted: many(moderationActions, { relationName: 'executingUser' }),
+  proposedInterventions: many(trainingInterventions, { relationName: 'interventionProposer' }),
+  approvedInterventions: many(trainingInterventions, { relationName: 'interventionApprover' }),
+  trainingInterventionParticipations: many(trainingInterventionParticipants),
+  verifiedTrainingInterventions: many(trainingInterventionParticipants, { relationName: 'interventionVerifier' }),
+  reviewedFairnessCases: many(fairnessReviewCases),
+  createdReportTemplates: many(institutionalReportTemplates),
+  generatedReportRuns: many(institutionalReportRuns),
+  createdOutreachCampaigns: many(outreachCampaigns, { relationName: 'campaignCreator' }),
+  approvedOutreachCampaigns: many(outreachCampaigns, { relationName: 'campaignApprover' })
 }));
 
 export const documentsRelations = relations(documents, ({ one, many }) => ({
@@ -4016,7 +4513,10 @@ export const studentsRelations = relations(students, ({ one, many }) => ({
   applications: many(applications),
   gapAnalyses: many(skillGapAnalyses),
   predictions: many(placementPredictions),
-  recommendations: many(learningRecommendations)
+  recommendations: many(learningRecommendations),
+  trainingInterventions: many(trainingInterventionParticipants),
+  correctionRequests: many(academicCorrectionRequests),
+  customLinks: many(studentCustomLinks)
 }));
 
 export const skillsRelations = relations(skills, ({ many }) => ({
@@ -4092,7 +4592,8 @@ export const academicSemestersRelations = relations(academicSemesters, ({ one })
 }));
 
 export const companiesRelations = relations(companies, ({ many }) => ({
-  jobRoles: many(jobRoles)
+  jobRoles: many(jobRoles),
+  outreachCampaignRecipients: many(outreachCampaignRecipients)
 }));
 
 export const jobRolesRelations = relations(jobRoles, ({ one, many }) => ({
@@ -4128,7 +4629,8 @@ export const placementDrivesRelations = relations(placementDrives, ({ one, many 
     references: [jobRoles.id]
   }),
   applications: many(applications),
-  predictions: many(placementPredictions)
+  predictions: many(placementPredictions),
+  fairnessReviewCases: many(fairnessReviewCases)
 }));
 
 export const applicationsRelations = relations(applications, ({ one, many }) => ({
@@ -5043,6 +5545,145 @@ export const moderationActionsRelations = relations(moderationActions, ({ one })
   })
 }));
 
+// ============================================================================
+// Phase 17 Relations
+// ============================================================================
+
+export const institutionalMetricSnapshotsRelations = relations(institutionalMetricSnapshots, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [institutionalMetricSnapshots.tenantId],
+    references: [tenants.id]
+  })
+}));
+
+export const trainingInterventionsRelations = relations(trainingInterventions, ({ one, many }) => ({
+  tenant: one(tenants, {
+    fields: [trainingInterventions.tenantId],
+    references: [tenants.id]
+  }),
+  proposer: one(users, {
+    fields: [trainingInterventions.proposedBy],
+    references: [users.id],
+    relationName: 'interventionProposer'
+  }),
+  approver: one(users, {
+    fields: [trainingInterventions.approvedBy],
+    references: [users.id],
+    relationName: 'interventionApprover'
+  }),
+  participants: many(trainingInterventionParticipants)
+}));
+
+export const trainingInterventionParticipantsRelations = relations(trainingInterventionParticipants, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [trainingInterventionParticipants.tenantId],
+    references: [tenants.id]
+  }),
+  intervention: one(trainingInterventions, {
+    fields: [trainingInterventionParticipants.interventionId],
+    references: [trainingInterventions.id]
+  }),
+  student: one(students, {
+    fields: [trainingInterventionParticipants.studentId],
+    references: [students.id]
+  }),
+  user: one(users, {
+    fields: [trainingInterventionParticipants.userId],
+    references: [users.id]
+  }),
+  verifier: one(users, {
+    fields: [trainingInterventionParticipants.verifiedBy],
+    references: [users.id],
+    relationName: 'interventionVerifier'
+  })
+}));
+
+export const fairnessReviewCasesRelations = relations(fairnessReviewCases, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [fairnessReviewCases.tenantId],
+    references: [tenants.id]
+  }),
+  drive: one(placementDrives, {
+    fields: [fairnessReviewCases.driveId],
+    references: [placementDrives.id]
+  }),
+  reviewer: one(users, {
+    fields: [fairnessReviewCases.reviewedBy],
+    references: [users.id]
+  })
+}));
+
+export const institutionalReportTemplatesRelations = relations(institutionalReportTemplates, ({ one, many }) => ({
+  tenant: one(tenants, {
+    fields: [institutionalReportTemplates.tenantId],
+    references: [tenants.id]
+  }),
+  creator: one(users, {
+    fields: [institutionalReportTemplates.createdBy],
+    references: [users.id]
+  }),
+  runs: many(institutionalReportRuns)
+}));
+
+export const institutionalReportRunsRelations = relations(institutionalReportRuns, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [institutionalReportRuns.tenantId],
+    references: [tenants.id]
+  }),
+  template: one(institutionalReportTemplates, {
+    fields: [institutionalReportRuns.templateId],
+    references: [institutionalReportTemplates.id]
+  }),
+  generator: one(users, {
+    fields: [institutionalReportRuns.generatedBy],
+    references: [users.id]
+  })
+}));
+
+export const outreachCampaignsRelations = relations(outreachCampaigns, ({ one, many }) => ({
+  tenant: one(tenants, {
+    fields: [outreachCampaigns.tenantId],
+    references: [tenants.id]
+  }),
+  creator: one(users, {
+    fields: [outreachCampaigns.createdBy],
+    references: [users.id],
+    relationName: 'campaignCreator'
+  }),
+  approver: one(users, {
+    fields: [outreachCampaigns.approvedBy],
+    references: [users.id],
+    relationName: 'campaignApprover'
+  }),
+  recipients: many(outreachCampaignRecipients)
+}));
+
+export const outreachCampaignRecipientsRelations = relations(outreachCampaignRecipients, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [outreachCampaignRecipients.tenantId],
+    references: [tenants.id]
+  }),
+  campaign: one(outreachCampaigns, {
+    fields: [outreachCampaignRecipients.campaignId],
+    references: [outreachCampaigns.id]
+  }),
+  company: one(companies, {
+    fields: [outreachCampaignRecipients.companyId],
+    references: [companies.id]
+  })
+}));
+
+export const institutionalDataQualityEventsRelations = relations(institutionalDataQualityEvents, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [institutionalDataQualityEvents.tenantId],
+    references: [tenants.id]
+  }),
+  resolver: one(users, {
+    fields: [institutionalDataQualityEvents.resolvedBy],
+    references: [users.id]
+  })
+}));
+
 
 // ============================================================================
 // Exported Inferred Types for Safety
@@ -5484,6 +6125,160 @@ export type CollaborationRoomStatus = (typeof collaborationRoomStatusEnum.enumVa
 export type ModerationReportStatus = (typeof moderationReportStatusEnum.enumValues)[number];
 export type ModerationActionType = (typeof moderationActionEnum.enumValues)[number];
 export type ModerationActionEnum = (typeof moderationActionEnum.enumValues)[number];
+
+// ============================================================================
+// Phase 17 — Institutional Governance, Accreditation & Outreach Types
+// ============================================================================
+
+export type InstitutionalMetricSnapshot = typeof institutionalMetricSnapshots.$inferSelect;
+export type NewInstitutionalMetricSnapshot = typeof institutionalMetricSnapshots.$inferInsert;
+export type InstitutionalMetricSnapshots = InstitutionalMetricSnapshot;
+export type NewInstitutionalMetricSnapshots = NewInstitutionalMetricSnapshot;
+
+export type TrainingIntervention = typeof trainingInterventions.$inferSelect;
+export type NewTrainingIntervention = typeof trainingInterventions.$inferInsert;
+export type TrainingInterventions = TrainingIntervention;
+export type NewTrainingInterventions = NewTrainingIntervention;
+
+export type TrainingInterventionParticipant = typeof trainingInterventionParticipants.$inferSelect;
+export type NewTrainingInterventionParticipant = typeof trainingInterventionParticipants.$inferInsert;
+export type TrainingInterventionParticipants = TrainingInterventionParticipant;
+export type NewTrainingInterventionParticipants = NewTrainingInterventionParticipant;
+
+export type FairnessReviewCase = typeof fairnessReviewCases.$inferSelect;
+export type NewFairnessReviewCase = typeof fairnessReviewCases.$inferInsert;
+export type FairnessReviewCases = FairnessReviewCase;
+export type NewFairnessReviewCases = NewFairnessReviewCase;
+
+export type InstitutionalReportTemplate = typeof institutionalReportTemplates.$inferSelect;
+export type NewInstitutionalReportTemplate = typeof institutionalReportTemplates.$inferInsert;
+export type InstitutionalReportTemplates = InstitutionalReportTemplate;
+export type NewInstitutionalReportTemplates = NewInstitutionalReportTemplate;
+
+export type InstitutionalReportRun = typeof institutionalReportRuns.$inferSelect;
+export type NewInstitutionalReportRun = typeof institutionalReportRuns.$inferInsert;
+export type InstitutionalReportRuns = InstitutionalReportRun;
+export type NewInstitutionalReportRuns = NewInstitutionalReportRun;
+
+export type OutreachCampaign = typeof outreachCampaigns.$inferSelect;
+export type NewOutreachCampaign = typeof outreachCampaigns.$inferInsert;
+export type OutreachCampaigns = OutreachCampaign;
+export type NewOutreachCampaigns = NewOutreachCampaign;
+
+export type OutreachCampaignRecipient = typeof outreachCampaignRecipients.$inferSelect;
+export type NewOutreachCampaignRecipient = typeof outreachCampaignRecipients.$inferInsert;
+export type OutreachCampaignRecipients = OutreachCampaignRecipient;
+export type NewOutreachCampaignRecipients = NewOutreachCampaignRecipient;
+
+export type InstitutionalDataQualityEvent = typeof institutionalDataQualityEvents.$inferSelect;
+export type NewInstitutionalDataQualityEvent = typeof institutionalDataQualityEvents.$inferInsert;
+export type InstitutionalDataQualityEvents = InstitutionalDataQualityEvent;
+export type NewInstitutionalDataQualityEvents = NewInstitutionalDataQualityEvent;
+
+// ============================================================================
+// Student Profile Management — New Tables (Additive Only)
+// ============================================================================
+
+/**
+ * academicCorrectionRequests — Students request corrections to locked academic fields.
+ */
+export const academicCorrectionRequests = pgTable('academic_correction_requests', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  studentId: uuid('student_id')
+    .notNull()
+    .references(() => students.id, { onDelete: 'cascade' }),
+  tenantId: uuid('tenant_id')
+    .notNull()
+    .references(() => tenants.id, { onDelete: 'cascade' }),
+  fieldName: varchar('field_name', { length: 100 }).notNull(),
+  currentValue: text('current_value'),
+  requestedValue: text('requested_value').notNull(),
+  reason: text('reason').notNull(),
+  status: varchar('status', { length: 50 }).default('PENDING').notNull(),
+  reviewedBy: uuid('reviewed_by').references(() => users.id, { onDelete: 'set null' }),
+  reviewNote: text('review_note'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
+});
+
+/**
+ * studentCustomLinks — Additional custom professional links beyond fixed URL columns.
+ */
+export const studentCustomLinks = pgTable(
+  'student_custom_links',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    studentId: uuid('student_id')
+      .notNull()
+      .references(() => students.id, { onDelete: 'cascade' }),
+    tenantId: uuid('tenant_id')
+      .notNull()
+      .references(() => tenants.id, { onDelete: 'cascade' }),
+    platform: varchar('platform', { length: 100 }).notNull(),
+    url: varchar('url', { length: 500 }).notNull(),
+    label: varchar('label', { length: 200 }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+  },
+  (table) => [
+    uniqueIndex('uq_student_custom_links_student_platform').on(table.studentId, table.platform)
+  ]
+);
+
+// ============================================================================
+// Student Profile Management — Relations
+// ============================================================================
+
+export const academicCorrectionRequestsRelations = relations(academicCorrectionRequests, ({ one }) => ({
+  student: one(students, {
+    fields: [academicCorrectionRequests.studentId],
+    references: [students.id]
+  }),
+  tenant: one(tenants, {
+    fields: [academicCorrectionRequests.tenantId],
+    references: [tenants.id]
+  }),
+  reviewer: one(users, {
+    fields: [academicCorrectionRequests.reviewedBy],
+    references: [users.id]
+  })
+}));
+
+export const studentCustomLinksRelations = relations(studentCustomLinks, ({ one }) => ({
+  student: one(students, {
+    fields: [studentCustomLinks.studentId],
+    references: [students.id]
+  }),
+  tenant: one(tenants, {
+    fields: [studentCustomLinks.tenantId],
+    references: [tenants.id]
+  })
+}));
+
+// ============================================================================
+// Student Profile Management — Types
+// ============================================================================
+
+export type AcademicCorrectionRequest = typeof academicCorrectionRequests.$inferSelect;
+export type NewAcademicCorrectionRequest = typeof academicCorrectionRequests.$inferInsert;
+export type StudentCustomLink = typeof studentCustomLinks.$inferSelect;
+export type NewStudentCustomLink = typeof studentCustomLinks.$inferInsert;
+
+// Phase 17 Enum Value Types
+export type InterventionStatus = (typeof interventionStatusEnum.enumValues)[number];
+export type InterventionStatusEnum = (typeof interventionStatusEnum.enumValues)[number];
+
+export type FairnessReviewStatus = (typeof fairnessReviewStatusEnum.enumValues)[number];
+export type FairnessReviewStatusEnum = (typeof fairnessReviewStatusEnum.enumValues)[number];
+
+export type ReportFormat = (typeof reportFormatEnum.enumValues)[number];
+export type ReportFormatEnum = (typeof reportFormatEnum.enumValues)[number];
+
+export type ReportCategory = (typeof reportCategoryEnum.enumValues)[number];
+export type ReportCategoryEnum = (typeof reportCategoryEnum.enumValues)[number];
+
+export type OutreachCampaignStatus = (typeof outreachCampaignStatusEnum.enumValues)[number];
+export type OutreachCampaignStatusEnum = (typeof outreachCampaignStatusEnum.enumValues)[number];
+
 
 
 

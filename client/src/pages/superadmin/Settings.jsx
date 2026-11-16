@@ -81,7 +81,7 @@ export default function Settings() {
         {/* Section 1: Platform Configuration */}
         <Card>
           <div className="flex items-center gap-2 pb-4 border-b border-slate-100">
-            <Globe className="h-4 w-4 text-indigo-600" />
+            <Globe className="h-4 w-4 text-[#009669]" />
             <div>
               <h3 className="font-bold text-slate-900 text-sm">Platform Identification & Limits</h3>
               <p className="text-xs text-slate-500">Core parameters defining the multi-institution environment.</p>
@@ -126,7 +126,7 @@ export default function Settings() {
         {/* Section 2: Security & Authentication Policies */}
         <Card>
           <div className="flex items-center gap-2 pb-4 border-b border-slate-100">
-            <Shield className="h-4 w-4 text-purple-600" />
+            <Shield className="h-4 w-4 text-[#009669]" />
             <div>
               <h3 className="font-bold text-slate-900 text-sm">Security & Access Policies</h3>
               <p className="text-xs text-slate-500">Authentication constraints, MFA enforcement, and session limits.</p>
@@ -145,7 +145,7 @@ export default function Settings() {
                 type="checkbox"
                 checked={securityPolicies.enforceMfaAdmins}
                 onChange={(e) => setSecurityPolicies({ ...securityPolicies, enforceMfaAdmins: e.target.checked })}
-                className="h-5 w-5 rounded text-indigo-600 border-slate-300 focus:ring-indigo-500 cursor-pointer"
+                className="h-5 w-5 rounded text-[#009669] border-slate-300 focus:ring-[#02E8A7] cursor-pointer"
               />
             </div>
 
@@ -266,7 +266,7 @@ export default function Settings() {
                 type="checkbox"
                 checked={maintenance.allowSuperAdminBypass}
                 onChange={(e) => setMaintenance({ ...maintenance, allowSuperAdminBypass: e.target.checked })}
-                className="h-4 w-4 rounded text-indigo-600 border-slate-300 focus:ring-indigo-500"
+                className="h-4 w-4 rounded text-[#009669] border-slate-300 focus:ring-[#02E8A7]"
               />
               <label htmlFor="bypassSuper" className="text-xs text-slate-700 font-medium select-none">
                 Permit Super Administrators to bypass maintenance gate

@@ -1,0 +1,169 @@
+/**
+ * CareerSync Official Design Tokens
+ * Source: CareerSync Design System Specification (M3 / Corporate Mint & Cyan Edition)
+ */
+
+:root {
+  /* =========================================================================
+     1. CareerSync Core Color System (YAML Specification)
+     ========================================================================= */
+  --surface: #e2fffe;
+  --surface-dim: #aae5e5;
+  --surface-bright: #e2fffe;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #c3fffe;
+  --surface-container: #bdf9f9;
+  --surface-container-high: #b8f3f3;
+  --surface-container-highest: #b2eded;
+  --surface-variant: #b2eded;
+
+  --on-surface: #002020;
+  --on-surface-variant: #3e494a;
+  --inverse-surface: #003737;
+  --inverse-on-surface: #c0fcfc;
+  --outline: #6e797b;
+  --outline-variant: #bdc9ca;
+  --surface-tint: #006973;
+
+  /* Primary */
+  --primary: #006973;
+  --on-primary: #ffffff;
+  --primary-container: #89eefc;
+  --on-primary-container: #006d77;
+  --inverse-primary: #6fd5e3;
+
+  /* Secondary */
+  --secondary: #006b5b;
+  --on-secondary: #ffffff;
+  --secondary-container: #2dfad8;
+  --on-secondary-container: #00705f;
+
+  /* Tertiary */
+  --tertiary: #7d5800;
+  --on-tertiary: #ffffff;
+  --tertiary-container: #ffd99a;
+  --on-tertiary-container: #815b00;
+
+  /* Error */
+  --error: #ba1a1a;
+  --on-error: #ffffff;
+  --error-container: #ffdad6;
+  --on-error-container: #93000a;
+
+  /* Fixed Roles */
+  --primary-fixed: #90f1ff;
+  --primary-fixed-dim: #6fd5e3;
+  --on-primary-fixed: #001f23;
+  --on-primary-fixed-variant: #004f57;
+
+  --secondary-fixed: #34fddb;
+  --secondary-fixed-dim: #00dfbf;
+  --on-secondary-fixed: #00201a;
+  --on-secondary-fixed-variant: #005144;
+
+  --tertiary-fixed: #ffdea9;
+  --tertiary-fixed-dim: #f6bd51;
+  --on-tertiary-fixed: #271900;
+  --on-tertiary-fixed-variant: #5e4100;
+
+  /* Canvas Background & Contrast */
+  --background: #e2fffe;
+  --on-background: #002020;
+
+  /* =========================================================================
+     2. Spacing Scale (YAML Specification)
+     ========================================================================= */
+  --gutter: 1rem;
+  --margin: 1.5rem;
+  --space-xs: 0.25rem;  /* 4px */
+  --space-sm: 0.5rem;   /* 8px */
+  --space-md: 1rem;     /* 16px */
+  --space-lg: 1.5rem;   /* 24px */
+  --space-xl: 2rem;     /* 32px */
+
+  /* Aliased standard spacing */
+  --spacing-xs: var(--space-xs);
+  --spacing-sm: var(--space-sm);
+  --spacing-md: var(--space-md);
+  --spacing-lg: var(--space-lg);
+  --spacing-xl: var(--space-xl);
+
+  /* =========================================================================
+     3. Shapes & Rounded Scale (YAML Specification)
+     ========================================================================= */
+  --rounded-sm: 0.25rem;   /* 4px */
+  --rounded-default: 0.5rem;/* 8px */
+  --rounded-md: 0.75rem;   /* 12px */
+  --rounded-lg: 1rem;      /* 16px */
+  --rounded-xl: 1.5rem;    /* 24px */
+  --rounded-full: 9999px;
+
+  /* Aliased standard radii */
+  --radius-xs: var(--rounded-sm);
+  --radius-sm: var(--rounded-default);
+  --radius-md: var(--rounded-md);
+  --radius-lg: var(--rounded-lg);
+  --radius-xl: var(--rounded-xl);
+  --radius-full: var(--rounded-full);
+
+  /* =========================================================================
+     4. Aliased Semantic Variables for Compatibility
+     ========================================================================= */
+  --color-primary-mint: #02E8A7;
+  --color-primary-cyan: #89eefc;
+  --color-primary-mint-hover: #00D295;
+  --color-primary-mint-light: #67F5CD;
+  --color-primary-mint-dark: #009669;
+
+  --color-secondary-aqua: #11F1CF;
+  --color-secondary-aqua-hover: #0EDBC0;
+  --color-secondary-aqua-light: #84F8E6;
+
+  --color-tertiary-amber: #FFC558;
+  --color-tertiary-amber-hover: #F8B638;
+  --color-tertiary-amber-light: #FFE29F;
+
+  --color-neutral: #B6F1F1;
+  --color-neutral-dark: #7ED6D6;
+
+  --color-background: var(--background);
+  --color-surface: #FFFFFF;
+  --color-surface-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-high: var(--surface-container-high);
+  --color-surface-elevated: #FFFFFF;
+
+  --color-text-main: var(--on-surface);
+  --color-text-secondary: var(--on-surface-variant);
+  --color-text-muted: var(--outline);
+  --color-text-inverse: #FFFFFF;
+  --color-text-on-mint: #002020;
+  --color-text-on-aqua: #002020;
+
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+  --color-outline-subtle: rgba(110, 121, 123, 0.2);
+  --color-border-card: rgba(110, 121, 123, 0.18);
+
+  /* Semantic Feedback */
+  --color-success: #02E8A7;
+  --color-success-bg: #E6FAF4;
+  --color-success-text: #004D36;
+
+  --color-warning: #FFC558;
+  --color-warning-bg: #FFF8E7;
+  --color-warning-text: #7A4E00;
+
+  --color-error: var(--error);
+  --color-error-bg: var(--error-container);
+  --color-error-text: var(--on-error-container);
+
+  --color-info: var(--primary-container);
+  --color-info-bg: #E3FFFB;
+  --color-info-text: var(--on-primary-container);
+
+  /* Elevation Shadows */
+  --elevation-1: 0 1px 2px 0 rgba(0, 32, 32, 0.04), 0 1px 3px 1px rgba(0, 32, 32, 0.02);
+  --elevation-2: 0 4px 6px -1px rgba(0, 32, 32, 0.06), 0 2px 4px -2px rgba(0, 32, 32, 0.04);
+  --elevation-3: 0 10px 15px -3px rgba(0, 32, 32, 0.08), 0 4px 6px -4px rgba(0, 32, 32, 0.04);
+}

@@ -128,7 +128,7 @@ export default function CandidateDiscovery() {
         action={
           <div className="flex items-center gap-2">
             <span className="text-xs text-slate-500">
-              Shortlisted: <strong className="text-indigo-600">{shortlistedSet.size} Candidates</strong>
+              Shortlisted: <strong className="text-[#009669]">{shortlistedSet.size} Candidates</strong>
             </span>
             <Button to="/recruiter/shortlists" variant="primary" size="sm">
               <UserCheck className="h-4 w-4 mr-1.5" />
@@ -154,7 +154,7 @@ export default function CandidateDiscovery() {
               onClick={() => setSelectedSkill(sk)}
               className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${
                 selectedSkill === sk
-                  ? 'bg-indigo-600 text-white'
+                  ? 'bg-[#02E8A7] text-[#002020] font-bold'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
@@ -170,7 +170,7 @@ export default function CandidateDiscovery() {
             placeholder="Search by candidate or skill..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-lg border border-slate-200 bg-slate-50 py-1.5 pl-8.5 pr-3 text-xs text-slate-900 focus:border-indigo-500 focus:outline-hidden"
+            className="w-full rounded-lg border border-slate-200 bg-slate-50 py-1.5 pl-8.5 pr-3 text-xs text-slate-900 focus:border-[#02E8A7] focus:outline-hidden"
           />
         </div>
       </div>
@@ -196,9 +196,9 @@ export default function CandidateDiscovery() {
                 </div>
 
                 {/* Match Justification */}
-                <div className="mt-3 p-2.5 rounded-lg bg-indigo-50/50 border border-indigo-100 text-xs text-slate-700">
-                  <span className="font-semibold text-indigo-900 block mb-0.5 flex items-center gap-1">
-                    <Sparkles className="h-3 w-3 text-indigo-600" />
+                <div className="mt-3 p-2.5 rounded-lg bg-[#BDF9F9]/30 border border-[#02E8A7]/30 text-xs text-slate-700">
+                  <span className="font-semibold text-[#002020] block mb-0.5 flex items-center gap-1">
+                    <Sparkles className="h-3 w-3 text-[#009669]" />
                     Explainable Match Rationale:
                   </span>
                   {cand.matchReason}

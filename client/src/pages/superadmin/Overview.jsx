@@ -156,12 +156,12 @@ export default function Overview() {
           <div>
             <div className="flex items-center justify-between pb-4 border-b border-slate-100">
               <div className="flex items-center gap-2">
-                <Building2 className="h-4 w-4 text-indigo-600" />
+                <Building2 className="h-4 w-4 text-[#009669]" />
                 <h3 className="font-bold text-slate-900 text-sm">Recently Registered Colleges</h3>
               </div>
               <Link
                 to="/super-admin/colleges"
-                className="text-xs font-semibold text-indigo-600 hover:text-indigo-700 flex items-center gap-1"
+                className="text-xs font-semibold text-[#009669] hover:text-[#004D36] flex items-center gap-1"
               >
                 View All Colleges <ArrowRight className="h-3.5 w-3.5" />
               </Link>
@@ -211,12 +211,12 @@ export default function Overview() {
           <div>
             <div className="flex items-center justify-between pb-4 border-b border-slate-100">
               <div className="flex items-center gap-2">
-                <History className="h-4 w-4 text-purple-600" />
+                <History className="h-4 w-4 text-[#009669]" />
                 <h3 className="font-bold text-slate-900 text-sm">Platform Audit Trail Stream</h3>
               </div>
               <Link
                 to="/super-admin/audit-logs"
-                className="text-xs font-semibold text-purple-600 hover:text-purple-700 flex items-center gap-1"
+                className="text-xs font-semibold text-[#009669] hover:text-[#004D36] flex items-center gap-1"
               >
                 Full Audit Trail <ArrowRight className="h-3.5 w-3.5" />
               </Link>

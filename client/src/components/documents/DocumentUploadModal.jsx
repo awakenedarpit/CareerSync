@@ -83,7 +83,7 @@ export default function DocumentUploadModal({ isOpen, onClose, onSuccess, initia
       <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl border border-slate-100">
         <div className="flex items-center justify-between pb-4 border-b border-slate-100">
           <div className="flex items-center gap-2">
-            <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
+            <div className="p-2 bg-[#BDF9F9]/30 text-[#009669] rounded-lg">
               <UploadCloud className="h-5 w-5" />
             </div>
             <div>
@@ -118,7 +118,7 @@ export default function DocumentUploadModal({ isOpen, onClose, onSuccess, initia
               accept=".pdf,.png,.jpg,.jpeg,.docx"
             />
             <div className="flex flex-col items-center justify-center space-y-2 pointer-events-none">
-              <div className="p-3 bg-white rounded-full shadow-xs border border-slate-100 text-indigo-600">
+              <div className="p-3 bg-white rounded-full shadow-xs border border-slate-100 text-[#009669]">
                 <UploadCloud className="h-6 w-6" />
               </div>
               <p className="text-xs font-semibold text-slate-700">
@@ -131,7 +131,7 @@ export default function DocumentUploadModal({ isOpen, onClose, onSuccess, initia
           {selectedFile && (
             <div className="flex items-center justify-between p-3 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-700">
               <div className="flex items-center gap-2 truncate">
-                <FileText className="h-4 w-4 text-indigo-600 shrink-0" />
+                <FileText className="h-4 w-4 text-[#009669] shrink-0" />
                 <span className="truncate font-medium">{selectedFile.name}</span>
               </div>
               <span className="text-[11px] text-slate-400 shrink-0 ml-2">
@@ -148,7 +148,7 @@ export default function DocumentUploadModal({ isOpen, onClose, onSuccess, initia
               </div>
               <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
                 <div
-                  className="bg-indigo-600 h-2 transition-all duration-300 rounded-full"
+                  className="bg-[#02E8A7] h-2 transition-all duration-300 rounded-full"
                   style={{ width: `${progress}%` }}
                 />
               </div>

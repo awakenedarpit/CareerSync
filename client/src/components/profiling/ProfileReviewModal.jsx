@@ -311,7 +311,7 @@ export default function ProfileReviewModal({
                 <button
                   type="button"
                   onClick={selectAll}
-                  className="text-xs font-medium text-indigo-600 hover:text-indigo-800 transition-colors"
+                  className="text-xs font-medium text-[#009669] hover:text-[#002020] transition-colors"
                 >
                   Select All
                 </button>
@@ -350,7 +350,7 @@ export default function ProfileReviewModal({
                       key={index}
                       className={`p-3 rounded-xl border transition-all ${
                         isChecked
-                          ? 'bg-white border-indigo-200 shadow-2xs'
+                          ? 'bg-white border-[#02E8A7]/40 shadow-2xs'
                           : 'bg-slate-50/70 border-slate-200 opacity-60'
                       }`}
                     >
@@ -360,7 +360,7 @@ export default function ProfileReviewModal({
                             type="checkbox"
                             checked={isChecked}
                             onChange={() => toggleSkill(skill.name)}
-                            className="mt-1 h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                            className="mt-1 h-4 w-4 rounded border-slate-300 text-[#009669] focus:ring-[#02E8A7] cursor-pointer"
                           />
                           <div className="space-y-1">
                             <div className="flex items-center gap-2 flex-wrap">
@@ -390,7 +390,7 @@ export default function ProfileReviewModal({
                           <button
                             type="button"
                             onClick={() => toggleExplanation(skill.name)}
-                            className="p-1 text-slate-400 hover:text-indigo-600 rounded transition-colors"
+                            className="p-1 text-slate-400 hover:text-[#009669] rounded transition-colors"
                             title="Toggle AI justification explanation"
                           >
                             {isExpanded ? (
@@ -406,7 +406,7 @@ export default function ProfileReviewModal({
                       {skill.explanation && isExpanded && (
                         <div className="mt-2.5 pt-2 border-t border-slate-100 text-[11px] text-slate-600 bg-slate-50/60 p-2 rounded-lg">
                           <div className="flex items-center gap-1 text-[10px] font-semibold text-slate-500 uppercase tracking-wider mb-0.5">
-                            <Info className="w-3 h-3 text-indigo-500" />
+                            <Info className="w-3 h-3 text-[#009669]" />
                             <span>AI Extraction Rationale</span>
                           </div>
                           <p className="leading-relaxed">{skill.explanation}</p>

@@ -44,21 +44,21 @@ export default function RecruiterSettings() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card className="p-6 border-slate-200">
           <div className="flex items-center gap-2 mb-4">
-            <Bell className="h-4 w-4 text-indigo-600" />
+            <Bell className="h-4 w-4 text-[#009669]" />
             <h3 className="text-sm font-bold text-slate-900">Communication Alerts</h3>
           </div>
 
           <div className="space-y-3 text-xs">
             <label className="flex items-center gap-2">
-              <input type="checkbox" defaultChecked className="h-4 w-4 rounded text-indigo-600" />
+              <input type="checkbox" defaultChecked className="h-4 w-4 rounded text-[#009669]" />
               <span>Email notification when an eligible student applies to an active job opening</span>
             </label>
             <label className="flex items-center gap-2">
-              <input type="checkbox" defaultChecked className="h-4 w-4 rounded text-indigo-600" />
+              <input type="checkbox" defaultChecked className="h-4 w-4 rounded text-[#009669]" />
               <span>Interview schedule confirmations and reminder alerts</span>
             </label>
             <label className="flex items-center gap-2">
-              <input type="checkbox" defaultChecked className="h-4 w-4 rounded text-indigo-600" />
+              <input type="checkbox" defaultChecked className="h-4 w-4 rounded text-[#009669]" />
               <span>Daily summary of newly verified candidates matching your active requisitions</span>
             </label>
           </div>
@@ -66,7 +66,7 @@ export default function RecruiterSettings() {
 
         <Card className="p-6 border-slate-200">
           <div className="flex items-center gap-2 mb-4">
-            <Lock className="h-4 w-4 text-indigo-600" />
+            <Lock className="h-4 w-4 text-[#009669]" />
             <h3 className="text-sm font-bold text-slate-900">Security Credentials</h3>
           </div>
 

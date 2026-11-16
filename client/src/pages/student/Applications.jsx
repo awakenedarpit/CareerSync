@@ -19,100 +19,106 @@ import DataTable from '../../components/ui/DataTable';
 import Badge from '../../components/ui/Badge';
 import StatusBadge from '../../components/ui/StatusBadge';
 import Modal from '../../components/ui/Modal';
+import authService from '../../services/authService';
+
+const DEMO_DRIVES = [
+  {
+    id: 'DRV-2024-001',
+    company: 'Google',
+    role: 'Associate Software Engineer (L3)',
+    package: '24.5 LPA',
+    location: 'Bengaluru / Hyderabad',
+    date: '28 Nov 2024',
+    status: 'Shortlisted',
+    eligible: true,
+    eligibilityReason: 'CGPA: 8.4 ≥ 8.0, 5 Verified skills met (DSA, JS, DB). Round 1 Technical Test passed.',
+    appliedDate: '02 Nov 2024'
+  },
+  {
+    id: 'DRV-2024-002',
+    company: 'TCS Digital',
+    role: 'System Engineer - Digital Cadre',
+    package: '9.2 LPA',
+    location: 'Pan India',
+    date: '15 Nov 2024',
+    status: 'Selected',
+    eligible: true,
+    eligibilityReason: 'Full match. Offer letter issued and verified by T&P cell.',
+    appliedDate: '15 Oct 2024'
+  },
+  {
+    id: 'DRV-2024-003',
+    company: 'Razorpay',
+    role: 'Backend Engineering Intern / FTE',
+    package: '18.0 LPA',
+    location: 'Bengaluru',
+    date: '05 Dec 2024',
+    status: 'Eligible',
+    eligible: true,
+    eligibilityReason: 'CGPA ≥ 7.5 and verified Node.js/PostgreSQL credentials matched.',
+    appliedDate: 'Not Applied'
+  },
+  {
+    id: 'DRV-2024-004',
+    company: 'Microsoft',
+    role: 'Software Development Engineer',
+    package: '28.0 LPA',
+    location: 'Hyderabad',
+    date: '12 Dec 2024',
+    status: 'Eligible',
+    eligible: true,
+    eligibilityReason: 'All criteria satisfied. Registrations open.',
+    appliedDate: 'Not Applied'
+  },
+  {
+    id: 'DRV-2024-005',
+    company: 'Amazon Web Services',
+    role: 'Cloud Support Associate',
+    package: '16.0 LPA',
+    location: 'Bengaluru',
+    date: '02 Dec 2024',
+    status: 'Applied',
+    eligible: true,
+    eligibilityReason: 'Application submitted. Resume and verified GitHub portfolio forwarded.',
+    appliedDate: '08 Nov 2024'
+  },
+  {
+    id: 'DRV-2024-006',
+    company: 'Goldman Sachs',
+    role: 'Summer Analyst / FTE',
+    package: '26.0 LPA',
+    location: 'Bengaluru',
+    date: '18 Dec 2024',
+    status: 'Ineligible',
+    eligible: false,
+    eligibilityReason: 'Requires CGPA ≥ 8.5 (Current CGPA: 8.42 - gap of 0.08 points).',
+    appliedDate: 'N/A'
+  },
+  {
+    id: 'DRV-2024-007',
+    company: 'Infosys',
+    role: 'Specialist Programmer',
+    package: '9.5 LPA',
+    location: 'Pune / Mysore',
+    date: '22 Nov 2024',
+    status: 'Applied',
+    eligible: true,
+    eligibilityReason: 'Application under review with technical screening team.',
+    appliedDate: '01 Nov 2024'
+  }
+];
 
 export default function Applications() {
+  const currentUser = authService.getCurrentUser();
+  const isDemoStudent = ['aditya.sharma@apex.edu', 'student@apex.edu'].includes(currentUser?.email);
+
   const [filterStatus, setFilterStatus] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedDrive, setSelectedDrive] = useState(null);
   const [showApplyModal, setShowApplyModal] = useState(false);
   const [appliedSuccess, setAppliedSuccess] = useState(false);
 
-  const [drives, setDrives] = useState([
-    {
-      id: 'DRV-2024-001',
-      company: 'Google',
-      role: 'Associate Software Engineer (L3)',
-      package: '24.5 LPA',
-      location: 'Bengaluru / Hyderabad',
-      date: '28 Nov 2024',
-      status: 'Shortlisted',
-      eligible: true,
-      eligibilityReason: 'CGPA: 8.4 ≥ 8.0, 5 Verified skills met (DSA, JS, DB). Round 1 Technical Test passed.',
-      appliedDate: '02 Nov 2024'
-    },
-    {
-      id: 'DRV-2024-002',
-      company: 'TCS Digital',
-      role: 'System Engineer - Digital Cadre',
-      package: '9.2 LPA',
-      location: 'Pan India',
-      date: '15 Nov 2024',
-      status: 'Selected',
-      eligible: true,
-      eligibilityReason: 'Full match. Offer letter issued and verified by T&P cell.',
-      appliedDate: '15 Oct 2024'
-    },
-    {
-      id: 'DRV-2024-003',
-      company: 'Razorpay',
-      role: 'Backend Engineering Intern / FTE',
-      package: '18.0 LPA',
-      location: 'Bengaluru',
-      date: '05 Dec 2024',
-      status: 'Eligible',
-      eligible: true,
-      eligibilityReason: 'CGPA ≥ 7.5 and verified Node.js/PostgreSQL credentials matched.',
-      appliedDate: 'Not Applied'
-    },
-    {
-      id: 'DRV-2024-004',
-      company: 'Microsoft',
-      role: 'Software Development Engineer',
-      package: '28.0 LPA',
-      location: 'Hyderabad',
-      date: '12 Dec 2024',
-      status: 'Eligible',
-      eligible: true,
-      eligibilityReason: 'All criteria satisfied. Registrations open.',
-      appliedDate: 'Not Applied'
-    },
-    {
-      id: 'DRV-2024-005',
-      company: 'Amazon Web Services',
-      role: 'Cloud Support Associate',
-      package: '16.0 LPA',
-      location: 'Bengaluru',
-      date: '02 Dec 2024',
-      status: 'Applied',
-      eligible: true,
-      eligibilityReason: 'Application submitted. Resume and verified GitHub portfolio forwarded.',
-      appliedDate: '08 Nov 2024'
-    },
-    {
-      id: 'DRV-2024-006',
-      company: 'Goldman Sachs',
-      role: 'Summer Analyst / FTE',
-      package: '26.0 LPA',
-      location: 'Bengaluru',
-      date: '18 Dec 2024',
-      status: 'Ineligible',
-      eligible: false,
-      eligibilityReason: 'Requires CGPA ≥ 8.5 (Current CGPA: 8.42 - gap of 0.08 points).',
-      appliedDate: 'N/A'
-    },
-    {
-      id: 'DRV-2024-007',
-      company: 'Infosys',
-      role: 'Specialist Programmer',
-      package: '9.5 LPA',
-      location: 'Pune / Mysore',
-      date: '22 Nov 2024',
-      status: 'Applied',
-      eligible: true,
-      eligibilityReason: 'Application under review with technical screening team.',
-      appliedDate: '01 Nov 2024'
-    }
-  ]);
+  const [drives, setDrives] = useState(() => (isDemoStudent ? DEMO_DRIVES : []));
 
   const handleApply = (drive) => {
     setSelectedDrive(drive);
@@ -180,7 +186,7 @@ export default function Applications() {
                 setSelectedDrive(row);
                 setShowApplyModal(true);
               }}
-              className="text-xs font-semibold text-indigo-600 hover:underline"
+              className="text-xs font-semibold text-[#009669] hover:underline"
             >
               View Details
             </button>
@@ -214,7 +220,7 @@ export default function Applications() {
               onClick={() => setFilterStatus(st)}
               className={`px-3 py-1 rounded-lg text-xs font-medium capitalize transition-colors ${
                 filterStatus === st
-                  ? 'bg-indigo-600 text-white'
+                  ? 'bg-[#02E8A7] text-[#002020] font-bold'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
@@ -230,17 +236,25 @@ export default function Applications() {
             placeholder="Search drives or roles..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-lg border border-slate-200 bg-slate-50 py-1.5 pl-8.5 pr-3 text-xs text-slate-900 focus:border-indigo-500 focus:outline-hidden"
+            className="w-full rounded-lg border border-slate-200 bg-slate-50 py-1.5 pl-8.5 pr-3 text-xs text-slate-900 focus:border-[#02E8A7] focus:outline-hidden"
           />
         </div>
       </div>
 
-      {/* Drives DataTable */}
-      <DataTable
-        columns={columns}
-        data={filteredDrives}
-        pageSize={6}
-      />
+      {/* Drives DataTable or Empty State */}
+      {filteredDrives.length === 0 ? (
+        <Card className="p-12 text-center text-slate-400 border-slate-200 space-y-2">
+          <Briefcase className="h-10 w-10 text-slate-300 mx-auto" />
+          <p className="font-bold text-slate-700">No Applications Submitted Yet</p>
+          <p className="text-xs">Browse upcoming placement drives or check back when your college T&P cell announces new corporate drive schedules.</p>
+        </Card>
+      ) : (
+        <DataTable
+          columns={columns}
+          data={filteredDrives}
+          pageSize={6}
+        />
+      )}
 
       {/* Modal for Details / Apply */}
       <Modal
@@ -277,7 +291,7 @@ export default function Applications() {
               </div>
               <div>
                 <span className="text-slate-400 block">Current Status</span>
-                <strong className="text-indigo-600">{selectedDrive.status}</strong>
+                <strong className="text-[#009669]">{selectedDrive.status}</strong>
               </div>
             </div>
 

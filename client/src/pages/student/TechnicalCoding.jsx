@@ -193,7 +193,7 @@ export default function TechnicalCoding() {
                     onClick={() => setDifficultyFilter(lvl)}
                     className={`text-[10px] font-semibold px-2 py-0.5 rounded border ${
                       difficultyFilter === lvl
-                        ? 'bg-indigo-600 text-white border-indigo-600'
+                        ? 'bg-[#02E8A7] text-[#002020] font-bold border-indigo-600'
                         : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
                     }`}
                   >
@@ -212,7 +212,7 @@ export default function TechnicalCoding() {
                     onClick={() => selectProblem(p)}
                     className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium flex items-center justify-between border transition-all ${
                       isSelected
-                        ? 'bg-indigo-50 border-indigo-300 text-indigo-900 shadow-xs'
+                        ? 'bg-[#BDF9F9]/30 border-[#02E8A7]/50 text-[#002020] shadow-xs'
                         : 'bg-white border-slate-100 hover:border-slate-200 text-slate-700'
                     }`}
                   >
@@ -294,7 +294,7 @@ export default function TechnicalCoding() {
               <select
                 value={selectedLanguage}
                 onChange={(e) => handleLanguageChange(e.target.value)}
-                className="bg-slate-800 text-white text-xs font-medium rounded px-2.5 py-1 border border-slate-700 focus:outline-hidden focus:ring-1 focus:ring-indigo-500"
+                className="bg-slate-800 text-white text-xs font-medium rounded px-2.5 py-1 border border-slate-700 focus:outline-hidden focus:ring-1 focus:ring-[#02E8A7]"
               >
                 {SUPPORTED_LANGUAGES.map(lang => (
                   <option key={lang.id} value={lang.id}>{lang.label}</option>
@@ -374,7 +374,7 @@ export default function TechnicalCoding() {
                 >
                   Submissions
                   {submissionHistory.length > 0 && (
-                    <span className="h-4 w-4 rounded-full bg-indigo-600 text-white text-[10px] flex items-center justify-center">
+                    <span className="h-4 w-4 rounded-full bg-[#02E8A7] text-[#002020] font-bold text-[10px] flex items-center justify-center">
                       {submissionHistory.length}
                     </span>
                   )}

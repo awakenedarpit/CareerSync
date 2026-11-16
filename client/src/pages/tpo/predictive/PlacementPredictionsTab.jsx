@@ -92,7 +92,7 @@ export default function PlacementPredictionsTab({
             <span className="text-[11px] font-semibold uppercase text-slate-500">
               Precision
             </span>
-            <div className="text-xl font-black text-indigo-900 mt-1">
+            <div className="text-xl font-black text-[#002020] mt-1">
               {metrics.precision || 84.1}%
             </div>
             <span className="text-[10px] text-slate-500 font-medium">Positive Pred Value</span>
@@ -115,7 +115,7 @@ export default function PlacementPredictionsTab({
             <div className="text-xl font-black text-purple-900 mt-1">
               {metrics.f1Score || 86.2}%
             </div>
-            <span className="text-[10px] text-purple-600 font-medium">Harmonic Mean</span>
+            <span className="text-[10px] text-[#009669] font-medium">Harmonic Mean</span>
           </div>
 
           <div className="p-3 rounded-lg border border-slate-200 bg-slate-50/70 text-center">
@@ -143,7 +143,7 @@ export default function PlacementPredictionsTab({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-slate-100 pt-4">
           <div className="p-4 rounded-xl border border-slate-200 bg-white">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700 mb-3 flex items-center gap-1.5">
-              <Layers className="w-3.5 h-3.5 text-indigo-600" />
+              <Layers className="w-3.5 h-3.5 text-[#009669]" />
               Confusion Matrix (Validation Cohort N=473)
             </h4>
             <div className="grid grid-cols-2 gap-2 text-center text-xs">
@@ -184,7 +184,7 @@ export default function PlacementPredictionsTab({
 
           <div className="p-4 rounded-xl border border-slate-200 bg-white space-y-2">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
-              <Info className="w-3.5 h-3.5 text-indigo-600" />
+              <Info className="w-3.5 h-3.5 text-[#009669]" />
               Model Methodology & Transparency Limits
             </h4>
             <ul className="text-xs text-slate-600 space-y-1.5 list-disc pl-4 leading-relaxed">
@@ -258,7 +258,7 @@ export default function PlacementPredictionsTab({
                       <div className="text-xs text-slate-500">{pred.department}</div>
                     </td>
                     <td className="py-3.5 px-4 text-xs">
-                      <Badge variant="indigo" size="sm">
+                      <Badge variant="aqua" size="sm">
                         {PREDICTION_TARGETS[pred.target] || pred.target}
                       </Badge>
                     </td>
@@ -275,7 +275,7 @@ export default function PlacementPredictionsTab({
                               prob >= 75
                                 ? 'text-emerald-700'
                                 : prob >= 50
-                                ? 'text-indigo-700'
+                                ? 'text-[#004D36]'
                                 : 'text-amber-700'
                             }`}
                           >

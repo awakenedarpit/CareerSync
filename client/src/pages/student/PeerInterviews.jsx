@@ -150,8 +150,8 @@ export default function PeerInterviews() {
           title="Active Peer Sessions"
           value={rooms.length.toString()}
           icon={Users}
-          iconColor="text-indigo-600"
-          bgColor="bg-indigo-50"
+          iconColor="text-[#009669]"
+          bgColor="bg-[#BDF9F9]/30"
           subtitle="Open rooms in marketplace"
         />
         <StatCard
@@ -186,7 +186,7 @@ export default function PeerInterviews() {
           onClick={() => setActiveTab('MARKETPLACE')}
           className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors ${
             activeTab === 'MARKETPLACE'
-              ? 'bg-indigo-600 text-white shadow-xs'
+              ? 'bg-[#02E8A7] text-[#002020] font-bold shadow-xs'
               : 'text-slate-600 hover:bg-slate-100'
           }`}
         >
@@ -196,7 +196,7 @@ export default function PeerInterviews() {
           onClick={() => setActiveTab('HISTORY')}
           className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors ${
             activeTab === 'HISTORY'
-              ? 'bg-indigo-600 text-white shadow-xs'
+              ? 'bg-[#02E8A7] text-[#002020] font-bold shadow-xs'
               : 'text-slate-600 hover:bg-slate-100'
           }`}
         >
@@ -216,14 +216,14 @@ export default function PeerInterviews() {
                   placeholder="Search rooms by title or target role..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full rounded-lg border border-slate-300 py-2 pl-10 pr-4 text-sm focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-lg border border-slate-300 py-2 pl-10 pr-4 text-sm focus:border-[#02E8A7] focus:outline-none"
                 />
               </div>
 
               <select
                 value={selectedType}
                 onChange={(e) => setSelectedType(e.target.value)}
-                className="rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-indigo-500 focus:outline-none bg-white text-slate-700"
+                className="rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-[#02E8A7] focus:outline-none bg-white text-slate-700"
               >
                 <option value="ALL">All Types</option>
                 {PEER_INTERVIEW_TYPES.map((t) => (
@@ -234,7 +234,7 @@ export default function PeerInterviews() {
               <select
                 value={selectedDifficulty}
                 onChange={(e) => setSelectedDifficulty(e.target.value)}
-                className="rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-indigo-500 focus:outline-none bg-white text-slate-700"
+                className="rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-[#02E8A7] focus:outline-none bg-white text-slate-700"
               >
                 <option value="ALL">All Difficulties</option>
                 {PEER_DIFFICULTIES.map((d) => (
@@ -275,7 +275,7 @@ export default function PeerInterviews() {
                 return (
                   <Card
                     key={room.id}
-                    className="flex flex-col justify-between border-slate-200 shadow-xs hover:border-indigo-300 transition-all p-5"
+                    className="flex flex-col justify-between border-slate-200 shadow-xs hover:border-[#02E8A7]/50 transition-all p-5"
                   >
                     <div className="space-y-3">
                       <div className="flex items-start justify-between gap-2">
@@ -284,7 +284,7 @@ export default function PeerInterviews() {
                             {diffBadge.label}
                           </span>
                           <h3 className="text-base font-bold text-slate-900 leading-snug">{room.title}</h3>
-                          <p className="text-xs text-indigo-700 font-medium">{room.targetRole}</p>
+                          <p className="text-xs text-[#004D36] font-medium">{room.targetRole}</p>
                         </div>
 
                         <Badge variant={room.mode === 'STRUCTURED_INTERVIEW' ? 'indigo' : 'purple'} size="xs">
@@ -380,7 +380,7 @@ export default function PeerInterviews() {
 
                     <div className="flex flex-col items-center justify-center p-4 rounded-xl bg-slate-50 border border-slate-200 shrink-0 min-w-[140px]">
                       <span className="text-xs font-semibold text-slate-500 uppercase">Rubric Score</span>
-                      <span className="text-3xl font-black text-indigo-600">{item.rubricScore}</span>
+                      <span className="text-3xl font-black text-[#009669]">{item.rubricScore}</span>
                       <span className="text-xs text-slate-400">out of 5.0</span>
                       <Button
                         variant="outline"
@@ -420,7 +420,7 @@ export default function PeerInterviews() {
                 placeholder="e.g. Trees, Graphs & Dynamic Programming Sprint"
                 value={formTitle}
                 onChange={(e) => setFormTitle(e.target.value)}
-                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-indigo-500 focus:outline-none"
+                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-[#02E8A7] focus:outline-none"
               />
             </div>
 
@@ -433,7 +433,7 @@ export default function PeerInterviews() {
                   type="text"
                   value={formTargetRole}
                   onChange={(e) => setFormTargetRole(e.target.value)}
-                  className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-[#02E8A7] focus:outline-none"
                 />
               </div>
 
@@ -444,7 +444,7 @@ export default function PeerInterviews() {
                 <select
                   value={formDomain}
                   onChange={(e) => setFormDomain(e.target.value)}
-                  className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-[#02E8A7] focus:outline-none"
                 >
                   <option value="Software Engineering">Software Engineering</option>
                   <option value="Cloud & Systems">Cloud & Systems</option>
@@ -463,7 +463,7 @@ export default function PeerInterviews() {
                 <select
                   value={formType}
                   onChange={(e) => setFormType(e.target.value)}
-                  className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-[#02E8A7] focus:outline-none"
                 >
                   {PEER_INTERVIEW_TYPES.map((t) => (
                     <option key={t.id} value={t.id}>{t.label}</option>
@@ -478,7 +478,7 @@ export default function PeerInterviews() {
                 <select
                   value={formDifficulty}
                   onChange={(e) => setFormDifficulty(e.target.value)}
-                  className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-[#02E8A7] focus:outline-none"
                 >
                   {PEER_DIFFICULTIES.map((d) => (
                     <option key={d.id} value={d.id}>{d.label}</option>
@@ -497,7 +497,7 @@ export default function PeerInterviews() {
                     key={mode.id}
                     className={`flex items-start gap-3 rounded-lg border p-3 cursor-pointer transition-colors ${
                       formMode === mode.id
-                        ? 'border-indigo-600 bg-indigo-50/50'
+                        ? 'border-indigo-600 bg-[#BDF9F9]/30'
                         : 'border-slate-200 hover:bg-slate-50'
                     }`}
                   >
@@ -507,7 +507,7 @@ export default function PeerInterviews() {
                       value={mode.id}
                       checked={formMode === mode.id}
                       onChange={() => setFormMode(mode.id)}
-                      className="mt-0.5 text-indigo-600"
+                      className="mt-0.5 text-[#009669]"
                     />
                     <div>
                       <div className="text-xs font-bold text-slate-900">{mode.label}</div>
@@ -525,7 +525,7 @@ export default function PeerInterviews() {
               <select
                 value={formDuration}
                 onChange={(e) => setFormDuration(e.target.value)}
-                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-indigo-500 focus:outline-none"
+                className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-[#02E8A7] focus:outline-none"
               >
                 <option value="30">30 Minutes (Quick Sprint)</option>
                 <option value="45">45 Minutes (Standard Industry Interview)</option>
@@ -570,7 +570,7 @@ export default function PeerInterviews() {
                 <span>Evaluator: <strong>{selectedHistoryItem.peerName}</strong> (Peer)</span>
                 <span className="block text-slate-400 mt-0.5">Formative assessment • Not official TPO credential</span>
               </div>
-              <Badge variant="indigo" size="sm">Overall: {selectedHistoryItem.rubricScore} / 5.0</Badge>
+              <Badge variant="aqua" size="sm">Overall: {selectedHistoryItem.rubricScore} / 5.0</Badge>
             </div>
 
             <div className="space-y-2.5">
@@ -589,7 +589,7 @@ export default function PeerInterviews() {
                   </div>
                   <div className="h-2 w-full rounded-full bg-slate-200 overflow-hidden">
                     <div
-                      className="h-full bg-indigo-600 rounded-full"
+                      className="h-full bg-[#02E8A7] rounded-full"
                       style={{ width: `${(dim.score / 5.0) * 100}%` }}
                     />
                   </div>

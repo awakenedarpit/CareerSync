@@ -35,26 +35,26 @@ export default function PlacementTrendsTab({
             <span className="text-xs uppercase font-semibold text-slate-500 block">
               2. Shortlisted Candidates
             </span>
-            <div className="text-2xl font-black text-indigo-700 mt-1">
+            <div className="text-2xl font-black text-[#004D36] mt-1">
               {funnel.shortlistedStudents || 394}{' '}
               <span className="text-xs font-normal text-slate-500">
                 ({funnel.shortlistRate || 82.1}%)
               </span>
             </div>
-            <ProgressBar value={funnel.shortlistRate || 82.1} max={100} size="xs" color="indigo" className="mt-2" />
+            <ProgressBar value={funnel.shortlistRate || 82.1} max={100} size="xs" color="teal" className="mt-2" />
           </div>
 
           <div className="p-4 rounded-xl border border-slate-200 bg-white">
             <span className="text-xs uppercase font-semibold text-slate-500 block">
               3. Interview Progression
             </span>
-            <div className="text-2xl font-black text-purple-700 mt-1">
+            <div className="text-2xl font-black text-[#004D36] mt-1">
               {funnel.interviewedStudents || 310}{' '}
               <span className="text-xs font-normal text-slate-500">
                 ({funnel.interviewRate || 64.6}%)
               </span>
             </div>
-            <ProgressBar value={funnel.interviewRate || 64.6} max={100} size="xs" color="violet" className="mt-2" />
+            <ProgressBar value={funnel.interviewRate || 64.6} max={100} size="xs" color="aqua" className="mt-2" />
           </div>
 
           <div className="p-4 rounded-xl border border-slate-200 bg-white">
@@ -89,7 +89,7 @@ export default function PlacementTrendsTab({
                       {r.count} offers ({r.percentage}%)
                     </span>
                   </div>
-                  <ProgressBar value={r.percentage} max={100} size="xs" color="indigo" />
+                  <ProgressBar value={r.percentage} max={100} size="xs" color="teal" />
                 </div>
               ))}
             </div>
@@ -132,7 +132,7 @@ export default function PlacementTrendsTab({
           </div>
           <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 text-center">
             <span className="text-[10px] uppercase font-bold text-slate-500">Conducted Drives</span>
-            <div className="text-xl font-black text-indigo-700 mt-0.5">
+            <div className="text-xl font-black text-[#004D36] mt-0.5">
               {pipeline.conductedDrives || 38}
             </div>
           </div>

@@ -50,7 +50,7 @@ export default function StudentSettings() {
         {/* Notification Settings */}
         <Card className="p-6 border-slate-200">
           <div className="flex items-center gap-2 mb-4">
-            <Bell className="h-4 w-4 text-indigo-600" />
+            <Bell className="h-4 w-4 text-[#009669]" />
             <h3 className="text-sm font-bold text-slate-900">Notification Alerts</h3>
           </div>
 
@@ -64,7 +64,7 @@ export default function StudentSettings() {
                 type="checkbox"
                 checked={driveAlerts}
                 onChange={(e) => setDriveAlerts(e.target.checked)}
-                className="h-4 w-4 rounded text-indigo-600"
+                className="h-4 w-4 rounded text-[#009669]"
               />
             </div>
 
@@ -77,7 +77,7 @@ export default function StudentSettings() {
                 type="checkbox"
                 checked={gapReminders}
                 onChange={(e) => setGapReminders(e.target.checked)}
-                className="h-4 w-4 rounded text-indigo-600"
+                className="h-4 w-4 rounded text-[#009669]"
               />
             </div>
 
@@ -90,7 +90,7 @@ export default function StudentSettings() {
                 type="checkbox"
                 checked={recruiterViews}
                 onChange={(e) => setRecruiterViews(e.target.checked)}
-                className="h-4 w-4 rounded text-indigo-600"
+                className="h-4 w-4 rounded text-[#009669]"
               />
             </div>
           </div>
@@ -99,7 +99,7 @@ export default function StudentSettings() {
         {/* Security & Password */}
         <Card className="p-6 border-slate-200">
           <div className="flex items-center gap-2 mb-4">
-            <Lock className="h-4 w-4 text-indigo-600" />
+            <Lock className="h-4 w-4 text-[#009669]" />
             <h3 className="text-sm font-bold text-slate-900">Security Credentials</h3>
           </div>
 

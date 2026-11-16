@@ -122,7 +122,7 @@ export default function TpoMockDrives() {
     {
       key: 'cutoffScore',
       label: 'Cutoff',
-      render: (val) => <Badge variant="indigo" size="sm">{val}%</Badge>
+      render: (val) => <Badge variant="aqua" size="sm">{val}%</Badge>
     },
     {
       key: 'status',
@@ -187,7 +187,7 @@ export default function TpoMockDrives() {
           trend="up"
           trendValue="+2 this month"
           icon={Calendar}
-          color="indigo"
+          color="teal"
         />
         <StatCard
           title="Total Student Attempts"
@@ -205,7 +205,7 @@ export default function TpoMockDrives() {
           trend="up"
           trendValue="+3.8%"
           icon={Award}
-          color="violet"
+          color="aqua"
         />
         <StatCard
           title="Placement Readiness Boost"
@@ -286,7 +286,7 @@ export default function TpoMockDrives() {
 
                 <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
                   <span className="text-xs text-slate-400">ID: {qb.id}</span>
-                  <Button variant="ghost" size="sm" className="text-indigo-600 hover:text-indigo-800">
+                  <Button variant="ghost" size="sm" className="text-[#009669] hover:text-[#002020]">
                     Manage Items <ChevronRight className="h-3 w-3 ml-0.5" />
                   </Button>
                 </div>
@@ -299,11 +299,11 @@ export default function TpoMockDrives() {
       {/* TAB 3: COHORT DIAGNOSTIC ANALYTICS */}
       {activeTab === 'analytics' && driveAnalytics && (
         <div className="space-y-6">
-          <Card className="p-6 border-indigo-100 bg-gradient-to-br from-indigo-50/50 via-white to-purple-50/20">
+          <Card className="p-6 border-[#02E8A7]/30 bg-gradient-to-br from-indigo-50/50 via-white to-purple-50/20">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div>
                 <div className="flex items-center gap-2 mb-1">
-                  <Badge variant="indigo" size="sm">Drive Analytics</Badge>
+                  <Badge variant="aqua" size="sm">Drive Analytics</Badge>
                   <span className="text-xs text-slate-500 font-medium">Cutoff: {driveAnalytics.cutoffScore}%</span>
                 </div>
                 <h3 className="text-xl font-bold text-slate-900">
@@ -339,10 +339,10 @@ export default function TpoMockDrives() {
                       <span className="font-semibold text-slate-800">{dept.department}</span>
                       <div className="flex items-center gap-2">
                         <span className="text-slate-500">{dept.participants} Students</span>
-                        <span className="font-bold text-indigo-700">{dept.avgScore}% Avg</span>
+                        <span className="font-bold text-[#004D36]">{dept.avgScore}% Avg</span>
                       </div>
                     </div>
-                    <ProgressBar value={dept.avgScore} color="indigo" />
+                    <ProgressBar value={dept.avgScore} color="teal" />
                     <div className="text-[11px] text-slate-500 mt-1 flex justify-between">
                       <span>Pass Clearance Rate:</span>
                       <strong className="text-emerald-700">{dept.passRate}</strong>

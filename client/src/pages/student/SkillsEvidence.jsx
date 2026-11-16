@@ -21,8 +21,113 @@ import DocumentUploadModal from '../../components/documents/DocumentUploadModal'
 import SkillEvidenceList from '../../components/profiling/SkillEvidenceList';
 import profilingService from '../../services/profilingService';
 import tpoService from '../../services/tpoService';
+import authService from '../../services/authService';
+
+const DEMO_SKILLS = [
+  {
+    id: '1',
+    name: 'JavaScript (ES6+)',
+    category: 'Languages',
+    status: 'verified',
+    level: 'Advanced',
+    verifiedBy: 'Automated Code Audit & Prof. K. Rao',
+    verifiedDate: '12 Oct 2024',
+    evidence: [
+      { type: 'GitHub Repo', name: 'event-engine', url: 'https://github.com/carrersync-demo/event-engine' },
+      { type: 'Test Result', name: 'JS Advanced Benchmark (94%)', url: '#' }
+    ]
+  },
+  {
+    id: '2',
+    name: 'React.js',
+    category: 'Frontend',
+    status: 'evidence_linked',
+    level: 'Intermediate',
+    verifiedBy: 'Pending Faculty Review',
+    verifiedDate: '28 Oct 2024',
+    evidence: [
+      { type: 'Project', name: 'devcollab frontend', url: 'https://github.com/carrersync-demo/devcollab' }
+    ]
+  },
+  {
+    id: '3',
+    name: 'Node.js & Express',
+    category: 'Backend',
+    status: 'observed',
+    level: 'Intermediate',
+    verifiedBy: 'Lab Submission Analyzer',
+    verifiedDate: '04 Nov 2024',
+    evidence: [
+      { type: 'Lab Commit', name: 'CS402 Lab Assignment 3', url: '#' }
+    ]
+  },
+  {
+    id: '4',
+    name: 'PostgreSQL',
+    category: 'Database',
+    status: 'verified',
+    level: 'Advanced',
+    verifiedBy: 'DBMS Faculty Lab Evaluation',
+    verifiedDate: '15 Sep 2024',
+    evidence: [
+      { type: 'Schema File', name: 'event-booking-schema.sql', url: '#' }
+    ]
+  },
+  {
+    id: '5',
+    name: 'Docker & Containers',
+    category: 'DevOps',
+    status: 'needs_more_evidence',
+    level: 'Beginner',
+    verifiedBy: 'Dr. Rajiv Menon (TPO)',
+    reviewerNotes: 'Please provide certificate credential ID or verification URL from issuing provider.',
+    verifiedDate: '13 Nov 2024',
+    evidence: [
+      { type: 'Course Certificate', name: 'cloud-devops-cert.pdf', url: '#' }
+    ]
+  },
+  {
+    id: '6',
+    name: 'Machine Learning (Scikit-Learn)',
+    category: 'AI/ML',
+    status: 'expired',
+    level: 'Beginner',
+    verifiedBy: 'Stale (No activity in 18 months)',
+    verifiedDate: 'Mar 2023',
+    evidence: [
+      { type: 'Old Coursework', name: 'ML 101 Intro Lab', url: '#' }
+    ]
+  },
+  {
+    id: '7',
+    name: 'TypeScript',
+    category: 'Languages',
+    status: 'evidence_linked',
+    level: 'Intermediate',
+    verifiedBy: 'GitHub Integration Engine',
+    verifiedDate: '02 Nov 2024',
+    evidence: [
+      { type: 'GitHub Commit', name: 'devcollab typed models', url: '#' }
+    ]
+  },
+  {
+    id: '8',
+    name: 'MongoDB',
+    category: 'Database',
+    status: 'observed',
+    level: 'Intermediate',
+    verifiedBy: 'Coursework Parser',
+    verifiedDate: '20 Oct 2024',
+    evidence: [
+      { type: 'NoSQL Project', name: 'blog-backend', url: '#' }
+    ]
+  }
+];
 
 export default function SkillsEvidence() {
+  const currentUser = authService.getCurrentUser();
+  const isDemoStudent = ['aditya.sharma@apex.edu', 'student@apex.edu'].includes(currentUser?.email);
+
   const [viewMode, setViewMode] = useState('evidence_list');
   const [evidenceList, setEvidenceList] = useState([]);
   const [activeTab, setActiveTab] = useState('all');
@@ -48,106 +153,7 @@ export default function SkillsEvidence() {
   // Toast feedback
   const [toastMessage, setToastMessage] = useState(null);
 
-  const [skills, setSkills] = useState([
-    {
-      id: '1',
-      name: 'JavaScript (ES6+)',
-      category: 'Languages',
-      status: 'verified',
-      level: 'Advanced',
-      verifiedBy: 'Automated Code Audit & Prof. K. Rao',
-      verifiedDate: '12 Oct 2024',
-      evidence: [
-        { type: 'GitHub Repo', name: 'event-engine', url: 'https://github.com/priya/event-engine' },
-        { type: 'Test Result', name: 'JS Advanced Benchmark (94%)', url: '#' }
-      ]
-    },
-    {
-      id: '2',
-      name: 'React.js',
-      category: 'Frontend',
-      status: 'evidence_linked',
-      level: 'Intermediate',
-      verifiedBy: 'Pending Faculty Review',
-      verifiedDate: '28 Oct 2024',
-      evidence: [
-        { type: 'Project', name: 'devcollab frontend', url: 'https://github.com/priya/devcollab' }
-      ]
-    },
-    {
-      id: '3',
-      name: 'Node.js & Express',
-      category: 'Backend',
-      status: 'observed',
-      level: 'Intermediate',
-      verifiedBy: 'Lab Submission Analyzer',
-      verifiedDate: '04 Nov 2024',
-      evidence: [
-        { type: 'Lab Commit', name: 'CS402 Lab Assignment 3', url: '#' }
-      ]
-    },
-    {
-      id: '4',
-      name: 'PostgreSQL',
-      category: 'Database',
-      status: 'verified',
-      level: 'Advanced',
-      verifiedBy: 'DBMS Faculty Lab Evaluation',
-      verifiedDate: '15 Sep 2024',
-      evidence: [
-        { type: 'Schema File', name: 'event-booking-schema.sql', url: '#' }
-      ]
-    },
-    {
-      id: '5',
-      name: 'Docker & Containers',
-      category: 'DevOps',
-      status: 'needs_more_evidence',
-      level: 'Beginner',
-      verifiedBy: 'Dr. Rajiv Menon (TPO)',
-      reviewerNotes: 'Please provide certificate credential ID or verification URL from issuing provider.',
-      verifiedDate: '13 Nov 2024',
-      evidence: [
-        { type: 'Course Certificate', name: 'cloud-devops-cert.pdf', url: '#' }
-      ]
-    },
-    {
-      id: '6',
-      name: 'Machine Learning (Scikit-Learn)',
-      category: 'AI/ML',
-      status: 'expired',
-      level: 'Beginner',
-      verifiedBy: 'Stale (No activity in 18 months)',
-      verifiedDate: 'Mar 2023',
-      evidence: [
-        { type: 'Old Coursework', name: 'ML 101 Intro Lab', url: '#' }
-      ]
-    },
-    {
-      id: '7',
-      name: 'TypeScript',
-      category: 'Languages',
-      status: 'evidence_linked',
-      level: 'Intermediate',
-      verifiedBy: 'GitHub Integration Engine',
-      verifiedDate: '02 Nov 2024',
-      evidence: [
-        { type: 'GitHub Commit', name: 'devcollab typed models', url: '#' }
-      ]
-    },
-    {
-      id: '8',
-      name: 'MongoDB',
-      category: 'Database',
-      status: 'observed',
-      level: 'Intermediate',
-      verifiedBy: 'Coursework Parser',
-      verifiedDate: '20 Oct 2024',
-      evidence: [
-        { type: 'NoSQL Project', name: 'blog-backend', url: '#' }
-      ]
-    }
-  ]);
+  const [skills, setSkills] = useState(() => (isDemoStudent ? DEMO_SKILLS : []));
 
   const showToast = (message, type = 'success') => {
     setToastMessage({ message, type });
@@ -214,7 +220,7 @@ export default function SkillsEvidence() {
           ? 'REJECTED'
           : 'SELF_DECLARED',
       confidence: s.confidence !== undefined ? s.confidence : (s.status === 'verified' ? 95 : s.status === 'evidence_linked' ? 84 : 65),
-      documentName: s.evidence?.[0]?.name || (s.status === 'claimed' ? null : 'Resume_Priya_Sharma.pdf'),
+      documentName: s.evidence?.[0]?.name || (s.status === 'claimed' ? null : (isDemoStudent ? 'Resume_Aditya_Sharma.pdf' : 'Uploaded_Resume.pdf')),
       evidenceType: s.evidence?.[0]?.type || (s.status === 'claimed' ? null : 'PROJECT'),
       reviewerNotes: s.reviewerNotes || (s.verifiedBy !== 'Self-Declared (No verified proof)' ? s.verifiedBy : null),
       extractedAt: s.verifiedDate,
@@ -358,7 +364,7 @@ export default function SkillsEvidence() {
           className={`p-3.5 rounded-xl border text-sm font-medium flex items-center justify-between shadow-xs transition-all ${
             toastMessage.type === 'success'
               ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
-              : 'bg-indigo-50 border-indigo-200 text-indigo-800'
+              : 'bg-[#BDF9F9]/30 border-[#02E8A7]/40 text-[#002020]'
           }`}
         >
           <span>{toastMessage.message}</span>
@@ -369,14 +375,14 @@ export default function SkillsEvidence() {
       )}
 
       {/* Lifecycle Rules Clarification */}
-      <div className="p-4 bg-indigo-50/60 border border-indigo-100 rounded-xl text-xs text-indigo-900 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+      <div className="p-4 bg-[#BDF9F9]/30/60 border border-[#02E8A7]/30 rounded-xl text-xs text-[#002020] flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <Award className="h-4 w-4 text-indigo-600 shrink-0" />
+          <Award className="h-4 w-4 text-[#009669] shrink-0" />
           <span>
             <strong>Human-in-the-Loop Governance:</strong> AI assists in extracting candidate skills, but only authorized faculty and TPO officers can certify claims to <strong>Verified</strong>.
           </span>
         </div>
-        <span className="text-[11px] font-semibold text-indigo-700 uppercase tracking-wider bg-white px-2 py-0.5 rounded border border-indigo-200 shrink-0">
+        <span className="text-[11px] font-semibold text-[#004D36] uppercase tracking-wider bg-white px-2 py-0.5 rounded border border-[#02E8A7]/40 shrink-0">
           Strict Verification
         </span>
       </div>
@@ -389,7 +395,7 @@ export default function SkillsEvidence() {
             onClick={() => setViewMode('evidence_list')}
             className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
               viewMode === 'evidence_list'
-                ? 'bg-indigo-600 text-white shadow-2xs'
+                ? 'bg-[#02E8A7] text-[#002020] font-bold shadow-2xs'
                 : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
             }`}
           >
@@ -401,7 +407,7 @@ export default function SkillsEvidence() {
             onClick={() => setViewMode('grid')}
             className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
               viewMode === 'grid'
-                ? 'bg-indigo-600 text-white shadow-2xs'
+                ? 'bg-[#02E8A7] text-[#002020] font-bold shadow-2xs'
                 : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
             }`}
           >
@@ -410,7 +416,7 @@ export default function SkillsEvidence() {
           </button>
         </div>
         <div className="flex items-center gap-1 text-[11px] text-slate-400 font-medium">
-          <Sparkles className="h-3 w-3 text-indigo-500" />
+          <Sparkles className="h-3 w-3 text-[#009669]" />
           <span>Multi-Tier Evidence Verification Governance</span>
         </div>
       </div>
@@ -435,89 +441,97 @@ export default function SkillsEvidence() {
                 placeholder="Filter skills..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full rounded-lg border border-slate-200 bg-white py-1.5 pl-8.5 pr-3 text-xs text-slate-900 focus:border-indigo-500 focus:outline-hidden"
+                className="w-full rounded-lg border border-slate-200 bg-white py-1.5 pl-8.5 pr-3 text-xs text-slate-900 focus:border-[#02E8A7] focus:outline-hidden"
               />
             </div>
           </div>
 
-          {/* Skill Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredSkills.map((skill) => (
-              <Card key={skill.id} className="p-4 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-start justify-between gap-2 mb-2">
-                    <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
-                      {skill.category}
-                    </span>
-                    <StatusBadge status={skill.status} />
-                  </div>
-
-                  <h3 className="font-bold text-slate-900 text-base">{skill.name}</h3>
-
-                  <div className="mt-2 text-xs text-slate-500">
-                    <span>Proficiency Level: </span>
-                    <strong className="text-slate-700">{skill.level}</strong>
-                  </div>
-
-                  {/* Reviewer Notes Display */}
-                  {(skill.reviewerNotes || (skill.verifiedBy && skill.status === 'verified')) && (
-                    <div className="mt-3 p-2.5 rounded-lg border text-xs bg-slate-50 border-slate-200">
-                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">
-                        Reviewer Feedback
+          {/* Skill Cards Grid or Empty State */}
+          {filteredSkills.length === 0 ? (
+            <Card className="p-12 text-center text-slate-400 border-slate-200 space-y-2">
+              <Award className="h-10 w-10 text-slate-300 mx-auto" />
+              <p className="font-bold text-slate-700">No Skills Recorded Yet</p>
+              <p className="text-xs">Click "Add Skill" above or upload your resume in the Document Vault to automatically populate verified competencies.</p>
+            </Card>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {filteredSkills.map((skill) => (
+                <Card key={skill.id} className="p-4 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                        {skill.category}
                       </span>
-                      <p className="text-slate-800 leading-relaxed text-[11px]">
-                        {skill.reviewerNotes || `Validated by ${skill.verifiedBy}`}
-                      </p>
+                      <StatusBadge status={skill.status} />
                     </div>
-                  )}
 
-                  {/* Attached Evidence Chips */}
-                  {skill.evidence && skill.evidence.length > 0 && (
-                    <div className="mt-3 space-y-1">
-                      <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
-                        Corroborating Evidence:
-                      </span>
-                      <div className="space-y-1">
-                        {skill.evidence.map((ev, i) => (
-                          <div
-                            key={i}
-                            className="flex items-center justify-between text-[11px] bg-slate-50 p-1.5 rounded border border-slate-100"
-                          >
-                            <span className="text-slate-700 font-medium truncate max-w-[180px]">{ev.name}</span>
-                            <span className="text-[10px] text-indigo-600 font-semibold">{ev.type}</span>
-                          </div>
-                        ))}
+                    <h3 className="font-bold text-slate-900 text-base">{skill.name}</h3>
+
+                    <div className="mt-2 text-xs text-slate-500">
+                      <span>Proficiency Level: </span>
+                      <strong className="text-slate-700">{skill.level}</strong>
+                    </div>
+
+                    {/* Reviewer Notes Display */}
+                    {(skill.reviewerNotes || (skill.verifiedBy && skill.status === 'verified')) && (
+                      <div className="mt-3 p-2.5 rounded-lg border text-xs bg-slate-50 border-slate-200">
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">
+                          Reviewer Feedback
+                        </span>
+                        <p className="text-slate-800 leading-relaxed text-[11px]">
+                          {skill.reviewerNotes || `Validated by ${skill.verifiedBy}`}
+                        </p>
                       </div>
-                    </div>
-                  )}
-                </div>
+                    )}
 
-                {/* Footer Action Strip */}
-                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span className="text-[10px] text-slate-400">{skill.verifiedDate}</span>
-                  <div className="flex items-center gap-1.5">
-                    {skill.status === 'needs_more_evidence' && (
+                    {/* Attached Evidence Chips */}
+                    {skill.evidence && skill.evidence.length > 0 && (
+                      <div className="mt-3 space-y-1">
+                        <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+                          Corroborating Evidence:
+                        </span>
+                        <div className="space-y-1">
+                          {skill.evidence.map((ev, i) => (
+                            <div
+                              key={i}
+                              className="flex items-center justify-between text-[11px] bg-slate-50 p-1.5 rounded border border-slate-100"
+                            >
+                              <span className="text-slate-700 font-medium truncate max-w-[180px]">{ev.name}</span>
+                              <span className="text-[10px] text-[#009669] font-semibold">{ev.type}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Footer Action Strip */}
+                  <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <span className="text-[10px] text-slate-400">{skill.verifiedDate}</span>
+                    <div className="flex items-center gap-1.5">
+                      {skill.status === 'needs_more_evidence' && (
+                        <button
+                          type="button"
+                          onClick={() => handleOpenResubmit(skill)}
+                          className="text-xs font-semibold text-[#004D36] bg-[#BDF9F9]/30 hover:bg-[#BDF9F9]/50 px-2 py-0.5 rounded border border-[#02E8A7]/40"
+                        >
+                          Resubmit Proof
+                        </button>
+                      )}
                       <button
                         type="button"
-                        onClick={() => handleOpenResubmit(skill)}
-                        className="text-xs font-semibold text-purple-700 bg-purple-50 hover:bg-purple-100 px-2 py-0.5 rounded border border-purple-200"
+                        onClick={() => handleOpenCorrection(skill)}
+                        className="text-xs font-semibold text-slate-500 hover:text-[#009669] px-1.5 py-0.5"
+                        title="Request correction"
                       >
-                        Resubmit Proof
+                        Correction
                       </button>
-                    )}
-                    <button
-                      type="button"
-                      onClick={() => handleOpenCorrection(skill)}
-                      className="text-xs font-semibold text-slate-500 hover:text-indigo-600 px-1.5 py-0.5"
-                      title="Request correction"
-                    >
-                      Correction
-                    </button>
+                    </div>
                   </div>
-                </div>
-              </Card>
-            ))}
-          </div>
+                </Card>
+              ))}
+            </div>
+          )}
         </div>
       )}
 
@@ -581,8 +595,8 @@ export default function SkillsEvidence() {
         >
           <form onSubmit={handleExecuteResubmit} className="space-y-4 py-2 text-xs">
             {resubmitItem.reviewerNotes && (
-              <div className="p-3 bg-purple-50 border border-purple-200 rounded-xl text-purple-900">
-                <span className="text-[10px] font-bold uppercase tracking-wider block text-purple-700">
+              <div className="p-3 bg-[#BDF9F9]/30 border border-[#02E8A7]/40 rounded-xl text-purple-900">
+                <span className="text-[10px] font-bold uppercase tracking-wider block text-[#004D36]">
                   Reviewer Feedback:
                 </span>
                 <p className="mt-0.5 text-xs font-medium">"{resubmitItem.reviewerNotes}"</p>
@@ -606,7 +620,7 @@ export default function SkillsEvidence() {
                 value={resubmitNotes}
                 onChange={(e) => setResubmitNotes(e.target.value)}
                 placeholder="Explain what has been updated or provide additional context for the TPO reviewer..."
-                className="w-full text-xs p-2.5 bg-white border border-slate-300 rounded-lg focus:outline-hidden focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="w-full text-xs p-2.5 bg-white border border-slate-300 rounded-lg focus:outline-hidden focus:border-[#02E8A7] focus:ring-1 focus:ring-[#02E8A7]"
               />
             </div>
 
@@ -653,7 +667,7 @@ export default function SkillsEvidence() {
                 value={correctionReason}
                 onChange={(e) => setCorrectionReason(e.target.value)}
                 placeholder="Provide details on why this record should be amended..."
-                className="w-full text-xs p-2.5 bg-white border border-slate-300 rounded-lg focus:outline-hidden focus:border-indigo-500"
+                className="w-full text-xs p-2.5 bg-white border border-slate-300 rounded-lg focus:outline-hidden focus:border-[#02E8A7]"
               />
             </div>
 

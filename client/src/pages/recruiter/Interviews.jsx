@@ -60,7 +60,7 @@ export default function RecruiterInterviews() {
                 <div>
                   <div className="flex items-center gap-2">
                     <h4 className="text-base font-bold text-slate-900">{item.candidate}</h4>
-                    <Badge variant="indigo" size="sm">{item.round}</Badge>
+                    <Badge variant="aqua" size="sm">{item.round}</Badge>
                   </div>
                   <div className="text-xs text-slate-500 mt-0.5">
                     Role: {item.role} • Panelist: <strong>{item.interviewer}</strong>
@@ -77,7 +77,7 @@ export default function RecruiterInterviews() {
                   href={item.meetUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 text-white text-xs font-semibold hover:bg-indigo-700 transition-colors shadow-2xs"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#02E8A7] text-[#002020] font-bold text-xs font-semibold hover:bg-[#11F1CF] transition-colors shadow-2xs"
                 >
                   <Video className="h-3.5 w-3.5" />
                   <span>Join Meet Room</span>

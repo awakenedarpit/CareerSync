@@ -113,7 +113,7 @@ export default function PerformanceReport() {
                 onClick={() => handleSelectReport(rep)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap border transition-all ${
                   isSelected
-                    ? 'bg-indigo-600 text-white border-indigo-600 shadow-xs'
+                    ? 'bg-[#02E8A7] text-[#002020] font-bold border-indigo-600 shadow-xs'
                     : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
                 }`}
               >
@@ -125,10 +125,10 @@ export default function PerformanceReport() {
       )}
 
       {/* Top Summary Banner */}
-      <Card className="p-6 border-indigo-100 bg-gradient-to-br from-indigo-50/50 via-white to-purple-50/20">
+      <Card className="p-6 border-[#02E8A7]/30 bg-gradient-to-br from-indigo-50/50 via-white to-purple-50/20">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="flex items-center gap-5">
-            <div className="h-20 w-20 rounded-2xl bg-indigo-600 text-white flex flex-col items-center justify-center shadow-md shrink-0">
+            <div className="h-20 w-20 rounded-2xl bg-[#02E8A7] text-[#002020] font-bold flex flex-col items-center justify-center shadow-md shrink-0">
               <span className="font-black text-2xl">{activeReport.overallScore}%</span>
               <span className="text-[10px] font-medium opacity-80 uppercase tracking-wider">Score</span>
             </div>
@@ -139,7 +139,7 @@ export default function PerformanceReport() {
                   {activeReport.resultStatus?.replace('_', ' ') || 'PASSED CUTOFF'}
                 </Badge>
                 <span className="text-xs font-semibold text-slate-500">
-                  Cohort Percentile: <strong className="text-indigo-600">{activeReport.percentile}</strong>
+                  Cohort Percentile: <strong className="text-[#009669]">{activeReport.percentile}</strong>
                 </span>
               </div>
               <h2 className="text-xl font-bold text-slate-900">{activeReport.driveTitle}</h2>
@@ -185,7 +185,7 @@ export default function PerformanceReport() {
           <Card key={item.label} className="p-4 border-slate-200">
             <div className="flex items-center justify-between text-xs mb-1.5">
               <span className="font-semibold text-slate-800">{item.label}</span>
-              <span className="font-black text-indigo-700 text-sm">{item.score}%</span>
+              <span className="font-black text-[#004D36] text-sm">{item.score}%</span>
             </div>
             <ProgressBar value={item.score} color={item.score >= 80 ? 'indigo' : 'amber'} />
             <p className="text-[11px] text-slate-500 mt-2">{item.desc}</p>
@@ -264,14 +264,14 @@ export default function PerformanceReport() {
       )}
 
       {/* Recommended Learning Path Micro-Tasks Handoff */}
-      <Card className="p-6 border-indigo-200 bg-indigo-50/40">
+      <Card className="p-6 border-[#02E8A7]/40 bg-[#BDF9F9]/20">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-indigo-600" />
+              <Sparkles className="h-4 w-4 text-[#009669]" />
               <h3 className="font-bold text-indigo-950 text-base">Curated Personalized Remediation Plan</h3>
             </div>
-            <p className="text-xs text-indigo-800 mt-1 max-w-xl leading-relaxed">
+            <p className="text-xs text-[#002020] mt-1 max-w-xl leading-relaxed">
               Based on the diagnosed weaknesses in Graph Algorithms and Distributed Caching, CarrerSync has scheduled 3 micro-tasks in your Learning Path to reach 90th+ percentile readiness.
             </p>
           </div>

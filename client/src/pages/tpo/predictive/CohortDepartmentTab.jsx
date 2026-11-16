@@ -41,7 +41,7 @@ export default function CohortDepartmentTab({
                     </td>
                     <td className="py-3.5 px-4">
                       {isOngoing ? (
-                        <Badge variant="indigo" size="sm">
+                        <Badge variant="aqua" size="sm">
                           Active Season (Interim)
                         </Badge>
                       ) : isUpcoming ? (
@@ -71,7 +71,7 @@ export default function CohortDepartmentTab({
                               batch.placementRate >= 85
                                 ? 'text-emerald-700'
                                 : batch.placementRate >= 70
-                                ? 'text-indigo-700'
+                                ? 'text-[#004D36]'
                                 : 'text-amber-700'
                             }`}
                           >
@@ -156,7 +156,7 @@ export default function CohortDepartmentTab({
                     </Badge>
                   ) : (
                     <div className="text-right">
-                      <div className="text-sm font-black text-indigo-700">
+                      <div className="text-sm font-black text-[#004D36]">
                         {dept.readinessAvg}%
                       </div>
                       <div className="text-[10px] text-slate-400">Avg Readiness</div>

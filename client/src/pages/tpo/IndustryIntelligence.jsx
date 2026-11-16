@@ -187,7 +187,7 @@ export default function IndustryIntelligence() {
       case 'REVIEWED':
         return <Badge variant="emerald" size="sm">Audited & Reviewed</Badge>;
       case 'EXTRACTED':
-        return <Badge variant="indigo" size="sm">AI Extracted</Badge>;
+        return <Badge variant="aqua" size="sm">AI Extracted</Badge>;
       case 'PENDING_REVIEW':
       default:
         return <Badge variant="amber" size="sm">Pending Review</Badge>;
@@ -229,10 +229,10 @@ export default function IndustryIntelligence() {
       />
 
       {/* Provenance & Data Freshness Banner */}
-      <div className="rounded-xl border border-indigo-200 bg-gradient-to-r from-indigo-50/70 via-white to-purple-50/70 p-4 shadow-xs">
+      <div className="rounded-xl border border-[#02E8A7]/40 bg-gradient-to-r from-indigo-50/70 via-white to-purple-50/70 p-4 shadow-xs">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-lg bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-sm">
+            <div className="h-10 w-10 rounded-lg bg-[#02E8A7] text-[#002020] font-bold flex items-center justify-center shrink-0 shadow-sm">
               <ShieldCheck className="h-5 w-5" />
             </div>
             <div>
@@ -263,7 +263,7 @@ export default function IndustryIntelligence() {
             <div className="hidden sm:block text-slate-300">|</div>
             <div>
               <span className="text-slate-400">Provenance:</span>{' '}
-              <strong className="text-indigo-700 font-semibold">{overview?.dataFreshness?.sourceAttribution || 'Verified Corporate Specs'}</strong>
+              <strong className="text-[#004D36] font-semibold">{overview?.dataFreshness?.sourceAttribution || 'Verified Corporate Specs'}</strong>
             </div>
           </div>
         </div>
@@ -351,7 +351,7 @@ export default function IndustryIntelligence() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
           <div>
             <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-              <Target className="h-4 w-4 text-indigo-600" />
+              <Target className="h-4 w-4 text-[#009669]" />
               Role-Wise Skill Requirements Map (14 Canonical Profiles)
             </h3>
             <p className="text-xs text-slate-500">
@@ -376,23 +376,23 @@ export default function IndustryIntelligence() {
             </div>
             <div className="flex items-center gap-3 text-xs">
               <span className="text-slate-600">Category: <strong className="text-slate-800">{currentRoleDetails.category}</strong></span>
-              <Badge variant="indigo" size="md">Market Demand: {currentRoleDetails.demandScore}/100</Badge>
+              <Badge variant="aqua" size="md">Market Demand: {currentRoleDetails.demandScore}/100</Badge>
             </div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Core Skills */}
-          <div className="p-4 rounded-xl border border-indigo-100 bg-indigo-50/30">
+          <div className="p-4 rounded-xl border border-[#02E8A7]/30 bg-[#BDF9F9]/30/30">
             <div className="flex items-center gap-2 mb-3">
-              <CheckCircle2 className="h-4 w-4 text-indigo-600" />
-              <h4 className="text-xs font-bold uppercase tracking-wider text-indigo-900">Core Required Skills</h4>
+              <CheckCircle2 className="h-4 w-4 text-[#009669]" />
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#002020]">Core Required Skills</h4>
             </div>
             <ul className="space-y-2">
               {(roleRequirements?.coreSkills || ['TypeScript', 'React', 'Node.js', 'PostgreSQL', 'Docker']).map((skill) => (
-                <li key={skill} className="flex items-center justify-between text-xs font-medium text-slate-800 bg-white p-2 rounded-lg border border-indigo-100">
+                <li key={skill} className="flex items-center justify-between text-xs font-medium text-slate-800 bg-white p-2 rounded-lg border border-[#02E8A7]/30">
                   <span>{skill}</span>
-                  <Badge variant="indigo" size="sm">Mandatory</Badge>
+                  <Badge variant="aqua" size="sm">Mandatory</Badge>
                 </li>
               ))}
             </ul>
@@ -415,16 +415,16 @@ export default function IndustryIntelligence() {
           </div>
 
           {/* Emerging & Preferred */}
-          <div className="p-4 rounded-xl border border-purple-100 bg-purple-50/30">
+          <div className="p-4 rounded-xl border border-[#02E8A7]/30 bg-[#BDF9F9]/30/30">
             <div className="flex items-center gap-2 mb-3">
-              <Sparkles className="h-4 w-4 text-purple-600" />
+              <Sparkles className="h-4 w-4 text-[#009669]" />
               <h4 className="text-xs font-bold uppercase tracking-wider text-purple-900">Emerging & Value-Add</h4>
             </div>
             <ul className="space-y-2">
               {(roleRequirements?.emergingSkills || ['FastAPI Microservices', 'Vector DBs', 'CI/CD Automation']).map((skill) => (
-                <li key={skill} className="flex items-center justify-between text-xs font-medium text-slate-800 bg-white p-2 rounded-lg border border-purple-100">
+                <li key={skill} className="flex items-center justify-between text-xs font-medium text-slate-800 bg-white p-2 rounded-lg border border-[#02E8A7]/30">
                   <span>{skill}</span>
-                  <Badge variant="purple" size="sm">Differentiating</Badge>
+                  <Badge variant="mint" size="sm">Differentiating</Badge>
                 </li>
               ))}
             </ul>
@@ -458,7 +458,7 @@ export default function IndustryIntelligence() {
             <select
               value={skillTypeFilter}
               onChange={(e) => setSkillTypeFilter(e.target.value)}
-              className="text-xs rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-slate-700 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="text-xs rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-slate-700 focus:outline-none focus:ring-1 focus:ring-[#02E8A7]"
             >
               <option value="ALL">All Types (Tech + Soft)</option>
               <option value="TECHNICAL">Technical Only</option>
@@ -467,7 +467,7 @@ export default function IndustryIntelligence() {
             <select
               value={categoryFilter}
               onChange={(e) => setCategoryFilter(e.target.value)}
-              className="text-xs rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-slate-700 focus:outline-none focus:ring-1 focus:ring-indigo-500 max-w-[160px]"
+              className="text-xs rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-slate-700 focus:outline-none focus:ring-1 focus:ring-[#02E8A7] max-w-[160px]"
             >
               <option value="ALL">All 8 Categories</option>
               {CANONICAL_CATEGORIES.map((cat) => (
@@ -509,7 +509,7 @@ export default function IndustryIntelligence() {
 
                 <div className="flex items-center gap-6 sm:justify-end">
                   <div className="w-32 hidden sm:block">
-                    <ProgressBar value={skill.percentage} variant="indigo" size="sm" />
+                    <ProgressBar value={skill.percentage} variant="aqua" size="sm" />
                   </div>
                   <div className="text-right min-w-[70px]">
                     <div className="text-xs font-bold text-slate-900">{skill.percentage}%</div>
@@ -533,7 +533,7 @@ export default function IndustryIntelligence() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
           <div>
             <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-              <Briefcase className="h-4 w-4 text-indigo-600" />
+              <Briefcase className="h-4 w-4 text-[#009669]" />
               Audited Job Descriptions Intake Queue
             </h3>
             <p className="text-xs text-slate-500">
@@ -665,7 +665,7 @@ export default function IndustryIntelligence() {
             </label>
             <textarea
               rows={6}
-              className="w-full rounded-lg border border-slate-300 p-3 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 font-mono leading-relaxed"
+              className="w-full rounded-lg border border-slate-300 p-3 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#02E8A7]/20 font-mono leading-relaxed"
               placeholder="Paste raw JD text including role requirements, responsibilities, technical prerequisites, and good-to-have qualifications..."
               value={jdRawText}
               onChange={(e) => setJdRawText(e.target.value)}
@@ -720,7 +720,7 @@ export default function IndustryIntelligence() {
               </h5>
               <div className="flex flex-wrap gap-1.5">
                 {(reviewJd.requiredSkills || []).map((skill) => (
-                  <Badge key={skill} variant="indigo" size="md">
+                  <Badge key={skill} variant="aqua" size="md">
                     {skill}
                   </Badge>
                 ))}

@@ -67,7 +67,7 @@ export default function AdminReports() {
           <Card key={rep.id} hover className="p-5 border-slate-200 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-2">
-                <Badge variant="indigo" size="sm">{rep.format}</Badge>
+                <Badge variant="aqua" size="sm">{rep.format}</Badge>
                 <span className="text-xs text-slate-400">{rep.size}</span>
               </div>
               <h4 className="text-sm font-bold text-slate-900 mb-2">{rep.title}</h4>

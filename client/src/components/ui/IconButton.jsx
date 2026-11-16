@@ -2,6 +2,7 @@ import React from 'react';
 
 /**
  * Reusable Icon Button
+ * CarrerSync Mint Design System compliant.
  * Compact button for actions like close, search, notifications, more options.
  */
 export default function IconButton({
@@ -21,10 +22,10 @@ export default function IconButton({
   };
 
   const variantStyles = {
-    ghost: 'text-slate-500 hover:text-slate-800 hover:bg-slate-100',
-    outline: 'border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900',
-    primary: 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm',
-    secondary: 'bg-white text-slate-700 border border-slate-300 hover:bg-slate-50',
+    ghost: 'text-[#3B4A42] hover:text-[#002020] hover:bg-[#BDF9F9]/50',
+    outline: 'border border-[#BACBC0]/50 text-[#002020] hover:bg-[#BDF9F9]/40',
+    primary: 'bg-[#02E8A7] text-[#002020] hover:bg-[#00D295] shadow-2xs',
+    secondary: 'bg-white text-[#002020] border border-[#BACBC0] hover:bg-[#BDF9F9]/30',
     danger: 'text-rose-600 hover:bg-rose-50',
   };
 
@@ -34,7 +35,9 @@ export default function IconButton({
       title={title}
       disabled={disabled}
       onClick={onClick}
-      className={`inline-flex items-center justify-center rounded-lg transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-slate-400 disabled:opacity-50 disabled:cursor-not-allowed ${sizeStyles[size] || sizeStyles.md} ${variantStyles[variant] || variantStyles.ghost} ${className}`}
+      className={`inline-flex items-center justify-center rounded-lg transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#02E8A7] focus-visible:ring-offset-2 focus-visible:ring-offset-[#E2FFFE] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer ${
+        sizeStyles[size] || sizeStyles.md
+      } ${variantStyles[variant] || variantStyles.ghost} ${className}`}
       {...props}
     >
       <Icon className="w-4 h-4 shrink-0" />

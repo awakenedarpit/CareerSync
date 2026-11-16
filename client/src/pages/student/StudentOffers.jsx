@@ -19,6 +19,7 @@ import Badge from '../../components/ui/Badge';
 import Modal from '../../components/ui/Modal';
 import StatCard from '../../components/ui/StatCard';
 import { studentOffersService } from '../../services/recruiterService';
+import authService from '../../services/authService';
 
 export default function StudentOffers() {
   const [offers, setOffers] = useState([]);
@@ -53,10 +54,14 @@ export default function StudentOffers() {
       if (res && res.data && res.data.length > 0) {
         setOffers(res.data);
       } else {
-        setOffers(defaultMockOffers);
+        const currentUser = authService.getCurrentUser();
+        const isDemoStudent = ['aditya.sharma@apex.edu', 'student@apex.edu'].includes(currentUser?.email);
+        setOffers(isDemoStudent ? defaultMockOffers : []);
       }
     } catch {
-      setOffers(defaultMockOffers);
+      const currentUser = authService.getCurrentUser();
+      const isDemoStudent = ['aditya.sharma@apex.edu', 'student@apex.edu'].includes(currentUser?.email);
+      setOffers(isDemoStudent ? defaultMockOffers : []);
     } finally {
       setLoading(false);
     }
@@ -164,7 +169,7 @@ export default function StudentOffers() {
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
                     <h3 className="font-bold text-slate-900 text-base">{offer.roleTitle}</h3>
-                    <Badge variant="indigo" size="sm">Campus Placement</Badge>
+                    <Badge variant="aqua" size="sm">Campus Placement</Badge>
                   </div>
                   <div className="flex items-center gap-2 text-xs font-semibold text-slate-600">
                     <Building2 className="h-3.5 w-3.5 text-slate-400" />
@@ -189,7 +194,7 @@ export default function StudentOffers() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 bg-slate-50/80 rounded-xl border border-slate-200/60 text-xs">
                 <div>
                   <span className="text-slate-400 text-[10px] uppercase font-bold tracking-wider">Annual Compensation</span>
-                  <div className="text-lg font-black text-indigo-600">₹{offer.ctcLpa} LPA</div>
+                  <div className="text-lg font-black text-[#009669]">₹{offer.ctcLpa} LPA</div>
                 </div>
                 <div>
                   <span className="text-slate-400 text-[10px] uppercase font-bold tracking-wider">Joining Date</span>
@@ -263,7 +268,7 @@ export default function StudentOffers() {
           <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-1">
             <span className="text-slate-400 text-[10px]">Target Position:</span>
             <p className="font-bold text-slate-800 text-sm">{selectedOffer?.roleTitle}</p>
-            <p className="text-indigo-600 font-bold text-xs">₹{selectedOffer?.ctcLpa} LPA • {selectedOffer?.companyName}</p>
+            <p className="text-[#009669] font-bold text-xs">₹{selectedOffer?.ctcLpa} LPA • {selectedOffer?.companyName}</p>
           </div>
 
           {decisionType === 'ACCEPTED' ? (
@@ -287,7 +292,7 @@ export default function StudentOffers() {
               {decisionType === 'ACCEPTED' ? 'Candidate Confirmation Note (Optional)' : 'Reason for Declining (Mandatory)'}
             </label>
             <textarea
-              className="w-full h-20 p-2.5 border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              className="w-full h-20 p-2.5 border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-[#02E8A7] focus:outline-none"
               value={decisionNotes}
               onChange={(e) => setDecisionNotes(e.target.value)}
               required={decisionType === 'DECLINED'}

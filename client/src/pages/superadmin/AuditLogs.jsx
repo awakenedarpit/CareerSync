@@ -166,7 +166,7 @@ export default function AuditLogs() {
     {
       key: 'entity',
       label: 'Target Entity / Resource',
-      render: (val) => <span className="text-xs font-mono text-indigo-700">{val}</span>
+      render: (val) => <span className="text-xs font-mono text-[#004D36]">{val}</span>
     },
     {
       key: 'category',
@@ -202,7 +202,7 @@ export default function AuditLogs() {
             setSelectedLog(row);
             setShowDiffModal(true);
           }}
-          className="p-1.5 text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors flex items-center gap-1 text-xs font-medium"
+          className="p-1.5 text-slate-500 hover:text-[#009669] hover:bg-[#BDF9F9]/30 rounded-lg transition-colors flex items-center gap-1 text-xs font-medium"
           title="Inspect Audit Diff"
         >
           <Eye className="h-4 w-4" />
@@ -215,7 +215,7 @@ export default function AuditLogs() {
   return (
     <div className="space-y-6">
       {exportNotice && (
-        <div className="fixed bottom-6 right-6 z-50 bg-indigo-600 text-white px-4 py-3 rounded-xl shadow-lg text-sm font-medium flex items-center gap-2 animate-in slide-in-from-bottom">
+        <div className="fixed bottom-6 right-6 z-50 bg-[#02E8A7] text-[#002020] font-bold px-4 py-3 rounded-xl shadow-lg text-sm font-medium flex items-center gap-2 animate-in slide-in-from-bottom">
           <CheckCircle2 className="h-4 w-4" />
           <span>Audit stream bundle exported in cryptographically signed JSON format.</span>
         </div>
@@ -242,7 +242,7 @@ export default function AuditLogs() {
             placeholder="Search by action, actor, or target entity..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-lg border border-slate-200 bg-slate-50/70 py-2 pl-9 pr-3 text-xs text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-indigo-100"
+            className="w-full rounded-lg border border-slate-200 bg-slate-50/70 py-2 pl-9 pr-3 text-xs text-slate-900 placeholder:text-slate-400 focus:border-[#02E8A7] focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-indigo-100"
           />
         </div>
 
@@ -258,7 +258,7 @@ export default function AuditLogs() {
                 onClick={() => setCategoryFilter(cat)}
                 className={`px-3 py-1 rounded-md transition-all ${
                   categoryFilter === cat
-                    ? 'bg-white text-indigo-700 shadow-xs font-semibold'
+                    ? 'bg-white text-[#004D36] shadow-xs font-semibold'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
@@ -307,7 +307,7 @@ export default function AuditLogs() {
               </div>
               <div className="col-span-2">
                 <p className="text-[10px] text-slate-400 font-semibold uppercase">Target Entity</p>
-                <p className="text-indigo-700 font-mono text-xs mt-0.5">{selectedLog.entity}</p>
+                <p className="text-[#004D36] font-mono text-xs mt-0.5">{selectedLog.entity}</p>
               </div>
             </div>
 
@@ -331,8 +331,8 @@ export default function AuditLogs() {
               </div>
             </div>
 
-            <div className="p-3 bg-indigo-50 border border-indigo-100 rounded-xl text-indigo-900 flex items-start gap-2">
-              <Shield className="h-4 w-4 text-indigo-600 shrink-0 mt-0.5" />
+            <div className="p-3 bg-[#BDF9F9]/30 border border-[#02E8A7]/30 rounded-xl text-[#002020] flex items-start gap-2">
+              <Shield className="h-4 w-4 text-[#009669] shrink-0 mt-0.5" />
               <p className="text-[11px]">
                 Audit entries are cryptographically signed with SHA-256 HMAC and replicated across distributed nodes to guarantee audit integrity.
               </p>

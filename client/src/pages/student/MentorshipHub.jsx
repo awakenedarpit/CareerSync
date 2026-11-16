@@ -120,15 +120,15 @@ export default function MentorshipHub() {
       />
 
       {/* Platform Mediation & Governance Alert */}
-      <div className="rounded-xl border border-indigo-200/80 bg-gradient-to-r from-indigo-50/90 via-sky-50/70 to-indigo-50/90 p-4 shadow-xs">
+      <div className="rounded-xl border border-[#02E8A7]/40/80 bg-gradient-to-r from-indigo-50/90 via-sky-50/70 to-indigo-50/90 p-4 shadow-xs">
         <div className="flex items-start gap-3">
-          <div className="mt-0.5 rounded-lg bg-indigo-600 p-2 text-white shadow-xs">
+          <div className="mt-0.5 rounded-lg bg-[#02E8A7] p-2 text-white shadow-xs">
             <Shield className="h-4 w-4" />
           </div>
           <div className="flex-1 text-sm text-slate-700">
             <div className="font-semibold text-indigo-950 flex items-center gap-2">
               <span>Platform-Mediated & Safe Mentorship Environment</span>
-              <Badge variant="indigo" size="xs">T&P Verified</Badge>
+              <Badge variant="aqua" size="xs">T&P Verified</Badge>
             </div>
             <p className="mt-1 text-xs text-slate-600 leading-relaxed">
               All alumni profiles are officially verified by your institution's Training & Placement Cell.
@@ -145,8 +145,8 @@ export default function MentorshipHub() {
           title="Verified Alumni Mentors"
           value={mentors.length.toString()}
           icon={GraduationCap}
-          iconColor="text-indigo-600"
-          bgColor="bg-indigo-50"
+          iconColor="text-[#009669]"
+          bgColor="bg-[#BDF9F9]/30"
           subtitle="Actively accepting mentees"
         />
         <StatCard
@@ -185,7 +185,7 @@ export default function MentorshipHub() {
               placeholder="Search by mentor name, company (e.g. Google, Microsoft), role, or skills..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-lg border border-slate-300 py-2.5 pl-10 pr-4 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="w-full rounded-lg border border-slate-300 py-2.5 pl-10 pr-4 text-sm focus:border-[#02E8A7] focus:outline-none focus:ring-1 focus:ring-[#02E8A7]"
             />
           </div>
 
@@ -193,7 +193,7 @@ export default function MentorshipHub() {
             <select
               value={selectedDomain}
               onChange={(e) => setSelectedDomain(e.target.value)}
-              className="rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-indigo-500 focus:outline-none text-slate-700 bg-white"
+              className="rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-[#02E8A7] focus:outline-none text-slate-700 bg-white"
             >
               <option value="ALL">All Domains</option>
               {MENTOR_DOMAINS.map((domain) => (
@@ -204,7 +204,7 @@ export default function MentorshipHub() {
             <select
               value={selectedTopic}
               onChange={(e) => setSelectedTopic(e.target.value)}
-              className="rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-indigo-500 focus:outline-none text-slate-700 bg-white max-w-[220px]"
+              className="rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-[#02E8A7] focus:outline-none text-slate-700 bg-white max-w-[220px]"
             >
               <option value="ALL">All Mentorship Topics</option>
               {MENTORSHIP_TOPICS.map((topic) => (
@@ -256,7 +256,7 @@ export default function MentorshipHub() {
             {mentors.map((mentor) => (
               <Card
                 key={mentor.id}
-                className="flex flex-col justify-between border-slate-200 shadow-xs hover:border-indigo-300 transition-all hover:shadow-sm"
+                className="flex flex-col justify-between border-slate-200 shadow-xs hover:border-[#02E8A7]/50 transition-all hover:shadow-sm"
               >
                 <div className="p-5">
                   {/* Card Header with Recommendation Badge */}
@@ -273,7 +273,7 @@ export default function MentorshipHub() {
                             Verified Alum
                           </Badge>
                         </div>
-                        <p className="text-xs font-medium text-indigo-700">{mentor.role} @ {mentor.company}</p>
+                        <p className="text-xs font-medium text-[#004D36]">{mentor.role} @ {mentor.company}</p>
                         <p className="text-xs text-slate-500">
                           Class of {mentor.graduationYear} • {mentor.branch}
                         </p>
@@ -291,7 +291,7 @@ export default function MentorshipHub() {
                   {/* Explainable Recommendation Note */}
                   {mentor.recommendationReason && (
                     <div className="mt-3 rounded-lg bg-slate-50 px-3 py-1.5 text-xs text-slate-600 border border-slate-100 flex items-center gap-1.5">
-                      <Sparkles className="h-3.5 w-3.5 text-indigo-500 shrink-0" />
+                      <Sparkles className="h-3.5 w-3.5 text-[#009669] shrink-0" />
                       <span className="font-medium text-slate-700">{mentor.recommendationReason}</span>
                     </div>
                   )}
@@ -382,7 +382,7 @@ export default function MentorshipHub() {
                   <h3 className="text-xl font-bold text-slate-900">{selectedMentorForDetails.fullName}</h3>
                   <Badge variant="emerald" size="sm">Verified Alum</Badge>
                 </div>
-                <p className="text-sm font-medium text-indigo-700">{selectedMentorForDetails.headline}</p>
+                <p className="text-sm font-medium text-[#004D36]">{selectedMentorForDetails.headline}</p>
                 <p className="text-xs text-slate-500 mt-0.5">
                   Alum Class of {selectedMentorForDetails.graduationYear} • {selectedMentorForDetails.degree}
                 </p>
@@ -408,7 +408,7 @@ export default function MentorshipHub() {
               <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Mentorship Topics Covered</h4>
               <div className="flex flex-wrap gap-2">
                 {selectedMentorForDetails.topics?.map((topic) => (
-                  <span key={topic} className="rounded-lg bg-indigo-50 border border-indigo-200/80 px-2.5 py-1 text-xs font-semibold text-indigo-800">
+                  <span key={topic} className="rounded-lg bg-[#BDF9F9]/30 border border-[#02E8A7]/40/80 px-2.5 py-1 text-xs font-semibold text-[#002020]">
                     {topic}
                   </span>
                 ))}
@@ -481,7 +481,7 @@ export default function MentorshipHub() {
           ) : (
             <form onSubmit={handleSendRequest} className="space-y-4">
               <div className="rounded-lg bg-slate-50 p-3 border border-slate-200 flex items-center gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-indigo-600 text-white font-bold text-sm">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#02E8A7] text-[#002020] font-bold font-bold text-sm">
                   {selectedMentorForRequest.fullName.split(' ').map((n) => n[0]).join('')}
                 </div>
                 <div>
@@ -498,7 +498,7 @@ export default function MentorshipHub() {
                   value={requestTopic}
                   onChange={(e) => setRequestTopic(e.target.value)}
                   required
-                  className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-[#02E8A7] focus:outline-none"
                 >
                   {selectedMentorForRequest.topics?.map((topic) => (
                     <option key={topic} value={topic}>{topic}</option>
@@ -515,7 +515,7 @@ export default function MentorshipHub() {
                 <select
                   value={requestTimeSlot}
                   onChange={(e) => setRequestTimeSlot(e.target.value)}
-                  className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-lg border border-slate-300 py-2 px-3 text-sm focus:border-[#02E8A7] focus:outline-none"
                 >
                   {selectedMentorForRequest.availableSlots?.map((slot) => (
                     <option key={slot.id} value={`${slot.dayOfWeek} ${slot.startTime} - ${slot.endTime} (${slot.timezone})`}>
@@ -537,7 +537,7 @@ export default function MentorshipHub() {
                   placeholder="Describe your current preparation level, specific questions you want to ask, or the project/resume section you want to review..."
                   value={requestMessage}
                   onChange={(e) => setRequestMessage(e.target.value)}
-                  className="w-full rounded-lg border border-slate-300 p-2.5 text-sm focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-lg border border-slate-300 p-2.5 text-sm focus:border-[#02E8A7] focus:outline-none"
                 />
                 <p className="mt-1 text-xs text-slate-400">
                   Tip: Specific, prepared questions help mentors make the most impactful use of your 45-minute session.

@@ -298,7 +298,7 @@ export default function AgentOrchestration() {
           value={workflows.filter(w => w.status === 'RUNNING' || w.status === 'QUEUED').length.toString()}
           subtitle="Executing in pipeline"
           icon={Activity}
-          variant="indigo"
+          variant="aqua"
         />
         <StatCard
           title="Human Gating Queue"
@@ -319,7 +319,7 @@ export default function AgentOrchestration() {
           value={delegatedReviewers.filter(r => r.isActive).length.toString()}
           subtitle="Active department reviewers"
           icon={Users}
-          variant="purple"
+          variant="mint"
         />
       </div>
 
@@ -347,7 +347,7 @@ export default function AgentOrchestration() {
                   placeholder="Search by workflow, ID, agent, user..."
                   value={workflowSearch}
                   onChange={(e) => setWorkflowSearch(e.target.value)}
-                  className="w-full rounded-lg border border-slate-200 bg-white py-1.5 pl-9 pr-3 text-xs text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-hidden focus:ring-1 focus:ring-indigo-500"
+                  className="w-full rounded-lg border border-slate-200 bg-white py-1.5 pl-9 pr-3 text-xs text-slate-900 placeholder:text-slate-400 focus:border-[#02E8A7] focus:outline-hidden focus:ring-1 focus:ring-[#02E8A7]"
                 />
               </div>
 
@@ -359,7 +359,7 @@ export default function AgentOrchestration() {
                     onClick={() => setWorkflowStatusFilter(st)}
                     className={`px-2.5 py-1 rounded-lg text-[11px] font-medium whitespace-nowrap transition-colors ${
                       workflowStatusFilter === st
-                        ? 'bg-indigo-600 text-white shadow-2xs'
+                        ? 'bg-[#02E8A7] text-[#002020] font-bold shadow-2xs'
                         : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-100'
                     }`}
                   >
@@ -722,16 +722,16 @@ export default function AgentOrchestration() {
       {/* ========================================================================= */}
       {activeTab === 'delegation' && (
         <div className="space-y-4">
-          <div className="p-4 rounded-xl bg-purple-50 border border-purple-200/80 flex items-start justify-between gap-4">
+          <div className="p-4 rounded-xl bg-[#BDF9F9]/30 border border-[#02E8A7]/40/80 flex items-start justify-between gap-4">
             <div className="flex items-start gap-3">
-              <div className="p-2 rounded-lg bg-white shadow-2xs text-purple-600 shrink-0">
+              <div className="p-2 rounded-lg bg-white shadow-2xs text-[#009669] shrink-0">
                 <Shield className="w-5 h-5" />
               </div>
               <div>
                 <h3 className="text-xs font-semibold text-purple-900">
                   Decentralized Faculty Reviewer Registry (Stop-Gate 5 Resolution)
                 </h3>
-                <p className="text-[11px] text-purple-800 mt-0.5 leading-relaxed">
+                <p className="text-[11px] text-[#002020] mt-0.5 leading-relaxed">
                   TPO administrators can delegate evidence and skill audit authority to departmental faculty coordinators. Delegations are tenant-isolated, auditable, and instantaneously revocable with zero stale permissions.
                 </p>
               </div>
@@ -843,7 +843,7 @@ export default function AgentOrchestration() {
             <select
               value={selectedWorkflowForTrigger}
               onChange={(e) => setSelectedWorkflowForTrigger(e.target.value)}
-              className="w-full rounded-lg border border-slate-200 bg-white p-2 text-xs focus:border-indigo-500 focus:outline-hidden"
+              className="w-full rounded-lg border border-slate-200 bg-white p-2 text-xs focus:border-[#02E8A7] focus:outline-hidden"
             >
               {registry.map((def) => (
                 <option key={def.workflowDefinitionId} value={def.workflowDefinitionId}>
@@ -865,7 +865,7 @@ export default function AgentOrchestration() {
                   onClick={() => setTriggerPriority(pr)}
                   className={`flex-1 py-1.5 rounded-lg border text-center font-medium transition-colors ${
                     triggerPriority === pr
-                      ? 'bg-indigo-50 border-indigo-500 text-indigo-700 font-semibold'
+                      ? 'bg-[#BDF9F9]/30 border-indigo-500 text-[#004D36] font-semibold'
                       : 'border-slate-200 text-slate-600 hover:bg-slate-50'
                   }`}
                 >
@@ -883,7 +883,7 @@ export default function AgentOrchestration() {
               rows={6}
               value={triggerPayloadText}
               onChange={(e) => setTriggerPayloadText(e.target.value)}
-              className="w-full rounded-lg border border-slate-200 p-2 font-mono text-[11px] focus:border-indigo-500 focus:outline-hidden"
+              className="w-full rounded-lg border border-slate-200 p-2 font-mono text-[11px] focus:border-[#02E8A7] focus:outline-hidden"
             />
             <p className="text-[10px] text-slate-400 mt-1">
               Strictly validated against registered Zod contract. Idempotency key generated automatically.
@@ -929,7 +929,7 @@ export default function AgentOrchestration() {
               </div>
               <div>
                 <span className="text-slate-400 block font-semibold uppercase text-[9px]">Responsible Agent</span>
-                <span className="text-indigo-600 font-semibold">{inspectWorkflow.responsibleAgent}</span>
+                <span className="text-[#009669] font-semibold">{inspectWorkflow.responsibleAgent}</span>
               </div>
             </div>
 
@@ -1009,7 +1009,7 @@ export default function AgentOrchestration() {
               value={reviewerNotes}
               onChange={(e) => setReviewerNotes(e.target.value)}
               placeholder="e.g. Verified zero bias; verified all 14 candidates met minimum criteria."
-              className="w-full rounded-lg border border-slate-200 p-2 text-xs focus:border-indigo-500 focus:outline-hidden"
+              className="w-full rounded-lg border border-slate-200 p-2 text-xs focus:border-[#02E8A7] focus:outline-hidden"
             />
           </div>
 
@@ -1048,7 +1048,7 @@ export default function AgentOrchestration() {
               value={newDelegation.reviewerName}
               onChange={(e) => setNewDelegation({ ...newDelegation, reviewerName: e.target.value })}
               placeholder="Dr. S. K. Mukherjee"
-              className="w-full rounded-lg border border-slate-200 p-2 text-xs focus:border-indigo-500 focus:outline-hidden"
+              className="w-full rounded-lg border border-slate-200 p-2 text-xs focus:border-[#02E8A7] focus:outline-hidden"
             />
           </div>
 
@@ -1061,7 +1061,7 @@ export default function AgentOrchestration() {
               value={newDelegation.reviewerEmail}
               onChange={(e) => setNewDelegation({ ...newDelegation, reviewerEmail: e.target.value })}
               placeholder="faculty@college.edu"
-              className="w-full rounded-lg border border-slate-200 p-2 text-xs focus:border-indigo-500 focus:outline-hidden"
+              className="w-full rounded-lg border border-slate-200 p-2 text-xs focus:border-[#02E8A7] focus:outline-hidden"
             />
           </div>
 
@@ -1071,7 +1071,7 @@ export default function AgentOrchestration() {
               <select
                 value={newDelegation.department}
                 onChange={(e) => setNewDelegation({ ...newDelegation, department: e.target.value })}
-                className="w-full rounded-lg border border-slate-200 bg-white p-2 text-xs focus:border-indigo-500 focus:outline-hidden"
+                className="w-full rounded-lg border border-slate-200 bg-white p-2 text-xs focus:border-[#02E8A7] focus:outline-hidden"
               >
                 <option value="Computer Science & Engineering">CSE</option>
                 <option value="Information Technology">IT</option>
@@ -1086,7 +1086,7 @@ export default function AgentOrchestration() {
                 type="date"
                 value={newDelegation.validUntil}
                 onChange={(e) => setNewDelegation({ ...newDelegation, validUntil: e.target.value })}
-                className="w-full rounded-lg border border-slate-200 p-2 text-xs focus:border-indigo-500 focus:outline-hidden"
+                className="w-full rounded-lg border border-slate-200 p-2 text-xs focus:border-[#02E8A7] focus:outline-hidden"
               />
             </div>
           </div>
@@ -1100,7 +1100,7 @@ export default function AgentOrchestration() {
               value={newDelegation.notes}
               onChange={(e) => setNewDelegation({ ...newDelegation, notes: e.target.value })}
               placeholder="Authorized for AI/ML and Distributed Systems portfolio audits"
-              className="w-full rounded-lg border border-slate-200 p-2 text-xs focus:border-indigo-500 focus:outline-hidden"
+              className="w-full rounded-lg border border-slate-200 p-2 text-xs focus:border-[#02E8A7] focus:outline-hidden"
             />
           </div>
 

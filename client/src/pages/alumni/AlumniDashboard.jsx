@@ -24,6 +24,7 @@ import StatCard from '../../components/ui/StatCard';
 import Button from '../../components/ui/Button';
 import Badge from '../../components/ui/Badge';
 import Modal from '../../components/ui/Modal';
+import { useToast } from '../../components/ui/ToastContext';
 import {
   alumniService,
   ALUMNI_VERIFICATION_STATUSES,
@@ -31,6 +32,7 @@ import {
 } from '../../services/alumniService';
 
 export default function AlumniDashboard() {
+  const toast = useToast();
   const [profile, setProfile] = useState(null);
   const [requests, setRequests] = useState([]);
   const [availability, setAvailability] = useState({
@@ -82,9 +84,11 @@ export default function AlumniDashboard() {
         scheduledAt: req.preferredTimeSlots?.includes('Saturday') ? '2026-11-21T11:00:00Z' : new Date(Date.now() + 86400000 * 3).toISOString(),
       });
       setSelectedReqForAccept(null);
+      toast.success('Mentorship session confirmed! Meeting link generated.');
       await loadDashboardData();
     } catch (err) {
       console.error('Failed to accept request:', err);
+      toast.error('Failed to accept request: ' + (err.message || 'Server error'));
     } finally {
       setSubmittingAction(false);
     }
@@ -98,9 +102,11 @@ export default function AlumniDashboard() {
         status: 'DECLINED',
         reason: 'Capacity full for this week',
       });
+      toast.info('Mentorship request declined.');
       await loadDashboardData();
     } catch (err) {
       console.error('Failed to decline request:', err);
+      toast.error('Failed to decline request: ' + (err.message || 'Server error'));
     } finally {
       setSubmittingAction(false);
     }
@@ -118,9 +124,11 @@ export default function AlumniDashboard() {
         mentorNote: rescheduleNote,
       });
       setSelectedReqForReschedule(null);
+      toast.success('Alternative time slot sent to student for confirmation.');
       await loadDashboardData();
     } catch (err) {
       console.error('Failed to reschedule:', err);
+      toast.error('Failed to propose reschedule: ' + (err.message || 'Server error'));
     } finally {
       setSubmittingAction(false);
     }
@@ -209,8 +217,8 @@ export default function AlumniDashboard() {
           title="Upcoming Sessions"
           value={upcomingSessions.length.toString()}
           icon={Calendar}
-          iconColor="text-indigo-600"
-          bgColor="bg-indigo-50"
+          iconColor="text-[#009669]"
+          bgColor="bg-[#BDF9F9]/30"
           subtitle="Confirmed appointments"
         />
         <StatCard
@@ -336,7 +344,7 @@ export default function AlumniDashboard() {
                   <p className="text-xs text-slate-600">
                     Mentee: <strong>{session.studentName}</strong> • {session.studentBranch}
                   </p>
-                  <p className="text-xs text-indigo-700 font-medium">
+                  <p className="text-xs text-[#004D36] font-medium">
                     {session.scheduledAt ? new Date(session.scheduledAt).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' }) : 'Saturday 11:00 AM IST'}
                   </p>
                 </div>
@@ -392,7 +400,7 @@ export default function AlumniDashboard() {
                 rows={4}
                 value={acceptAgenda}
                 onChange={(e) => setAcceptAgenda(e.target.value)}
-                className="w-full rounded-lg border border-slate-300 p-2 text-xs font-mono focus:outline-none focus:border-indigo-500"
+                className="w-full rounded-lg border border-slate-300 p-2 text-xs font-mono focus:outline-none focus:border-[#02E8A7]"
               />
             </div>
 
@@ -435,7 +443,7 @@ export default function AlumniDashboard() {
                 value={rescheduleSlot}
                 onChange={(e) => setRescheduleSlot(e.target.value)}
                 required
-                className="w-full rounded-lg border border-slate-300 p-2 text-xs focus:outline-none focus:border-indigo-500 bg-white"
+                className="w-full rounded-lg border border-slate-300 p-2 text-xs focus:outline-none focus:border-[#02E8A7] bg-white"
               >
                 {profile?.availableSlots?.map((slot) => (
                   <option key={slot.id} value={`${slot.dayOfWeek} ${slot.startTime} - ${slot.endTime}`}>
@@ -456,7 +464,7 @@ export default function AlumniDashboard() {
                 placeholder="Brief reason or guidance for the proposed time change..."
                 value={rescheduleNote}
                 onChange={(e) => setRescheduleNote(e.target.value)}
-                className="w-full rounded-lg border border-slate-300 p-2 text-xs focus:outline-none focus:border-indigo-500"
+                className="w-full rounded-lg border border-slate-300 p-2 text-xs focus:outline-none focus:border-[#02E8A7]"
               />
             </div>
 

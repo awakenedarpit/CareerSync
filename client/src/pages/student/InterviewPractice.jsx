@@ -168,10 +168,10 @@ export default function InterviewPractice() {
         />
 
         {/* Overall Score Card */}
-        <Card className="p-6 border-indigo-100 bg-gradient-to-br from-indigo-50/50 via-white to-emerald-50/30">
+        <Card className="p-6 border-[#02E8A7]/30 bg-gradient-to-br from-indigo-50/50 via-white to-emerald-50/30">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-4">
-              <div className="h-16 w-16 rounded-2xl bg-indigo-600 text-white flex items-center justify-center font-black text-2xl shadow-md">
+              <div className="h-16 w-16 rounded-2xl bg-[#02E8A7] text-[#002020] font-bold flex items-center justify-center font-black text-2xl shadow-md">
                 {evaluationReport.overallScore || 86}%
               </div>
               <div>
@@ -205,7 +205,7 @@ export default function InterviewPractice() {
               <div key={item.dim} className="p-3 bg-slate-50 rounded-xl border border-slate-200">
                 <div className="flex items-center justify-between text-xs mb-1">
                   <span className="font-semibold text-slate-800">{item.dim}</span>
-                  <span className="font-bold text-indigo-700">{item.score}%</span>
+                  <span className="font-bold text-[#004D36]">{item.score}%</span>
                 </div>
                 <ProgressBar value={item.score} color={item.score >= 85 ? 'emerald' : 'indigo'} />
                 <p className="text-[11px] text-slate-500 mt-1.5">{item.desc}</p>
@@ -299,7 +299,7 @@ export default function InterviewPractice() {
                   onClick={() => setSelectedRole(r.id)}
                   className={`p-4 rounded-xl border text-left transition-all ${
                     isSelected
-                      ? 'border-indigo-600 bg-indigo-50/70 shadow-sm ring-1 ring-indigo-600'
+                      ? 'border-indigo-600 bg-[#BDF9F9]/30 shadow-sm ring-1 ring-indigo-600'
                       : 'border-slate-200 bg-white hover:border-slate-300'
                   }`}
                 >
@@ -355,7 +355,7 @@ export default function InterviewPractice() {
             <h1 className="text-base font-bold text-slate-900">
               {roles.find(r => r.id === selectedRole)?.title} Interview Simulation
             </h1>
-            <Badge variant="indigo" size="sm">Session Active</Badge>
+            <Badge variant="aqua" size="sm">Session Active</Badge>
           </div>
           <p className="text-xs text-slate-500">
             Question {currentIdx + 1} of {totalQuestions} • {answeredCount} Completed
@@ -388,7 +388,7 @@ export default function InterviewPractice() {
           {currentQ && (
             <Card className="p-5 border-slate-200">
               <div className="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
-                <Badge variant="indigo" size="sm">{currentQ.category}</Badge>
+                <Badge variant="aqua" size="sm">{currentQ.category}</Badge>
                 <span className="text-xs text-slate-400">Round Question {currentIdx + 1}</span>
               </div>
 
@@ -397,9 +397,9 @@ export default function InterviewPractice() {
               </h3>
 
               {/* Guidance Tips */}
-              <div className="p-3.5 bg-indigo-50/70 border border-indigo-200 rounded-xl text-xs space-y-2">
-                <div className="flex items-center gap-1.5 font-bold text-indigo-900">
-                  <Sparkles className="h-4 w-4 text-indigo-600" />
+              <div className="p-3.5 bg-[#BDF9F9]/30 border border-[#02E8A7]/40 rounded-xl text-xs space-y-2">
+                <div className="flex items-center gap-1.5 font-bold text-[#002020]">
+                  <Sparkles className="h-4 w-4 text-[#009669]" />
                   Key Talking Points & Architectural Strategy
                 </div>
                 <p className="text-indigo-950 leading-relaxed">{currentQ.tips}</p>
@@ -436,7 +436,7 @@ export default function InterviewPractice() {
                     onClick={() => setCurrentIdx(idx)}
                     className={`w-full text-left p-2.5 rounded-lg text-xs font-medium flex items-center justify-between border transition-all ${
                       isSelected
-                        ? 'border-indigo-600 bg-indigo-50 text-indigo-950 ring-1 ring-indigo-600'
+                        ? 'border-indigo-600 bg-[#BDF9F9]/30 text-indigo-950 ring-1 ring-indigo-600'
                         : 'border-slate-100 bg-white hover:bg-slate-50 text-slate-700'
                     }`}
                   >
@@ -467,7 +467,7 @@ export default function InterviewPractice() {
                   className={`h-11 w-11 rounded-full flex items-center justify-center transition-all ${
                     isRecording
                       ? 'bg-red-600 text-white animate-pulse shadow-md ring-4 ring-red-200'
-                      : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm'
+                      : 'bg-[#02E8A7] text-[#002020] font-bold hover:bg-[#11F1CF] shadow-sm'
                   }`}
                 >
                   {isRecording ? <MicOff className="h-5 w-5" /> : <Mic className="h-5 w-5" />}
