@@ -12,6 +12,7 @@
 CarrerSync enforces a strict, fail-safe environment configuration architecture. All runtime parameters are validated at startup through a strongly-typed Zod schema. If any mandatory variable is missing or malformed, the application immediately aborts boot with an explicit diagnostic error, preventing silent security regressions or corrupt database transactions.
 
 ### Core Security Guarantees
+
 1. **Zero Secret Leakage:** No credentials, connection strings, or cryptographic keys are ever committed to version control. All `.env`, `.env.local`, and `.dev.vars` files are registered in `.gitignore`.
 2. **Strict ₹0 Budget Compliance:** Every configuration default is tuned to operate reliably within the free tiers of Render, Vercel, Neon PostgreSQL, and Google Gemini API without requiring payment methods.
 3. **Cardless Infrastructure:** Zero dependencies on Cloudflare, AWS paid tiers, or third-party credit card validation gates.
@@ -38,7 +39,7 @@ All backend variables are loaded via `dotenv` and validated via Zod in `server/s
 | `STORAGE_DRIVER` | `'local' \| 's3'` | Optional | `'local'` | File storage engine. `'local'` saves to disk; `'s3'` connects to Neon Object Storage / MinIO. |
 | `STORAGE_PROVIDER` | `'local' \| 's3'` | Optional | `'local'` | Backward-compatible alias for `STORAGE_DRIVER`. |
 | `UPLOAD_DIR` | Relative or absolute path | Optional | `'uploads'` | Root directory for local storage engine. Sandboxed with 0o700 directory permissions. |
-| `STORAGE_LOCAL_DIRECTORY`| Path string | Optional | `'uploads'` | Backward-compatible alias for `UPLOAD_DIR`. |
+| `STORAGE_LOCAL_DIRECTORY` | Path string | Optional | `'uploads'` | Backward-compatible alias for `UPLOAD_DIR`. |
 
 ---
 
@@ -47,12 +48,14 @@ All backend variables are loaded via `dotenv` and validated via Zod in `server/s
 CarrerSync features an abstract file storage architecture (`server/src/storage/`). Depending on `STORAGE_DRIVER`, the application configures either local sandboxed disk storage or S3-compatible cloud storage:
 
 ### Local Storage (`STORAGE_DRIVER=local`)
+
 - **Use Case:** Local development, CI test suites, and temporary ephemeral pilot uploads on Render.
 - **Root Directory:** Resolved from `UPLOAD_DIR` (defaults to `./uploads`).
 - **Path Traversal Protection:** The engine sanitizes all incoming filenames, rejects null bytes (`\0`) and dot-dot traversal tokens (`..`), and chroots files to the upload root.
 - **Permissions:** Root directory is initialized with `0o700` (`rwx------`) restricting host filesystem access.
 
 ### S3 / Neon Object Storage (`STORAGE_DRIVER=s3`)
+
 When using Neon Object Storage or any zero-cost S3-compatible bucket, provide:
 
 | Variable Name | Example Value | Description |
@@ -74,7 +77,7 @@ All frontend client variables must be prefixed with `VITE_` to be embedded by th
 | `VITE_API_URL` | HTTPS URL | `https://carrersync-api.onrender.com/api/v1` | Target base URL for all Axios REST requests. |
 | `VITE_WS_URL` | WSS URL | `wss://carrersync-api.onrender.com/ws` | WebSocket server endpoint for real-time alerts. |
 | `VITE_APP_ENV` | String | `production` | Active environment displayed in telemetry & footer. |
-| `VITE_API_PROXY_TARGET`| HTTP URL | `http://localhost:5050` | Development-only Vite dev server reverse proxy target. |
+| `VITE_API_PROXY_TARGET` | HTTP URL | `http://localhost:5050` | Development-only Vite dev server reverse proxy target. |
 
 > [!WARNING]
 > Never expose secrets, database connection strings, or administrative credentials to `VITE_` variables. All `VITE_` variables are compiled directly into client-side JavaScript bundles and are publicly visible to anyone inspecting browser network traffic.
@@ -133,6 +136,7 @@ export default env;
 ```
 
 ### Fail-Safe Behavior
+
 1. If `NODE_ENV` is set to an unsupported string (e.g. `staging`), the schema rejects it and halts process execution immediately.
 2. If `PORT` is passed as a non-numeric string, `z.coerce.number()` will trigger a parse failure and exit.
 3. If `STORAGE_DRIVER` is set to an unrecognized provider (such as `gcs` or `azure`), startup is rejected before any files can be mishandled.
@@ -179,7 +183,7 @@ UPLOAD_DIR=uploads
 # -----------------
 # 5. AI ENGINE (Optional Google Gemini Free Tier)
 # -----------------
-GEMINI_API_KEY=AQ.Ab8RN6Kyv7IwTC0EUmMVypoiBuU9PLdTBDk4MIRTT6Y9eLsvRQ
+GEMINI_API_KEY=
 ```
 
 ---
@@ -189,6 +193,7 @@ GEMINI_API_KEY=AQ.Ab8RN6Kyv7IwTC0EUmMVypoiBuU9PLdTBDk4MIRTT6Y9eLsvRQ
 When deploying to Render and Vercel, populate the dashboard settings as follows:
 
 ### Render Dashboard Settings (`carrersync-api`)
+
 - [x] Set **Environment** to `Node`
 - [x] Set **Build Command** to `npm install --prefix server && npm run build --prefix server || true`
 - [x] Set **Start Command** to `npm start --prefix server`
@@ -201,6 +206,7 @@ When deploying to Render and Vercel, populate the dashboard settings as follows:
 - [x] Set **Health Check Path** to `/health`
 
 ### Vercel Project Settings (`carrersync-client`)
+
 - [x] Set **Framework Preset** to `Vite`
 - [x] Set **Build Command** to `npm run build --prefix client`
 - [x] Set **Output Directory** to `client/dist`
